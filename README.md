@@ -2,11 +2,15 @@
 
 ## Project information
 
--   Project name: [Project name]
--   Project description: [Project description]
+-   Project name: Team-Nine Pebble Work Theme
+-   Project description: Volunteering Website, for searinching and creating events
 -   Technology used: Nextjs, TailwindCSS, i18next, Husky, Prettier, Eslint, Commitlinter (Conventional Commits)
--   Team members: Member1, Member2, etc,
--   Bootcamp: GIZ YE 2022
+-   Team members: hachem bouhadede
+    Khalil NOUI
+    Oualid Elhouari
+    imane omari
+    Imad Eddine KETTAF
+-   Bootcamp: DZ NEA FEW 2023
 
 ## Installation
 
