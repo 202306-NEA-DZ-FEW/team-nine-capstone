@@ -34,11 +34,12 @@ const Navbar = () => {
             <div className='p-1 font-bold'> Logo </div>
 
             {/* Mobile view */}
-            <div
-                className='absolute right-1 lg:hidden p-2 flex-col justify-between hover:bg-amber-300 hover:text-white rounded-lg'
-                onClick={toggleHamburger}
-            >
-                {isHamburgerOn ? <CgClose /> : <GiHamburgerMenu />}
+            <div className='absolute right-1 lg:hidden p-2 flex-col justify-between hover:bg-amber-300 hover:text-white rounded-lg'>
+                {isHamburgerOn ? (
+                    <CgClose onClick={toggleHamburger} />
+                ) : (
+                    <GiHamburgerMenu onClick={toggleHamburger} />
+                )}
                 {isHamburgerOn && (
                     <div className='fixed top-12 left-0 w-full layout z-50'>
                         <div className='w-full items-center flex flex-col'>
@@ -118,7 +119,7 @@ const Navbar = () => {
                         <CgProfile /> {user ? "Profile" : "Sign Up"}
                     </button>
                     {isProfileDropdownOpen && (
-                        <div className='absolute layout top-full mt-2 w-28 p-2 border border-gray-400 rounded-lg'>
+                        <div className='absolute layout top-full mt-2 w-26 p-2 border border-gray-400 rounded-lg'>
                             {user ? (
                                 <>
                                     <Link href='/' /*"/profile"*/>
