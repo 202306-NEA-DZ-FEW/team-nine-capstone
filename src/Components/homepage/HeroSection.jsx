@@ -23,7 +23,7 @@ const Hero = () => {
                         </button>
                     </div>
                     <div>
-                        <img src='/images/square.png' alt='' className='' />
+                        <img src='/images/square.png' alt='' />
                     </div>
                 </div>
             </div>
