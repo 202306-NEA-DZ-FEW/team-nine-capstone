@@ -3,9 +3,9 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 
-import HeroSection from "@/components/HomePage/HeroSection";
-import HowitWorks from "@/Components/homepage/HowitWorks";
 import Layout from "@/layout/Layout";
+import HeroSection from "@/temp-components/homepage/HeroSection";
+import HowitWorks from "@/temp-components/homepage/HowitWorks";
 
 export default function HomePage() {
     const { t } = useTranslation("common");
