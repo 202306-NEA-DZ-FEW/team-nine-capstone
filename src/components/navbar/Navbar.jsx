@@ -1,14 +1,16 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import { useTranslation } from "next-i18next";
+import { useState } from "react";
 import { CgClose, CgProfile } from "react-icons/cg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { LiaLanguageSolid } from "react-icons/lia";
 
 const Navbar = () => {
-    const [user, setUser] = useState(true); // Set to true if a user is authenticated, otherwise, set it to false
+    const [user, setUser] = useState(false); // Set to true if a user is authenticated, otherwise, set it to false
     const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
     const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
     const [isHamburgerOn, setIsHamburgerOn] = useState(false);
+    const { t } = useTranslation("common");
 
     const toggleProfileDropdown = () => {
         setProfileDropdownOpen(!isProfileDropdownOpen);
@@ -43,65 +45,75 @@ const Navbar = () => {
                 {isHamburgerOn && (
                     <div className='fixed top-12 left-0 w-full layout z-50'>
                         <div className='w-full items-center flex flex-col'>
-                            <button
-                                className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
-                                onClick={toggleProfileDropdown}
-                            >
-                                <CgProfile /> {user ? "Profile" : "SignUp"}
-                            </button>
-                            {isProfileDropdownOpen && (
-                                <div className='w-full'>
-                                    {user ? (
-                                        <>
-                                            <Link href='/profile'>
+                            <div className='w-full border-t-4 border-amber-700'>
+                                <button
+                                    className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                    onClick={toggleProfileDropdown}
+                                >
+                                    <CgProfile /> {user ? "Profile" : "SignUp"}
+                                </button>
+                                {isProfileDropdownOpen && (
+                                    <div className='w-full border-t-2 border-amber-700'>
+                                        {user ? (
+                                            <>
+                                                <Link href='/profile'>
+                                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                        Your Profile
+                                                    </button>
+                                                </Link>
+                                                <Link href='/events'>
+                                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                        Your Events
+                                                    </button>
+                                                </Link>
                                                 <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                    Your Profile
+                                                    Logout
                                                 </button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Link href='/signin'>
+                                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                        Sign In
+                                                    </button>
+                                                </Link>
+                                                <Link href='/signup'>
+                                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                        Sign Up
+                                                    </button>
+                                                </Link>
+                                            </>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                            <div className='w-full border-t-4 border-amber-700'>
+                                <button
+                                    className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                    onClick={toggleLanguageDropdown}
+                                >
+                                    <LiaLanguageSolid /> Language
+                                </button>
+                                {isLanguageDropdownOpen && (
+                                    <div className='w-full border-t-2 border-amber-700'>
+                                        <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                            <Link href='/' locale='en'>
+                                                English
                                             </Link>
-                                            <Link href='/events'>
-                                                <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                    Your Events
-                                                </button>
+                                        </button>
+                                        <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                            <Link href='/' locale='ar'>
+                                                العربية
                                             </Link>
-                                            <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                Logout
-                                            </button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Link href='/signin'>
-                                                <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                    Sign In
-                                                </button>
-                                            </Link>
-                                            <Link href='/signup'>
-                                                <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                    Sign Up
-                                                </button>
-                                            </Link>
-                                        </>
-                                    )}
-                                </div>
-                            )}
-                            <button
-                                className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
-                                onClick={toggleLanguageDropdown}
-                            >
-                                <LiaLanguageSolid /> Language
-                            </button>
-                            {isLanguageDropdownOpen && (
-                                <div className='w-full'>
-                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                        English
-                                    </button>
-                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                        العربية
-                                    </button>
-                                </div>
-                            )}
-                            <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                <Link href='#'>About</Link>
-                            </button>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                            <div className='w-full border-t-4 border-amber-700'>
+                                <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                    <Link href='#'>{t("About")}</Link>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -116,7 +128,7 @@ const Navbar = () => {
                         onClick={toggleProfileDropdown}
                         onBlur={closeDropdowns}
                     >
-                        <CgProfile /> {user ? "Profile" : "Sign Up"}
+                        <CgProfile /> {user ? t("Profile") : t("Sign Up")}
                     </button>
                     {isProfileDropdownOpen && (
                         <div className='absolute layout top-full mt-2 w-26 p-2 border border-gray-400 rounded-lg'>
@@ -124,30 +136,30 @@ const Navbar = () => {
                                 <>
                                     <Link href='/' /*"/profile"*/>
                                         <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                            Your Profile
+                                            {t("Your Profile")}
                                         </div>
                                     </Link>
                                     <Link href='/' /*"/events"*/>
                                         <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                            Your Events
+                                            {t("Your Events")}
                                         </div>
                                     </Link>
                                     <button
                                         className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg' /*onClick={signOut}*/
                                     >
-                                        Logout
+                                        {t("Logout")}
                                     </button>
                                 </>
                             ) : (
                                 <>
                                     <Link href='/' /*"/signin"*/>
                                         <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                            Sign In
+                                            {t("Sign In")}
                                         </div>
                                     </Link>
                                     <Link href='/' /*"/signup"*/>
                                         <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                            Sign Up
+                                            {t("Sign Up")}
                                         </div>
                                     </Link>
                                 </>
@@ -162,16 +174,20 @@ const Navbar = () => {
                         onClick={toggleLanguageDropdown}
                         onBlur={closeDropdowns}
                     >
-                        <LiaLanguageSolid /> Language
+                        <LiaLanguageSolid /> {t("Language")}
                     </button>
                     {isLanguageDropdownOpen && (
                         <div className='absolute top-full layout left-1 mt-2 w-32 p-2 border border-gray-400 rounded-lg'>
                             <ul>
                                 <li className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                    English
+                                    <Link href='/' locale='en'>
+                                        English
+                                    </Link>
                                 </li>
                                 <li className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                    العربية
+                                    <Link href='/' locale='ar'>
+                                        العربية
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -179,7 +195,7 @@ const Navbar = () => {
                 </div>
                 <button className='p-2 mx-2 hover:bg-amber-300 hover:text-white rounded-lg'>
                     {" "}
-                    <Link href='#'>About</Link>
+                    <Link href='#'>{t("About")}</Link>
                 </button>
             </div>
         </nav>
