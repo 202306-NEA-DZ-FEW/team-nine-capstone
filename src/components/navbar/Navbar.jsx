@@ -72,12 +72,12 @@ const Navbar = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <Link href='/signin'>
+                                                <Link href='../../pages/signIn/signIn'>
                                                     <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
                                                         Sign In
                                                     </button>
                                                 </Link>
-                                                <Link href='/signup'>
+                                                <Link href='../../pages/signUp/signUp'>
                                                     <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
                                                         Sign Up
                                                     </button>

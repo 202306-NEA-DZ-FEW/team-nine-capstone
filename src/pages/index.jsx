@@ -18,6 +18,8 @@ export default function HomePage() {
                 <Link href='/' locale='ar'>
                     العربية
                 </Link>
+                <Link href='./signIn/signIn'>signIn</Link>
+                <Link href='./signUp/signUp'>signUp</Link>
             </div>
         </Layout>
     );
