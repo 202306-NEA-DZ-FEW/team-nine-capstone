@@ -6,7 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { LiaLanguageSolid } from "react-icons/lia";
 
 const Navbar = () => {
-    const [user, setUser] = useState(false); // Set to true if a user is authenticated, otherwise, set it to false
+    const [user, setUser] = useState(true); // Set to true if a user is authenticated, otherwise, set it to false
     const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
     const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
     const [isHamburgerOn, setIsHamburgerOn] = useState(false);
@@ -22,17 +22,17 @@ const Navbar = () => {
         setProfileDropdownOpen(false);
     };
 
-    const closeDropdowns = () => {
-        setProfileDropdownOpen(false);
-        setLanguageDropdownOpen(false);
-    };
+    // const closeDropdowns = () => {
+    //     setProfileDropdownOpen(false);
+    //     setLanguageDropdownOpen(false);
+    // };
 
     const toggleHamburger = () => {
         setIsHamburgerOn(!isHamburgerOn);
     };
 
     return (
-        <nav className='layout sticky w-screen items-center flex justify-between p-2'>
+        <nav className='layout sticky w-screen items-center flex justify-between p-2 '>
             <div className='p-1 font-bold'> Logo </div>
 
             {/* Mobile view */}
@@ -50,7 +50,8 @@ const Navbar = () => {
                                     className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
                                     onClick={toggleProfileDropdown}
                                 >
-                                    <CgProfile /> {user ? "Profile" : "SignUp"}
+                                    <CgProfile />{" "}
+                                    {user ? t("Profile") : t("Sign Up")}
                                 </button>
                                 {isProfileDropdownOpen && (
                                     <div className='w-full border-t-2 border-amber-700'>
@@ -58,28 +59,28 @@ const Navbar = () => {
                                             <>
                                                 <Link href='/profile'>
                                                     <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                        Your Profile
+                                                        {t("Your Profile")}
                                                     </button>
                                                 </Link>
                                                 <Link href='/events'>
                                                     <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                        Your Events
+                                                        {t("Your Events")}
                                                     </button>
                                                 </Link>
                                                 <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                    Logout
+                                                    {t("Sign Out")}
                                                 </button>
                                             </>
                                         ) : (
                                             <>
                                                 <Link href='/signin'>
                                                     <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                        Sign In
+                                                        {t("Sign In")}
                                                     </button>
                                                 </Link>
                                                 <Link href='/signup'>
                                                     <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                        Sign Up
+                                                        {t("Sign Up")}
                                                     </button>
                                                 </Link>
                                             </>
@@ -92,20 +93,25 @@ const Navbar = () => {
                                     className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
                                     onClick={toggleLanguageDropdown}
                                 >
-                                    <LiaLanguageSolid /> Language
+                                    <LiaLanguageSolid /> {t("Language")}
                                 </button>
                                 {isLanguageDropdownOpen && (
                                     <div className='w-full border-t-2 border-amber-700'>
-                                        <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                            <Link href='/' locale='en'>
-                                                English
-                                            </Link>
-                                        </button>
-                                        <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                            <Link href='/' locale='ar'>
-                                                العربية
-                                            </Link>
-                                        </button>
+                                        <Link
+                                            href='/'
+                                            locale='en'
+                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                        >
+                                            English
+                                        </Link>
+
+                                        <Link
+                                            href='/'
+                                            locale='ar'
+                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                        >
+                                            العربية
+                                        </Link>
                                     </div>
                                 )}
                             </div>
@@ -126,7 +132,7 @@ const Navbar = () => {
                     <button
                         className='p-2 mx-2 flex items-center hover:bg-amber-300 hover:text-white rounded-lg'
                         onClick={toggleProfileDropdown}
-                        onBlur={closeDropdowns}
+                        //onBlur={closeDropdowns}
                     >
                         <CgProfile /> {user ? t("Profile") : t("Sign Up")}
                     </button>
@@ -134,12 +140,14 @@ const Navbar = () => {
                         <div className='absolute layout top-full mt-2 w-26 p-2 border border-gray-400 rounded-lg'>
                             {user ? (
                                 <>
-                                    <Link href='/' /*"/profile"*/>
+                                    <Link href='/profile' /*"/profile/[id]"*/>
                                         <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
                                             {t("Your Profile")}
                                         </div>
                                     </Link>
-                                    <Link href='/' /*"/events"*/>
+                                    <Link
+                                        href='/events' /*"/profile/[id]/events"*/
+                                    >
                                         <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
                                             {t("Your Events")}
                                         </div>
@@ -147,12 +155,12 @@ const Navbar = () => {
                                     <button
                                         className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg' /*onClick={signOut}*/
                                     >
-                                        {t("Logout")}
+                                        {t("Sign Out")}
                                     </button>
                                 </>
                             ) : (
                                 <>
-                                    <Link href='/' /*"/signin"*/>
+                                    <Link href='authentification/signin'>
                                         <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
                                             {t("Sign In")}
                                         </div>
@@ -172,24 +180,27 @@ const Navbar = () => {
                     <button
                         className='p-2 mx-2 flex items-center hover:bg-amber-300 hover:text-white rounded-lg'
                         onClick={toggleLanguageDropdown}
-                        onBlur={closeDropdowns}
+                        // onBlur={closeDropdowns}
                     >
                         <LiaLanguageSolid /> {t("Language")}
                     </button>
                     {isLanguageDropdownOpen && (
                         <div className='absolute top-full layout left-1 mt-2 w-32 p-2 border border-gray-400 rounded-lg'>
-                            <ul>
-                                <li className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                    <Link href='/' locale='en'>
-                                        English
-                                    </Link>
-                                </li>
-                                <li className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                    <Link href='/' locale='ar'>
-                                        العربية
-                                    </Link>
-                                </li>
-                            </ul>
+                            <Link
+                                href='/'
+                                locale='en'
+                                className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'
+                            >
+                                English
+                            </Link>
+
+                            <Link
+                                href='/'
+                                locale='ar'
+                                className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'
+                            >
+                                العربية
+                            </Link>
                         </div>
                     )}
                 </div>

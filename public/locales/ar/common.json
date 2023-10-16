@@ -1,10 +1,12 @@
 {
-    "test": "This is a test",
-    "Profile": "Profile",
-    "Sign Up": "Sign Up",
-    "Your Profile": "Your Profile",
-    "Your Events": "Your Events",
-    "Logout": "Logout",
-    "Sign In": "Sign In",
-    "About": "About"
+    "test": "هذا اختبار",
+    "Profile": "حسابك",
+    "Sign Up": "تسجّل",
+    "Your Profile": "ملفك الشخصي",
+    "Your Events": "فعالياتك",
+    "Sign Out": "تسجيل الخروج",
+    "Sign In": "تسجيل الدخول",
+    "About": "حول",
+    "Language": "اللغة"
+    
 }

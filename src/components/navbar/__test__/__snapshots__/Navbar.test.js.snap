@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <nav
-  className="layout sticky w-screen items-center flex justify-between p-2"
+  className="layout sticky w-screen items-center flex justify-between p-2 "
 >
   <div
     className="p-1 font-bold"
@@ -40,7 +40,6 @@ exports[`renders correctly 1`] = `
     >
       <button
         className="p-2 mx-2 flex items-center hover:bg-amber-300 hover:text-white rounded-lg"
-        onBlur={[Function]}
         onClick={[Function]}
       >
         <svg
@@ -71,7 +70,7 @@ exports[`renders correctly 1`] = `
           />
         </svg>
          
-        Sign Up
+        Profile
       </button>
     </div>
     <div
@@ -79,7 +78,6 @@ exports[`renders correctly 1`] = `
     >
       <button
         className="p-2 mx-2 flex items-center hover:bg-amber-300 hover:text-white rounded-lg"
-        onBlur={[Function]}
         onClick={[Function]}
       >
         <svg
