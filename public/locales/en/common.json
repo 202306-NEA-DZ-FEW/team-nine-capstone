@@ -1,3 +1,11 @@
 {
-    "test": "Hello"
+    "test": "This is a test",
+    "Profile": "Profile",
+    "Sign Up": "Sign Up",
+    "Your Profile": "Your Profile",
+    "Your Events": "Your Events",
+    "Sign Out": "Sign Out",
+    "Sign In": "Sign In",
+    "About": "About",
+    "Events": "Events"
 }
