@@ -4,7 +4,7 @@ import React from "react";
 
 import { auth } from "@/lib/firebase/controller";
 
-export default function SignInOut() {
+export default function SignIn() {
     function handleSignIn(e) {
         e.preventDefault();
 

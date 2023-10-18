@@ -144,14 +144,14 @@ function Navbar() {
                                     ) : (
                                         <>
                                             <Link
-                                                href='/authentification/signUp'
+                                                href='/authentication/signUp'
                                                 className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
                                                 onClick={closeMenu}
                                             >
                                                 {t("Sign Up")}
                                             </Link>
                                             <Link
-                                                href='/authentification/signIn'
+                                                href='/authentication/signIn'
                                                 className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
                                                 onClick={closeMenu}
                                             >

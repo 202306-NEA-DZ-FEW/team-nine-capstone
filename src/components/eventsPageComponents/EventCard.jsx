@@ -23,7 +23,7 @@ function EventCard({ TheEvent }) {
                             <div className='w-1/2'>Pebble</div>
                             <div className='w-1/2 flex justify-end'>
                                 <img
-                                    src='your-image-url-here.jpg'
+                                    src='/logo-image.jpg'
                                     alt='Sponsor Logo'
                                     className='w-8'
                                 />
