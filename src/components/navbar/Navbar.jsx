@@ -1,3 +1,4 @@
+import { signOut } from "firebase/auth";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
@@ -10,11 +11,13 @@ import {
     VscMenu,
 } from "react-icons/vsc";
 
+import { auth } from "@/lib/firebase/controller";
+
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
-    const [user, setUser] = useState(false);
+    const [user, setUser] = useState(true);
     const { t, i18 } = useTranslation("common");
 
     const toggleMenu = () => {
@@ -37,8 +40,19 @@ function Navbar() {
         setIsAccountDropdownOpen(false);
     };
 
+    function handleSignOut(e) {
+        e.preventDefault();
+        signOut(auth)
+            .then(() => {
+                console.log("User Logged Out");
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }
+
     return (
-        <div className='fixed top-0 w-full layout text-white shadow-lg z-50'>
+        <div className='sticky top-0 w-full layout text-white shadow-lg z-50'>
             <div className='mx-auto px-4 sm:px-8 md:px-0'>
                 <div className='flex items-center justify-between p-4'>
                     <Link
@@ -134,9 +148,9 @@ function Navbar() {
                                                 {t("Your Events")}
                                             </Link>
                                             <Link
-                                                href='#'
+                                                href='/'
                                                 className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
-                                                onClick={closeMenu}
+                                                onClick={handleSignOut}
                                             >
                                                 {t("Sign Out")}
                                             </Link>
@@ -260,18 +274,23 @@ function Navbar() {
                                                                 )}
                                                             </button>
                                                         </Link>
-                                                        <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                        <button
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                                            onClick={
+                                                                handleSignOut
+                                                            }
+                                                        >
                                                             {t("Sign Out")}
                                                         </button>
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <Link href='/signin'>
+                                                        <Link href='/authentication/signIn'>
                                                             <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
                                                                 {t("Sign In")}
                                                             </button>
                                                         </Link>
-                                                        <Link href='/signup'>
+                                                        <Link href='/authentication/signUp'>
                                                             <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
                                                                 {t("Sign Up")}
                                                             </button>

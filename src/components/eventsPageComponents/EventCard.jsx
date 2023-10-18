@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 function EventCard({ TheEvent }) {
@@ -22,11 +23,13 @@ function EventCard({ TheEvent }) {
                         <div className='flex flex-row items-center mt-4 text-gray-700'>
                             <div className='w-1/2'>Pebble</div>
                             <div className='w-1/2 flex justify-end'>
-                                <img
+                                {/* <Image
                                     src='/logo-image.jpg'
                                     alt='Sponsor Logo'
+                                    width={auto}
+                                    height={auto}
                                     className='w-8'
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>

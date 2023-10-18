@@ -19,7 +19,7 @@ function EventList() {
 
     return (
         <div>
-            <h1 className='mx-auto bg-gray-500 font-bold text-3xl flex items-center py-12 justify-center'>
+            <h1 className='z-60 mx-auto bg-gray-500 font-bold text-3xl flex items-center py-12 justify-center'>
                 Our Events
             </h1>
             {events.map((event) => {

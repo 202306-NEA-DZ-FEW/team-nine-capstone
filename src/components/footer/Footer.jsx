@@ -6,7 +6,7 @@ function Footer() {
     const [user, setUser] = useState(false);
     const { t, i18 } = useTranslation("common");
     return (
-        <footer className='fixed bottom-0 w-screen mt-20 xl:mt-32 mx-auto  text-center layout text-white'>
+        <footer className='bottom-0 w-screen mt-20 mx-auto  text-center layout text-white'>
             <div className='px-6 py-8 md:py-14 xl:pt-20 xl:pb-12'>
                 <h2 className='font-bold text-3xl xl:text-4xl leading-snug'>
                     {t("footer.hook")}
@@ -20,19 +20,19 @@ function Footer() {
                 <div className='mt-14 xl:mt-20'>
                     <nav className='flex flex-wrap justify-center text-lg font-medium'>
                         <div className='px-5 py-2'>
-                            <Link href='#'>{t("About")}</Link>
+                            <Link href='/about'>{t("About")}</Link>
                         </div>
                         <div className='px-5 py-2'>
-                            <Link href='#'>{t("Events")}</Link>
+                            <Link href='/events'>{t("Events")}</Link>
                         </div>
                         <div className='px-5 py-2'>
-                            <Link href='#'>
-                                {user ? t("Sign In") : t("Account")}
+                            <Link href='/authentication/signIn'>
+                                {user ? t("Account") : t("Sign In")}
                             </Link>
                         </div>
                         <div className='px-5 py-2'>
-                            <Link href='#'>
-                                {user ? t("Sign Up") : t("Your Events")}
+                            <Link href='/authentication/signUp'>
+                                {user ? t("Your Events") : t("Sign Up")}
                             </Link>
                         </div>
                     </nav>

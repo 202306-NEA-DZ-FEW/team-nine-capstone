@@ -10,22 +10,7 @@ export default function HomePage() {
 
     const { t } = useTranslation("common");
 
-    return (
-        <Layout>
-            <p>{t("test")}</p>
-            <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-                <Link href='/' locale='en'>
-                    English
-                </Link>
-                <Link href='/' locale='ar'>
-                    العربية
-                </Link>
-                <Link href='./authentication/signIn'>signIn</Link>
-                <Link href='./authentication/signUp'>signUp</Link>
-                <Link href='./events'> events</Link>
-            </div>
-        </Layout>
-    );
+    return <Layout></Layout>;
 }
 
 export async function getStaticProps({ locale }) {
