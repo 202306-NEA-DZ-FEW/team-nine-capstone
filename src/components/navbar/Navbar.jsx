@@ -1,219 +1,294 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import { useState } from "react";
-import { CgClose, CgProfile } from "react-icons/cg";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { LiaLanguageSolid } from "react-icons/lia";
+import React, { useState } from "react";
+import { BsTranslate } from "react-icons/bs";
+import {
+    VscAccount,
+    VscChevronDown,
+    VscChevronUp,
+    VscChromeClose,
+    VscMenu,
+} from "react-icons/vsc";
 
-const Navbar = () => {
-    const [user, setUser] = useState(true); // Set to true if a user is authenticated, otherwise, set it to false
-    const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
-    const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
-    const [isHamburgerOn, setIsHamburgerOn] = useState(false);
+function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+    const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
+    const [user, setUser] = useState(false);
     const { t, i18 } = useTranslation("common");
-    const router = useRouter();
 
-    const handleLanguageChange = (e) => {
-        const selectedLanguage = e.target.value;
-        const currentLocale = router.locale;
-
-        if (selectedLanguage !== currentLocale) {
-            router.push(router.asPath, router.asPath, {
-                locale: selectedLanguage,
-            });
-        }
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
     };
 
-    const toggleProfileDropdown = () => {
-        setProfileDropdownOpen(!isProfileDropdownOpen);
-        setLanguageDropdownOpen(false);
+    const toggleLangDropdown = () => {
+        setIsLangDropdownOpen(!isLangDropdownOpen);
+        setIsAccountDropdownOpen(false);
     };
 
-    const toggleLanguageDropdown = () => {
-        setLanguageDropdownOpen(!isLanguageDropdownOpen);
-        setProfileDropdownOpen(false);
+    const toggleAccountDropdown = () => {
+        setIsAccountDropdownOpen(!isAccountDropdownOpen);
+        setIsLangDropdownOpen(false);
     };
 
-    const toggleHamburger = () => {
-        setIsHamburgerOn(!isHamburgerOn);
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+        setIsLangDropdownOpen(false);
+        setIsAccountDropdownOpen(false);
     };
 
     return (
-        <nav className='layout sticky w-screen items-center flex justify-between p-2 '>
-            <div className='p-1 font-bold'> Logo </div>
-
-            {/* Mobile/Tablette view */}
-            <div className='absolute right-1 lg:hidden p-2 flex-col justify-between hover:bg-amber-300 hover:text-white rounded-lg'>
-                {isHamburgerOn ? (
-                    <CgClose onClick={toggleHamburger} />
-                ) : (
-                    <GiHamburgerMenu onClick={toggleHamburger} />
-                )}
-                {isHamburgerOn && (
-                    <div className='fixed top-12 left-0 w-full md:w-56 md:h-80 md:-left-48 md:top-14 rounded-lg md:absolute layout z-50'>
-                        <div className='w-full items-center flex flex-col'>
-                            <div className='w-full '>
-                                <button
-                                    className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
-                                    onClick={toggleProfileDropdown}
-                                >
-                                    <CgProfile />{" "}
-                                    {user ? t("Profile") : t("Sign Up")}
-                                </button>
-                                {isProfileDropdownOpen && (
-                                    <div className='w-full border-t-2 border-amber-700'>
-                                        {user ? (
-                                            <>
-                                                <Link href='/profile'>
-                                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                        {t("Your Profile")}
-                                                    </button>
-                                                </Link>
-                                                <Link href='/events'>
-                                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                        {t("Your Events")}
-                                                    </button>
-                                                </Link>
-                                                <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                    {t("Sign Out")}
-                                                </button>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Link href='/signin'>
-                                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                        {t("Sign In")}
-                                                    </button>
-                                                </Link>
-                                                <Link href='/signup'>
-                                                    <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                                        {t("Sign Up")}
-                                                    </button>
-                                                </Link>
-                                            </>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                            <div className='w-full border-t-4 border-amber-700'>
-                                <button
-                                    className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
-                                    onClick={toggleLanguageDropdown}
-                                >
-                                    <LiaLanguageSolid /> {t("Language")}
-                                </button>
-                                {isLanguageDropdownOpen && (
-                                    <div className='w-full border-t-2 border-amber-700'>
-                                        <Link
-                                            href='/'
-                                            locale='en'
-                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
-                                        >
-                                            English
-                                        </Link>
-
-                                        <Link
-                                            href='/'
-                                            locale='ar'
-                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
-                                        >
-                                            العربية
-                                        </Link>
-                                    </div>
-                                )}
-                            </div>
-                            <div className='w-full border-t-4 border-amber-700'>
-                                <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                    <Link href='#'>{t("Events")}</Link>
-                                </button>
-                            </div>
-                            <div className='w-full border-t-4 border-amber-700'>
-                                <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
-                                    <Link href='#'>{t("About")}</Link>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            {/* Desktop view */}
-            <div className='hidden lg:flex flex-row-reverse text-center '>
-                <div className='relative'>
-                    {/* Profile Dropdown */}
-                    <button
-                        className='p-2 mx-2 flex items-center hover:bg-amber-300 hover:text-white rounded-lg'
-                        onClick={toggleProfileDropdown}
+        <div className='fixed top-0 w-full layout text-white shadow-lg z-50'>
+            <div className='mx-auto px-4 sm:px-8 md:px-0'>
+                <div className='flex items-center justify-between p-4'>
+                    <Link
+                        href='/'
+                        className='text-2xl font-bold cursor-pointer'
+                        onClick={closeMenu}
                     >
-                        <CgProfile /> {user ? t("Profile") : t("Sign Up")}
-                    </button>
-                    {isProfileDropdownOpen && (
-                        <div className='absolute layout top-full mt-2 w-26 p-2 border border-gray-400 rounded-lg'>
-                            {user ? (
-                                <>
-                                    <Link href='/profile' /*"/profile/[id]"*/>
-                                        <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                            {t("Your Profile")}
-                                        </div>
+                        Logo
+                    </Link>
+                    {/*SM view*/}
+                    <div className='absolute right-0 p-5 sm:hidden'>
+                        <VscMenu
+                            className='text-2xl cursor-pointer'
+                            onClick={toggleMenu}
+                        />
+                    </div>
+                    <div className='hidden sm:flex space-x-4'>
+                        <Link
+                            href='/about'
+                            className='cursor-pointer flex hover:bg-amber-200 hover:rounded-lg p-2'
+                            onClick={closeMenu}
+                        >
+                            {t("About")}
+                        </Link>
+                        <Link
+                            href='/events'
+                            className=' fcursor-pointer flex hover:bg-amber-200 hover:rounded-lg p-2'
+                            onClick={closeMenu}
+                        >
+                            {t("Events")}
+                        </Link>
+                        <div className='relative w-38'>
+                            <span
+                                className='cursor-pointer flex  hover:bg-amber-200 hover:rounded-lg p-2'
+                                onClick={toggleLangDropdown}
+                            >
+                                <BsTranslate className='mr-5' />
+                                {t("Language")}
+                                {isLangDropdownOpen ? (
+                                    <VscChevronUp />
+                                ) : (
+                                    <VscChevronDown />
+                                )}
+                            </span>
+                            {isLangDropdownOpen && (
+                                <div className='absolute top-full left-0 w-full p-2 layout border-4 border-grey-800 border-3 rounded-lg shadow-lg  mt-2'>
+                                    <Link
+                                        href='/'
+                                        locale='en'
+                                        className='block text-sm text-white p-2 w-38 hover:bg-amber-200 rounded-xl'
+                                    >
+                                        English
                                     </Link>
                                     <Link
-                                        href='/events' /*"/profile/[id]/events"*/
+                                        href='/'
+                                        locale='ar'
+                                        className='block text-sm text-white p-2 w-38 hover:bg-amber-200 rounded-xl'
                                     >
-                                        <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                            {t("Your Events")}
-                                        </div>
+                                        العربية
                                     </Link>
-                                    <button
-                                        className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg' /*onClick={signOut}*/
-                                    >
-                                        {t("Sign Out")}
-                                    </button>
-                                </>
-                            ) : (
-                                <>
-                                    <Link href='authentification/signin'>
-                                        <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                            {t("Sign In")}
-                                        </div>
-                                    </Link>
-                                    <Link href='/' /*"/signup"*/>
-                                        <div className='block w-full text-left p-2  hover:bg-amber-300 hover:rounded-lg'>
-                                            {t("Sign Up")}
-                                        </div>
-                                    </Link>
-                                </>
+                                </div>
                             )}
                         </div>
-                    )}
-                </div>
-                <div className='relative flex  hover:bg-amber-300 rounded-lg'>
-                    {/* Language Dropdown */}
-                    <div className='p-2 mx-2 flex items-center '>
-                        <LiaLanguageSolid />
+                        <div className='relative'>
+                            <span
+                                className='cursor-pointer flex hover:bg-amber-200 hover:rounded-lg p-2 items-center space-x-2'
+                                onClick={toggleAccountDropdown}
+                            >
+                                <VscAccount className='mr-5' />
+                                {user ? t("Account") : t("Join Us")}
+                                {isAccountDropdownOpen ? (
+                                    <VscChevronUp />
+                                ) : (
+                                    <VscChevronDown />
+                                )}
+                            </span>
+                            {isAccountDropdownOpen && (
+                                <div className='absolute top-full left-0 w-full p-2 layout border-4 border-grey-800 border-3 rounded-lg shadow-lg  mt-2'>
+                                    {user ? (
+                                        <>
+                                            <Link
+                                                href='/profile'
+                                                className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
+                                                onClick={closeMenu}
+                                            >
+                                                {t("Your Profile")}
+                                            </Link>
+                                            <Link
+                                                href='/events'
+                                                className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
+                                                onClick={closeMenu}
+                                            >
+                                                {t("Your Events")}
+                                            </Link>
+                                            <Link
+                                                href='#'
+                                                className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
+                                                onClick={closeMenu}
+                                            >
+                                                {t("Sign Out")}
+                                            </Link>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Link
+                                                href='/authentification/signUp'
+                                                className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
+                                                onClick={closeMenu}
+                                            >
+                                                {t("Sign Up")}
+                                            </Link>
+                                            <Link
+                                                href='/authentification/signIn'
+                                                className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
+                                                onClick={closeMenu}
+                                            >
+                                                {t("Sign In")}
+                                            </Link>
+                                        </>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <select
-                        className='p-1 flex items-center rounded-lg layout hover:bg-amber-300'
-                        value={router.locale}
-                        onChange={handleLanguageChange}
-                    >
-                        <option className='mx-2 p-2 ' value='en'>
-                            English
-                        </option>
-                        <option value='ar'>العربية</option>
-                    </select>
+                    {/*SM View */}
+                    <div className='sm:hidden'>
+                        {isMenuOpen && (
+                            <div className='fixed top-0 left-0 w-screen h-auto layout text-white z-50'>
+                                <div className='flex justify-between p-4'>
+                                    <Link
+                                        href='/'
+                                        className='text-2xl font-bold cursor-pointer '
+                                        onClick={closeMenu}
+                                    >
+                                        Logo
+                                    </Link>
+                                    <VscChromeClose
+                                        className='text-2xl cursor-pointer'
+                                        onClick={toggleMenu}
+                                    />
+                                </div>
+                                <div className='text-center'>
+                                    <Link
+                                        href='/about'
+                                        className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg border-t-2 border-amber-700'
+                                        onClick={closeMenu}
+                                    >
+                                        {t("About")}
+                                    </Link>
+                                    <Link
+                                        href='/events'
+                                        className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg border-t-2 border-amber-700'
+                                        onClick={closeMenu}
+                                    >
+                                        {t("Events")}
+                                    </Link>
+
+                                    <div className='w-full border-t-2 border-amber-700'>
+                                        <button
+                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                            onClick={toggleLangDropdown}
+                                        >
+                                            <BsTranslate className='mr-5' />
+                                            {t("Language")}{" "}
+                                            {isLangDropdownOpen ? (
+                                                <VscChevronUp />
+                                            ) : (
+                                                <VscChevronDown />
+                                            )}
+                                        </button>
+                                        {isLangDropdownOpen && (
+                                            <div className='w-full border-t-2 border-amber-700'>
+                                                <Link
+                                                    href='/'
+                                                    locale='en'
+                                                    className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                                >
+                                                    {t("English")}
+                                                </Link>
+
+                                                <Link
+                                                    href='/'
+                                                    locale='ar'
+                                                    className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                                >
+                                                    العربية{" "}
+                                                </Link>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className='relative'>
+                                        <div
+                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg border-t-2 border-amber-700'
+                                            onClick={toggleAccountDropdown}
+                                        >
+                                            <VscAccount className='mr-4' />
+                                            {user ? t("Account") : t("Join Us")}
+                                            {isAccountDropdownOpen ? (
+                                                <VscChevronUp />
+                                            ) : (
+                                                <VscChevronDown />
+                                            )}
+                                        </div>
+                                        {isAccountDropdownOpen && (
+                                            <div className='w-full border-t-2 border-amber-700'>
+                                                {user ? (
+                                                    <>
+                                                        <Link href='/profile'>
+                                                            <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                                {t(
+                                                                    "Your Profile"
+                                                                )}
+                                                            </button>
+                                                        </Link>
+                                                        <Link href='/events'>
+                                                            <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                                {t(
+                                                                    "Your Events"
+                                                                )}
+                                                            </button>
+                                                        </Link>
+                                                        <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                            {t("Sign Out")}
+                                                        </button>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Link href='/signin'>
+                                                            <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                                {t("Sign In")}
+                                                            </button>
+                                                        </Link>
+                                                        <Link href='/signup'>
+                                                            <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
+                                                                {t("Sign Up")}
+                                                            </button>
+                                                        </Link>
+                                                    </>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
-                <button className='p-2 mx-2 hover:bg-amber-300 hover:text-white rounded-lg'>
-                    {" "}
-                    <Link href='#'>{t("Events")}</Link>
-                </button>
-                <button className='p-2 mx-2 hover:bg-amber-300 hover:text-white rounded-lg'>
-                    {" "}
-                    <Link href='#'>{t("About")}</Link>
-                </button>
             </div>
-        </nav>
+        </div>
     );
-};
+}
 
 export default Navbar;
