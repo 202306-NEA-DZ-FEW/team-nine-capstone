@@ -6,21 +6,11 @@ import * as React from "react";
 import Layout from "@/layout/Layout";
 
 export default function HomePage() {
+    // console.log("this is proceesenv:", process.env.NEXT_PUBLIC_FIREBASE_API_KEY)
+
     const { t } = useTranslation("common");
 
-    return (
-        <Layout>
-            <p>{t("test")}</p>
-            <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-                <Link href='/' locale='en'>
-                    English
-                </Link>
-                <Link href='/' locale='ar'>
-                    العربية
-                </Link>
-            </div>
-        </Layout>
-    );
+    return <Layout></Layout>;
 }
 
 export async function getStaticProps({ locale }) {
