@@ -38,7 +38,7 @@ function Navbar() {
     };
 
     return (
-        <div className='fixed top-0 w-full layout text-white shadow-lg'>
+        <div className='fixed top-0 w-full layout text-white shadow-lg z-50'>
             <div className='mx-auto px-4 sm:px-8 md:px-0'>
                 <div className='flex items-center justify-between p-4'>
                     <Link
