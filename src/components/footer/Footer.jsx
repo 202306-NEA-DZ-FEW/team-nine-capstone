@@ -23,7 +23,7 @@ function Footer() {
                     <div className='items-center justify-center text-center content-center p-2'>
                         <Link
                             className='items-center justify-center content-center p-2'
-                            href='/events'
+                            href='../../pages/events/'
                         >
                             {t("Events")}
                         </Link>

@@ -1,7 +1,9 @@
 import React from "react";
 
+import EventList from "@/components/eventsPageComponents/EventList";
+
 function index() {
-    return <div>global event page</div>;
+    return <EventList />;
 }
 
 export default index;

@@ -6,6 +6,8 @@ import * as React from "react";
 import Layout from "@/layout/Layout";
 
 export default function HomePage() {
+    // console.log("this is proceesenv:", process.env.NEXT_PUBLIC_FIREBASE_API_KEY)
+
     const { t } = useTranslation("common");
 
     return (
@@ -18,8 +20,9 @@ export default function HomePage() {
                 <Link href='/' locale='ar'>
                     العربية
                 </Link>
-                <Link href='./signIn/signIn'>signIn</Link>
-                <Link href='./signUp/signUp'>signUp</Link>
+                <Link href='./authentication/signIn'>signIn</Link>
+                <Link href='./authentication/signUp'>signUp</Link>
+                <Link href='./events'> events</Link>
             </div>
         </Layout>
     );
