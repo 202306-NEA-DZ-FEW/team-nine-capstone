@@ -1,29 +1,41 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
-import React from "react";
-import Image from "next/image";
-import Layout from "@/layout/Layout";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 import { auth } from "@/lib/firebase/controller";
 
-export default function index() {
-    function handleSignUp(e) {
+import { useUser } from "@/context/UserContext";
+import Layout from "@/layout/Layout";
+
+export default function SignUp() {
+    const { setUser } = useUser();
+    const router = useRouter();
+
+    async function handleSignUp(e) {
         e.preventDefault();
-        console.log(e.target[0].value);
-        console.log(e.target[1].value);
+
         let newEmail = e.target[0].value;
         let newPassword = e.target[1].value;
-        console.log(newEmail);
-        console.log(newPassword);
-        createUserWithEmailAndPassword(auth, newEmail, newPassword)
-            .then((userCredential) => {
-                console.log(userCredential.user, newEmail, newPassword);
-            })
-            .catch((err) => {
-                const errCode = err.code;
-                const errMsg = err.message;
-                console.log(`${errMsg} and the err code is ${errCode} `);
-            });
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                newEmail,
+                newPassword
+            );
+            const user = userCredential.user;
+
+            // Update the user context with the signed-up user
+            setUser(user);
+
+            // console.log("User Signed Up", user, newEmail, newPassword);
+            router.push("/");
+        } catch (err) {
+            const errCode = err.code;
+            const errMsg = err.message;
+            console.log(`${errMsg} and the err code is ${errCode}`);
+        }
     }
 
     // const handleTwitterSignUp = () => {
@@ -31,6 +43,19 @@ export default function index() {
 
     // const handleGoogleSignUp = () => {
     // };
+
+    useEffect(() => {
+        const Logged = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+            }
+        }, []);
+        return () => {
+            Logged();
+        };
+    }, []);
 
     return (
         <Layout>

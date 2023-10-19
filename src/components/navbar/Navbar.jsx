@@ -1,5 +1,6 @@
 import { signOut } from "firebase/auth";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { BsTranslate } from "react-icons/bs";
@@ -13,12 +14,15 @@ import {
 
 import { auth } from "@/lib/firebase/controller";
 
+import { useUser } from "@/context/UserContext";
+
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
-    const [user, setUser] = useState(true);
-    const { t, i18 } = useTranslation("common");
+    const { user } = useUser();
+    const { t } = useTranslation("common");
+    const router = useRouter("/");
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -44,7 +48,8 @@ function Navbar() {
         e.preventDefault();
         signOut(auth)
             .then(() => {
-                console.log("User Logged Out");
+                //console.log("User Logged Out"); //tests
+                router.push("/");
             })
             .catch((err) => {
                 console.log(err.message);
@@ -100,14 +105,14 @@ function Navbar() {
                             {isLangDropdownOpen && (
                                 <div className='absolute top-full left-0 w-full p-2 layout border-4 border-grey-800 border-3 rounded-lg shadow-lg  mt-2'>
                                     <Link
-                                        href='/'
+                                        href=''
                                         locale='en'
                                         className='block text-sm text-white p-2 w-38 hover:bg-amber-200 rounded-xl'
                                     >
                                         English
                                     </Link>
                                     <Link
-                                        href='/'
+                                        href=''
                                         locale='ar'
                                         className='block text-sm text-white p-2 w-38 hover:bg-amber-200 rounded-xl'
                                     >
@@ -226,15 +231,15 @@ function Navbar() {
                                         {isLangDropdownOpen && (
                                             <div className='w-full border-t-2 border-amber-700'>
                                                 <Link
-                                                    href='/'
+                                                    href=''
                                                     locale='en'
                                                     className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
                                                 >
-                                                    {t("English")}
+                                                    English
                                                 </Link>
 
                                                 <Link
-                                                    href='/'
+                                                    href=''
                                                     locale='ar'
                                                     className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
                                                 >
