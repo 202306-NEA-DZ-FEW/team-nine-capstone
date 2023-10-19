@@ -1,10 +1,13 @@
+import { getAuth } from "firebase/auth";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
+import React from "react";
 
 function Footer() {
-    const [user, setUser] = useState(false);
-    const { t, i18 } = useTranslation("common");
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    const { t } = useTranslation("common");
     return (
         <footer className='bottom-0 w-screen mt-20 mx-auto  text-center layout text-white'>
             <div className='px-6 py-8 md:py-14 xl:pt-20 xl:pb-12'>

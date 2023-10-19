@@ -1,7 +1,10 @@
 import Image from "next/image";
 import React from "react";
+// import { useUser } from "@/context/UserContext";
 
 function EventCard({ TheEvent }) {
+    // const { user } = useUser();
+    // console.log(user)
     return (
         <div className='mx-auto bg-gray-700 flex items-center justify-center px-8 py-8'>
             <div className='flex flex-col w-full bg-white rounded shadow-lg sm:w-3/4 md:w-1/2 lg:w-3/5'>
@@ -23,13 +26,13 @@ function EventCard({ TheEvent }) {
                         <div className='flex flex-row items-center mt-4 text-gray-700'>
                             <div className='w-1/2'>Pebble</div>
                             <div className='w-1/2 flex justify-end'>
-                                {/* <Image
+                                <Image
                                     src='/logo-image.jpg'
                                     alt='Sponsor Logo'
-                                    width={auto}
-                                    height={auto}
+                                    width={100}
+                                    height={100}
                                     className='w-8'
-                                /> */}
+                                />
                             </div>
                         </div>
                     </div>

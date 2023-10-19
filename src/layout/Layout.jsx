@@ -7,7 +7,7 @@ export default function Layout({ children }) {
     // Put Header or Footer around the children element
     // Example
     return (
-        <div className='fit-w-screen'>
+        <div className='w-screen'>
             <Navbar />
             {children}
             <Footer />

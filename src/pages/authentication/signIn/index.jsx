@@ -1,43 +1,62 @@
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
-import React from "react";
-import Layout from "@/layout/Layout";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 import { auth } from "@/lib/firebase/controller";
 
-export default function index() {
-    function handleSignIn(e) {
+import { useUser } from "@/context/UserContext";
+import Layout from "@/layout/Layout";
+
+export default function SignUp() {
+    const { setUser } = useUser();
+    const router = useRouter();
+    async function handleSignIn(e) {
         e.preventDefault();
 
         let email = e.target[0].value;
         let password = e.target[1].value;
-        console.log(email, password);
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                console.log(
-                    "User Logged in ",
-                    userCredential.user,
-                    email,
-                    password
-                );
-            })
-            .catch((err) => {
-                const errCode = err.code;
-                const errMsg = err.message;
-                console.log(`${errMsg} and code is : ${errCode}`);
-            });
+        try {
+            const userCredential = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            const user = userCredential.user;
+
+            // Update the user context with the signed-in user
+
+            console.log("User Logged in ", user, email, password); //for testing
+            router.push("/");
+        } catch (err) {
+            const errCode = err.code;
+            const errMsg = err.message;
+            console.log(`${errMsg} and code is : ${errCode}`);
+        }
     }
+    useEffect(() => {
+        const Logged = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+            }
+        }, []);
+        return () => {
+            Logged();
+        };
+    }, []);
 
     return (
         <Layout>
             <div className='relative flex flex-col justify-center h-screen'>
                 <div className='lg:flex lg:gap-x-4 justify-center items-center mx-4'>
                     <div className='lg:max-w-xl w-full'>
-                        <img
+                        {/* <img
                             className='w-full h-full object-cover rounded-md'
                             src=''
                             alt='sign up image'
-                        />
+                        /> */}
                     </div>
                     <div className='w-full bg-white rounded-md lg:max-w-xl'>
                         <h1 className='text-2xl font-semibold text-center text-gray-700'>
