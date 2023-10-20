@@ -52,7 +52,8 @@ function Navbar() {
                 router.push("/");
             })
             .catch((err) => {
-                console.log(err.message);
+                // console.log(err.message);
+                err.message;
             });
     }
 
@@ -139,7 +140,7 @@ function Navbar() {
                                     {user ? (
                                         <>
                                             <Link
-                                                href='/profile'
+                                                href={`/profile/${user.displayName}`}
                                                 className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
                                                 onClick={closeMenu}
                                             >
@@ -265,7 +266,9 @@ function Navbar() {
                                             <div className='w-full border-t-2 border-amber-700'>
                                                 {user ? (
                                                     <>
-                                                        <Link href='/profile'>
+                                                        <Link
+                                                            href={`/profile/${user.displayName}`}
+                                                        >
                                                             <button className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'>
                                                                 {t(
                                                                     "Your Profile"

@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -15,8 +15,9 @@ export default function SignUp() {
     async function handleSignUp(e) {
         e.preventDefault();
 
-        let newEmail = e.target[0].value;
-        let newPassword = e.target[1].value;
+        let newDisplayName = e.target[0].value;
+        let newEmail = e.target[1].value;
+        let newPassword = e.target[2].value;
 
         try {
             const userCredential = await createUserWithEmailAndPassword(
@@ -26,6 +27,11 @@ export default function SignUp() {
             );
             const user = userCredential.user;
 
+            //    Update the user's display name
+            await updateProfile(user, {
+                displayName: newDisplayName,
+            });
+
             // Update the user context with the signed-up user
             setUser(user);
 
@@ -34,7 +40,8 @@ export default function SignUp() {
         } catch (err) {
             const errCode = err.code;
             const errMsg = err.message;
-            console.log(`${errMsg} and the err code is ${errCode}`);
+            //console.log(`${errMsg} and the err code is ${errCode}`);
+            errCode, errMsg;
         }
     }
 
@@ -55,7 +62,7 @@ export default function SignUp() {
         return () => {
             Logged();
         };
-    }, []);
+    }, [setUser]);
 
     return (
         <Layout>
@@ -91,18 +98,24 @@ export default function SignUp() {
                             </button>
                         </div>
                         <form className='mt-6' onSubmit={handleSignUp}>
-                            {/* <div className="mb-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-semibold text-gray-800"
-              >
-                Name
-              </label>
-              <input
-                type="email"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
-              />
-            </div> */}
+                            <div className='mb-2'>
+                                <label
+                                    htmlFor='displayName'
+                                    className='block text-sm font-semibold text-gray-800'
+                                >
+                                    User Name
+                                    <span style={{ color: "red" }}>*</span>
+                                </label>
+                                <input
+                                    type='text'
+                                    id='displayName'
+                                    name='displayName' // Add a name attribute
+                                    className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40'
+                                    placeholder='add your name here'
+                                    required
+                                />
+                            </div>
+
                             <div className='mb-2'>
                                 <label
                                     htmlFor='email'
