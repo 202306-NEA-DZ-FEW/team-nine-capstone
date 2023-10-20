@@ -283,6 +283,7 @@ function Navbar() {
                                                             </button>
                                                         </Link>
                                                         <button
+                                                            href='/'
                                                             className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
                                                             onClick={
                                                                 handleSignOut

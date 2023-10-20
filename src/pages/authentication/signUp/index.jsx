@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-import { auth } from "@/lib/firebase/controller";
+import { auth, createUserDocument } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
@@ -32,11 +32,19 @@ export default function SignUp() {
                 displayName: newDisplayName,
             });
 
+            // Create a document for the user in the "users" collection
+            const userData = {
+                displayName: newDisplayName,
+                email: newEmail,
+                // Inital Detail for the user document
+            };
+            createUserDocument(user.uid, userData);
+
             // Update the user context with the signed-up user
             setUser(user);
 
             // console.log("User Signed Up", user, newEmail, newPassword);
-            router.push("/");
+            router.push("/profile/editProfile");
         } catch (err) {
             const errCode = err.code;
             const errMsg = err.message;
@@ -44,12 +52,6 @@ export default function SignUp() {
             errCode, errMsg;
         }
     }
-
-    // const handleTwitterSignUp = () => {
-    // };
-
-    // const handleGoogleSignUp = () => {
-    // };
 
     useEffect(() => {
         const Logged = auth.onAuthStateChanged((user) => {
@@ -68,16 +70,7 @@ export default function SignUp() {
         <Layout>
             <div className='relative flex flex-col justify-center h-screen'>
                 <div className='lg:flex lg:gap-x-4 justify-center items-center mx-4'>
-                    <div className='lg:max-w-xl w-full'>
-                        {/* <Image
-                        className='w-full h-full object-cover rounded-md'
-                        src='/public/images/Square.png'
-                        alt='sign up with image'
-                        layout=
-                        width={100}
-                        height={75}
-                    /> */}
-                    </div>
+                    <div className='lg:max-w-xl w-full'></div>
                     <div className='w-full bg-white rounded-md lg:max-w-xl'>
                         <h1 className='text-2xl font-semibold text-center text-gray-700'>
                             Create an account
