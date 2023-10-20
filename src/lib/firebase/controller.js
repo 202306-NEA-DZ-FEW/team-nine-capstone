@@ -16,8 +16,8 @@ export const createUserDocument = async (userId, userData) => {
 
     try {
         await setDoc(userDocRef, userData);
-        console.log("User document created successfully!");
+        // console.log("User document created successfully!");
     } catch (error) {
-        console.error("Error creating user document:", error);
+        // console.error("Error creating user document:", error);
     }
 };

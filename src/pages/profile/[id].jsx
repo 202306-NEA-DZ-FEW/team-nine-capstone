@@ -1,11 +1,12 @@
+import Link from "next/link";
+
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
-import Link from "next/link";
 
 function Profile() {
     const { user } = useUser();
     // const { t } = useTranslation("common");
-    console.log(user);
+    // console.log(user);
 
     return (
         <Layout>
