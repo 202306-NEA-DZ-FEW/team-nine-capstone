@@ -1,4 +1,6 @@
+import Image from "next/image";
 import React from "react";
+
 const Hero = () => {
     return (
         <div>
@@ -18,12 +20,18 @@ const Hero = () => {
                             self-contained unit of text dealing with a
                             particular point or idea.
                         </p>
-                        <button className='w-[166px] h-[52px] px-4 py-[11px] bg-cyan-700 rounded-lg flex justify-center items-center text-white text-xl font-medium font-Rubik leading-[30px] tracking-tight'>
+                        <button className='w-[166px] h-14 px-4 py-3 bg-cyan-700 rounded-lg flex justify-center items-center text-white text-xl font-medium font-Rubik leading-[30px] tracking-tight'>
                             Get Started
                         </button>
                     </div>
                     <div>
-                        <img src='/images/square.png' alt='' />
+                        <Image
+                            src='/images/square.png'
+                            alt=''
+                            width={630}
+                            height={630}
+                            className='w-[630px] h-full'
+                        />
                     </div>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { AiOutlineRight } from "react-icons/ai";
 
@@ -37,10 +38,12 @@ const HowitWorks = () => {
                         key={service.id}
                         className='flex flex-col items-center gap-6'
                     >
-                        <img
+                        <Image
                             src={service.image}
                             alt={service.title}
-                            className='w-50 h-56 object-cover'
+                            width={220}
+                            height={220}
+                            className='w-[220px] h-[220]'
                         />
                         <h4 className='text-zinc-900 text-2xl font-medium leading-10 tracking-tight'>
                             {service.title}
@@ -50,7 +53,7 @@ const HowitWorks = () => {
                         </p>
                         <a
                             href={service.link}
-                            className="flex items-center text-zinc-900 text-[18px] font-medium font-['Rubik']"
+                            className="flex items-center text-zinc-900 text-xl font-medium font-['Rubik']"
                         >
                             {service.link} <AiOutlineRight className='ml-2' />
                         </a>
