@@ -1,9 +1,9 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-import { auth } from "@/lib/firebase/controller";
+import { auth, createUserDocument } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
@@ -15,8 +15,9 @@ export default function SignUp() {
     async function handleSignUp(e) {
         e.preventDefault();
 
-        let newEmail = e.target[0].value;
-        let newPassword = e.target[1].value;
+        let newDisplayName = e.target[0].value;
+        let newEmail = e.target[1].value;
+        let newPassword = e.target[2].value;
 
         try {
             const userCredential = await createUserWithEmailAndPassword(
@@ -26,23 +27,31 @@ export default function SignUp() {
             );
             const user = userCredential.user;
 
+            //    Update the user's display name
+            await updateProfile(user, {
+                displayName: newDisplayName,
+            });
+
+            // Create a document for the user in the "users" collection
+            const userData = {
+                displayName: newDisplayName,
+                email: newEmail,
+                // Inital Detail for the user document
+            };
+            createUserDocument(user.uid, userData);
+
             // Update the user context with the signed-up user
             setUser(user);
 
             // console.log("User Signed Up", user, newEmail, newPassword);
-            router.push("/");
+            router.push("/profile/editProfile");
         } catch (err) {
             const errCode = err.code;
             const errMsg = err.message;
-            console.log(`${errMsg} and the err code is ${errCode}`);
+            //console.log(`${errMsg} and the err code is ${errCode}`);
+            errCode, errMsg;
         }
     }
-
-    // const handleTwitterSignUp = () => {
-    // };
-
-    // const handleGoogleSignUp = () => {
-    // };
 
     useEffect(() => {
         const Logged = auth.onAuthStateChanged((user) => {
@@ -55,22 +64,13 @@ export default function SignUp() {
         return () => {
             Logged();
         };
-    }, []);
+    }, [setUser]);
 
     return (
         <Layout>
             <div className='relative flex flex-col justify-center h-screen'>
                 <div className='lg:flex lg:gap-x-4 justify-center items-center mx-4'>
-                    <div className='lg:max-w-xl w-full'>
-                        {/* <Image
-                        className='w-full h-full object-cover rounded-md'
-                        src='/public/images/Square.png'
-                        alt='sign up with image'
-                        layout=
-                        width={100}
-                        height={75}
-                    /> */}
-                    </div>
+                    <div className='lg:max-w-xl w-full'></div>
                     <div className='w-full bg-white rounded-md lg:max-w-xl'>
                         <h1 className='text-2xl font-semibold text-center text-gray-700'>
                             Create an account
@@ -91,18 +91,24 @@ export default function SignUp() {
                             </button>
                         </div>
                         <form className='mt-6' onSubmit={handleSignUp}>
-                            {/* <div className="mb-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-semibold text-gray-800"
-              >
-                Name
-              </label>
-              <input
-                type="email"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
-              />
-            </div> */}
+                            <div className='mb-2'>
+                                <label
+                                    htmlFor='displayName'
+                                    className='block text-sm font-semibold text-gray-800'
+                                >
+                                    User Name
+                                    <span style={{ color: "red" }}>*</span>
+                                </label>
+                                <input
+                                    type='text'
+                                    id='displayName'
+                                    name='displayName' // Add a name attribute
+                                    className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40'
+                                    placeholder='add your name here'
+                                    required
+                                />
+                            </div>
+
                             <div className='mb-2'>
                                 <label
                                     htmlFor='email'
