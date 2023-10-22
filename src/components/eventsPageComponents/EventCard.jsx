@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 // import { useUser } from "@/context/UserContext";
@@ -35,13 +34,13 @@ function EventCard({ TheEvent }) {
                                 </button>
                             </Link>
                             <div className='w-1/2 flex justify-end'>
-                                <Image
+                                {/* <Image
                                     src='/logo-image.jpg'
                                     alt='Sponsor Logo'
                                     width={100}
                                     height={100}
                                     className='w-8'
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>

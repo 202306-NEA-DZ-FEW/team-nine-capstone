@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 
 import { firestore } from "@/lib/firebase/controller";
 
+import Loader from "../loader/Loader";
+
 function EventDetails() {
     const [eventDisplay, setEventDisplay] = useState({});
 
@@ -22,7 +24,7 @@ function EventDetails() {
     }, [id]);
 
     if (!id || eventDisplay === {}) {
-        return <div className='Loading'> loadinf </div>;
+        return <Loader />;
     }
 
     console.log(eventDisplay);
