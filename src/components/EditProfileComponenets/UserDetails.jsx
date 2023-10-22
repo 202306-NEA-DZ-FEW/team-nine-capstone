@@ -26,11 +26,12 @@ function UserDetails() {
         e.preventDefault();
         updateUserDocument(user.uid, userData)
             .then(() => {
-                console.log("User document updated successfully!");
-                console.log(userData);
+                //console.log("User document updated successfully!");
+                //console.log(userData);
             })
             .catch((error) => {
-                console.error("Error updating user document:", error);
+                error;
+                // console.error("Error updating user document:", error);
             });
     };
 

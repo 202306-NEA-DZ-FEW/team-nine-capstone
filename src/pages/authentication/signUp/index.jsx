@@ -1,4 +1,8 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    updateProfile,
+    //  sendEmailVerification
+} from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -20,36 +24,35 @@ export default function SignUp() {
         let newPassword = e.target[2].value;
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(
+            const { user } = await createUserWithEmailAndPassword(
                 auth,
                 newEmail,
                 newPassword
             );
-            const user = userCredential.user;
 
-            //    Update the user's display name
             await updateProfile(user, {
                 displayName: newDisplayName,
             });
 
-            // Create a document for the user in the "users" collection
             const userData = {
                 displayName: newDisplayName,
                 email: newEmail,
-                // Inital Detail for the user document
+                password: newPassword,
             };
-            createUserDocument(user.uid, userData);
 
-            // Update the user context with the signed-up user
+            await createUserDocument(user.uid, userData);
+
+            //Verification email
+            // await sendEmailVerification(user);
+            // console.log("Verification email sent successfully!");
+
             setUser(user);
 
-            // console.log("User Signed Up", user, newEmail, newPassword);
             router.push("/profile/editProfile");
         } catch (err) {
             const errCode = err.code;
             const errMsg = err.message;
-            //console.log(`${errMsg} and the err code is ${errCode}`);
-            errCode, errMsg;
+            console.log(`${errMsg} and the err code is ${errCode}`);
         }
     }
 

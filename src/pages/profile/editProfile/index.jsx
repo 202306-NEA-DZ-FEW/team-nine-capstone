@@ -1,10 +1,8 @@
-import React from "react";
-
+import EditSignInDetailes from "@/components/EditProfileComponenets/updateSignInDetails";
 import UserDetails from "@/components/EditProfileComponenets/UserDetails";
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
-import { updateUserDocument } from "@/lib/firebase/controller";
 
 function EditProfile() {
     const { user } = useUser();
@@ -13,6 +11,7 @@ function EditProfile() {
     return (
         <Layout>
             <UserDetails />
+            <EditSignInDetailes />
         </Layout>
     );
 }
