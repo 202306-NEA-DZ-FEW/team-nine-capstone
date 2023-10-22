@@ -1,3 +1,26 @@
 {
-    "test": "Hello"
+    "test": "This is a test",
+    "Profile": "Profile",
+    "Sign Up": "Sign Up",
+    "Your Profile": "Your Profile",
+    "Your Events": "Your Events",
+    "Sign Out": "Sign Out",
+    "Sign In": "Sign In",
+    "About": "About",
+    "Events": "Events",
+    "footer": {
+        "hook": "Ready to be part of a word changing experience ! Be the change ! Join Us."
+    },
+
+    "globalGolas": {
+        "title": "Sustainable Developments Goals",
+        "discription": "Sustainable Development Goals (SDGs) are a global call to action to end poverty, protect the planet, and ensure prosperity for all. They address various challenges such as inequality, climate change, and environmental degradation."
+    },
+    "feedback": "Hear it from volunteers",
+    "slogan": {
+        "title": "Become the change you wish to see in the world",
+        "discription": "Embrace your vision for a better world, lead by example, inspire positive actions, and together, we can create a brighter future."
+    },
+    "Get Started": "Get Started",
+    "who are we": "who are we"
 }

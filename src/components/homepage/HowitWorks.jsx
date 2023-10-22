@@ -9,21 +9,24 @@ const HowitWorks = () => {
             id: 1,
             title: "Register",
             description: "Lorem ipsum",
-            link: "Sign up",
+            logo: "Sign up",
+            link: "/authentication/signUp",
         },
         {
             image: "/images/attend.png",
             id: 2,
             title: "Attend events",
             description: "Lorem ipsum",
-            link: "View events",
+            logo: "View events",
+            link: "/events",
         },
         {
             image: "/images/Girl.png",
             id: 3,
             title: "Organize your own!",
             description: "Lorem ipsum",
-            link: "Get started",
+            logo: "Get started",
+            link: "/createEvent",
         },
     ];
 
@@ -55,7 +58,7 @@ const HowitWorks = () => {
                             href={service.link}
                             className="flex items-center text-zinc-900 text-xl font-medium font-['Rubik']"
                         >
-                            {service.link} <AiOutlineRight className='ml-2' />
+                            {service.logo} <AiOutlineRight className='ml-2' />
                         </a>
                     </div>
                 ))}

@@ -1,27 +1,21 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import * as React from "react";
+import React from "react";
 
-import HeroSection from "@/components/homepage/HeroSection";
-import HowitWorks from "@/components/homepage/HowitWorks";
-import SectionTwo from "@/components/homepage/SectionTwo";
+import EventList from "@/components/eventsPageComponents/EventList";
 
-import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
 
-export default function HomePage() {
-    const { user } = useUser();
+function Event() {
     const { t } = useTranslation("common");
-    // console.log(user)  // context test
-
     return (
         <Layout>
-            <HeroSection />
-            <HowitWorks />
-            <SectionTwo />
+            <EventList />
         </Layout>
     );
 }
+
+export default Event;
 
 export async function getStaticProps({ locale }) {
     return {

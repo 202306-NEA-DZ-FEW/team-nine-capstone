@@ -2,8 +2,14 @@ import { appWithTranslation } from "next-i18next";
 
 import "@/styles/globals.css";
 
+import { UserProvider } from "@/context/UserContext"; // Import UserProvider
+
 function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps} />;
+    return (
+        <UserProvider>
+            <Component {...pageProps} />
+        </UserProvider>
+    );
 }
 
 export default appWithTranslation(MyApp);
