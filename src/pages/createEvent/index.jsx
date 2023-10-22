@@ -1,7 +1,9 @@
 import React from "react";
 
+import CreateEvent from "@/components/creatEventPageComponents/CreateEvent";
+
 function CreatEvent() {
-    return <div>creat event page</div>;
+    return <CreateEvent />;
 }
 
 export default CreatEvent;
