@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
@@ -17,6 +18,10 @@ export default function HomePage() {
             {user ? "we're here" : "we're not here" /*context test*/}
             <br />
             {t("footer.hook") /*translation test*/}
+            <Link href='/createEvent' className='border border-orange-600'>
+                {" "}
+                Create an Event !
+            </Link>
             <SectionTwo />
         </Layout>
     );
