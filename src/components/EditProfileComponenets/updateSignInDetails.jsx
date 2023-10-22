@@ -6,7 +6,6 @@ import {
     updatePassword,
 } from "firebase/auth";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 import { updateUserDocument } from "@/lib/firebase/controller";
 
@@ -65,9 +64,6 @@ function UpdateSignInDetailes() {
             if (newPassword !== "") {
                 if (newPassword === confirmPassword) {
                     await updatePassword(user, newPassword);
-                    toast.success("Password updated successfully!", {
-                        position: toast.POSITION.TOP_CENTER,
-                    });
                     console.log("Password updated successfully!");
                 } else {
                     setError("New password and confirm password must match.");
