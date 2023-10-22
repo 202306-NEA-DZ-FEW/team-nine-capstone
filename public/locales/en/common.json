@@ -22,5 +22,21 @@
         "discription": "Embrace your vision for a better world, lead by example, inspire positive actions, and together, we can create a brighter future."
     },
     "Get Started": "Get Started",
-    "who are we": "who are we"
+    "who are we": "who are we",
+
+    "HeroSection": {
+        "title": "Join Us in Creating Impactful Change",
+        "introduction": "Welcome to Pebbels, where we unite hearts and hands to make a difference. Our charity events are more than gatherings; they're opportunities to transform lives. Join our mission to inspire hope, foster change, and spread kindness. Together, we can create a brighter future, one event at a time"
+    },
+    "HowitWorks": {
+        "title": "How it Works"
+    },
+    "Register": "Register",
+    "Sign up and create your account to join our community.": "Sign up and create your account to join our community.",
+    "Participate in inspiring events and make a difference in the community.": "Participate in inspiring events and make a difference in the community.",
+    "Host your own charity event and bring positive change to the world.": "Host your own charity event and bring positive change to the world.",
+    "Attend events": "Attend events",
+    "View events": "View events",
+    "Organize your own!": "Organize your own!",
+    "Get started": "Get started"
 }
