@@ -1,7 +1,7 @@
 import { doc, onSnapshot } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { firestore } from "@/lib/firebase/controller";
@@ -9,17 +9,19 @@ import { firestore } from "@/lib/firebase/controller";
 function EventDetails() {
     const [eventDisplay, setEventDisplay] = useState({});
 
-    const { id } = useParams();
-
-    const eventRef = doc(firestore, "events", id);
+    const router = useRouter();
+    const { id } = router.query;
 
     useEffect(() => {
-        onSnapshot(eventRef, (docEvent) => {
-            setEventDisplay({ ...docEvent.data(), id: docEvent.id });
-        });
-    }, []);
+        if (id) {
+            const eventRef = doc(firestore, "events", id);
+            onSnapshot(eventRef, (docEvent) => {
+                setEventDisplay({ ...docEvent.data(), id: docEvent.id });
+            });
+        }
+    }, [id]);
 
-    if (eventDisplay === {}) {
+    if (!id || eventDisplay === {}) {
         return <div className='Loading'> loadinf </div>;
     }
 

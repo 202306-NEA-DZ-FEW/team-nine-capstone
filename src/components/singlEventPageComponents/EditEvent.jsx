@@ -1,11 +1,12 @@
 import { doc, updateDoc } from "firebase/firestore";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import React from "react";
 
 import { firestore } from "@/lib/firebase/controller";
 
 function EditEvent() {
-    const { id } = useParams();
+    const router = useRouter();
+    const { id } = router.query;
 
     function handleEditForm(e) {
         e.preventDefault();
@@ -14,15 +15,16 @@ function EditEvent() {
         // console.log(e.target.image.value)
         // console.log(e.target.category.value)
         // console.log(e.target.location.value)
-
-        const eventRef = doc(firestore, "events", id);
-        updateDoc(eventRef, {
-            title: e.target.title.value,
-            about: e.target.about.value,
-            date: e.target.date.value,
-            image: e.target.image.value,
-            location: e.target.location.value,
-        });
+        if (id) {
+            const eventRef = doc(firestore, "events", id);
+            updateDoc(eventRef, {
+                title: e.target.title.value,
+                about: e.target.about.value,
+                date: e.target.date.value,
+                image: e.target.image.value,
+                location: e.target.location.value,
+            });
+        }
     }
 
     return (
