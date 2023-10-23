@@ -27,8 +27,6 @@ function EventDetails() {
         return <Loader />;
     }
 
-    console.log(eventDisplay);
-
     return (
         <div className='relative overflow-hidden bg-gray-900 pt-16 pb-32 space-y-24'>
             <div className='relative'>
