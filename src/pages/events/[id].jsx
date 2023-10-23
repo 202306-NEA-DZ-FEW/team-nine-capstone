@@ -1,7 +1,9 @@
 import React from "react";
 
+import EventDetails from "@/components/singlEventPageComponents/EventDetails";
+
 function singleEventPage() {
-    return <div>single event details</div>;
+    return <EventDetails />;
 }
 
 export default singleEventPage;
