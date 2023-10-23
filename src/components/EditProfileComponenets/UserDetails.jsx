@@ -1,3 +1,4 @@
+import { updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 
 import { updateUserDocument } from "@/lib/firebase/controller";
@@ -26,6 +27,12 @@ function UserDetails() {
         e.preventDefault();
         updateUserDocument(user.uid, userData)
             .then(() => {
+                // Update display name in authentication
+                updateProfile(user, { displayName: userData.displayName }).then(
+                    () => {
+                        console.log("Display name updated successfully!");
+                    }
+                );
                 //console.log("User document updated successfully!");
                 //console.log(userData);
             })
