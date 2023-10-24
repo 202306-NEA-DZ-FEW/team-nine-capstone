@@ -9,24 +9,23 @@ import Layout from "@/layout/Layout";
 
 function Profile() {
     const { user } = useUser();
-    console.log(user);
+    //console.log(user);
 
     // Get the current profile id from the URL
     const router = useRouter();
     const { id } = router.query;
-    console.log(id);
+    //console.log(id);
 
     // check if the current user is the profile owner
     const [isOwner, setIsOwner] = useState(false);
     useEffect(() => {
         if (user && user.uid === id) {
             setIsOwner(true);
-            console.log("current user is the owner of the profile", isOwner);
+            //console.log("current user is the owner of the profile", isOwner);
         }
-    }),
-        [isOwner];
+    }, [isOwner, id, user]);
 
-    console.log(isOwner);
+    // console.log(isOwner);
 
     const [userData, setUserData] = useState(null);
 
@@ -38,7 +37,7 @@ function Profile() {
                     setUserData(userDoc.data());
                 }
             } catch (error) {
-                console.error("Error fetching user data:", error);
+                //console.error("Error fetching user data:", error);
             }
         };
 

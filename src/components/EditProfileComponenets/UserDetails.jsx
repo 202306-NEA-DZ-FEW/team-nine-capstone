@@ -26,6 +26,7 @@ function UserDetails() {
                     }
                 })
                 .catch((error) => {
+                    error;
                     // console.error("Error fetching user document:", error);
                 });
         }
