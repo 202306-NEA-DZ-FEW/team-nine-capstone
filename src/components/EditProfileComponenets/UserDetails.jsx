@@ -2,8 +2,8 @@ import { updateProfile } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
 import { getUserDocument, updateUserDocument } from "@/lib/firebase/controller";
-import { interestList } from "@/lib/interestsList";
 
+// import { interestList } from "@/lib/interestsList";
 import { useUser } from "@/context/UserContext";
 
 function UserDetails() {
@@ -40,30 +40,30 @@ function UserDetails() {
         }));
     };
 
-    const handleSelectedInterest = (interest) => {
-        if (userData && userData.userInterests) {
-            if (userData.userInterests.includes(interest.title)) {
-                // If the interest is already selected, remove it from the array
-                setUserData((prevUserData) => ({
-                    ...prevUserData,
-                    userInterests: prevUserData.userInterests.filter(
-                        (item) => item !== interest.title
-                    ),
-                }));
-            } else {
-                // If the interest is not selected, add it to the array (up to 5 interests)
-                if (userData.userInterests.length < 5) {
-                    setUserData((prevUserData) => ({
-                        ...prevUserData,
-                        userInterests: [
-                            ...prevUserData.userInterests,
-                            interest.title,
-                        ],
-                    }));
-                }
-            }
-        }
-    };
+    // const handleSelectedInterest = (interest) => {
+    //     if (userData && userData.userInterests) {
+    //         if (userData.userInterests.includes(interest.title)) {
+    //             // If the interest is already selected, remove it from the array
+    //             setUserData((prevUserData) => ({
+    //                 ...prevUserData,
+    //                 userInterests: prevUserData.userInterests.filter(
+    //                     (item) => item !== interest.title
+    //                 ),
+    //             }));
+    //         } else {
+    //             // If the interest is not selected, add it to the array (up to 5 interests)
+    //             if (userData.userInterests.length < 5) {
+    //                 setUserData((prevUserData) => ({
+    //                     ...prevUserData,
+    //                     userInterests: [
+    //                         ...prevUserData.userInterests,
+    //                         interest.title,
+    //                     ],
+    //                 }));
+    //             }
+    //         }
+    //     }
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -124,7 +124,7 @@ function UserDetails() {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div>
+                {/* <div>
                     <label htmlFor='interests'>interests</label>
                     <div className='flex flex-wrap justify-center items-start'>
                         {interestList.map((interest) => (
@@ -143,7 +143,7 @@ function UserDetails() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
                 <button type='submit'>Update Profile</button>
             </form>
         </div>
