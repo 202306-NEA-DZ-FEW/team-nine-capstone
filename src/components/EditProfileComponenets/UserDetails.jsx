@@ -39,30 +39,31 @@ function UserDetails() {
         }));
     };
 
-    const handleSelectedInterest = (interest) => {
-        if (userData && userData.userInterests) {
-            if (userData.userInterests.includes(interest.title)) {
-                // If the interest is already selected, remove it from the array
-                setUserData((prevUserData) => ({
-                    ...prevUserData,
-                    userInterests: prevUserData.userInterests.filter(
-                        (item) => item !== interest.title
-                    ),
-                }));
-            } else {
-                // If the interest is not selected, add it to the array (up to 5 interests)
-                if (userData.userInterests.length < 5) {
-                    setUserData((prevUserData) => ({
-                        ...prevUserData,
-                        userInterests: [
-                            ...prevUserData.userInterests,
-                            interest.title,
-                        ],
-                    }));
-                }
-            }
-        }
-    };
+    // const handleSelectedInterest = (interest) => {
+    //     if (userData && userData.userInterests) {
+    //         if (userData.userInterests.includes(interest.title)) {
+    //             // If the interest is already selected, remove it from the array
+    //             setUserData((prevUserData) => ({
+    //                 ...prevUserData,
+    //                 userInterests: prevUserData.userInterests.filter(
+    //                     (item) => item !== interest.title
+    //                 ),
+    //             }));
+    //         } else {
+    //             // If the interest is not selected, add it to the array (up to 5 interests)
+    //             if (userData.userInterests.length < 5) {
+    //                 setUserData((prevUserData) => ({
+    //                     ...prevUserData,
+    //                     userInterests: [
+    //                         ...prevUserData.userInterests,
+    //                         interest.title,
+    //                     ],
+    //                 }));
+    //                 console.log(userData.userInterests)
+    //             }
+    //         }
+    //     }
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -142,14 +143,7 @@ function UserDetails() {
                         {interestList.map((interest) => (
                             <div
                                 key={interest.title}
-                                className={`flex flex-col items-center basis-1/2 sm:basis-1/4 md:basis-1/6 mr-4 mb-4 p-4 border-2 border-gray-300 cursor-pointer hover:font-semibold hover:border-4 ${
-                                    userData.userInterests.includes(
-                                        interest.title
-                                    )
-                                        ? "bg-red-500"
-                                        : ""
-                                }`}
-                                onClick={() => handleSelectedInterest(interest)}
+                                className='flex flex-col items-center basis-1/2 sm:basis-1/4 md:basis-1/6 mr-4 mb-4 p-4 border-2 border-gray-300 cursor-pointer hover:font-semibold hover:border-4'
                             >
                                 {interest.title}
                             </div>
