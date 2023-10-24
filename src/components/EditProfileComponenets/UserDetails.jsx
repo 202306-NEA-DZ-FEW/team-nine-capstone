@@ -126,7 +126,7 @@ function UserDetails() {
                 </div>
                 <div>
                     <label htmlFor='interests'>interests</label>
-                    <div className='flex flex-wrap justify-center items-start'>
+                    {/* <div className='flex flex-wrap justify-center items-start'>
                         {interestList.map((interest) => (
                             <div
                                 key={interest.title}
@@ -142,7 +142,7 @@ function UserDetails() {
                                 {interest.title}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
                 <button type='submit'>Update Profile</button>
             </form>

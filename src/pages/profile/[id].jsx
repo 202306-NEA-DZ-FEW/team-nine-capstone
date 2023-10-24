@@ -51,7 +51,7 @@ function Profile() {
                     <img src={userData.avatar} alt='Avatar' />
                     <div>Full Name: {userData.fullName}</div>
                     <div>Location: {userData.location}</div>
-                    {/* <div>
+                    <div>
                         Interests:{" "}
                         {userData.userInterests.map((interest) => (
                             <div
@@ -61,7 +61,7 @@ function Profile() {
                                 {interest}
                             </div>
                         ))}
-                    </div> */}
+                    </div>
                 </div>
             )}
             {isOwner ? (
