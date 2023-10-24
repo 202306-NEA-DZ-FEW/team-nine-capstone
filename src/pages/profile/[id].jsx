@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+import { getUserDocument } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
-import { userCollection } from "@/lib/firebase/controller";
 
 function Profile() {
     const { user } = useUser();
@@ -33,10 +33,9 @@ function Profile() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const userDocRef = doc(userCollection, id);
-                const userDocSnapshot = await getDoc(userDocRef);
-                if (userDocSnapshot.exists()) {
-                    setUserData(userDocSnapshot.data());
+                const userDoc = await getUserDocument(id);
+                if (userDoc.exists()) {
+                    setUserData(userDoc.data());
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -52,7 +51,18 @@ function Profile() {
                     <h1>{userData.displayName}</h1>
                     <img src={userData.avatar} alt='Avatar' />
                     <p>Location: {userData.location}</p>
-                    <p>Interests: {userData.interest}</p>
+                    <p>
+                        Interests:{" "}
+                        {userData.userInterests.map((interest) => (
+                            <div
+                                key={interest}
+                                className='flex flex-col items-center basis-1/2 sm:basis-1/4 md:basis-1/6 mr-4 mb-4 p-4 border-2 border-gray-300 cursor-pointer hover:font-semibold hover:border-4'
+                            >
+                                {interest}
+                            </div>
+                        ))}
+                    </p>
+
                     <p>Full Name: {userData.fullName}</p>
                 </div>
             )}

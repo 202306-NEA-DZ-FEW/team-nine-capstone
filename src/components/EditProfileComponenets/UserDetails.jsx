@@ -1,7 +1,8 @@
 import { updateProfile } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { updateUserDocument } from "@/lib/firebase/controller";
+import { getUserDocument, updateUserDocument } from "@/lib/firebase/controller";
+import { interestList } from "@/lib/interestsList";
 
 import { useUser } from "@/context/UserContext";
 
@@ -12,8 +13,23 @@ function UserDetails() {
         fullName: "",
         location: "",
         avatar: "",
-        interest: "",
+        userInterests: [],
     });
+
+    //get user details if there is any from data base to populate input
+    useEffect(() => {
+        if (user) {
+            getUserDocument(user.uid)
+                .then((doc) => {
+                    if (doc.exists) {
+                        setUserData(doc.data());
+                    }
+                })
+                .catch((error) => {
+                    // console.error("Error fetching user document:", error);
+                });
+        }
+    }, [user]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -23,6 +39,31 @@ function UserDetails() {
         }));
     };
 
+    const handleSelectedInterest = (interest) => {
+        if (userData && userData.userInterests) {
+            if (userData.userInterests.includes(interest.title)) {
+                // If the interest is already selected, remove it from the array
+                setUserData((prevUserData) => ({
+                    ...prevUserData,
+                    userInterests: prevUserData.userInterests.filter(
+                        (item) => item !== interest.title
+                    ),
+                }));
+            } else {
+                // If the interest is not selected, add it to the array (up to 5 interests)
+                if (userData.userInterests.length < 5) {
+                    setUserData((prevUserData) => ({
+                        ...prevUserData,
+                        userInterests: [
+                            ...prevUserData.userInterests,
+                            interest.title,
+                        ],
+                    }));
+                }
+            }
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         updateUserDocument(user.uid, userData)
@@ -30,11 +71,13 @@ function UserDetails() {
                 // Update display name in authentication
                 updateProfile(user, { displayName: userData.displayName }).then(
                     () => {
-                        console.log("Display name updated successfully!");
+                        // console.log(
+                        //     "Display name in authentification updated successfully!"
+                        // );
                     }
                 );
-                //console.log("User document updated successfully!");
-                //console.log(userData);
+                // console.log("User document updated successfully!");
+                // console.log(userData);
             })
             .catch((error) => {
                 error;
@@ -52,7 +95,8 @@ function UserDetails() {
                         type='text'
                         id='displayName'
                         name='displayName'
-                        value={userData.displayName}
+                        placeholder='Enter a User Name'
+                        value={userData.displayName || ""}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -63,7 +107,8 @@ function UserDetails() {
                         type='text'
                         id='fullName'
                         name='fullName'
-                        value={userData.fullName}
+                        placeholder='Enter Full Name'
+                        value={userData.fullName || ""}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -74,7 +119,8 @@ function UserDetails() {
                         type='text'
                         id='location'
                         name='location'
-                        value={userData.location}
+                        placeholder='Enter Location'
+                        value={userData.location || ""}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -85,20 +131,30 @@ function UserDetails() {
                         type='text'
                         id='avatar'
                         name='avatar'
-                        value={userData.avatar}
+                        placeholder='add an image here'
+                        value={userData.avatar || ""}
                         onChange={handleInputChange}
                     />
                 </div>
                 <div>
-                    <label htmlFor='interest'>Interest</label>
-                    <input
-                        className='border-4 focus:border-black'
-                        type='text'
-                        id='interest'
-                        name='interest'
-                        value={userData.interest}
-                        onChange={handleInputChange}
-                    />
+                    <label htmlFor='interests'>interests</label>
+                    <div className='flex flex-wrap justify-center items-start'>
+                        {interestList.map((interest) => (
+                            <div
+                                key={interest.title}
+                                className={`flex flex-col items-center basis-1/2 sm:basis-1/4 md:basis-1/6 mr-4 mb-4 p-4 border-2 border-gray-300 cursor-pointer hover:font-semibold hover:border-4 ${
+                                    userData.userInterests.includes(
+                                        interest.title
+                                    )
+                                        ? "bg-red-500"
+                                        : ""
+                                }`}
+                                onClick={() => handleSelectedInterest(interest)}
+                            >
+                                {interest.title}
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <button type='submit'>Update Profile</button>
             </form>

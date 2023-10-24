@@ -2,6 +2,7 @@ import { getAuth } from "firebase/auth";
 import {
     collection,
     doc,
+    getDoc,
     getFirestore,
     setDoc,
     updateDoc,
@@ -30,12 +31,19 @@ export const createUserDocument = async (userId, userData) => {
 
 //function responsible for updating profile info
 export const updateUserDocument = async (userId, userData) => {
-    const userDocRef = doc(firestore, "users", userId);
+    const userRef = doc(userCollection, userId);
 
     try {
-        await updateDoc(userDocRef, userData);
+        await updateDoc(userRef, userData);
         // console.log("User document updated successfully!");
     } catch (error) {
         // console.error("Error updating user document:", error);
     }
+};
+
+//function responsible for fetching user Data
+export const getUserDocument = async (uid) => {
+    const userRef = doc(userCollection, uid);
+    const userDoc = await getDoc(userRef);
+    return userDoc;
 };
