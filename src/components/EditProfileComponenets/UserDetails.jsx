@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { getUserDocument, updateUserDocument } from "@/lib/firebase/controller";
 
-// import { interestList } from "@/lib/interestsList";
+import { interestList } from "@/lib/interestsList";
 import { useUser } from "@/context/UserContext";
 
 function UserDetails() {
@@ -124,7 +124,7 @@ function UserDetails() {
                         onChange={handleInputChange}
                     />
                 </div>
-                {/* <div>
+                <div>
                     <label htmlFor='interests'>interests</label>
                     <div className='flex flex-wrap justify-center items-start'>
                         {interestList.map((interest) => (
@@ -137,13 +137,13 @@ function UserDetails() {
                                         ? "bg-red-500"
                                         : ""
                                 }`}
-                                onClick={() => handleSelectedInterest(interest)}
+                                // onClick={() => handleSelectedInterest(interest)}
                             >
                                 {interest.title}
                             </div>
                         ))}
                     </div>
-                </div> */}
+                </div>
                 <button type='submit'>Update Profile</button>
             </form>
         </div>
