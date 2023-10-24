@@ -45,7 +45,7 @@ export default function SignUp() {
         return () => {
             Logged();
         };
-    }, []);
+    }, [setUser]);
 
     return (
         <Layout>

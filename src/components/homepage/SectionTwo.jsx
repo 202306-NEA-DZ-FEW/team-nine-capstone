@@ -222,7 +222,7 @@ const SectionTwo = () => {
                     <div className='flex justify-end '>
                         <button
                             onClick={handleUser}
-                            class='flex justify-center items-center  hover:bg-cyan-500  bg-teal-600 text-white font-normal text-sm  rounded h-8 w-20'
+                            className='flex justify-center items-center  hover:bg-cyan-500  bg-teal-600 text-white font-normal text-sm  rounded h-8 w-20'
                         >
                             {t("Get Started")}
                         </button>

@@ -67,23 +67,10 @@ function UserDetails() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateUserDocument(user.uid, userData)
-            .then(() => {
-                // Update display name in authentication
-                updateProfile(user, { displayName: userData.displayName }).then(
-                    () => {
-                        // console.log(
-                        //     "Display name in authentification updated successfully!"
-                        // );
-                    }
-                );
-                // console.log("User document updated successfully!");
-                // console.log(userData);
-            })
-            .catch((error) => {
-                error;
-                // console.error("Error updating user document:", error);
-            });
+        updateUserDocument(user.uid, userData).then(() => {
+            // Update display name in authentication
+            updateProfile(user, { displayName: userData.displayName });
+        });
     };
 
     return (
