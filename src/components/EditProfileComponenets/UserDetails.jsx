@@ -2,8 +2,8 @@ import { updateProfile } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
 import { getUserDocument, updateUserDocument } from "@/lib/firebase/controller";
-
 import { interestList } from "@/lib/interestsList";
+
 import { useUser } from "@/context/UserContext";
 
 function UserDetails() {
@@ -26,7 +26,6 @@ function UserDetails() {
                     }
                 })
                 .catch((error) => {
-                    error;
                     // console.error("Error fetching user document:", error);
                 });
         }
@@ -40,37 +39,50 @@ function UserDetails() {
         }));
     };
 
-    // const handleSelectedInterest = (interest) => {
-    //     if (userData && userData.userInterests) {
-    //         if (userData.userInterests.includes(interest.title)) {
-    //             // If the interest is already selected, remove it from the array
-    //             setUserData((prevUserData) => ({
-    //                 ...prevUserData,
-    //                 userInterests: prevUserData.userInterests.filter(
-    //                     (item) => item !== interest.title
-    //                 ),
-    //             }));
-    //         } else {
-    //             // If the interest is not selected, add it to the array (up to 5 interests)
-    //             if (userData.userInterests.length < 5) {
-    //                 setUserData((prevUserData) => ({
-    //                     ...prevUserData,
-    //                     userInterests: [
-    //                         ...prevUserData.userInterests,
-    //                         interest.title,
-    //                     ],
-    //                 }));
-    //             }
-    //         }
-    //     }
-    // };
+    const handleSelectedInterest = (interest) => {
+        if (userData && userData.userInterests) {
+            if (userData.userInterests.includes(interest.title)) {
+                // If the interest is already selected, remove it from the array
+                setUserData((prevUserData) => ({
+                    ...prevUserData,
+                    userInterests: prevUserData.userInterests.filter(
+                        (item) => item !== interest.title
+                    ),
+                }));
+            } else {
+                // If the interest is not selected, add it to the array (up to 5 interests)
+                if (userData.userInterests.length < 5) {
+                    setUserData((prevUserData) => ({
+                        ...prevUserData,
+                        userInterests: [
+                            ...prevUserData.userInterests,
+                            interest.title,
+                        ],
+                    }));
+                }
+            }
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateUserDocument(user.uid, userData).then(() => {
-            // Update display name in authentication
-            updateProfile(user, { displayName: userData.displayName });
-        });
+        updateUserDocument(user.uid, userData)
+            .then(() => {
+                // Update display name in authentication
+                updateProfile(user, { displayName: userData.displayName }).then(
+                    () => {
+                        // console.log(
+                        //     "Display name in authentification updated successfully!"
+                        // );
+                    }
+                );
+                // console.log("User document updated successfully!");
+                // console.log(userData);
+            })
+            .catch((error) => {
+                error;
+                // console.error("Error updating user document:", error);
+            });
     };
 
     return (
@@ -126,7 +138,7 @@ function UserDetails() {
                 </div>
                 <div>
                     <label htmlFor='interests'>interests</label>
-                    {/* <div className='flex flex-wrap justify-center items-start'>
+                    <div className='flex flex-wrap justify-center items-start'>
                         {interestList.map((interest) => (
                             <div
                                 key={interest.title}
@@ -137,12 +149,12 @@ function UserDetails() {
                                         ? "bg-red-500"
                                         : ""
                                 }`}
-                                // onClick={() => handleSelectedInterest(interest)}
+                                onClick={() => handleSelectedInterest(interest)}
                             >
                                 {interest.title}
                             </div>
                         ))}
-                    </div> */}
+                    </div>
                 </div>
                 <button type='submit'>Update Profile</button>
             </form>
