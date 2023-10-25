@@ -6,6 +6,8 @@ import { interestList } from "@/lib/interestsList";
 
 import { useUser } from "@/context/UserContext";
 
+import LocationInput from "../reusableComponents/LocationInput";
+
 function UserDetails() {
     const { user } = useUser();
     const [userData, setUserData] = useState({
@@ -30,7 +32,7 @@ function UserDetails() {
                     }
                 })
                 .catch((error) => {
-                    // console.error("Error fetching user document:", error);
+                    error;
                 });
         }
     }, [user]);
@@ -43,24 +45,23 @@ function UserDetails() {
         }));
     };
 
+    // Function to handle location selection
+    const handleLocationSelect = (selectedLocation) => {
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            location: selectedLocation,
+        }));
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         updateUserDocument(user.uid, userData)
             .then(() => {
                 // Update display name in authentication
-                updateProfile(user, { displayName: userData.displayName }).then(
-                    () => {
-                        console.log(
-                            "Display name in authentification updated successfully!"
-                        );
-                    }
-                );
-                // console.log("User document updated successfully!");
-                // console.log(userData);
+                updateProfile(user, { displayName: userData.displayName });
             })
             .catch((error) => {
                 error;
-                // console.error("Error updating user document:", error);
             });
     };
 
@@ -109,15 +110,9 @@ function UserDetails() {
                     />
                 </div>
                 <div>
-                    <label htmlFor='location'>Location</label>
-                    <input
-                        className='border-4 focus:border-black'
-                        type='text'
-                        id='location'
-                        name='location'
-                        placeholder='Enter Location'
-                        value={userData.location || ""}
-                        onChange={handleInputChange}
+                    <LocationInput
+                        initialLocation={userData.location}
+                        onSelectLocation={handleLocationSelect}
                     />
                 </div>
                 <div>
