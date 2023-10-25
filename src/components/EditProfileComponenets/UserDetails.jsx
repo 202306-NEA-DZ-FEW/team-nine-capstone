@@ -1,7 +1,8 @@
 import { updateProfile } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { updateUserDocument } from "@/lib/firebase/controller";
+import { getUserDocument, updateUserDocument } from "@/lib/firebase/controller";
+import { interestList } from "@/lib/interestsList";
 
 import { useUser } from "@/context/UserContext";
 
@@ -12,8 +13,27 @@ function UserDetails() {
         fullName: "",
         location: "",
         avatar: "",
-        interest: "",
+        userInterests: [],
     });
+
+    //get user details if there is any from data base to populate input
+    useEffect(() => {
+        if (user) {
+            getUserDocument(user.uid)
+                .then((doc) => {
+                    if (doc.exists) {
+                        setUserData((prevUserData) => ({
+                            ...prevUserData,
+                            ...doc.data(),
+                            userInterests: doc.data().userInterests || [], // Initialize as an empty array
+                        }));
+                    }
+                })
+                .catch((error) => {
+                    // console.error("Error fetching user document:", error);
+                });
+        }
+    }, [user]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -30,16 +50,35 @@ function UserDetails() {
                 // Update display name in authentication
                 updateProfile(user, { displayName: userData.displayName }).then(
                     () => {
-                        console.log("Display name updated successfully!");
+                        console.log(
+                            "Display name in authentification updated successfully!"
+                        );
                     }
                 );
-                //console.log("User document updated successfully!");
-                //console.log(userData);
+                // console.log("User document updated successfully!");
+                // console.log(userData);
             })
             .catch((error) => {
                 error;
                 // console.error("Error updating user document:", error);
             });
+    };
+
+    // Function to handle interest selection
+    const handleInterestClick = (interest) => {
+        const updatedInterests = [...userData.userInterests];
+        const index = updatedInterests.indexOf(interest);
+
+        if (index === -1) {
+            updatedInterests.push(interest);
+        } else {
+            updatedInterests.splice(index, 1);
+        }
+
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            userInterests: updatedInterests,
+        }));
     };
 
     return (
@@ -52,7 +91,8 @@ function UserDetails() {
                         type='text'
                         id='displayName'
                         name='displayName'
-                        value={userData.displayName}
+                        placeholder='Enter a User Name'
+                        value={userData.displayName || ""}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -63,7 +103,8 @@ function UserDetails() {
                         type='text'
                         id='fullName'
                         name='fullName'
-                        value={userData.fullName}
+                        placeholder='Enter Full Name'
+                        value={userData.fullName || ""}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -74,7 +115,8 @@ function UserDetails() {
                         type='text'
                         id='location'
                         name='location'
-                        value={userData.location}
+                        placeholder='Enter Location'
+                        value={userData.location || ""}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -85,20 +127,32 @@ function UserDetails() {
                         type='text'
                         id='avatar'
                         name='avatar'
-                        value={userData.avatar}
+                        placeholder='add an image here'
+                        value={userData.avatar || ""}
                         onChange={handleInputChange}
                     />
                 </div>
                 <div>
-                    <label htmlFor='interest'>Interest</label>
-                    <input
-                        className='border-4 focus:border-black'
-                        type='text'
-                        id='interest'
-                        name='interest'
-                        value={userData.interest}
-                        onChange={handleInputChange}
-                    />
+                    <label htmlFor='interests'>interests</label>
+                    <div className='flex flex-wrap justify-center items-start'>
+                        {interestList.map((interest) => (
+                            <div
+                                key={interest.title}
+                                className={`flex flex-col items-center basis-1/2 sm:basis-1/4 md:basis-1/6 mr-4 mb-4 p-4 border-2 border-gray-300 cursor-pointer ${
+                                    userData.userInterests.includes(
+                                        interest.title
+                                    )
+                                        ? "bg-orange-500"
+                                        : ""
+                                }`}
+                                onClick={() =>
+                                    handleInterestClick(interest.title)
+                                }
+                            >
+                                {interest.title}
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <button type='submit'>Update Profile</button>
             </form>
