@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 // import { useUser } from "@/context/UserContext";
 
@@ -24,15 +24,23 @@ function EventCard({ TheEvent }) {
                         </h1>
                         <p className='leading-normal'>{TheEvent.about}</p>
                         <div className='flex flex-row items-center mt-4 text-gray-700'>
-                            <div className='w-1/2'>Pebble</div>
+                            <Link
+                                href={`/events/${TheEvent.id}`}
+                                className='w-1/2'
+                            >
+                                {" "}
+                                <button className='w-1/2 border border-gray-600'>
+                                    More ...{" "}
+                                </button>
+                            </Link>
                             <div className='w-1/2 flex justify-end'>
-                                <Image
+                                {/* <Image
                                     src='/logo-image.jpg'
                                     alt='Sponsor Logo'
                                     width={100}
                                     height={100}
                                     className='w-8'
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>

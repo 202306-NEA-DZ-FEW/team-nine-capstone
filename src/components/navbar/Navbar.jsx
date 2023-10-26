@@ -140,7 +140,7 @@ function Navbar() {
                                     {user ? (
                                         <>
                                             <Link
-                                                href={`/profile/${user.displayName}`}
+                                                href={`/profile/${user.uid}`}
                                                 className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
                                                 onClick={closeMenu}
                                             >

@@ -7,4 +7,14 @@ module.exports = {
         dirs: ["src"],
     },
     reactStrictMode: true,
+    // mak sure there is  no rights infringments on the images used
+    images: {
+        domains: [
+            "www.signupgenius.com",
+            "www.greenbiz.com",
+            "www.cleantech.com",
+            "upload.wikimedia.org",
+            "cdn0.handsonconnect.org",
+        ],
+    },
 };

@@ -1,5 +1,12 @@
 import { getAuth } from "firebase/auth";
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
+import {
+    collection,
+    doc,
+    getDoc,
+    getFirestore,
+    setDoc,
+    updateDoc,
+} from "firebase/firestore";
 
 import { app } from "./firebase";
 
@@ -20,4 +27,23 @@ export const createUserDocument = async (userId, userData) => {
     } catch (error) {
         // console.error("Error creating user document:", error);
     }
+};
+
+//function responsible for updating profile info
+export const updateUserDocument = async (userId, userData) => {
+    const userRef = doc(userCollection, userId);
+
+    try {
+        await updateDoc(userRef, userData);
+        // console.log("User document updated successfully!");
+    } catch (error) {
+        // console.error("Error updating user document:", error);
+    }
+};
+
+//function responsible for fetching user Data
+export const getUserDocument = async (uid) => {
+    const userRef = doc(userCollection, uid);
+    const userDoc = await getDoc(userRef);
+    return userDoc;
 };

@@ -26,5 +26,24 @@
     "who are we": "مَن نَحن؟ ",
     "Our Events": " انشطتنا",
     "No Events": "لا يوجد انشطة",
-    "Create Event": "اصنع نشاط"
+    "Create Event": "اصنع نشاط",
+
+    "HeroSection": {
+        "title": "انضموا إلينا لإحداث تغيير مؤثر",
+        "introduction": "مرحبًا بكم في Pebbels، حيث نجمع بين القلوب والأيدي لإحداث فارق. تُعَدّ فعاليات الخير لدينا أكثر من مجرد تجمعات؛ إنها فرص لتحويل الحياة. انضموا إلى مهمتنا لإلهام الأمل، وتعزيز التغيير، ونشر العطاء. معًا، يمكننا صنع مستقبل أفضل، حدثا بعد حدث."
+    },
+    "HowitWorks": {
+        "title": "كيف يعمل"
+    },
+    "service": {
+        "title": "سجّل"
+    },
+    "Register": "سجل",
+    "Sign up and create your account to join our community.": "قم بالتسجيل وإنشاء حسابك للانضمام إلى مجتمعنا.",
+    "Participate in inspiring events and make a difference in the community.": "شارك في الأحداث الملهمة وأحدث فرقًا في المجتمع.",
+    "Host your own charity event and bring positive change to the world.": "قم باستضافة حدث خيري خاص بك وأحدث تغييرًا إيجابيًا في العالم.",
+    "Attend events": "حضور الفعاليات",
+    "View events": "عرض الأحداث",
+    "Organize your own!": "نظم بنفسك!",
+    "Get started": "ابدأ"
 }
