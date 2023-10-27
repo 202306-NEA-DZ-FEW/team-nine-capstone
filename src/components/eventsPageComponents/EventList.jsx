@@ -7,11 +7,13 @@ import { useUser } from "@/context/UserContext";
 
 import DateFilter from "./DateFilter";
 import EventCard from "./EventCard";
+import LocatioFilter from "./LocatioFilter";
 import { eventsCollection } from "../../lib/firebase/controller";
 
 function EventList() {
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
+    const [location, setLocation] = useState(null);
     const { user } = useUser();
     const router = useRouter();
     // sets the routing according to the user's state
@@ -29,6 +31,14 @@ function EventList() {
         });
         setFilteredEvents(filteredEvents);
     };
+    // function that handle filter the events based on the location choosed by the user
+    const handleLocation = (location) => {
+        const filteredEvents = events.filter((event) => {
+            setLocation(location);
+            return event.location === location;
+        });
+        setFilteredEvents(filteredEvents);
+    };
     // fetch data from dataBase (fireStore)
     useEffect(() => {
         onSnapshot(eventsCollection, (snapshot) => {
@@ -39,13 +49,20 @@ function EventList() {
             setFilteredEvents(eventsArr);
         });
     }, []);
-
     return (
         <div className='flex flex-row'>
             {/* calendar filter component */}
             <div className='flex flex-col w-1/3 gap-3'>
                 <div>
                     <DateFilter onClick={onClick} />
+                </div>
+                <div>
+                    {/* locations components filter */}
+                    <LocatioFilter
+                        location={location}
+                        events={events}
+                        handleLocation={handleLocation}
+                    />
                 </div>
             </div>
             <div className='w-2/3'>
