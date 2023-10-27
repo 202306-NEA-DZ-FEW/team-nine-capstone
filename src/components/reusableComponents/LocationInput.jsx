@@ -17,7 +17,7 @@ function LocationInput({ initialLocation, onSelectLocation }) {
                     setResults(response.data);
                 })
                 .catch((error) => {
-                    console.error(error);
+                    <span>{error}</span>;
                 });
         } else {
             setResults([]);
