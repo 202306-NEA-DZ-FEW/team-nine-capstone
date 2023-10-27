@@ -7,11 +7,13 @@ import {
     setDoc,
     updateDoc,
 } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 import { app } from "./firebase";
 
 export const firestore = getFirestore(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
 
 export const eventsCollection = collection(firestore, "events"); //Events
 export const userCollection = collection(firestore, "users"); //Auth

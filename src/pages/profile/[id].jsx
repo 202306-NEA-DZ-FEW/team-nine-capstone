@@ -12,6 +12,13 @@ function Profile() {
     const router = useRouter();
     const { id } = router.query;
 
+    const signUpDate = user ? new Date(user.metadata.creationTime) : null;
+    const month = signUpDate
+        ? signUpDate.toLocaleString("default", { month: "long" })
+        : null;
+    const year = signUpDate ? signUpDate.getFullYear() : null;
+    const formattedDate = signUpDate ? `${month} ${year}` : null;
+
     const [isOwner, setIsOwner] = useState(false);
     useEffect(() => {
         if (user && user.uid === id) {
@@ -34,13 +41,38 @@ function Profile() {
 
         fetchUserData();
     }, [id]);
+    console.log(user);
 
     return (
         <Layout>
             {userData && (
                 <div>
                     <h1>{userData.displayName}</h1>
-                    <img src={userData.avatar} alt='Avatar' />
+                    <div className='relative inline-block group'>
+                        <div className='relative'>
+                            {userData.avatar ? (
+                                <img
+                                    src={userData.avatar}
+                                    alt='Avatar'
+                                    className='rounded-full border-orange-400 border-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                                />
+                            ) : (
+                                <img
+                                    src='/images/defaultUser.png'
+                                    alt='Default Avatar'
+                                    className='rounded-full border-orange-400 border-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                                />
+                            )}
+
+                            {/* Tooltip for the user's account creation date */}
+                            <div className='hidden group-hover:block absolute bg-black text-white p-2 rounded-lg text-center w-full'>
+                                {formattedDate
+                                    ? `Joined on: ${formattedDate}`
+                                    : "Join date not available"}
+                            </div>
+                        </div>
+                    </div>
+
                     <div>Full Name: {userData.fullName}</div>
                     <div>Location: {userData.location}</div>
                     <div>

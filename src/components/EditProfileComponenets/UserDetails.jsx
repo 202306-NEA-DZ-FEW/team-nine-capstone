@@ -6,6 +6,7 @@ import { interestList } from "@/lib/interestsList";
 
 import { useUser } from "@/context/UserContext";
 
+import AvatarInput from "./AvatrInput";
 import LocationInput from "../reusableComponents/LocationInput";
 
 function UserDetails() {
@@ -53,6 +54,14 @@ function UserDetails() {
         }));
     };
 
+    // Function to update avatar URL
+    const updateAvatarUrl = (downloadURL) => {
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            avatar: downloadURL,
+        }));
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         updateUserDocument(user.uid, userData)
@@ -85,6 +94,10 @@ function UserDetails() {
     return (
         <div className='flex flex-col'>
             <form onSubmit={handleSubmit}>
+                <AvatarInput
+                    avatar={userData.avatar}
+                    onUpdateAvatar={updateAvatarUrl}
+                />
                 <div>
                     <label htmlFor='displayName'>Display Name</label>
                     <input
@@ -113,18 +126,6 @@ function UserDetails() {
                     <LocationInput
                         initialLocation={userData.location}
                         onSelectLocation={handleLocationSelect}
-                    />
-                </div>
-                <div>
-                    <label htmlFor='avatar'>Avatar Image</label>
-                    <input
-                        className='border-4 focus:border-black'
-                        type='text'
-                        id='avatar'
-                        name='avatar'
-                        placeholder='add an image here'
-                        value={userData.avatar || ""}
-                        onChange={handleInputChange}
                     />
                 </div>
                 <div>
