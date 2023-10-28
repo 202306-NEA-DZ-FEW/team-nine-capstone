@@ -5,3 +5,20 @@
 .layout {
     background: #fda855;
 }
+
+.slide-in {
+    animation: slideInFromBottom 1s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

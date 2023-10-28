@@ -39,10 +39,10 @@ function LocationInput({ initialLocation, onSelectLocation }) {
     };
 
     return (
-        <div>
+        <div className='flex flex-col md:flex-row md:space-x-5 align-middle justify-center items-center p-2'>
             <label htmlFor='locationInput'>Location:</label>
             <input
-                className='border-4 focus:border-black'
+                className='border-4 focus:border-orange-400 rounded-md p-2 w-52 bg-orange-200'
                 type='text'
                 id='locationInput'
                 value={location}
@@ -50,12 +50,17 @@ function LocationInput({ initialLocation, onSelectLocation }) {
                 onChange={handleLocationChange}
             />
             {showSuggestions && (
-                <ul className='w-full border-2 border-black'>
+                <ul className='border-2 border-black'>
                     {results.map((result) => (
                         <li
-                            className='hover:bg-orange-400'
+                            className='hover:bg-orange-400 w-52'
                             key={result.place_id}
                             onClick={() => handleSelectedLocation(result)}
+                            style={{
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                            }}
                         >
                             {result.display_name}
                         </li>

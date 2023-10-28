@@ -57,8 +57,7 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
     };
 
     return (
-        <div>
-            <label htmlFor='avatar'>Avatar Image</label>
+        <div className='flex flex-col md:flex-row md:space-x-10 align-middle justify-center items-center p-2'>
             {avatar ? (
                 <img
                     src={avatar}
@@ -72,7 +71,18 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
                     className='rounded-full border-orange-400 border-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
                 />
             )}
-            <input type='file' id='avatar' onChange={handleFileChange} />
+            <input
+                type='file'
+                id='avatar'
+                style={{ display: "none" }} // Hide the default file input
+                onChange={handleFileChange}
+            />
+            <label
+                htmlFor='avatar'
+                className='bg-orange-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black'
+            >
+                Change Avatar
+            </label>
         </div>
     );
 }
