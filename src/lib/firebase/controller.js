@@ -1,4 +1,9 @@
-import { getAuth } from "firebase/auth";
+import {
+    FacebookAuthProvider,
+    getAuth,
+    GoogleAuthProvider,
+    TwitterAuthProvider,
+} from "firebase/auth";
 import {
     collection,
     doc,
@@ -49,3 +54,15 @@ export const getUserDocument = async (uid) => {
     const userDoc = await getDoc(userRef);
     return userDoc;
 };
+
+// Google Auth
+
+export const googleProvider = new GoogleAuthProvider();
+
+//Facebook Auth
+
+export const facebookProvider = new FacebookAuthProvider();
+
+//TWitter Auth
+
+export const twitterProvider = new TwitterAuthProvider();
