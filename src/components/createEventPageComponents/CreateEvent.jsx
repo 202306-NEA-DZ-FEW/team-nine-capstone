@@ -1,19 +1,40 @@
 import { addDoc } from "firebase/firestore";
-import React from "react";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import { MultiSelect } from "react-multi-select-component";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 import { eventsCollection } from "../../lib/firebase/controller";
 
 function CreateEvent() {
+    const [startDate, setStartDate] = useState(new Date());
+
+    const options = [
+        { label: "grapes", value: "grapes" },
+        { label: "Mango ", value: "Mango " },
+        { label: "strawberry", value: "strawberry" },
+    ];
+
+    const [selectedInterets, setSelectedInterets] = useState([]);
+
+    console.log(
+        startDate.toDateString(),
+        "this is startdate",
+        selectedInterets,
+        "and thsi selected"
+    );
+
     function handleCreateForm(e) {
         e.preventDefault();
 
         addDoc(eventsCollection, {
             title: e.target.title.value,
             about: e.target.about.value,
-            date: e.target.date.value,
+            date: startDate.toUTCString(),
             image: e.target.image.value,
             location: e.target.location.value,
-            category: e.target.category.value,
+            interests: selectedInterets,
         }).then(() => {
             e.target.reset();
         });
@@ -50,18 +71,16 @@ function CreateEvent() {
                         </div>
                         <div className='col-span-6 sm:col-span-3'>
                             <label
-                                htmlFor='category'
+                                htmlFor='Interests'
                                 className='text-sm font-medium text-gray-900 block mb-2'
                             >
-                                Category
+                                Interests
                             </label>
-                            <input
-                                type='text'
-                                name='category'
-                                id='category'
-                                className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
-                                placeholder='e.g ..sustaibility'
-                                required
+                            <MultiSelect
+                                options={options}
+                                value={selectedInterets}
+                                onChange={setSelectedInterets}
+                                labelledBy='Select'
                             />
                         </div>
                         <div className='col-span-6 sm:col-span-3'>
@@ -102,13 +121,18 @@ function CreateEvent() {
                             >
                                 date
                             </label>
-                            <input
+                            <DatePicker
                                 type='text'
                                 name='date'
                                 id='date'
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                dateFormat="dd MMMM yyyy ':' HH'h'mm"
+                                showTimeSelect
+                                timeFormat='p'
+                                showYearDropdown
+                                scrollableMonthYearDropdown
                                 className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
-                                placeholder='e.g 1 october ..'
-                                required
                             />
                         </div>
                         <div className='col-span-full'>
