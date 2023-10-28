@@ -7,12 +7,14 @@ import {
 import { deleteDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 
 import { updateUserDocument, userCollection } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 
 function UpdateSignInDetailes() {
+    const { t } = useTranslation("common");
     const { user, setUser } = useUser();
     const [currentEmail, setCurrentEmail] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
@@ -130,16 +132,15 @@ function UpdateSignInDetailes() {
         <div className='flex flex-col rounded-md border-red-600 boreder-4 w-[90%] bg-gradient-to-b from-red-500 justify-center p-4 mx-10 my-20'>
             <p className='flex justify-center font-extrabold p-2'>
                 {" "}
-                ⚠️ Change Sign-in Credentials ⚠️
+                ⚠️ {t("editProfile.CRUDtitle")} ⚠️
             </p>
             <span className='flex justify-center font-bold p-2'>
-                you will need to provide your Crudentials in order to UPDATE
-                them or DELETE the account
+                {t("editProfile.CRUDreq")}
             </span>
             <form onSubmit={handleSubmit}>
                 <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
                     <label htmlFor='currentEmail' className='w-48'>
-                        Current Email :
+                        {t("editProfile.CRUDmail")}
                         <span className='text-red-600 font-mono '>*</span>
                     </label>
                     <input
@@ -152,7 +153,7 @@ function UpdateSignInDetailes() {
                 </div>
                 <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
                     <label htmlFor='currentPassword' className='w-48'>
-                        Current Password :
+                        {t("editProfile.CRUDpassword")}
                         <span className='text-red-600 font-mono '>*</span>
                     </label>
                     <input
@@ -165,7 +166,7 @@ function UpdateSignInDetailes() {
                 </div>
                 <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
                     <label htmlFor='newPassword' className='w-48'>
-                        New Password :
+                        {t("editProfile.CRUDnew1")}
                     </label>
                     <input
                         className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
@@ -177,7 +178,7 @@ function UpdateSignInDetailes() {
                 </div>
                 <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
                     <label htmlFor='confirmPassword' className='w-48'>
-                        Confirm New Password :
+                        {t("editProfile.CRUDnew2")}
                     </label>
                     <input
                         className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
@@ -206,7 +207,7 @@ function UpdateSignInDetailes() {
                         className='flex justify-center item-end bg-orange-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black"'
                         type='submit'
                     >
-                        Save Changes
+                        {t("editProfile.CRUDsav")}
                     </button>
                 </div>
                 <div className='flex justify-center items-center p-2'>
@@ -217,7 +218,7 @@ function UpdateSignInDetailes() {
                         className='flex justify-center item-end bg-red-700 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black"'
                         onClick={handleDelete}
                     >
-                        Delete Account
+                        {t("editProfile.CRUDdel")}
                     </button>
                 </div>
             </form>

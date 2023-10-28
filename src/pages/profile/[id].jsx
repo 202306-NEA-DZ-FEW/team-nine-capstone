@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect, useState } from "react";
 
 import { getUserDocument } from "@/lib/firebase/controller";
+import { getAllUserIds } from "@/lib/firebase/users";
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
@@ -11,6 +14,7 @@ function Profile() {
     const { user } = useUser();
     const router = useRouter();
     const { id } = router.query;
+    const { t } = useTranslation("common");
 
     const signUpDate = user ? new Date(user.metadata.creationTime) : null;
     const month = signUpDate
@@ -65,8 +69,10 @@ function Profile() {
                             {/* Tooltip for the user's account creation date */}
                             <div className='hidden group-hover:block absolute left-[100%] top-[25%] bg-black text-white p-2 rounded-lg text-center w-36'>
                                 {formattedDate
-                                    ? `Joined on: ${formattedDate}`
-                                    : "Join date not available"}
+                                    ? t("profile.joinON", {
+                                          date: formattedDate,
+                                      })
+                                    : t("profile.notJoined")}
                             </div>
                         </div>
                     </div>
@@ -75,27 +81,27 @@ function Profile() {
                     </h1>
                     {isOwner && (
                         <Link
-                            href='/profile/editProfile'
+                            href={`/profile/${id}/editProfile`}
                             className='border-transparent border-4 bg-orange-400 rounded-md p-2 m-2'
                         >
-                            Edit Profile
+                            {t("profile.ep")}
                         </Link>
                     )}
 
                     <div className='flex p-2 flex-row justify-center items-center my-3'>
-                        <div>Full Name:</div>{" "}
+                        <div>{t("profile.Full Name")}</div>{" "}
                         <div className='font-semibold mx-2'>
                             {userData.fullName}
                         </div>
                     </div>
                     <div className='flex w-screen p-2 justify-center my-3'>
-                        <div>Location: </div>
+                        <div>{t("profile.Location")}</div>
                         <div className='font-semibold mx-2'>
                             {userData.location}
                         </div>
                     </div>
                     <div className='flex flex-col items-center justify-center'>
-                        Interests:{" "}
+                        {t("profile.Interests")}{" "}
                         {userData.userInterests &&
                         userData.userInterests.length > 0 ? (
                             <div className='flex flex-col md:flex-row items-center my-2'>
@@ -112,18 +118,19 @@ function Profile() {
                             <div>
                                 {isOwner ? (
                                     <div>
-                                        You have not set any interest. Head to
-                                        the{" "}
+                                        {t("profile.noIntrests")}{" "}
                                         <Link
                                             className='text-indigo-800 underline hover:font-semibold hover:rounded-lg hover:bg-orange-300'
-                                            href='/profile/editProfile '
+                                            href={`/profile/${id}/editProfile`}
                                         >
-                                            Edit Profile
+                                            {t("profile.ep")}
                                         </Link>{" "}
-                                        to add some.
+                                        {t("profile.toaddsome")}
                                     </div>
                                 ) : (
-                                    <div>No interests found.</div>
+                                    <div>
+                                        {t("profile.No interests found.")}
+                                    </div>
                                 )}
                             </div>
                         )}
@@ -135,3 +142,21 @@ function Profile() {
 }
 
 export default Profile;
+
+export async function getStaticPaths() {
+    const paths = await getAllUserIds();
+
+    return {
+        paths,
+        fallback: true,
+    };
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"])),
+            // Will be passed to the page component as props
+        },
+    };
+}

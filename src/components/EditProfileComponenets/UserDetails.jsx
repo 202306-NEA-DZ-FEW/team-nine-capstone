@@ -1,4 +1,5 @@
 import { updateProfile } from "firebase/auth";
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 
 import { getUserDocument, updateUserDocument } from "@/lib/firebase/controller";
@@ -10,6 +11,7 @@ import AvatarInput from "./AvatrInput";
 import LocationInput from "../reusableComponents/LocationInput";
 
 function UserDetails() {
+    const { t } = useTranslation("common");
     const { user } = useUser();
     const [userData, setUserData] = useState({
         displayName: "",
@@ -70,15 +72,10 @@ function UserDetails() {
             .then(() => {
                 // Update display name in authentication
                 updateProfile(user, { displayName: userData.displayName });
-                setSuccessMessage(
-                    "Your Account Detailes have been update succefully"
-                );
+                setSuccessMessage(t("editProfile.succUpdate"));
             })
             .catch((error) => {
-                setError(
-                    "There was an error while updating your account details: " +
-                        error.message
-                );
+                setError(t("editProfile.failUpdate") + error.message);
             });
     };
 
@@ -122,7 +119,9 @@ function UserDetails() {
                 />
                 <div className='flex flex-col md:flex-row md:space-x-10 justify-center'>
                     <div className='flex flex-col md:flex-row md:space-x-5 justify-start items-center p-2'>
-                        <label htmlFor='displayName'>Display Name: </label>
+                        <label htmlFor='displayName'>
+                            {t("editProfile.DisplayName")}{" "}
+                        </label>
                         <input
                             className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
                             type='text'
@@ -134,7 +133,9 @@ function UserDetails() {
                         />
                     </div>
                     <div className='flex flex-col md:flex-row md:space-x-5 align-middle justify-start items-center p-2'>
-                        <label htmlFor='fullName'>Full Name: </label>
+                        <label htmlFor='fullName'>
+                            {t("editProfile.FullName")}{" "}
+                        </label>
                         <input
                             className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
                             type='text'
@@ -153,7 +154,7 @@ function UserDetails() {
                     />
                 </div>
                 <div className='flex flex-col align-middle justify-start items-center p-2'>
-                    <label htmlFor='interests'>interests</label>
+                    <label htmlFor='interests'>{t("profile.interests")}</label>
                     <div className='flex flex-wrap justify-center items-start'>
                         {interestList.map((interest) => (
                             <div
@@ -179,7 +180,7 @@ function UserDetails() {
                         type='submit'
                         className='flex justify-center bg-orange-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black'
                     >
-                        Update Profile
+                        {t("editProfile.UpdateProfile")}
                     </button>
                 </div>
                 {error && (

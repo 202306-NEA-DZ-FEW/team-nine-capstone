@@ -106,14 +106,20 @@ function Navbar() {
                             {isLangDropdownOpen && (
                                 <div className='absolute top-full left-0 w-full p-2 layout border-4 border-grey-800 border-3 rounded-lg shadow-lg  mt-2'>
                                     <Link
-                                        href=''
+                                        href={{
+                                            pathname: "",
+                                            query: { id: user.uid },
+                                        }}
                                         locale='en'
                                         className='block text-sm text-white p-2 w-38 hover:bg-amber-200 rounded-xl'
                                     >
                                         English
                                     </Link>
                                     <Link
-                                        href=''
+                                        href={{
+                                            pathname: "",
+                                            query: { id: user.uid },
+                                        }}
                                         locale='ar'
                                         className='block text-sm text-white p-2 w-38 hover:bg-amber-200 rounded-xl'
                                     >

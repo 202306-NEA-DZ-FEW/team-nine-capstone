@@ -1,4 +1,5 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 
 import { storage } from "@/lib/firebase/controller";
@@ -6,6 +7,7 @@ import { storage } from "@/lib/firebase/controller";
 import { useUser } from "@/context/UserContext";
 
 function AvatarInput({ avatar, onUpdateAvatar }) {
+    const { t } = useTranslation("common");
     const [file, setFile] = useState(null);
     const { user } = useUser();
 
@@ -81,7 +83,7 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
                 htmlFor='avatar'
                 className='bg-orange-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black'
             >
-                Change Avatar
+                {t("editProfile.ChangeAvatar")}
             </label>
         </div>
     );

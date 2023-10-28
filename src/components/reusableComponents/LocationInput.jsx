@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 
 function LocationInput({ initialLocation, onSelectLocation }) {
+    const { t } = useTranslation("common");
     const [location, setLocation] = useState(initialLocation || "");
     const [results, setResults] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -40,7 +42,7 @@ function LocationInput({ initialLocation, onSelectLocation }) {
 
     return (
         <div className='flex flex-col md:flex-row md:space-x-5 align-middle justify-center items-center p-2'>
-            <label htmlFor='locationInput'>Location:</label>
+            <label htmlFor='locationInput'>{t("profile.Location")}</label>
             <input
                 className='border-4 focus:border-orange-400 rounded-md p-2 w-52 bg-orange-200'
                 type='text'
