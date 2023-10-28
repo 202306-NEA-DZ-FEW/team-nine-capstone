@@ -11,7 +11,6 @@ import React, { useEffect } from "react";
 import {
     auth,
     createUserDocument,
-    facebookProvider,
     googleProvider,
     twitterProvider,
 } from "@/lib/firebase/controller";
@@ -65,29 +64,6 @@ export default function SignUp() {
 
     function handleGoogleSignUp() {
         signInWithPopup(auth, googleProvider)
-            .then((result) => {
-                const user = result.user;
-
-                const userData = {
-                    displayName: user.displayName,
-                    email: user.email,
-                    avatar: user.photoURL,
-                };
-
-                createUserDocument(user.uid, userData);
-                setUser(user);
-
-                router.push("/profile/editProfile");
-            })
-            .catch((err) => {
-                const errCode = err.code;
-                const errMsg = err.message;
-                console.error(`${errMsg} and the error code is ${errCode}`);
-            });
-    }
-
-    function handleFacebookSignUp() {
-        signInWithPopup(auth, facebookProvider)
             .then((result) => {
                 const user = result.user;
 
@@ -167,13 +143,6 @@ export default function SignUp() {
                                 className='w-full mt-4 px-4 py-2 text-white bg-red-400 rounded-lg hover:bg-red-500 focus:outline-none focus:bg-red-600'
                             >
                                 Sign up with Google
-                            </button>
-
-                            <button
-                                onClick={handleFacebookSignUp}
-                                className='w-full mt-4 px-4 py-2 text-white bg-blue-400 rounded-lg hover:bg-blue-500 focus:outline-none focus:bg-blue-600'
-                            >
-                                Sign up with Facebook
                             </button>
                         </div>
                         <form className='mt-6' onSubmit={handleSignUp}>
