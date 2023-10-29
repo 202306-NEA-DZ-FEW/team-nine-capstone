@@ -23,16 +23,16 @@ function EditProfile() {
 
 export default EditProfile;
 
-export async function getStaticPaths() {
-    const paths = await getAllUserIds();
+// export async function getStaticPaths() {
+//     const paths = await getAllUserIds();
 
-    return {
-        paths,
-        fallback: true,
-    };
-}
+//     return {
+//         paths,
+//         fallback: true,
+//     };
+// }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale }) {
     return {
         props: {
             ...(await serverSideTranslations(locale, ["common"])),

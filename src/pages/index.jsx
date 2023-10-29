@@ -23,7 +23,7 @@ export default function HomePage() {
     );
 }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale }) {
     return {
         props: {
             ...(await serverSideTranslations(locale, ["common"])),
