@@ -12,7 +12,6 @@ import Layout from "@/layout/Layout";
 export default function HomePage() {
     const { user } = useUser();
     const { t } = useTranslation("common");
-    // console.log(user)  // context test
 
     return (
         <Layout>
@@ -23,7 +22,7 @@ export default function HomePage() {
     );
 }
 
-export async function getServerSideProps({ locale }) {
+export async function getStaticProps({ locale }) {
     return {
         props: {
             ...(await serverSideTranslations(locale, ["common"])),

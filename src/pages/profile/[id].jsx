@@ -143,16 +143,16 @@ function Profile() {
 
 export default Profile;
 
-// export async function getStaticPaths() {
-//     const paths = await getAllUserIds();
+export async function getStaticPaths() {
+    const paths = await getAllUserIds();
 
-//     return {
-//         paths,
-//         fallback: true,
-//     };
-// }
+    return {
+        paths,
+        fallback: true,
+    };
+}
 
-export async function getServerSideProps({ locale }) {
+export async function getStaticProps({ locale }) {
     return {
         props: {
             ...(await serverSideTranslations(locale, ["common"])),

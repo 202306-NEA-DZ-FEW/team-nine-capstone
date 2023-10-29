@@ -21,8 +21,8 @@ function Navbar() {
     const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
     const { user } = useUser();
-    const { t, i18n } = useTranslation("common");
-    const router = useRouter("/");
+    const { t } = useTranslation("common");
+    const router = useRouter();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
