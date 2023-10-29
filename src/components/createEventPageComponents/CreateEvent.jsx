@@ -22,7 +22,7 @@ function CreateEvent() {
     });
 
     console.log(
-        startDate,
+        startDate.toLocaleDateString("en-GB"),
         "this is startdate",
         selectedInterets.map((interest) => interest.value),
         "and thsi selected",
@@ -36,7 +36,7 @@ function CreateEvent() {
         addDoc(eventsCollection, {
             title: e.target.title.value,
             about: e.target.about.value,
-            date: startDate,
+            date: startDate.toLocaleDateString("en-GB"),
             image: e.target.image.value,
             location: loca,
             interests: selectedInterets.map((interest) => interest.value),

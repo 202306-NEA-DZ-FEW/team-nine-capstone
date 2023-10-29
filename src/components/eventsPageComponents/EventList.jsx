@@ -25,7 +25,8 @@ function EventList() {
     // var to handle translatons
     const { t } = useTranslation();
     const onClick = (selectedDate) => {
-        const formattedDate = selectedDate.format("DD MMM YYYY");
+        const formattedDate = selectedDate.format("DD/MM/YYYY");
+        console.log(formattedDate);
         const filteredEvents = events.filter((event) => {
             return event.date === formattedDate.toLowerCase();
         });
