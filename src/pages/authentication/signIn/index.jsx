@@ -51,13 +51,6 @@ export default function SignUp() {
         <Layout>
             <div className='relative flex flex-col justify-center h-screen'>
                 <div className='lg:flex lg:gap-x-4 justify-center items-center mx-4'>
-                    <div className='lg:max-w-xl w-full'>
-                        {/* <img
-                            className='w-full h-full object-cover rounded-md'
-                            src=''
-                            alt='sign up image'
-                        /> */}
-                    </div>
                     <div className='w-full bg-white rounded-md lg:max-w-xl'>
                         <h1 className='text-2xl font-semibold text-center text-gray-700'>
                             Login to an account
