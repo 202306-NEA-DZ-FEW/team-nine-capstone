@@ -48,7 +48,7 @@ export default function SignUp() {
 
             setUser(user);
 
-            router.push("/profile/editProfile");
+            router.push(`/profile/${user.uid}/editProfile`);
         } catch (err) {
             const errCode = err.code;
             const errMsg = err.message;
