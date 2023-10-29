@@ -16,7 +16,7 @@ function EventCard({ TheEvent }) {
                 ></div>
                 <div className='flex flex-col w-full md:flex-row'>
                     <div className='flex flex-row justify-around p-4 font-bold leading-none text-gray-800 uppercase bg-gray-400 rounded md:flex-col md:items-center md:justify-center md:w-1/4'>
-                        <div className='md:text-xl'>{TheEvent.date}</div>
+                        <div className='md:text-xl'>the event date</div>
                     </div>
 
                     <div className='p-4 font-normal text-gray-800 md:w-3/4'>

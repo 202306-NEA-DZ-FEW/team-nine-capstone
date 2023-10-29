@@ -5,24 +5,29 @@ import { MultiSelect } from "react-multi-select-component";
 
 import "react-datepicker/dist/react-datepicker.css";
 
+import LocationInput from "../reusableComponents/LocationInput";
 import { eventsCollection } from "../../lib/firebase/controller";
+import { interestList } from "../../lib/interestsList";
 
 function CreateEvent() {
     const [startDate, setStartDate] = useState(new Date());
-
-    const options = [
-        { label: "grapes", value: "grapes" },
-        { label: "Mango ", value: "Mango " },
-        { label: "strawberry", value: "strawberry" },
-    ];
-
     const [selectedInterets, setSelectedInterets] = useState([]);
+    const [loca, setLoca] = useState(null);
+
+    const options = interestList.map((obj) => {
+        return {
+            label: `${obj.title}`,
+            value: `${obj.title}`,
+        };
+    });
 
     console.log(
-        startDate.toDateString(),
+        startDate,
         "this is startdate",
-        selectedInterets,
-        "and thsi selected"
+        selectedInterets.map((interest) => interest.value),
+        "and thsi selected",
+        options,
+        "this is options"
     );
 
     function handleCreateForm(e) {
@@ -31,14 +36,18 @@ function CreateEvent() {
         addDoc(eventsCollection, {
             title: e.target.title.value,
             about: e.target.about.value,
-            date: startDate.toUTCString(),
+            date: startDate,
             image: e.target.image.value,
-            location: e.target.location.value,
-            interests: selectedInterets,
+            location: loca,
+            interests: selectedInterets.map((interest) => interest.value),
         }).then(() => {
             e.target.reset();
         });
     }
+
+    const handleLocationSelect = (selectedLocation) => {
+        setLoca(selectedLocation);
+    };
 
     return (
         <div className='bg-white border rounded-lg shadow relative m-10'>
@@ -90,13 +99,13 @@ function CreateEvent() {
                             >
                                 Location
                             </label>
-                            <input
-                                type='text'
+                            <LocationInput
                                 name='location'
                                 id='location'
                                 className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
-                                placeholder='e.g Kandahar..'
-                                required
+                                placeholder='location'
+                                initialLocation={loca}
+                                onSelectLocation={handleLocationSelect}
                             />
                         </div>
                         <div className='col-span-6 sm:col-span-3'>
@@ -127,7 +136,7 @@ function CreateEvent() {
                                 id='date'
                                 selected={startDate}
                                 onChange={(date) => setStartDate(date)}
-                                dateFormat="dd MMMM yyyy ':' HH'h'mm"
+                                dateFormat="dd MMM yyyy 'at' HH'h'mm"
                                 showTimeSelect
                                 timeFormat='p'
                                 showYearDropdown
