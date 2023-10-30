@@ -11,6 +11,7 @@ import Layout from "@/layout/Layout";
 export default function SignUp() {
     const { setUser } = useUser();
     const router = useRouter();
+
     async function handleSignIn(e) {
         e.preventDefault();
 
@@ -26,7 +27,7 @@ export default function SignUp() {
 
             // Update the user context with the signed-in user
 
-            console.log("User Logged in ", user, email, password); //for testing
+            // console.log("User Logged in ", user, email, password); //for testing
             router.push("/");
         } catch (err) {
             const errCode = err.code;
@@ -76,13 +77,6 @@ export default function SignUp() {
                                 className='w-full mt-4 px-4 py-2 text-white bg-red-400 rounded-lg hover:bg-red-500 focus:outline-none focus:bg-red-600'
                             >
                                 Google
-                            </button>
-
-                            <button
-                                // onClick={handleFacebookSignIN}
-                                className='w-full mt-4 px-4 py-2 text-white bg-blue-400 rounded-lg hover:bg-blue-500 focus:outline-none focus:bg-blue-600'
-                            >
-                                Facebook
                             </button>
                         </div>
                         <h1 className='text-xl mt-4 px-4 py-2 font-semibold text-center text-gray-700'>

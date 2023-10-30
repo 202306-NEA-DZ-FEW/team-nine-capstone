@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,13 +6,40 @@ import React, { useEffect, useState } from "react";
 
 import { firestore } from "@/lib/firebase/controller";
 
+import { useUser } from "@/context/UserContext";
+
 import Loader from "../loader/Loader";
 
 function EventDetails() {
+    const [myEvents, setMyEvents] = useState([]);
     const [eventDisplay, setEventDisplay] = useState({});
 
     const router = useRouter();
     const { id } = router.query;
+
+    const { user, setUser } = useUser();
+
+    function JoinEvent() {
+        if (user) {
+            const userRef = doc(firestore, "users", user.uid);
+
+            getDoc(userRef)
+                .then((userDoc) => {
+                    const existEvent = userDoc.data().iEvents;
+
+                    const updatedEvents = [...existEvent, id];
+
+                    return updateDoc(userRef, {
+                        iEvents: updatedEvents,
+                    });
+                })
+                .catch((error) => {
+                    console.error("the error:", error);
+                });
+        } else {
+            console.log("please sign in or sign up first");
+        }
+    }
 
     useEffect(() => {
         if (id) {
@@ -124,6 +151,7 @@ function EventDetails() {
                             <Link
                                 className='inline-flex rounded-lg bg-pink-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-pink-600 hover:bg-pink-700 hover:ring-pink-700'
                                 href='/'
+                                onClick={JoinEvent}
                             >
                                 Join the Event !
                             </Link>
