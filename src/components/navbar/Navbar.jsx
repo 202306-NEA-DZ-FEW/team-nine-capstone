@@ -147,7 +147,7 @@ function Navbar() {
                                                 {t("Your Profile")}
                                             </Link>
                                             <Link
-                                                href='/events'
+                                                href='/events/myEvents'
                                                 className='block text-sm text-white p-2  hover:bg-amber-200 rounded-xl'
                                                 onClick={closeMenu}
                                             >

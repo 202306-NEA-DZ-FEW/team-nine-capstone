@@ -34,10 +34,10 @@ function EventDetails() {
                     });
                 })
                 .catch((error) => {
-                    console.error("the error:", error);
+                    console.log("the error:", error);
                 });
         } else {
-            console.log("please sign in or sign up first");
+            alert("please sign in or sign up first");
         }
     }
 
@@ -150,7 +150,7 @@ function EventDetails() {
                         <div className='mt-6'>
                             <Link
                                 className='inline-flex rounded-lg bg-pink-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-pink-600 hover:bg-pink-700 hover:ring-pink-700'
-                                href='/'
+                                href='/events/myEvents'
                                 onClick={JoinEvent}
                             >
                                 Join the Event !
