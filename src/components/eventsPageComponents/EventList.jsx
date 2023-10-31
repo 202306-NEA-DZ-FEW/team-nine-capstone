@@ -2,67 +2,151 @@ import { onSnapshot } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
+import { LuFilterX } from "react-icons/lu";
+
+import { eventsCollection } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 
 import DateFilter from "./DateFilter";
 import EventCard from "./EventCard";
+import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
-import { eventsCollection } from "../../lib/firebase/controller";
 
 function EventList() {
     const [events, setEvents] = useState([]);
-    const [filteredEvents, setFilteredEvents] = useState([]);
     const [location, setLocation] = useState(null);
+    const [upDatedDate, setUpDatedDated] = useState(null);
+    const [allCategories, setAllCategoris] = useState(false);
+    const [updatedInterests, setUpdatedInterests] = useState([]);
+    const [prevLocation, setPrevLocation] = useState(null);
     const { user } = useUser();
     const router = useRouter();
+
     // sets the routing according to the user's state
     const handleUser = () => {
         user
             ? router.push("/createEvent")
             : router.push("/authentication/signUp");
     };
+
+    let filteredEvents = events; // Initialize with all events
+
     // var to handle translatons
     const { t } = useTranslation();
+    // handle reset filter
+    const resetFilter = () => {
+        setUpdatedInterests([]);
+        setLocation(null);
+        setUpDatedDated(null);
+        setAllCategoris(null);
+    };
+    // filtered date
     const onClick = (selectedDate) => {
         const formattedDate = selectedDate.format("DD/MM/YYYY");
-        console.log(formattedDate);
-        const filteredEvents = events.filter((event) => {
-            return event.date === formattedDate.toLowerCase();
-        });
-        setFilteredEvents(filteredEvents);
+        if (formattedDate === upDatedDate) {
+            setUpDatedDated(null);
+        } else {
+            setUpDatedDated(formattedDate);
+        }
     };
     // function that handle filter the events based on the location choosed by the user
     const handleLocation = (location) => {
-        const filteredEvents = events.filter((event) => {
-            setLocation(location);
-            return event.location === location;
-        });
-        setFilteredEvents(filteredEvents);
+        if (location !== prevLocation) {
+            setLocation(prevLocation);
+        } else {
+            setLocation(null);
+        }
     };
-    // fetch data from dataBase (fireStore)
+    // function to handle Interests filter
+    const handleInterest = (interest) => {
+        // Check if the interest is in the updatedInterests array
+        const index = updatedInterests.indexOf(interest);
+        if (index === -1) {
+            // If the interest is not in the array, add it
+            setUpdatedInterests((prevInterests) => [
+                ...prevInterests,
+                interest,
+            ]);
+        } else {
+            // If the interest is already in the array, remove it
+            const updatedInterestsWithoutInterest = updatedInterests.filter(
+                (item) => item !== interest
+            );
+            setUpdatedInterests(updatedInterestsWithoutInterest);
+        }
+    };
+
+    if (!allCategories) {
+        // Apply the category filter
+        filteredEvents = filteredEvents.filter((e) => {
+            if (updatedInterests.length === 0) {
+                return true; // No filters applied if updatedInterests is empty
+            } else {
+                // Check if any selected interest is included in e.interest
+                return updatedInterests.every((selectedInterest) =>
+                    e.interests?.includes(selectedInterest)
+                );
+            }
+        });
+    }
+
+    // Apply other filters
+    filteredEvents = filteredEvents
+        .filter((e) =>
+            upDatedDate
+                ? e.date?.toLowerCase().includes(upDatedDate.toLowerCase())
+                : true
+        )
+        .filter((e) =>
+            location
+                ? e.location?.toLowerCase().includes(location.toLowerCase())
+                : true
+        );
+
     useEffect(() => {
         onSnapshot(eventsCollection, (snapshot) => {
             let eventsArr = snapshot.docs.map((doc) => {
                 return { ...doc.data(), id: doc.id };
             });
             setEvents(eventsArr);
-            setFilteredEvents(eventsArr);
         });
     }, []);
+
     return (
         <div className='flex flex-row'>
-            {/* calendar filter component */}
-            <div className='flex flex-col w-1/3 gap-3'>
-                <div>
-                    <DateFilter onClick={onClick} />
+            <div className='flex flex-col w-1/3 gap-4'>
+                {/* reset filter button */}
+                <div
+                    className='flex flex-row mt-3 justify-center transition-all h-11 duration-150 text-lg font-medium cursor-pointer items-center w-[90%] self-center border-spacing-1 rounded-sm border-solid hover:bg-red-700 hover:text-white active:text-white border-black shadow-lg'
+                    onClick={() => resetFilter()}
+                >
+                    Clear Filters <LuFilterX />
                 </div>
+                {/* calendar filter component */}
+                <div>
+                    <DateFilter upDatedDate={upDatedDate} onClick={onClick} />
+                </div>
+                <div class='w-[90%] self-center border-b-2 border-black my-4'></div>
                 <div>
                     {/* locations components filter */}
                     <LocatioFilter
+                        prevLocation={prevLocation}
+                        setPrevLocation={setPrevLocation}
+                        setLocation={setLocation}
                         location={location}
                         events={events}
                         handleLocation={handleLocation}
+                    />
+                </div>
+                <div class='w-[90%] self-center border-b-2 border-black my-4'></div>
+                <div>
+                    <InterestsFilter
+                        allCategories={allCategories}
+                        setAllCategoris={setAllCategoris}
+                        setUpdatedInterests={setUpdatedInterests}
+                        updatedInterests={updatedInterests}
+                        handleInterest={handleInterest}
                     />
                 </div>
             </div>

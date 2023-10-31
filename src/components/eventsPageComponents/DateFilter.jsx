@@ -5,7 +5,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { generateDate, months } from "../util/calendar";
 import cn from "../util/cn";
 
-const DateFilter = ({ onClick }) => {
+const DateFilter = ({ onClick, upDatedDate }) => {
     const days = ["S", "M", "T", "W", "T", "F", "S"];
     const currentDate = dayjs();
     const [today, setToday] = useState(currentDate);
@@ -67,16 +67,15 @@ const DateFilter = ({ onClick }) => {
                                     <h1
                                         className={cn(
                                             currentMonth ? "" : "text-gray-400",
-                                            today
-                                                ? "bg-amber-500 text-white"
+                                            today ? "bg-black text-white" : "",
+                                            upDatedDate &&
+                                                selectDate
+                                                    .toDate()
+                                                    .toDateString() ===
+                                                    date.toDate().toDateString()
+                                                ? "bg-orange-500 text-white"
                                                 : "",
-                                            selectDate
-                                                .toDate()
-                                                .toDateString() ===
-                                                date.toDate().toDateString()
-                                                ? "bg-black text-white"
-                                                : "",
-                                            "h-7 w-7 rounded-full grid place-content-center hover:bg-black hover:text-white transition-all cursor-pointer select-none"
+                                            "h-7 w-7 rounded-full grid place-content-center hover:bg-orange-500 hover:text-white transition-all cursor-pointer select-none"
                                         )}
                                         onClick={() => {
                                             setSelectDate(date);
