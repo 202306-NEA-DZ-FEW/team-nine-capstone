@@ -1,14 +1,20 @@
 import React from "react";
 import { MdLocationOn } from "react-icons/md";
 
-const LocationModal = ({ isVisible, onClose, events, handleLocation }) => {
+const LocationModal = ({
+    isVisible,
+    onClose,
+    events,
+    setLocation,
+    setPrevLocation,
+}) => {
     const uniqueLocations = new Set();
     if (!isVisible) return null;
     return (
         // model that show up when the user want to choose location
         <div
             onClick={onClose}
-            className='fixed w-full inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center'
+            className='fixed z-10 w-full inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center'
         >
             <div className='w-[45%] flex flex-col rounded-lg object-cover '>
                 <button
@@ -26,7 +32,8 @@ const LocationModal = ({ isVisible, onClose, events, handleLocation }) => {
                                 <div
                                     className='bg-gray-300 hover:bg-amber-500 text-lg font-medium cursor-pointer h-10 px-5 flex flex-row justify-start items-center gap-4 border-b-2'
                                     onClick={() => {
-                                        handleLocation(event.location);
+                                        setPrevLocation(event.location);
+                                        setLocation(event.location);
                                         onClose();
                                     }}
                                     key={index}

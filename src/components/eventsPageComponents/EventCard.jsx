@@ -4,9 +4,15 @@ import React from "react";
 import { useUser } from "@/context/UserContext";
 
 function EventCard({ TheEvent }) {
+
     const { user } = useUser();
 
     // console.log("TheEvent structure", TheEvent);
+
+
+    // console.log(TheEvent.date);
+    // const { user } = useUser();
+    // console.log(user)
 
     return (
         <div className='mx-auto bg-gray-700 flex items-center justify-center px-8 py-8'>
