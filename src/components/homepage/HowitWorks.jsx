@@ -35,7 +35,7 @@ const HowitWorks = () => {
                 "Host your own charity event and bring positive change to the world."
             ),
             logo: t("Get started"),
-            link: "/createEvent",
+            link: "/createTheEvent",
         },
     ];
 
