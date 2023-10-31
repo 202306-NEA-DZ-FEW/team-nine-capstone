@@ -3,6 +3,7 @@ import React from "react";
 // import { useUser } from "@/context/UserContext";
 
 function EventCard({ TheEvent }) {
+    // console.log(TheEvent.date);
     // const { user } = useUser();
     // console.log(user)
     return (
