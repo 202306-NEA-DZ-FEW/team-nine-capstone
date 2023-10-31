@@ -1,5 +1,6 @@
 import {
     createUserWithEmailAndPassword,
+    signInWithPopup,
     updateProfile,
     //  sendEmailVerification
 } from "firebase/auth";
@@ -7,7 +8,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-import { auth, createUserDocument } from "@/lib/firebase/controller";
+import {
+    auth,
+    createUserDocument,
+    googleProvider,
+    twitterProvider,
+} from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
@@ -19,9 +25,9 @@ export default function SignUp() {
     async function handleSignUp(e) {
         e.preventDefault();
 
-        let newDisplayName = e.target[0].value;
-        let newEmail = e.target[1].value;
-        let newPassword = e.target[2].value;
+        let newDisplayName = e.target.displayName.value;
+        let newEmail = e.target.email.value;
+        let newPassword = e.target.password.value;
 
         try {
             const { user } = await createUserWithEmailAndPassword(
@@ -56,6 +62,52 @@ export default function SignUp() {
         }
     }
 
+    function handleGoogleSignUp() {
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                const user = result.user;
+
+                const userData = {
+                    displayName: user.displayName,
+                    email: user.email,
+                    avatar: user.photoURL,
+                };
+
+                createUserDocument(user.uid, userData);
+                setUser(user);
+
+                router.push("/profile/editProfile");
+            })
+            .catch((err) => {
+                const errCode = err.code;
+                const errMsg = err.message;
+                console.error(`${errMsg} and the error code is ${errCode}`);
+            });
+    }
+
+    function handleTwitterSignUp() {
+        signInWithPopup(auth, twitterProvider)
+            .then((result) => {
+                const user = result.user;
+
+                const userData = {
+                    displayName: user.displayName,
+                    email: user.email,
+                    avatar: user.photoURL,
+                };
+
+                createUserDocument(user.uid, userData);
+                setUser(user);
+
+                router.push("/profile/editProfile");
+            })
+            .catch((err) => {
+                const errCode = err.code;
+                const errMsg = err.message;
+                console.error(`${errMsg} and the error code is ${errCode}`);
+            });
+    }
+
     useEffect(() => {
         const Logged = auth.onAuthStateChanged((user) => {
             if (user) {
@@ -80,14 +132,14 @@ export default function SignUp() {
                         </h1>
                         <div className='mt-6'>
                             <button
-                                // handleTwitterSignUp
-                                className='w-full px-4 py-2 text-white bg-blue-400 rounded-lg hover:bg-blue-500 focus:outline-none focus:bg-blue-600'
+                                onClick={handleTwitterSignUp}
+                                className='w-full mt-4 px-4 py-2 text-white bg-gray-400 rounded-lg hover:bg-gray-500 focus:outline-none focus:bg-gray-600'
                             >
                                 Sign up with Twitter
                             </button>
 
                             <button
-                                // handleGoogleSignUp
+                                onClick={handleGoogleSignUp}
                                 className='w-full mt-4 px-4 py-2 text-white bg-red-400 rounded-lg hover:bg-red-500 focus:outline-none focus:bg-red-600'
                             >
                                 Sign up with Google
@@ -120,6 +172,7 @@ export default function SignUp() {
                                     Email
                                 </label>
                                 <input
+                                    name='email'
                                     type='email'
                                     className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40'
                                 />
@@ -132,6 +185,7 @@ export default function SignUp() {
                                     Password
                                 </label>
                                 <input
+                                    name='password'
                                     type='password'
                                     className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40'
                                 />
