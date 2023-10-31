@@ -55,7 +55,7 @@ function EditEvent() {
     return (
         <div className='bg-white border rounded-lg shadow relative m-10'>
             <div className='flex items-start justify-between p-5 border-b rounded-t '>
-                <h3 className='text-2xl font-semibold'>Create Event</h3>
+                <h3 className='text-2xl font-semibold'>Edit Event</h3>
                 <button
                     type='button'
                     className='text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center'

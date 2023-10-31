@@ -27,8 +27,6 @@ function IEvent() {
             : router.push("/authentication/signUp");
     };
 
-    // console.log("theuserUID", user.uid)
-
     const { t } = useTranslation();
     const onClick = (selectedDate) => {
         const formattedDate = selectedDate.format("DD MMM YYYY");
@@ -54,7 +52,7 @@ function IEvent() {
                 const userData = userDoc.data();
 
                 if (userData) {
-                    setEventsId(() => userData.iEvents);
+                    setEventsId(userData.iEvents);
                     setLoading(false);
                 }
 
@@ -65,8 +63,8 @@ function IEvent() {
                 const userMyEvents = snapshot.docs.filter((doc) => {
                     return eventsId.includes(doc.id);
                 });
-                setEvents(() => userMyEvents);
-                setFilteredEvents(() => userMyEvents);
+                setEvents(userMyEvents);
+                setFilteredEvents(userMyEvents);
                 console.log("userMyEvents", userMyEvents);
             });
         }
