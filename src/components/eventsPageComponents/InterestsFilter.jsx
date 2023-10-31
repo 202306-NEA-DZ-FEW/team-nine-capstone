@@ -18,8 +18,7 @@ function InterestsFilter({
             </div>
             <div
                 onClick={() => {
-                    setUpdatedInterests([]);
-                    setAllCategoris("all");
+                    setAllCategoris(!allCategories);
                 }}
                 className={`flex flex-row text-lg cursor-pointer hover:bg-orange-500 justify-center items-center gap-x-2 font-medium w-[90%] border-2 border-solid border-black rounded-md shadow-xl h-10 ${
                     allCategories

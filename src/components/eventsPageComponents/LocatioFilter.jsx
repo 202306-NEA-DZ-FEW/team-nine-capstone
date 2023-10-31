@@ -14,8 +14,6 @@ function LocatioFilter({
     prevLocation,
     setPrevLocation,
 }) {
-    console.log("locationfiltprev", prevLocation);
-    console.log("locationfilt", location);
     const { t } = useTranslation();
     const [showModal, setShowModal] = useState(false);
     return (
@@ -34,7 +32,9 @@ function LocatioFilter({
                         handleLocation(location);
                     }}
                     className={`flex flex-row text-lg cursor-pointer transition-all hover:bg-orange-500 justify-center items-center gap-x-2 font-medium w-[90%] border-2 border-solid border-black rounded-md shadow-xl h-10 ${
-                        location === prevLocation
+                        location === prevLocation &&
+                        location !== null &&
+                        prevLocation !== null
                             ? "bg-orange-500 transition-all scale-95"
                             : ""
                     }`}

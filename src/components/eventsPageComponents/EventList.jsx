@@ -17,14 +17,9 @@ function EventList() {
     const [events, setEvents] = useState([]);
     const [location, setLocation] = useState(null);
     const [upDatedDate, setUpDatedDated] = useState(null);
-    const [allCategories, setAllCategoris] = useState(null);
+    const [allCategories, setAllCategoris] = useState(false);
     const [updatedInterests, setUpdatedInterests] = useState([]);
     const [prevLocation, setPrevLocation] = useState(null);
-    const [isReset, setIsReset] = useState(false);
-    // // console.log({ date, location, updatedInterests });
-    // console.log(events);
-    // console.log(updatedInterests);
-    console.log(location);
     const { user } = useUser();
     const router = useRouter();
 
@@ -35,19 +30,7 @@ function EventList() {
             : router.push("/authentication/signUp");
     };
 
-    // const handleAllCategories = () => {
-    //     setAllCategoris("all");
-    // };
     let filteredEvents = events; // Initialize with all events
-
-    // if (!allCategories) {
-    //     // Apply the category filter
-    //     filteredEvents = filteredEvents.filter((e) =>
-    //         updatedInterests.length === 0
-    //             ? true
-    //             : updatedInterests.includes(e.interest)
-    //     );
-    // }
 
     // var to handle translatons
     const { t } = useTranslation();
