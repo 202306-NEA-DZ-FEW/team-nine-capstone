@@ -29,7 +29,8 @@ function IEvent() {
 
     const { t } = useTranslation();
     const onClick = (selectedDate) => {
-        const formattedDate = selectedDate.format("DD MMM YYYY");
+        const formattedDate = selectedDate.format("DD/MM/YYYY");
+        console.log(formattedDate);
         const filteredEvents = events.filter((event) => {
             return event.date === formattedDate.toLowerCase();
         });
@@ -46,33 +47,40 @@ function IEvent() {
 
     useEffect(() => {
         if (user && user.uid) {
-            const userRef = doc(userCollection, user.uid);
-
-            onSnapshot(userRef, (userDoc) => {
-                const userData = userDoc.data();
-
-                if (userData) {
-                    setEventsId(userData.iEvents);
-                    setLoading(false);
-                }
-
-                console.log("eventsId", eventsId);
-            });
-
-            onSnapshot(eventsCollection, (snapshot) => {
-                const userMyEvents = snapshot.docs.filter((doc) => {
-                    return eventsId.includes(doc.id);
-                });
-                setEvents(userMyEvents);
-                setFilteredEvents(userMyEvents);
-                console.log("userMyEvents", userMyEvents);
-            });
+            fetchUserData(user);
         }
     }, [user]);
+
+    const fetchUserData = (user) => {
+        const userRef = doc(userCollection, user.uid);
+
+        onSnapshot(userRef, (userDoc) => {
+            const userData = userDoc.data();
+
+            if (userData) {
+                setEventsId(() => userData.iEvents);
+                fetchUserEvents(userData.iEvents);
+            }
+            setLoading(() => false);
+        });
+    };
+
+    const fetchUserEvents = (userEvents) => {
+        onSnapshot(eventsCollection, (snapshot) => {
+            const userMyEvents = snapshot.docs.filter((doc) => {
+                return userEvents.includes(doc.id);
+            });
+
+            setEvents(() => userMyEvents);
+            setFilteredEvents(() => userMyEvents);
+        });
+    };
 
     if (loading) {
         return <Loader />;
     }
+
+    console.log(filteredEvents);
 
     return (
         <div className='flex flex-row'>
@@ -93,7 +101,7 @@ function IEvent() {
             <div className='w-2/3'>
                 {filteredEvents.length !== 0 ? (
                     <h1 className='z-60 mx-auto bg-gray-500 font-bold text-3xl flex items-center py-12 justify-center'>
-                        {t("Our Events")}
+                        {t("Your Events")}
                     </h1>
                 ) : (
                     <p className='z-60 mx-auto bg-gray-500 font-bold text-3xl flex items-center py-12 justify-center'>
@@ -103,7 +111,9 @@ function IEvent() {
                 {/* display the events based on filters */}
                 {filteredEvents.length !== 0 ? (
                     filteredEvents.map((event) => {
-                        return <EventCard key={event.id} TheEvent={event} />;
+                        return (
+                            <EventCard key={event.id} TheEvent={event.data()} />
+                        );
                     })
                 ) : (
                     <button
