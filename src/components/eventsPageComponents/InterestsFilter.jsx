@@ -6,7 +6,6 @@ import { interestList } from "@/lib/interestsList";
 function InterestsFilter({
     allCategories,
     handleInterest,
-    setUpdatedInterests,
     updatedInterests,
     setAllCategoris,
 }) {
