@@ -44,6 +44,7 @@ export default function SignUp() {
                 displayName: newDisplayName,
                 email: newEmail,
                 password: newPassword,
+                iEvents: [],
             };
 
             await createUserDocument(user.uid, userData);
@@ -71,6 +72,7 @@ export default function SignUp() {
                     displayName: user.displayName,
                     email: user.email,
                     avatar: user.photoURL,
+                    iEvents: [],
                 };
 
                 createUserDocument(user.uid, userData);
@@ -94,6 +96,7 @@ export default function SignUp() {
                     displayName: user.displayName,
                     email: user.email,
                     avatar: user.photoURL,
+                    iEvents: [],
                 };
 
                 createUserDocument(user.uid, userData);
