@@ -9,7 +9,7 @@
     "About": "About",
     "Events": "Events",
     "footer": {
-        "hook": "Ready to be part of a word changing experience ! Be the change ! Join Us."
+        "hook": "Unite for a Better Tomorrow, Hand in Hand."
     },
 
     "globalGolas": {
@@ -18,8 +18,8 @@
     },
     "feedback": "Hear it from volunteers",
     "slogan": {
-        "title": "Become the change you wish to see in the world",
-        "discription": "Embrace your vision for a better world, lead by example, inspire positive actions, and together, we can create a brighter future."
+        "title": "Spread Hope and Change",
+        "discription": "Embrace your vision for a better world. Lead by example."
     },
     "Get Started": "Get Started",
     "who are we": "who are we",
@@ -38,5 +38,29 @@
     "Attend events": "Attend events",
     "View events": "View events",
     "Organize your own!": "Organize your own!",
-    "Get started": "Get started"
+
+    "about": {
+        "title": "About Pebble",
+        "pebble": "Where Heart Meets Hands. Join our vibrant community of volunteers dedicated to making a difference. Explore diverse opportunities and contribute to impactful projects. Together, we're shaping a brighter tomorrow, one pebble at a time."
+    },
+    "Pebble": "Pebble:",
+    "team": {
+        "title": "Meet Our Team.",
+        "desc": "At Pebble, our diverse team of passionate individuals comes together to create meaningful impact. With innovation at our core, we collaborate to transform ideas into action, ensuring every project is a success story waiting to be written."
+    },
+
+    "Khalil Noui":"Khalil Noui",
+    "Oualid Elhouari":"Oualid Elhouari",
+    "Hachem Bouhadede":"Hachem Bouhadede",
+    "Imane Omari":"Imane Omari",
+    "desc":{
+        "khalil":"Skilled developer with creative innovation.",
+        "oualid":"Meticulous developer ensuring precision and quality.",
+        "hachem":"Problem-solving developer with innovative solutions.",
+        "imane":"Dedicated developer ensuring impactful results."
+    },
+    "Web Developer":"Web Developer",
+
+    "Technologies Used":"Technologies Used"
+
 }

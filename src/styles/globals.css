@@ -3,7 +3,8 @@
 @import "tailwindcss/utilities";
 
 .layout {
-    background: #fda855;
+    /* background: #fda855; */
+    background: #0e7490;
 }
 
 @keyframes fadeInRotate {
@@ -39,4 +40,22 @@
     animation: fadeInRotate 1s ease-in-out, rotateLetters 1s ease-in-out;
     animation-delay: 0s, 0.5s;
     animation-fill-mode: both;
+}
+.rotate-vertical {
+    transform-origin: center;
+    transition: transform 0.8s ease-in-out;
+}
+
+.rotate-vertical:hover {
+    transform: rotateY(360deg);
+}
+
+@media (max-width: 767px) {
+    .overlay-section {
+        position: absolute;
+        top: 0;
+        margin-top: 40%;
+        width: 100%;
+        z-index: 10;
+    }
 }
