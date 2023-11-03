@@ -11,11 +11,12 @@ import Layout from "@/layout/Layout";
 export default function SignUp() {
     const { setUser } = useUser();
     const router = useRouter();
+
     async function handleSignIn(e) {
         e.preventDefault();
 
-        let email = e.target[0].value;
-        let password = e.target[1].value;
+        let email = e.target.email.value;
+        let password = e.target.password.value;
         try {
             const userCredential = await signInWithEmailAndPassword(
                 auth,
@@ -26,7 +27,7 @@ export default function SignUp() {
 
             // Update the user context with the signed-in user
 
-            console.log("User Logged in ", user, email, password); //for testing
+            // console.log("User Logged in ", user, email, password); //for testing
             router.push("/");
         } catch (err) {
             const errCode = err.code;
@@ -52,8 +53,27 @@ export default function SignUp() {
             <div className='relative flex flex-col justify-center h-screen'>
                 <div className='lg:flex lg:gap-x-4 justify-center items-center mx-4'>
                     <div className='w-full bg-white rounded-md lg:max-w-xl'>
-                        <h1 className='text-2xl font-semibold text-center text-gray-700'>
-                            Login to an account
+                        <h1 className='text-xl mt-4 px-4 py-2 font-semibold text-center text-gray-700'>
+                            Login with:
+                        </h1>
+                        {/* // the following will be used only to login users that originally signed up with one of the providers */}
+                        <div className='mt-6'>
+                            <button
+                                // onClick={handleTwitterSignIn}
+                                className='w-full mt-4 px-4 py-2 text-white bg-gray-400 rounded-lg hover:bg-gray-500 focus:outline-none focus:bg-gray-600'
+                            >
+                                Twitter
+                            </button>
+
+                            <button
+                                // onClick={handleGoogleSignIn}
+                                className='w-full mt-4 px-4 py-2 text-white bg-red-400 rounded-lg hover:bg-red-500 focus:outline-none focus:bg-red-600'
+                            >
+                                Google
+                            </button>
+                        </div>
+                        <h1 className='text-xl mt-4 px-4 py-2 font-semibold text-center text-gray-700'>
+                            or with:
                         </h1>
                         <form className='mt-6' onSubmit={handleSignIn}>
                             <div className='mb-2'>
@@ -64,6 +84,7 @@ export default function SignUp() {
                                     Email
                                 </label>
                                 <input
+                                    name='email'
                                     type='email'
                                     className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40'
                                 />
@@ -76,6 +97,7 @@ export default function SignUp() {
                                     Password
                                 </label>
                                 <input
+                                    name='password'
                                     type='password'
                                     className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40'
                                 />

@@ -1,12 +1,29 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import { MultiSelect } from "react-multi-select-component";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 import { firestore } from "@/lib/firebase/controller";
 
+import LocationInput from "../reusableComponents/LocationInput";
+import { interestList } from "../../lib/interestsList";
+
 function EditEvent() {
+    const [startDate, setStartDate] = useState(new Date());
+    const [selectedInterets, setSelectedInterets] = useState([]);
+    const [loca, setLoca] = useState(null);
     const router = useRouter();
     const { id } = router.query;
+
+    const options = interestList.map((obj) => {
+        return {
+            label: `${obj.title}`,
+            value: `${obj.title}`,
+        };
+    });
 
     function handleEditForm(e) {
         e.preventDefault();
@@ -16,16 +33,24 @@ function EditEvent() {
         // console.log(e.target.category.value)
         // console.log(e.target.location.value)
         if (id) {
-            const eventRef = doc(firestore, "events", id);
-            updateDoc(eventRef, {
+            const updatedInfo = {
                 title: e.target.title.value,
                 about: e.target.about.value,
-                date: e.target.date.value,
+                date: startDate.toLocaleDateString("en-GB"),
                 image: e.target.image.value,
-                location: e.target.location.value,
-            });
+                location: loca,
+                interests: selectedInterets.map((interest) => interest.value),
+            };
+
+            const eventRef = doc(firestore, "events", id);
+            updateDoc(eventRef, updatedInfo);
+            console.log("theeventREf", eventRef);
         }
     }
+
+    const handleLocationSelect = (selectedLocation) => {
+        setLoca(selectedLocation);
+    };
 
     return (
         <div className='bg-white border rounded-lg shadow relative m-10'>
@@ -35,20 +60,7 @@ function EditEvent() {
                     type='button'
                     className='text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center'
                     data-modal-toggle='Event-modal'
-                >
-                    <svg
-                        className='w-5 h-5'
-                        fill='currentColor'
-                        viewBox='0 0 20 20'
-                        xmlns='http://www.w3.org/2000/svg'
-                    >
-                        <path
-                            fillRule='evenodd'
-                            d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                            clipRule='evenodd'
-                        ></path>
-                    </svg>
-                </button>
+                ></button>
             </div>
             <div className='p-6 space-y-6'>
                 <form onSubmit={handleEditForm}>
@@ -71,18 +83,16 @@ function EditEvent() {
                         </div>
                         <div className='col-span-6 sm:col-span-3'>
                             <label
-                                htmlFor='category'
+                                htmlFor='Interests'
                                 className='text-sm font-medium text-gray-900 block mb-2'
                             >
-                                Category
+                                Interests
                             </label>
-                            <input
-                                type='text'
-                                name='category'
-                                id='category'
-                                className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
-                                placeholder='e.g ..sustaibility'
-                                required
+                            <MultiSelect
+                                options={options}
+                                value={selectedInterets}
+                                onChange={setSelectedInterets}
+                                labelledBy='Select'
                             />
                         </div>
                         <div className='col-span-6 sm:col-span-3'>
@@ -92,13 +102,13 @@ function EditEvent() {
                             >
                                 Location
                             </label>
-                            <input
-                                type='text'
+                            <LocationInput
                                 name='location'
                                 id='location'
                                 className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
-                                placeholder='e.g Kandahar..'
-                                required
+                                placeholder='location'
+                                initialLocation={loca}
+                                onSelectLocation={handleLocationSelect}
                             />
                         </div>
                         <div className='col-span-6 sm:col-span-3'>
@@ -114,7 +124,6 @@ function EditEvent() {
                                 id='image'
                                 className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
                                 placeholder='provide an Url e.g http:// ...'
-                                required
                             />
                         </div>
                         <div className='col-span-6 sm:col-span-3'>
@@ -124,13 +133,18 @@ function EditEvent() {
                             >
                                 date
                             </label>
-                            <input
+                            <DatePicker
                                 type='text'
                                 name='date'
                                 id='date'
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                dateFormat="dd MMM yyyy 'at' HH'h'mm"
+                                showTimeSelect
+                                timeFormat='p'
+                                showYearDropdown
+                                scrollableMonthYearDropdown
                                 className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
-                                placeholder='provide an Url e.g http:// ...'
-                                required
                             />
                         </div>
                         <div className='col-span-full'>
