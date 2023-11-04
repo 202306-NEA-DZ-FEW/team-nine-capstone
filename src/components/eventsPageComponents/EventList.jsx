@@ -22,7 +22,7 @@ function EventList() {
     const [prevLocation, setPrevLocation] = useState(null);
     const { user } = useUser();
     const router = useRouter();
-
+    console.log(events);
     // sets the routing according to the user's state
     const handleUser = () => {
         user
@@ -127,7 +127,7 @@ function EventList() {
                 <div>
                     <DateFilter upDatedDate={upDatedDate} onClick={onClick} />
                 </div>
-                <div class='w-[90%] self-center border-b-2 border-black my-4'></div>
+                <div className='w-[90%] self-center border-b-2 border-black my-4'></div>
                 <div>
                     {/* locations components filter */}
                     <LocatioFilter
