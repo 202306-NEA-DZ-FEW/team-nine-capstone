@@ -194,7 +194,7 @@ function YourEvents() {
             <div className='w-2/3'>
                 {filteredEvents.length !== 0 ? (
                     <h1 className='z-60 mx-auto bg-gray-500 font-bold text-3xl flex items-center py-12 justify-center'>
-                        {t("Our Events")}
+                        {t("Your Events")}
                     </h1>
                 ) : (
                     <p className='z-60 mx-auto bg-gray-500 font-bold text-3xl flex items-center py-12 justify-center'>
