@@ -1,25 +1,35 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import * as React from "react";
 
-import HeroSection from "@/components/homepage/HeroSection";
-import HowitWorks from "@/components/homepage/HowitWorks";
-import SectionTwo from "@/components/homepage/SectionTwo";
+import { getAllUserIds } from "@/lib/firebase/users";
+
+import EditSignInDetailes from "@/components/EditProfileComponenets/updateSignInDetails";
+import UserDetails from "@/components/EditProfileComponenets/UserDetails";
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
 
-export default function HomePage() {
-    const { user } = useUser();
+function EditProfile() {
     const { t } = useTranslation("common");
+    const { user } = useUser();
 
     return (
         <Layout>
-            <HeroSection />
-            <HowitWorks />
-            <SectionTwo />
+            <UserDetails />
+            <EditSignInDetailes />
         </Layout>
     );
+}
+
+export default EditProfile;
+
+export async function getStaticPaths() {
+    const paths = await getAllUserIds();
+
+    return {
+        paths,
+        fallback: true,
+    };
 }
 
 export async function getStaticProps({ locale }) {
