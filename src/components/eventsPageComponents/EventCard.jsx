@@ -99,14 +99,16 @@ function EventCard({ TheEvent }) {
 
                                 <div
                                     className={`cursor-pointer  flex flex-row justify-center bg-amber-500 text-lg font-medium items-center w-20 rounded-sm shadow-lg text-white self-end gap-x-3 ${
+                                        user &&
                                         TheEvent.attendees.indexOf(user.uid) >
-                                        -1
+                                            -1
                                             ? "bg-gray-300 text-black"
                                             : "hover:bg-emerald-500 transition-all duration-200"
                                     }`}
                                     onClick={handleAttendees}
                                 >
-                                    {TheEvent.attendees.indexOf(user.uid) > -1
+                                    {user &&
+                                    TheEvent.attendees.indexOf(user.uid) > -1
                                         ? "JOINED"
                                         : "JOIN"}
                                 </div>
