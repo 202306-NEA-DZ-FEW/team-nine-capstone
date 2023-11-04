@@ -109,9 +109,12 @@ export default function SignUp() {
                                     className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40'
                                 />
                             </div>
-                            <p className='text-xs text-gray-800 font-bold'>
-                                Forget Your Password !
-                            </p>
+                            <Link
+                                href='./forgotPassword'
+                                className='text-xs text-gray-800 font-bold'
+                            >
+                                Forget Your <u> Password ! </u>
+                            </Link>
                             <div className='mt-6'>
                                 <button className='w-full px-4 py-2 text-white bg-gray-800 rounded-lg hover:bg-gray-900 focus:outline-none focus:bg-gray-600'>
                                     Sign In
