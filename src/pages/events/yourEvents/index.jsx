@@ -1,17 +1,17 @@
 import React from "react";
 
-import IEvent from "@/components/eventsPageComponents/IEvents";
+import YourEvents from "@/components/eventsPageComponents/YourEvents";
 
 import Layout from "@/layout/Layout";
 
-function myEvents() {
+function yourEvents() {
     return (
         <Layout>
             <div>
-                <IEvent />
+                <YourEvents />
             </div>
         </Layout>
     );
 }
 
-export default myEvents;
+export default yourEvents;
