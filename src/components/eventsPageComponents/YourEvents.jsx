@@ -168,7 +168,7 @@ function YourEvents() {
                 <div>
                     <DateFilter upDatedDate={upDatedDate} onClick={onClick} />
                 </div>
-                <div class='w-[90%] self-center border-b-2 border-black my-4'></div>
+                <div className='w-[90%] self-center border-b-2 border-black my-4'></div>
                 <div>
                     {/* locations components filter */}
                     <LocatioFilter
@@ -180,7 +180,7 @@ function YourEvents() {
                         handleLocation={handleLocation}
                     />
                 </div>
-                <div class='w-[90%] self-center border-b-2 border-black my-4'></div>
+                <div className='w-[90%] self-center border-b-2 border-black my-4'></div>
                 <div>
                     <InterestsFilter
                         allCategories={allCategories}
