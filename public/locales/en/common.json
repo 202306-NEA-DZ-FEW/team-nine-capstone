@@ -7,6 +7,7 @@
     "Sign Out": "Sign Out",
     "Sign In": "Sign In",
     "About": "About",
+    "Terms of Use": "Terms of Use",
     "Events": "Events",
     "footer": {
         "hook": "Unite for a Better Tomorrow, Hand in Hand."
@@ -23,6 +24,9 @@
     },
     "Get Started": "Get Started",
     "who are we": "who are we",
+    "Our Events": "Our Events",
+    "No Events": "No Events",
+    "Create Event": "Create Event",
 
     "HeroSection": {
         "title": "Join Us in Creating Impactful Change",
@@ -63,4 +67,33 @@
 
     "Technologies Used":"Technologies Used"
 
+    "Get started": "Get started",
+    "Choose Location": "Choose Location",
+    "profile": {
+        "joinON": "Joined on:",
+        "notJoined": "Join date not available",
+        "ep": "Edit Profile",
+        "Full Name": "Full Name:",
+        "Location": "Location: ",
+        "noIntrests": "You have not set any interest. Head to the",
+        "toaddsome": "to add some",
+        "No interests found.": "No interests found.",
+        "Interests": "Interests & Volunteering Goals:"
+    },
+    "editProfile": {
+        "DisplayName": "Display Name:",
+        "FullName": "Full Name:",
+        "UpdateProfile": "Update Profile",
+        "succUpdate": "Your Account Detailes have been update succefully",
+        "failUpdate": "There was an error while updating your account details: ",
+        "CRUDtitle": "Change Sign-in Credentials",
+        "CRUDreq": "you will need to provide your Crudentials in order to UPDATE them or DELETE the account",
+        "CRUDmail": "Current Email :",
+        "CRUDpassword": "Current Password :",
+        "CRUDnew1": "New Password :",
+        "CRUDnew2": "Confirm New Password :",
+        "CRUDdel": "Delete Account",
+        "CRUDsav": "Save Changes",
+        "ChangeAvatar": "Change Avatar"
+    }
 }

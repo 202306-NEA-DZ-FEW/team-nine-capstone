@@ -15,6 +15,8 @@ module.exports = {
             "www.cleantech.com",
             "upload.wikimedia.org",
             "cdn0.handsonconnect.org",
+            "cdn.wallpapersafari.com",
+            "cdn.mos.cms.futurecdn.net",
         ],
     },
 };

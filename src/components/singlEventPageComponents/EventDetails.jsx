@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,13 +6,42 @@ import React, { useEffect, useState } from "react";
 
 import { firestore } from "@/lib/firebase/controller";
 
+import { useUser } from "@/context/UserContext";
+
 import Loader from "../loader/Loader";
+import SocialShare from "../reusableComponents/SocialShare";
 
 function EventDetails() {
+    const [myEvents, setMyEvents] = useState([]);
     const [eventDisplay, setEventDisplay] = useState({});
 
     const router = useRouter();
     const { id } = router.query;
+
+    console.log("this is router.asPath", router.asPath);
+    const { user, setUser } = useUser();
+
+    function JoinEvent() {
+        if (user) {
+            const userRef = doc(firestore, "users", user.uid);
+
+            getDoc(userRef)
+                .then((userDoc) => {
+                    const existEvent = userDoc.data().iEvents;
+
+                    const updatedEvents = [...existEvent, id];
+
+                    return updateDoc(userRef, {
+                        iEvents: updatedEvents,
+                    });
+                })
+                .catch((error) => {
+                    console.log("the error:", error);
+                });
+        } else {
+            alert("please sign in or sign up first");
+        }
+    }
 
     useEffect(() => {
         if (id) {
@@ -94,6 +123,11 @@ function EventDetails() {
                     </div>
                 </div>
             </div>
+            <SocialShare
+                path={router.asPath}
+                title={eventDisplay.title}
+                quote={eventDisplay.about}
+            />
 
             <div className='relative'>
                 <div className='lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8 '>
@@ -123,7 +157,8 @@ function EventDetails() {
                         <div className='mt-6'>
                             <Link
                                 className='inline-flex rounded-lg bg-pink-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-pink-600 hover:bg-pink-700 hover:ring-pink-700'
-                                href='/'
+                                href='/events/yourEvents'
+                                onClick={JoinEvent}
                             >
                                 Join the Event !
                             </Link>

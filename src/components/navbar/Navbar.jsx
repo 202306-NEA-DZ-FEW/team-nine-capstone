@@ -24,7 +24,7 @@ function Navbar() {
     const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
     const { user } = useUser();
     const { t } = useTranslation("common");
-    const router = useRouter("/");
+    const router = useRouter();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -133,20 +133,47 @@ function Navbar() {
                                             : "bg-black/20 backdrop-blur-lg text-black"
                                     }`}
                                 >
-                                    <Link
-                                        href=''
-                                        locale='en'
-                                        className='block text-sm  p-2 w-38 hover:bg-amber-400 rounded-xl'
-                                    >
-                                        English
-                                    </Link>
-                                    <Link
-                                        href=''
-                                        locale='ar'
-                                        className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
-                                    >
-                                        العربية
-                                    </Link>
+                                    {router.query.id ? (
+                                        <>
+                                            <Link
+                                                href={{
+                                                    pathname: "",
+                                                    query: { id: user.uid },
+                                                }}
+                                                locale='en'
+                                                className='block text-sm  p-2 w-38 hover:bg-amber-400 rounded-xl'
+                                            >
+                                                English
+                                            </Link>
+                                            <Link
+                                                href={{
+                                                    pathname: "",
+                                                    query: { id: user.uid },
+                                                }}
+                                                locale='ar'
+                                                className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
+                                            >
+                                                العربية
+                                            </Link>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Link
+                                                href=''
+                                                locale='en'
+                                                className='block text-sm text-white p-2 w-38 hover-bg-amber-200 rounded-xl'
+                                            >
+                                                English
+                                            </Link>
+                                            <Link
+                                                href=''
+                                                locale='ar'
+                                                className='block text-sm text-white p-2 w-38 hover-bg-amber-200 rounded-xl'
+                                            >
+                                                العربية
+                                            </Link>
+                                        </>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -174,14 +201,14 @@ function Navbar() {
                                     {user ? (
                                         <>
                                             <Link
-                                                href={`/profile/${user.displayName}`}
+                                                href={`/profile/${user.uid}`}
                                                 className='block text-sm  p-2  hover:bg-amber-400 rounded-xl'
                                                 onClick={closeMenu}
                                             >
                                                 {t("Your Profile")}
                                             </Link>
                                             <Link
-                                                href='/events'
+                                                href='/events/yourEvents'
                                                 className='block text-sm  p-2  hover:bg-amber-400 rounded-xl'
                                                 onClick={closeMenu}
                                             >
@@ -286,22 +313,53 @@ function Navbar() {
                                         </button>
                                         {isLangDropdownOpen && (
                                             <div className='w-full '>
-                                                <Link
-                                                    href=''
-                                                    locale='en'
-                                                    className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white 
-                                                    '
-                                                >
-                                                    English
-                                                </Link>
+                                                {router.query.id ? (
+                                                    <>
+                                                        <Link
+                                                            href={{
+                                                                pathname: "",
+                                                                query: {
+                                                                    id: user.uid,
+                                                                },
+                                                            }}
+                                                            locale='en'
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                                        >
+                                                            English
+                                                        </Link>
 
-                                                <Link
-                                                    href=''
-                                                    locale='ar'
-                                                    className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white '
-                                                >
-                                                    العربية{" "}
-                                                </Link>
+                                                        <Link
+                                                            href={{
+                                                                pathname: "",
+                                                                query: {
+                                                                    id: user.uid,
+                                                                },
+                                                            }}
+                                                            locale='ar'
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
+                                                        >
+                                                            العربية{" "}
+                                                        </Link>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Link
+                                                            href=''
+                                                            locale='en'
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white 
+                                                    '
+                                                        >
+                                                            English
+                                                        </Link>
+                                                        <Link
+                                                            href=''
+                                                            locale='ar'
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white '
+                                                        >
+                                                            العربية{" "}
+                                                        </Link>
+                                                    </>
+                                                )}
                                             </div>
                                         )}
                                     </div>
@@ -324,7 +382,7 @@ function Navbar() {
                                                 {user ? (
                                                     <>
                                                         <Link
-                                                            href={`/profile/${user.displayName}`}
+                                                            href={`/profile/${user.uid}`}
                                                         >
                                                             <button className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white '>
                                                                 {t(

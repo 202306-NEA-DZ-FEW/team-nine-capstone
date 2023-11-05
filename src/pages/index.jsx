@@ -12,7 +12,6 @@ import Layout from "@/layout/Layout";
 export default function HomePage() {
     const { user } = useUser();
     const { t } = useTranslation("common");
-    // console.log(user)  // context test
 
     return (
         <Layout>

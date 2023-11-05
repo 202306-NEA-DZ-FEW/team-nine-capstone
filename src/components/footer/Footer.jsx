@@ -26,6 +26,11 @@ function Footer() {
                             <Link href='/about'>{t("About")}</Link>
                         </div>
                         <div className='px-5 py-2'>
+                            <Link href='/termsAndConditions'>
+                                {t("Terms of Use")}
+                            </Link>
+                        </div>
+                        <div className='px-5 py-2'>
                             <Link href='/events'>{t("Events")}</Link>
                         </div>
                         <div className='px-5 py-2'>

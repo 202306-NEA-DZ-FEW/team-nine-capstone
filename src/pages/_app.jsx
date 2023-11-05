@@ -2,7 +2,9 @@ import { appWithTranslation } from "next-i18next";
 
 import "@/styles/globals.css";
 
-import { UserProvider } from "@/context/UserContext"; // Import UserProvider
+import { UserProvider } from "@/context/UserContext";
+
+import { i18n } from "../../next-i18next.config";
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -12,4 +14,4 @@ function MyApp({ Component, pageProps }) {
     );
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(MyApp, { i18n });

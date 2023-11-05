@@ -10,7 +10,9 @@ function Event() {
     const { t } = useTranslation("common");
     return (
         <Layout>
-            <EventList />
+            <div>
+                <EventList />
+            </div>
         </Layout>
     );
 }

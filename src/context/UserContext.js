@@ -20,7 +20,7 @@ export function UserProvider({ children }) {
 
         // Clean up the subscription
         return () => isLogged();
-    }, []);
+    }, [user]);
 
     return (
         <UserContext.Provider value={{ user, setUser }}>
