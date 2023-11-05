@@ -22,7 +22,7 @@ function EventList() {
     const [prevLocation, setPrevLocation] = useState(null);
     const { user } = useUser();
     const router = useRouter();
-
+    console.log(events);
     // sets the routing according to the user's state
     const handleUser = () => {
         user
