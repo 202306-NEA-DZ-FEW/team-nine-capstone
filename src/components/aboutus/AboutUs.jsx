@@ -26,7 +26,7 @@ const AboutUs = () => {
             title: t("Web Developer"),
             linkedin: "https://www.linkedin.com/in/khalil-noui-pr/",
             GitHub: "https://github.com/Khalil-NOUI",
-            desc: t("Skilled developer with creative innovation."),
+            desc: t("desc.khalil"),
         },
         {
             avatar: "/images/AboutUs/oualid.jpg",
@@ -34,7 +34,7 @@ const AboutUs = () => {
             title: t("Web Developer"),
             linkedin: "https://www.linkedin.com/in/elhouari-oualid",
             GitHub: "https://github.com/oualidelh",
-            desc: t("Meticulous developer ensuring precision and quality."),
+            desc: t("desc.oualid"),
         },
         {
             avatar: "/images/AboutUs/Hachem.jpg",
@@ -42,7 +42,7 @@ const AboutUs = () => {
             title: t("Web Developer"),
             linkedin: "https://www.linkedin.com/in/hachem-bouhadede/",
             GitHub: "https://github.com/HachemBouhadede",
-            desc: t("Problem-solving developer with innovative solutions."),
+            desc: t("desc.hachem"),
         },
         {
             avatar: "/images/AboutUs/iman.jpg",
@@ -50,7 +50,7 @@ const AboutUs = () => {
             title: t("web Developer"),
             linkedin: "https://www.linkedin.com/in/iman-omari/",
             GitHub: "https://www.linkedin.com/in/iman-omari/",
-            desc: t("Dedicated developer ensuring impactful results."),
+            desc: t("desc.imane"),
         },
     ];
 

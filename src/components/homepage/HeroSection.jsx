@@ -26,12 +26,12 @@ const Hero = () => {
                         <p className='text-sm md:text-base lg:text-lg text-zinc-500 mb-4'>
                             {t("HeroSection.introduction")}
                         </p>
-                        <a
+                        <Link
                             href='#'
                             className='inline-block px-6 py-3 text-base md:text-xl font-semibold bg-green-700 rounded-lg text-white hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100'
                         >
                             {t("Get Started")}
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
