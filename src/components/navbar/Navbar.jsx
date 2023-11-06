@@ -244,7 +244,7 @@ function Navbar() {
                             )}
                         </div>
                         <div className='px-10'>
-                            <Link href='#'>
+                            <Link href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'>
                                 <button className=' text-lg text-white py-1 px-3 bg-green-700 rounded-sm'>
                                     {t("DONATE")}
                                 </button>
@@ -254,7 +254,7 @@ function Navbar() {
                     {/*SM View */}
                     <div className='sm:hidden'>
                         <div className='pr-16'>
-                            <Link href='#'>
+                            <Link href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'>
                                 <button className=' text-sm text-white  py-1 px-3 rounded-sm bg-amber-400'>
                                     {t("DONATE")}
                                 </button>
@@ -271,7 +271,7 @@ function Navbar() {
                                         Logo
                                     </Link>
                                     <div className='pl-32'>
-                                        <Link href='#'>
+                                        <Link href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'>
                                             <button className=' text-sm text-white py-1 px-3 rounded-sm bg-amber-400 flex '>
                                                 {t("DONATE")}
                                             </button>
