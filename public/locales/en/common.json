@@ -53,19 +53,19 @@
         "desc": "At Pebble, our diverse team of passionate individuals comes together to create meaningful impact. With innovation at our core, we collaborate to transform ideas into action, ensuring every project is a success story waiting to be written."
     },
 
-    "Khalil Noui":"Khalil Noui",
-    "Oualid Elhouari":"Oualid Elhouari",
-    "Hachem Bouhadede":"Hachem Bouhadede",
-    "Imane Omari":"Imane Omari",
-    "desc":{
-        "khalil":"Skilled developer with creative innovation.",
-        "oualid":"Meticulous developer ensuring precision and quality.",
-        "hachem":"Problem-solving developer with innovative solutions.",
-        "imane":"Dedicated developer ensuring impactful results."
+    "Khalil Noui": "Khalil Noui",
+    "Oualid Elhouari": "Oualid Elhouari",
+    "Hachem Bouhadede": "Hachem Bouhadede",
+    "Imane Omari": "Imane Omari",
+    "desc": {
+        "khalil": "Skilled developer with creative innovation.",
+        "oualid": "Meticulous developer ensuring precision and quality.",
+        "hachem": "Problem-solving developer with innovative solutions.",
+        "imane": "Dedicated developer ensuring impactful results."
     },
-    "Web Developer":"Web Developer",
+    "Web Developer": "Web Developer",
 
-    "Technologies Used":"Technologies Used",
+    "Technologies Used": "Technologies Used",
 
     "Get started": "Get started",
     "Choose Location": "Choose Location",
