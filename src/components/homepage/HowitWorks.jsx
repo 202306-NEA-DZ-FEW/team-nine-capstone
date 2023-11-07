@@ -44,7 +44,10 @@ const HowitWorks = () => {
 
     return (
         <>
-            <div className='hero-inAll'>
+            <div
+                className='hero-inAll'
+                style={{ backgroundColor: "rgb(229, 231, 235)" }}
+            >
                 <div className='md:w-2/5 text-center md:text-left pl-10'>
                     <h2 className='text-xl md:text-2xl lg:text-3xl text-zinc-900 font-semibold mb-4'>
                         {t("HeroSection.title")}

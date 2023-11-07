@@ -22,7 +22,7 @@ const Hero = () => {
 
             <div className='home-text'>
                 <Image
-                    src='/images/tempLogo.svg'
+                    src='/images/Logo.png'
                     alt=''
                     width={200}
                     height={200}
