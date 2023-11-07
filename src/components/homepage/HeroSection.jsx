@@ -7,32 +7,53 @@ const Hero = () => {
     const { t } = useTranslation();
 
     return (
-        <div className='flex justify-center bg-gray-100 py-10 px-2 md:p-10 lg:p-10 mt-8 md:mt-10'>
-            <div className='container max-w-6xl border shadow-lg rounded-lg bg-white p-6 md:p-10'>
-                <div className='max-w-screen-2xl mx-auto flex flex-row md:flex-row items-center'>
-                    <div className='mb-6 md:w-1/2 sm:w-2/3 md:mb-0'>
-                        <Image
-                            src='/images/square.png'
-                            alt=''
-                            width={400}
-                            height={400}
-                            className='w-[500px]'
-                        />
-                    </div>
-                    <div className='md:w-2/5 text-center md:text-left pl-10'>
-                        <h2 className='text-xl md:text-2xl lg:text-3xl text-zinc-900 font-semibold mb-4'>
-                            {t("HeroSection.title")}
-                        </h2>
-                        <p className='text-sm md:text-base lg:text-lg text-zinc-500 mb-4'>
-                            {t("HeroSection.introduction")}
-                        </p>
-                        <Link
-                            href='#'
-                            className='inline-block px-6 py-3 text-base md:text-xl font-semibold bg-green-700 rounded-lg text-white hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100'
-                        >
-                            {t("Get Started")}
-                        </Link>
-                    </div>
+        <div className='hero-inAll'>
+            <video
+                className='bg-video'
+                src='/images/heroVideo.mp4'
+                typeof='video/mp4'
+                autoPlay
+                loop
+                playsInline
+                muted
+            ></video>
+
+            <div className='bg-overlay'></div>
+
+            <div className='home-text'>
+                <Image
+                    src='/images/tempLogo.svg'
+                    alt=''
+                    width={200}
+                    height={200}
+                ></Image>
+                <h2 className='hero-h1' style={{ fontWeight: "bold" }}>
+                    Living Through Giving
+                </h2>
+                <p className='hero-p' style={{ fontWeight: "lighter" }}>
+                    Empowering individuals with the means to orchestrate and
+                    experience the profound impact of acts of love
+                </p>
+
+                <div className='flex flex-row  '>
+                    <Link
+                        href='#'
+                        className='home-btn'
+                        style={{
+                            backgroundColor: "rgb(251, 191, 36, 0.5)",
+                        }}
+                    >
+                        {t("Get Started")}
+                    </Link>
+                    <Link
+                        href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'
+                        className='home-btn'
+                        style={{
+                            backgroundColor: "rgb(21, 128, 61, 0.5)",
+                        }}
+                    >
+                        {t("Donate")}
+                    </Link>
                 </div>
             </div>
         </div>

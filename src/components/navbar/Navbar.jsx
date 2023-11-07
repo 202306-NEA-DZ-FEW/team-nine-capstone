@@ -243,23 +243,9 @@ function Navbar() {
                                 </div>
                             )}
                         </div>
-                        <div className='px-10'>
-                            <Link href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'>
-                                <button className=' text-lg text-white py-1 px-3 bg-green-700 rounded-sm'>
-                                    {t("DONATE")}
-                                </button>
-                            </Link>
-                        </div>
                     </div>
-                    {/*SM View */}
+
                     <div className='sm:hidden'>
-                        <div className='pr-16'>
-                            <Link href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'>
-                                <button className=' text-sm text-white  py-1 px-3 rounded-sm bg-amber-400'>
-                                    {t("DONATE")}
-                                </button>
-                            </Link>
-                        </div>
                         {isMenuOpen && (
                             <div className='fixed top-0 left-0 w-screen h-auto bg-black/80 backdrop-blur-md text-white z-50'>
                                 <div className='flex justify-between p-4'>
@@ -270,13 +256,7 @@ function Navbar() {
                                     >
                                         Logo
                                     </Link>
-                                    <div className='pl-32'>
-                                        <Link href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'>
-                                            <button className=' text-sm text-white py-1 px-3 rounded-sm bg-amber-400 flex '>
-                                                {t("DONATE")}
-                                            </button>
-                                        </Link>
-                                    </div>
+
                                     <VscChromeClose
                                         className='text-2xl cursor-pointer'
                                         onClick={toggleMenu}
@@ -297,7 +277,6 @@ function Navbar() {
                                     >
                                         {t("Events")}
                                     </Link>
-
                                     <div className='w-full border-t'>
                                         <button
                                             className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white '
@@ -363,6 +342,7 @@ function Navbar() {
                                             </div>
                                         )}
                                     </div>
+                                    donate
                                     <div className='relative'>
                                         <div
                                             className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white border-t'

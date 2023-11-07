@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import React from "react";
 import { AiOutlineRight } from "react-icons/ai";
@@ -43,6 +44,22 @@ const HowitWorks = () => {
 
     return (
         <>
+            <div className='hero-inAll'>
+                <div className='md:w-2/5 text-center md:text-left pl-10'>
+                    <h2 className='text-xl md:text-2xl lg:text-3xl text-zinc-900 font-semibold mb-4'>
+                        {t("HeroSection.title")}
+                    </h2>
+                    <p className='text-sm md:text-base lg:text-lg text-zinc-500 mb-4'>
+                        {t("HeroSection.introduction")}
+                    </p>
+                    <Link
+                        href='#'
+                        className='inline-block px-6 py-3 text-base md:text-xl font-semibold bg-green-700 rounded-lg text-white hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100'
+                    >
+                        {t("Find an Event near you")}
+                    </Link>
+                </div>
+            </div>
             <div className='lg:px-32 max-w-screen-2xl mx-auto  text-center px-8 bg-gray-100'>
                 <h2 className='text-zinc-900 text-3xl font-semibold mb-10'>
                     {t("HowitWorks.title")}
