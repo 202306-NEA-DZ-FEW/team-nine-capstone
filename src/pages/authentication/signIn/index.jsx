@@ -69,8 +69,7 @@ export default function SignUp() {
             setSuccessMessage(t("signIn.succLog"));
             router.push("/");
         } catch (error) {
-            // Handle sign-in error
-            console.error(error);
+            setError(t("signIn.failLog"));
         }
     }
 

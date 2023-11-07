@@ -96,34 +96,34 @@
         "CRUDsav": "Save Changes",
         "ChangeAvatar": "Change Avatar"
     },
-    "signIn":{
+    "signIn": {
         "succLog": "Sign In succefully",
         "failLog": "Error while signing in",
-        "EnterYourEmail" : "Enter Your Email",
+        "EnterYourEmail": "Enter Your Email",
         "EnterYourPassword": "Enter Your Password",
-        "PassReset1" : "Forgot your Password !",
-        "PassReset2" : "Reset it",
-        "noAccount" : "Don't have an account ?",
-        "noAccount2" : "Become a member",
-        "Google" : "Continue with Google",
-        "Twitter" : "Continue With Twitter",
-        "button" : "Sign In",
-        "or" : "OR"
+        "PassReset1": "Forgot your Password !",
+        "PassReset2": "Reset it",
+        "noAccount": "Don't have an account ?",
+        "noAccount2": "Become a member",
+        "Google": "Continue with Google",
+        "Twitter": "Continue With Twitter",
+        "button": "Sign In",
+        "or": "OR"
     },
-    "SignUp" : {
+    "SignUp": {
         "succLog": "Account Created Succefully",
         "failLog": "Error in account creation process",
-        "EnterUserName" : "Enter a User Name of Your Choice",
-        "EnterYourEmail" : "Enter Your Email",
+        "EnterUserName": "Enter a User Name of Your Choice",
+        "EnterYourEmail": "Enter Your Email",
         "EnterYourPassword": "Enter Your Password",
-        "register" : "Creat Account",
-        "account1" : "Already a member",
-        "account2" : "Sign In",
-        "or" : "OR",
-        "Google" : "Sign Up with Google",
-        "Twitter" : "Sign Up with Twitter",
-        "Terms&Cons1" : "By Creating an Account you are agreeing to",
-        "Terms&Cons2" : "Our Terms and Condition"
+        "register": "Creat Account",
+        "account1": "Already a member",
+        "account2": "Sign In",
+        "or": "OR",
+        "Google": "Sign Up with Google",
+        "Twitter": "Sign Up with Twitter",
+        "Terms&Cons1": "By Creating an Account you are agreeing to",
+        "Terms&Cons2": "Our Terms and Condition"
     },
     "t&c": {
         "title": "Terms And Conditions",
@@ -148,7 +148,5 @@
         "t10": "10. Skill-Based Volunteering",
         "b10": "Encourage volunteers to use their unique skills and expertise for more targeted and impactful contributions.",
         "button": "Agree and Continue"
-      }
-      
-      
+    }
 }
