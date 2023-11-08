@@ -206,7 +206,7 @@ function Navbar() {
                                                 {t("Your Profile")}
                                             </Link>
                                             <Link
-                                                href='/events/yourEvents'
+                                                href={`/profile/${user.uid}/events`}
                                                 className='block text-sm  p-2  hover:bg-amber-400 rounded-xl'
                                                 onClick={closeMenu}
                                             >
@@ -368,7 +368,9 @@ function Navbar() {
                                                                 )}
                                                             </button>
                                                         </Link>
-                                                        <Link href='/events'>
+                                                        <Link
+                                                            href={`/profile/${user.uid}/events`}
+                                                        >
                                                             <button className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white '>
                                                                 {t(
                                                                     "Your Events"

@@ -70,15 +70,20 @@
     "Get started": "Get started",
     "Choose Location": "Choose Location",
     "profile": {
-        "joinON": "Joined on:",
-        "notJoined": "Join date not available",
         "ep": "Edit Profile",
         "Full Name": "Full Name:",
         "Location": "Location: ",
         "noIntrests": "You have not set any interest. Head to the",
         "toaddsome": "to add some",
         "No interests found.": "No interests found.",
-        "Interests": "Interests & Volunteering Goals:"
+        "Interests": "Interests & Volunteering Goals:",
+        "more": "& more",
+        "Join": "Join",
+        "Joined": "Joined",
+        "LearnMore": "Learn More",
+        "attendees": "attendees",
+        "recentEvents": "recent events:",
+        "seeMore": "See more Events with"
     },
     "editProfile": {
         "DisplayName": "Display Name:",
