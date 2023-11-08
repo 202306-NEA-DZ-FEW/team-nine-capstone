@@ -40,10 +40,6 @@ function Profile() {
         fetchUserData();
     }, [id]);
 
-    // console.log(userData)
-    // console.log(userData.displayName)
-    // console.log(userData.iEvents)
-
     return (
         <Layout>
             {userData && (
@@ -100,7 +96,7 @@ function Profile() {
                             {t("profile.Interests")}{" "}
                             {userData.userInterests &&
                             userData.userInterests.length > 0 ? (
-                                <div className='flex flex-wrap'>
+                                <div className='flex flex-wrap items-center justify-center'>
                                     {userData.userInterests.map((interest) => (
                                         <div
                                             key={interest}
@@ -142,7 +138,8 @@ function Profile() {
                         <div className='flex flex-col items-center justify-center '>
                             <div className='text-lg font-semibold'>
                                 {" "}
-                                {userData.displayName} recent events:{" "}
+                                {userData.displayName}{" "}
+                                {t("profile.recentEvents")}{" "}
                             </div>
                             <div className='flex flex-wrap my-5 p-1'>
                                 {userData.iEvents.map((event) => (
@@ -160,6 +157,17 @@ function Profile() {
                             {" "}
                             {userData.displayName} has not joined any events{" "}
                         </div>
+                    )}
+                    {userData.iEvents && userData.iEvents.length > 0 && (
+                        <Link
+                            className='flex flex-end items-end justify-end mr-10 mb-10'
+                            href={`/profile/${id}/events`}
+                        >
+                            <button className='rounded-sm py-2 px-3 text-white text-xl hover:font-semibold hover:text-black focus:font-semibold focus:text-black bg-green-400 hover:bg-opacity-50 focus:border-2 focus:border-black'>
+                                {" "}
+                                {t("profile.seeMore")} {userData.displayName}
+                            </button>
+                        </Link>
                     )}
                 </div>
             )}

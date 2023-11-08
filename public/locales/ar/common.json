@@ -49,15 +49,20 @@
     "Get started": "ابدأ",
     "Choose Location": "اختر موقعا",
     "profile": {
-        "joinON": "تم الانضمام في:",
-        "notJoined": "تاريخ الانضمام غير متاح",
         "ep": "تعديل الملف الشخصي",
         "Full Name": "الاسم الكامل:",
         "Location": "الموقع: ",
         "noIntrests": "لم تقم بإضافة أي اهتمامات. انتقل إلى",
         "toaddsome": "لإضافة بعض",
         "No interests found.": "لا توجد اهتمامات.",
-        "Interests": "الاهتمامات و الاهداف التطوعية"
+        "Interests": "الاهتمامات و الاهداف التطوعية",
+        "more" : "والمزيد",
+        "Join" : "شارك",
+        "Joined" : "تمت المشاركة",
+        "LearnMore" : "المزيد حول الحدث",
+        "attendees" : "مشاركة",
+        "recentEvents" : "اخر فاعليات:",
+        "seeMore" : "شاهد المزيد من فعاليات "
     },
     "editProfile": {
         "DisplayName": "اسم المستخدم:",

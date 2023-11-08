@@ -1,9 +1,11 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 
 import { getEventDocument } from "@/lib/firebase/controller";
 
 function UserProfileEventCard({ id, isOwner }) {
+    const { t } = useTranslation("common");
     const [eventData, setEventData] = useState(null);
     const [hover, setHover] = useState(false);
     console.log(isOwner);
@@ -66,7 +68,7 @@ function UserProfileEventCard({ id, isOwner }) {
                                         ))}
                                     {eventData.interests.length > 3 && (
                                         <span className='inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-                                            & more
+                                            {t("profile.more")}
                                         </span>
                                     )}
                                 </div>
@@ -77,7 +79,8 @@ function UserProfileEventCard({ id, isOwner }) {
                         {hover && (
                             <div className='absolute w-5/6 h-1/2 flex flex-col items-center top-20 left-7 right-0 bottom-0 space-y-5 bg-white shadow-lg rounded-lg bg-opacity-50'>
                                 <span className='text-xl'>
-                                    {eventData.attendees.length} attendees
+                                    {eventData.attendees.length}{" "}
+                                    {t("profile.attendees")}
                                 </span>
                                 <Link
                                     href={`/events/${id}`}
@@ -85,7 +88,7 @@ function UserProfileEventCard({ id, isOwner }) {
                                 >
                                     {" "}
                                     <button className='w-full h-full'>
-                                        Learn More
+                                        {t("profile.LearnMore")}
                                     </button>
                                 </Link>
 
