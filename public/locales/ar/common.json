@@ -56,13 +56,13 @@
         "toaddsome": "لإضافة بعض",
         "No interests found.": "لا توجد اهتمامات.",
         "Interests": "الاهتمامات و الاهداف التطوعية",
-        "more" : "والمزيد",
-        "Join" : "شارك",
-        "Joined" : "تمت المشاركة",
-        "LearnMore" : "المزيد حول الحدث",
-        "attendees" : "مشاركة",
-        "recentEvents" : "اخر فاعليات:",
-        "seeMore" : "شاهد المزيد من فعاليات "
+        "more": "والمزيد",
+        "Join": "شارك",
+        "Joined": "تمت المشاركة",
+        "LearnMore": "المزيد حول الحدث",
+        "attendees": "مشاركة",
+        "recentEvents": "اخر فاعليات:",
+        "seeMore": "شاهد المزيد من فعاليات "
     },
     "editProfile": {
         "DisplayName": "اسم المستخدم:",
