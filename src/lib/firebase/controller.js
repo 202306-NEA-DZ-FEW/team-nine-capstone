@@ -55,6 +55,13 @@ export const getUserDocument = async (uid) => {
     return userDoc;
 };
 
+//function responsible for fetching event Data
+export const getEventDocument = async (id) => {
+    const eventRef = doc(eventsCollection, id);
+    const eventDoc = await getDoc(eventRef);
+    return eventDoc;
+};
+
 // Google Auth
 
 export const googleProvider = new GoogleAuthProvider();
