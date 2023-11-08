@@ -14,11 +14,13 @@ export default function HomePage() {
     const { t } = useTranslation("common");
 
     return (
-        <Layout>
+        <>
             <HeroSection />
-            <HowitWorks />
-            <SectionTwo />
-        </Layout>
+            <Layout>
+                <HowitWorks />
+                <SectionTwo />
+            </Layout>
+        </>
     );
 }
 

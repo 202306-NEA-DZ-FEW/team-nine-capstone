@@ -73,10 +73,10 @@ function Navbar() {
     }, []);
     return (
         <div
-            className={` relative top-0 left-0 w-full h-auto z-50  ${
+            className={`sticky left-0 top-0 w-full h-auto z-50  ${
                 hasScrolled
-                    ? "bg-black/80 text-white "
-                    : "bg-black/20 backdrop-blur-lg text-black shadow-lg"
+                    ? "bg-black/80 text-white"
+                    : "bg-black/60 text-white shadow-lg"
             }`}
         >
             <div className='mx-auto px-4 sm:px-8 md:px-0'>
