@@ -109,7 +109,7 @@ function Events() {
                         </button>
                     </Link>
                     {/* users events list */}
-                    {userData.iEvents && userData.iEvents.length > 0 ? (
+                    {/* {userData.iEvents && userData.iEvents.length > 0 ? (
                         <div>
                             {userData.iEvents.map((eventId) => (
                                 <div key={eventId}>
@@ -119,7 +119,7 @@ function Events() {
                         </div>
                     ) : (
                         <div>{t("profileEvent.noEvents")}</div>
-                    )}
+                    )} */}
                 </div>
             )}
         </Layout>
