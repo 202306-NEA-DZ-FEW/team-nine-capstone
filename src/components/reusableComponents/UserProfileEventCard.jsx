@@ -1,14 +1,15 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
+import React, { useEffect, useState } from "react";
 
 import { getEventDocument } from "@/lib/firebase/controller";
+
+import JoinButton from "./JoinButton";
 
 function UserProfileEventCard({ id, isOwner }) {
     const { t } = useTranslation("common");
     const [eventData, setEventData] = useState(null);
     const [hover, setHover] = useState(false);
-    console.log(isOwner);
 
     //fetch event data
     useEffect(() => {
@@ -92,11 +93,12 @@ function UserProfileEventCard({ id, isOwner }) {
                                     </button>
                                 </Link>
 
-                                {isOwner ? null : (
-                                    <button className='w-40 h-14 rounded-lg bg-amber-400 hover:bg-green-400 text-white text-xl'>
-                                        Join
-                                    </button>
-                                )}
+                                <button className='w-40 h-14 rounded-lg bg-amber-400 hover:bg-green-400 text-white text-xl'>
+                                    <JoinButton
+                                        eventId={id}
+                                        eAttendees={eventData.attendees}
+                                    />
+                                </button>
                             </div>
                         )}
                     </div>

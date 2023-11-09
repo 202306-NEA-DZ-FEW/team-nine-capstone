@@ -101,6 +101,13 @@
         "CRUDsav": "Save Changes",
         "ChangeAvatar": "Change Avatar"
     },
+    "profileEvent" : {
+        "goback" : "Go Back to",
+        "profile" : "profile",
+        "eventAmount" : "has actively joined",
+        "event" : "event",
+        "noEvents" : "this member hasn't joined any events so far"
+    },
     "signIn": {
         "succLog": "Sign In succefully",
         "failLog": "Error while signing in",
