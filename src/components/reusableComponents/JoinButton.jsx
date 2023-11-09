@@ -1,6 +1,6 @@
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 import {
     getUserDocument,
@@ -10,13 +10,12 @@ import {
 
 import { useUser } from "@/context/UserContext";
 
-function JoinButton({ eventId, eAttendees }) {
+function JoinButton({ eventId, eAttendees, setJoinUpdate }) {
     const { t } = useTranslation("common");
     const { user } = useUser();
     const [userData, setUserData] = useState();
     const [userEvents, setUserEvents] = useState([]);
     const router = useRouter();
-    const [included, setIncluded] = useState(false);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -28,7 +27,7 @@ function JoinButton({ eventId, eAttendees }) {
                     setUserEvents(userData.iEvents);
                 }
             } catch (error) {
-                console.error("Error fetching user data:", error);
+                error;
             }
         };
 
@@ -51,12 +50,9 @@ function JoinButton({ eventId, eAttendees }) {
                 updatedAttendees = updatedAttendees.filter(
                     (attendee) => attendee !== user.uid
                 );
-                console.log("removed");
-                setIncluded(false);
             } else {
                 // User is not in attendees list - add them
                 updatedAttendees.push(user.uid);
-                setIncluded(true);
             }
 
             const updatedEventData = {
@@ -74,12 +70,19 @@ function JoinButton({ eventId, eAttendees }) {
             }
 
             await updateUserDocument(user.uid, updatedUserData);
+
+            setUserEvents(updatedUserData.iEvents);
+            setJoinUpdate((prev) => prev + 1);
         }
     };
 
     return (
         <div onClick={handleJoinClick}>
-            {user ? (included ? t("Joined") : t("Join")) : t("Sign Up")}
+            {user
+                ? eAttendees.includes(user.uid)
+                    ? t("joinbtn.joined")
+                    : t("joinbtn.join")
+                : t("joinbtn.Sign Up")}
         </div>
     );
 }

@@ -101,12 +101,12 @@
         "CRUDsav": "Save Changes",
         "ChangeAvatar": "Change Avatar"
     },
-    "profileEvent" : {
-        "goback" : "Go Back to",
-        "profile" : "profile",
-        "eventAmount" : "has actively joined",
-        "event" : "event",
-        "noEvents" : "this member hasn't joined any events so far"
+    "profileEvent": {
+        "goback": "Go Back to",
+        "profile": "profile",
+        "eventAmount": "has actively joined",
+        "event": "event",
+        "noEvents": "this member hasn't joined any events so far"
     },
     "signIn": {
         "succLog": "Sign In succefully",
@@ -160,5 +160,10 @@
         "t10": "10. Skill-Based Volunteering",
         "b10": "Encourage volunteers to use their unique skills and expertise for more targeted and impactful contributions.",
         "button": "Agree and Continue"
+    },
+    "joinbtn": {
+        "join": "Join",
+        "joined": "Joined",
+        "signUp": "Sign Up"
     }
 }

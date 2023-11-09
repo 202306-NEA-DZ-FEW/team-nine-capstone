@@ -6,10 +6,11 @@ import { getEventDocument } from "@/lib/firebase/controller";
 
 import JoinButton from "./JoinButton";
 
-function UserProfileEventCard({ id, isOwner }) {
+function UserProfileEventCard({ id }) {
     const { t } = useTranslation("common");
     const [eventData, setEventData] = useState(null);
     const [hover, setHover] = useState(false);
+    const [joinUpdate, setJoinUpdate] = useState(0);
 
     //fetch event data
     useEffect(() => {
@@ -21,7 +22,7 @@ function UserProfileEventCard({ id, isOwner }) {
         };
 
         fetchEventData();
-    }, [id]);
+    }, [id, joinUpdate]);
 
     return (
         <div
@@ -97,6 +98,7 @@ function UserProfileEventCard({ id, isOwner }) {
                                     <JoinButton
                                         eventId={id}
                                         eAttendees={eventData.attendees}
+                                        setJoinUpdate={setJoinUpdate}
                                     />
                                 </button>
                             </div>
