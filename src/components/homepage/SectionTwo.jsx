@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
 import { React } from "react";
 import { LiaAngleRightSolid } from "react-icons/lia";
+import { Carousel } from "react-responsive-carousel";
+
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { useUser } from "@/context/UserContext";
 
@@ -110,18 +113,18 @@ const SectionTwo = () => {
         },
     ];
     return (
-        <div className='container mx-auto  flex  flex-col justify-center items-center gap-y-10'>
+        <div className=' flex flex-col justify-center items-center bg-gray-100 mx-auto'>
             {/* global-goals-section */}
-            <div className='flex flex-col gap-y-9 mt-16'>
-                <div className='flex flex-col justify-center items-center gap-6 '>
-                    <h1 className='text-center text-2xl text-gray-950 font-bold'>
+            <div className='flex flex-col gap-y-6 p-6 lg:px-14 max-w-screen-2xl mx-auto'>
+                <div className='flex flex-col justify-center items-center gap-y-3 '>
+                    <h1 className='text-center text-2xl text-gray-950 font-semibold'>
                         {t("globalGolas.title")}
                     </h1>
-                    <p className='md:w-[50%] w-[80%] text-center text-sm text-gray-400 font-normal'>
+                    <p className='md:w-[50%] w-[80%] text-center text-base text-gray-700 font-normal'>
                         {t("globalGolas.discription")}
                     </p>
                 </div>
-                <div className='grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 justify-items-center justify-self-center gap-2 w-full'>
+                <div className='grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 justify-items-center justify-self-center gap-y-3 w-full'>
                     {globalGoalsImages.map((goal, index) => (
                         <Link
                             className=' flex w-[60%] h-auto justify-center '
@@ -129,7 +132,7 @@ const SectionTwo = () => {
                             key={index}
                         >
                             <Image
-                                className=' object-cover m-0 p-0 transition duration-300 hover:scale-110'
+                                className=' object-cover  transition duration-300 hover:scale-110'
                                 src={goal.src}
                                 alt={goal.title}
                                 width={300}
@@ -139,15 +142,81 @@ const SectionTwo = () => {
                     ))}
                 </div>
             </div>
+            {/* events images section */}
+            <div className='flex md:flex-row flex-col px-4 gap-3 md:px-8 py-4'>
+                <div className='hidden md:flex flex-col gap-y-3'>
+                    <div className='h-[40%] rounded-md overflow-hidden shadow-md'>
+                        <Image
+                            className='w-full h-full transition duration-300 hover:scale-110'
+                            src='/globalGoalsLogos/refugies.png'
+                            alt=''
+                            width={800}
+                            height={800}
+                        />
+                    </div>
+                    <div className='h-[60%] rounded-md overflow-hidden shadow-md'>
+                        <Image
+                            className='w-full h-full transition duration-300 hover:scale-110'
+                            src='/globalGoalsLogos/helpOlds.png'
+                            alt=''
+                            width={800}
+                            height={800}
+                        />
+                    </div>
+                </div>
+                <div className='hidden md:flex flex-col gap-y-3'>
+                    <div className='h-[55%] rounded-md overflow-hidden shadow-md'>
+                        <Image
+                            className='w-full h-full transition duration-300 hover:scale-110'
+                            src='/globalGoalsLogos/construct.png'
+                            alt=''
+                            width={800}
+                            height={800}
+                        />
+                    </div>
+                    <div className='h-[45%] rounded-md overflow-hidden shadow-md'>
+                        <Image
+                            className='w-full h-full transition duration-300 hover:scale-110'
+                            src='/globalGoalsLogos/donate.png'
+                            alt=''
+                            width={800}
+                            height={800}
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className='md:hidden px-2'>
+                <Carousel
+                    showArrows={false}
+                    infiniteLoop={true}
+                    autoPlay={true}
+                    interval={4000}
+                    showStatus={false}
+                    showIndicators={false}
+                >
+                    <div>
+                        <img src='/globalGoalsLogos/refugies.png' alt='' />
+                    </div>
+                    <div>
+                        <img src='/globalGoalsLogos/helpOlds.png' alt='' />
+                    </div>
+                    <div>
+                        <img src='/globalGoalsLogos/construct.png' alt='' />
+                    </div>
+                    <div>
+                        <img src='/globalGoalsLogos/donate.png' alt='' />
+                    </div>
+                </Carousel>
+            </div>
             {/* volunteers feedback section */}
-            <div className=' flex flex-col gap-y-4 py-6 mt-16 w-[88%] '>
-                <h1 className='text-center text-2xl text-gray-950 font-bold mb-7'>
+            <div className=' w-full flex flex-col gap-y-4 py-10  lg:px-14'>
+                <h1 className='text-center text-3xl text-gray-950 font-semibold mb-7'>
                     {t("feedback")}
                 </h1>
                 <div className='flex md:flex-row flex-col items-center px-10 gap-6 justify-center w-[100%] h-auto mx-auto'>
                     {userFeeddBack.map((user, index) => (
                         <div
-                            className='flex flex-col overflow-hidden pt-8 px-3 border-y-2 h-full justify-center items-center border gap-2 pb-3  border-white rounded-md shadow-sm hover:shadow-xl transition duration-200 hover:scale-100'
+                            className='flex flex-col overflow-hidden pt-8 px-3 border-y-2 h-full justify-center items-center border gap-2 pb-3 bg-white border-white rounded-md shadow-sm hover:shadow-xl transition duration-200 hover:scale-100'
                             key={index}
                         >
                             <Image
@@ -157,7 +226,7 @@ const SectionTwo = () => {
                                 width={300}
                                 height={300}
                             />
-                            <h1 className='text-center md:text-xl text-sm text-gray-950 font-bold'>
+                            <h1 className='text-center md:text-xl text-sm text-gray-950 font-semibold'>
                                 {user.Name}, {user.Occupation}
                             </h1>
                             <p className='text-center text-sm text-gray-400 font-normal'>
@@ -167,9 +236,9 @@ const SectionTwo = () => {
                     ))}
                 </div>
             </div>
-            {/* events mages section */}
-            <div className='flex md:flex-row flex-col  px-4 gap-3 mt-16 md:px-8'>
-                <div className='flex flex-col  gap-y-3'>
+            {/* events images section
+            <div className='flex md:flex-row flex-col  px-4 gap-3 md:px-8 py-10 bg-white'>
+                <div className='flex flex-col  gap-y-3 '>
                     <div className='h-[40%] rounded-md overflow-hidden shadow-md'>
                         <Image
                             className='w-full h-full transition duration-300 hover:scale-110'
@@ -209,32 +278,41 @@ const SectionTwo = () => {
                         />
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/* slogan and started button */}
-            <div className='flex flex-col justify-center items-center gap-y-4 my-14 px-4'>
-                <h1 className='flex justify-center items-center text-center text-2xl text-gray-950 font-bold'>
-                    {t("slogan.title")}
-                </h1>
-                <p className='flex justify-center items-center w-[80%] md:w-[50%] text-center text-sm text-gray-400 font-normal'>
-                    {t("slogan.discription")}
-                </p>
-                <div className='flex md:flex-row flex-col justify-center items-center gap-6'>
-                    <div className='flex justify-end '>
-                        <button
-                            onClick={handleUser}
-                            className='flex justify-center items-center  hover:bg-cyan-500  bg-teal-600 text-white font-normal text-sm  rounded h-8 w-20'
-                        >
-                            {t("Get Started")}
-                        </button>
-                    </div>
-
-                    <Link
-                        href='/about'
-                        className='flex justify-start items-center gap-x-2'
+            <div className='relative w-screen sm:h-1/2'>
+                <div className=' top-0 left-0 w-full bg-black/30 z-[2]'>
+                    <div
+                        className='flex flex-col justify-center items-center bg-cover bg-center min-w-full object-cover overflow-hidden'
+                        style={{
+                            backgroundImage: `url('/images/image.jpg')`,
+                        }}
                     >
-                        <h2>{t("who are we")}</h2>
-                        <LiaAngleRightSolid />
-                    </Link>
+                        <div className='flex flex-col text-white font-semibold p-20 pr-[40%]'>
+                            <h1 className='text-left text-4xl sm:text-6xl md:w-[35%] lg:w-[60%] mb-3 sm:mb-5'>
+                                {t("slogan.title")}
+                            </h1>
+                            <p className='text-base sm:text-xl lg:w-[100%] text-gray-600 font-normal mb-3 sm:mb-5 '>
+                                {t("slogan.discription")}
+                            </p>
+                            <div className='flex flex-row gap-8 '>
+                                <button
+                                    onClick={handleUser}
+                                    className=' bg-white text-black font-semibold text-sm rounded-md py-2 px-3'
+                                >
+                                    {t("Get Started")}
+                                </button>
+                                <Link
+                                    href='/about'
+                                    passHref
+                                    className='text-black font-semibold bg-green-700 text-sm rounded-md py-2 px-3 '
+                                >
+                                    <h2>{t("who are we")}</h2>
+                                    {/* <LiaAngleRightSolid className=' mt-1' /> */}
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

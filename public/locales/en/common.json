@@ -10,7 +10,7 @@
     "Terms of Use": "Terms of Use",
     "Events": "Events",
     "footer": {
-        "hook": "Ready to be part of a word changing experience ! Be the change ! Join Us."
+        "hook": "Unite for a Better Tomorrow, Hand in Hand."
     },
 
     "globalGolas": {
@@ -19,8 +19,8 @@
     },
     "feedback": "Hear it from volunteers",
     "slogan": {
-        "title": "Become the change you wish to see in the world",
-        "discription": "Embrace your vision for a better world, lead by example, inspire positive actions, and together, we can create a brighter future."
+        "title": "Spread Hope and Change",
+        "discription": "Embrace your vision for a better world. Lead by example."
     },
     "Get Started": "Get Started",
     "who are we": "who are we",
@@ -42,18 +42,48 @@
     "Attend events": "Attend events",
     "View events": "View events",
     "Organize your own!": "Organize your own!",
+
+    "about": {
+        "title": "About Pebble",
+        "pebble": "Where Heart Meets Hands. Join our vibrant community of volunteers dedicated to making a difference. Explore diverse opportunities and contribute to impactful projects. Together, we're shaping a brighter tomorrow, one pebble at a time."
+    },
+    "Pebble": "Pebble:",
+    "team": {
+        "title": "Meet Our Team.",
+        "desc": "At Pebble, our diverse team of passionate individuals comes together to create meaningful impact. With innovation at our core, we collaborate to transform ideas into action, ensuring every project is a success story waiting to be written."
+    },
+
+    "Khalil Noui": "Khalil Noui",
+    "Oualid Elhouari": "Oualid Elhouari",
+    "Hachem Bouhadede": "Hachem Bouhadede",
+    "Imane Omari": "Imane Omari",
+    "desc": {
+        "khalil": "Skilled developer with creative innovation.",
+        "oualid": "Meticulous developer ensuring precision and quality.",
+        "hachem": "Problem-solving developer with innovative solutions.",
+        "imane": "Dedicated developer ensuring impactful results."
+    },
+    "Web Developer": "Web Developer",
+
+    "Technologies Used": "Technologies Used",
+
     "Get started": "Get started",
     "Choose Location": "Choose Location",
     "profile": {
-        "joinON": "Joined on:",
-        "notJoined": "Join date not available",
         "ep": "Edit Profile",
         "Full Name": "Full Name:",
         "Location": "Location: ",
         "noIntrests": "You have not set any interest. Head to the",
         "toaddsome": "to add some",
         "No interests found.": "No interests found.",
-        "Interests": "Interests & Volunteering Goals:"
+        "Interests": "Interests & Volunteering Goals:",
+        "more": "& more",
+        "Join": "Join",
+        "Joined": "Joined",
+        "LearnMore": "Learn More",
+        "attendees": "attendees",
+        "recentEvents": "recent events:",
+        "seeMore": "See more Events with"
     },
     "editProfile": {
         "DisplayName": "Display Name:",
@@ -70,5 +100,70 @@
         "CRUDdel": "Delete Account",
         "CRUDsav": "Save Changes",
         "ChangeAvatar": "Change Avatar"
+    },
+    "profileEvent": {
+        "goback": "Go Back to",
+        "profile": "profile",
+        "eventAmount": "has actively joined",
+        "event": "event",
+        "noEvents": "this member hasn't joined any events so far"
+    },
+    "signIn": {
+        "succLog": "Sign In succefully",
+        "failLog": "Error while signing in",
+        "EnterYourEmail": "Enter Your Email",
+        "EnterYourPassword": "Enter Your Password",
+        "PassReset1": "Forgot your Password !",
+        "PassReset2": "Reset it",
+        "noAccount": "Don't have an account ?",
+        "noAccount2": "Become a member",
+        "Google": "Continue with Google",
+        "Twitter": "Continue With Twitter",
+        "button": "Sign In",
+        "or": "OR"
+    },
+    "SignUp": {
+        "succLog": "Account Created Succefully",
+        "failLog": "Error in account creation process",
+        "EnterUserName": "Enter a User Name of Your Choice",
+        "EnterYourEmail": "Enter Your Email",
+        "EnterYourPassword": "Enter Your Password",
+        "register": "Creat Account",
+        "account1": "Already a member",
+        "account2": "Sign In",
+        "or": "OR",
+        "Google": "Sign Up with Google",
+        "Twitter": "Sign Up with Twitter",
+        "Terms&Cons1": "By Creating an Account you are agreeing to",
+        "Terms&Cons2": "Our Terms and Condition"
+    },
+    "t&c": {
+        "title": "Terms And Conditions",
+        "t1": "1. Compassion and Empathy",
+        "b1": "Approach charity and volunteering with a deep sense of compassion and empathy for those in need.",
+        "t2": "2. Voluntary Service",
+        "b2": "Volunteering is an act of free will. It should not be coerced or forced.",
+        "t3": "3. Respect and Dignity",
+        "b3": "Treat all individuals with respect and dignity, regardless of their background, race, religion, or social status.",
+        "t4": "4. Equality and Inclusivity",
+        "b4": "Ensure that charity efforts and volunteer opportunities are open to everyone. Promote inclusivity and diversity.",
+        "t5": "5. Transparency and Accountability",
+        "b5": "Maintain transparency in financial transactions and the allocation of resources. Be accountable for the funds and donations received.",
+        "t6": "6. Sustainability",
+        "b6": "Aim for long-term, sustainable solutions rather than short-term fixes. Address the root causes of social issues.",
+        "t7": "7. Partnerships and Collaboration",
+        "b7": "Collaborate with other charities, nonprofits, and community organizations for more significant positive impacts.",
+        "t8": "8. Effective Resource Allocation",
+        "b8": "Allocate resources wisely to maximize the impact of your efforts.",
+        "t9": "9. Needs Assessment",
+        "b9": "Conduct thorough needs assessments to understand the specific requirements of the community or individuals you are serving.",
+        "t10": "10. Skill-Based Volunteering",
+        "b10": "Encourage volunteers to use their unique skills and expertise for more targeted and impactful contributions.",
+        "button": "Agree and Continue"
+    },
+    "joinbtn": {
+        "join": "Join",
+        "joined": "Joined",
+        "signUp": "Sign Up"
     }
 }
