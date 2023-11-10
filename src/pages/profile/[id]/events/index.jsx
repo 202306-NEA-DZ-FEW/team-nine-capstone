@@ -18,7 +18,6 @@ function Events() {
     const { id } = router.query;
     const { t } = useTranslation("common");
     const [isOwner, setIsOwner] = useState(false);
-    console.log(user);
 
     const [eventData, setEventData] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -53,13 +52,14 @@ function Events() {
                     const eventDoc = await getEventDocument(eventId);
                     if (eventDoc.exists()) {
                         setEventData(eventDoc.data());
+                        //console.log(eventData)
                     }
                 } catch (error) {
                     error;
                 }
             });
         }
-    }, [userData]);
+    }, [userData, eventData]);
 
     return (
         <Layout>
@@ -109,7 +109,7 @@ function Events() {
                         </button>
                     </Link>
                     {/* users events list */}
-                    {/* {userData.iEvents && userData.iEvents.length > 0 ? (
+                    {userData.iEvents && userData.iEvents.length > 0 ? (
                         <div>
                             {userData.iEvents.map((eventId) => (
                                 <div key={eventId}>
@@ -119,7 +119,7 @@ function Events() {
                         </div>
                     ) : (
                         <div>{t("profileEvent.noEvents")}</div>
-                    )} */}
+                    )}
                 </div>
             )}
         </Layout>
