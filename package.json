@@ -36,6 +36,7 @@
         "react-datepicker": "^4.21.0",
         "react-dom": "^18.2.0",
         "react-icons": "^4.11.0",
+        "react-intl": "^6.5.2",
         "react-multi-select-component": "^4.3.4",
         "react-responsive-carousel": "^3.2.23",
         "react-router-dom": "^6.3.0",

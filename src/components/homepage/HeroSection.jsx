@@ -15,6 +15,7 @@ const Hero = () => {
                     className='bg-video '
                     src='/images/heroVideo.mp4'
                     typeof='video/mp4'
+                    poster='/images/background.png'
                     autoPlay
                     loop
                     playsInline
@@ -25,10 +26,10 @@ const Hero = () => {
 
                 <div className='home-text sm:w-[70%] h-[60%] sm:h-[50%] flex flex-col justify-center items-center'>
                     <Image
-                        src='/images/Logo.png'
+                        src='/images/HeroLogo.png'
                         alt='Logo'
-                        width={150}
-                        height={150}
+                        width={70}
+                        height={70}
                     ></Image>
                     <h2 className='hero-h1'>Empower, Engage, Volunteer</h2>
                     <p className='hero-p'>
@@ -39,7 +40,7 @@ const Hero = () => {
 
                     <div className='flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4  '>
                         <Link
-                            href='#'
+                            href='events'
                             className='home-btn home-btn w-full sm:w-40 md:w-48 h-12 sm:h-16'
                             style={{
                                 backgroundColor: "rgb(251, 191, 36, 0.5)",

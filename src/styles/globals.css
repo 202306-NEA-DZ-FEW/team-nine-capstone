@@ -2,10 +2,37 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.layout {
-    /* background: #fda855; */
-    background: #0e7490;
+@font-face {
+    font-family: "Montserrat";
+    src: url("/public/fonts/Montserrat/Montserrat.otf");
+
+    font-family: "Lora";
+    src: url("/public/fonts/Lora/Lora.otf");
+
+    font-family: "Roboto";
+    src: url("/public/fonts/Roboto/Roboto.otf");
+
+    font-family: "OpenSans";
+    src: url("/public/fonts/OpenSans/OpenSans.otf");
 }
+
+/*
+    our background colors
+        
+        sunflower: "#FFCA28", // Amber-400
+        silver: "#EEEEEE", // grey-200
+        ForestGreen: "#388E3C", // grenn-700
+        Viridescent: "#50c878", // green-200
+        Charcoal: "#424242", //gray-800
+        Tranquil: "#80CBC4", // teal-200
+  
+    our text color, each suits a certain background to a certain degree.    
+    
+        DarkCharcoal: "#333333", // for Amber-400, Grey-200  and  Teal-200 (#80CBC4, #EEEEEE, #333333 )
+        Ivory: "#FFFFF0", // For Emerald-500 ad the Green-700 (#388E3C, #50C878)
+        LightGray: "#AAAAAA", // For Grey-800 (#424242)
+    
+*/
 
 @keyframes fadeInRotate {
     from {
@@ -153,12 +180,15 @@ hero-All {
     animation: fade 4s;
     margin-bottom: 10px;
     font-weight: 700;
+    text-align: center;
 }
 
 .hero-p {
     color: white;
     font-size: 1em;
+    animation: fade 4s;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .home-btn {
@@ -167,6 +197,7 @@ hero-All {
     height: 4em;
     border-radius: 3em;
     z-index: 1;
+    animation: fade 4s;
     font-size: 1em;
     font-weight: 700;
     color: #f0f0f0;
@@ -175,6 +206,11 @@ hero-All {
     align-items: center;
     cursor: pointer;
     margin: 0.5em 0;
+}
+.nav-logo {
+    font-size: 1em;
+    animation: fade 4s;
+    font-weight: 400;
 }
 
 @media (min-width: 375px) {
@@ -191,6 +227,11 @@ hero-All {
     .hero-h1 {
         font-size: 3em;
         margin-bottom: 15px;
+    }
+
+    .nav-logo {
+        font-size: 1.5em;
+        font-weight: 700;
     }
 
     .hero-p {
@@ -270,6 +311,9 @@ hero-All {
         font-size: 1.5em;
         margin-bottom: 5px;
     }
+    .nav-logo {
+        font-size: 1em;
+    }
     .hero-p {
         font-size: 0.8em;
         margin-bottom: 5px;
@@ -284,4 +328,13 @@ hero-All {
     .top-to-btm {
         display: none;
     }
+}
+
+.form-input {
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    color: #333333;
+    display: block;
+    margin-bottom: 0.5rem;
 }

@@ -26,7 +26,7 @@ function EventList() {
     // sets the routing according to the user's state
     const handleUser = () => {
         user
-            ? router.push("/createEvent")
+            ? router.push("/createTheEvent")
             : router.push("/authentication/signUp");
     };
 
