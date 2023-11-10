@@ -11,6 +11,10 @@ function EventCard({ TheEvent }) {
     // const { user } = useUser();
     // console.log(user)
 
+    if (!TheEvent || !TheEvent.image) {
+        return null; // Return null or a placeholder component if TheEvent or image is null
+    }
+
     return (
         <div className='mx-auto bg-gray-700 flex items-center justify-center px-8 py-8'>
             <div className='flex flex-col w-full bg-white rounded shadow-lg sm:w-3/4 md:w-1/2 lg:w-3/5'>
