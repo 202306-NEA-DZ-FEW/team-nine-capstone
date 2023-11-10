@@ -3,15 +3,19 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 import { LuFilterX } from "react-icons/lu";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 import { eventsCollection } from "@/lib/firebase/controller";
+import { interestList } from "@/lib/interestsList";
 
 import { useUser } from "@/context/UserContext";
 
+import BottomSheet from "./BottomSheets";
 import DateFilter from "./DateFilter";
 import EventCard from "./EventCard";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
+import Pagination from "./Pagination";
 
 function EventList() {
     const [events, setEvents] = useState([]);
@@ -20,8 +24,23 @@ function EventList() {
     const [allCategories, setAllCategoris] = useState(false);
     const [updatedInterests, setUpdatedInterests] = useState([]);
     const [prevLocation, setPrevLocation] = useState(null);
+    const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+    const [filterType, setFilterType] = useState(null);
+    const [itemOffset, setItemOffset] = useState(0);
+    const [locationSearch, setLocationSearch] = useState([]);
+    const itemsPerPage = 5;
     const { user } = useUser();
     const router = useRouter();
+    const openBottomSheet = () => {
+        setBottomSheetOpen(true);
+    };
+
+    const closeBottomSheet = () => {
+        setBottomSheetOpen(false);
+    };
+    const handleFilterType = (filterType) => {
+        setFilterType(filterType);
+    };
 
     // sets the routing according to the user's state
     const handleUser = () => {
@@ -104,6 +123,13 @@ function EventList() {
                 : true
         );
 
+    const matchingInterests = updatedInterests
+        ?.map((element) =>
+            interestList.find((interest) => interest.title === element)
+        )
+        .filter((matchingInterest) => matchingInterest);
+    console.log(matchingInterests);
+    // fetch the events data
     useEffect(() => {
         onSnapshot(eventsCollection, (snapshot) => {
             let eventsArr = snapshot.docs.map((doc) => {
@@ -112,67 +138,199 @@ function EventList() {
             setEvents(eventsArr);
         });
     }, []);
+    const handleSearch = (e) => {
+        const searchValue = e.target.value.toLowerCase();
+        if (searchValue === "") {
+            setLocationSearch([]);
+        } else {
+            setLocationSearch(
+                events
+                    .filter((f) =>
+                        f.location?.toLowerCase().includes(searchValue)
+                    )
+                    .map((event) => event.location)
+            );
+        }
+    };
+
+    const endOffset = itemOffset + itemsPerPage;
+    const currentItems = filteredEvents.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(filteredEvents.length / itemsPerPage);
+
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+        const newOffset =
+            (event.selected * itemsPerPage) % filteredEvents.length;
+        setItemOffset(newOffset);
+    };
 
     return (
-        <div className='flex flex-row'>
-            <div className='flex flex-col w-1/3 gap-4'>
-                {/* reset filter button */}
-                <div
-                    className='flex flex-row mt-3 justify-center transition-all h-11 duration-150 text-lg font-medium cursor-pointer items-center w-[90%] self-center border-spacing-1 rounded-sm border-solid hover:bg-red-700 hover:text-white active:text-white border-black shadow-lg'
-                    onClick={() => resetFilter()}
-                >
-                    Clear Filters <LuFilterX />
-                </div>
-                {/* calendar filter component */}
-                <div>
-                    <DateFilter upDatedDate={upDatedDate} onClick={onClick} />
-                </div>
-                <div className='w-[90%] self-center border-b-2 border-black my-4'></div>
-                <div>
-                    {/* locations components filter */}
-                    <LocatioFilter
-                        prevLocation={prevLocation}
-                        setPrevLocation={setPrevLocation}
-                        setLocation={setLocation}
-                        location={location}
-                        events={events}
-                        handleLocation={handleLocation}
-                    />
-                </div>
-                <div className='w-[90%] self-center border-b-2 border-black my-4'></div>
-                <div>
-                    <InterestsFilter
-                        allCategories={allCategories}
-                        setAllCategoris={setAllCategoris}
-                        setUpdatedInterests={setUpdatedInterests}
-                        updatedInterests={updatedInterests}
-                        handleInterest={handleInterest}
-                    />
-                </div>
-            </div>
-            <div className='w-2/3'>
-                {filteredEvents.length !== 0 ? (
-                    <h1 className='z-60 mx-auto bg-gray-500 font-bold text-3xl flex items-center py-12 justify-center'>
-                        {t("Our Events")}
-                    </h1>
-                ) : (
-                    <p className='z-60 mx-auto bg-gray-500 font-bold text-3xl flex items-center py-12 justify-center'>
-                        {t("No Events")}
-                    </p>
-                )}
-                {/* display the events based on filters */}
-                {filteredEvents.length !== 0 ? (
-                    filteredEvents.map((event) => {
-                        return <EventCard key={event.id} TheEvent={event} />;
-                    })
-                ) : (
-                    <button
-                        className='w-full h-14 border rounded-lg my-2 text-lg flex flex-row justify-center items-center bg-amber-500 cursor-pointer hover:bg-teal-600 transition-all duration-200'
-                        onClick={handleUser}
+        <div className='relative h-full flex flex-col bg-gray-200'>
+            <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
+                <div className='hidden bg-gray-50 mt-4 sticky top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>
+                    {/* reset filter button */}
+                    <div
+                        className='flex flex-row mt-3 justify-center transition-all h-11 duration-150 text-lg bg-gray-200 font-medium cursor-pointer items-center w-[80%] self-center border-spacing-1 border-solid hover:bg-red-500 rounded-lg hover:text-white active:text-white border-black shadow-lg'
+                        onClick={() => resetFilter()}
                     >
-                        {t("Create Event")}
-                    </button>
-                )}
+                        Clear Filters <LuFilterX />
+                    </div>
+                    {/* calendar filter component */}
+                    <div>
+                        <DateFilter
+                            upDatedDate={upDatedDate}
+                            onClick={onClick}
+                        />
+                    </div>
+                    <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
+                    <div className=''>
+                        {/* locations components filter */}
+                        <LocatioFilter
+                            setLocationSearch={setLocationSearch}
+                            locationSearch={locationSearch}
+                            handleSearch={handleSearch}
+                            prevLocation={prevLocation}
+                            setPrevLocation={setPrevLocation}
+                            setLocation={setLocation}
+                            location={location}
+                            events={events}
+                            handleLocation={handleLocation}
+                        />
+                    </div>
+                    <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
+                    <div className=''>
+                        <InterestsFilter
+                            allCategories={allCategories}
+                            setAllCategoris={setAllCategoris}
+                            setUpdatedInterests={setUpdatedInterests}
+                            updatedInterests={updatedInterests}
+                            handleInterest={handleInterest}
+                        />
+                    </div>
+                    {/* <div>join</div> */}
+                </div>
+
+                <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
+                    <div className='bg-amber-100 self-center w-[95%] rounded-xl mx-auto my-4 flex justify-center items-center'>
+                        {user ? (
+                            <h1 className='z-60 mx-auto  font-bold text-3xl flex items-center py-12 justify-center'>
+                                Welcome, {user.name}
+                            </h1>
+                        ) : (
+                            <p className='z-60 mx-auto font-bold text-3xl flex items-center py-12 justify-center'>
+                                Welcome,
+                            </p>
+                        )}
+                    </div>
+                    {allCategories ? (
+                        ""
+                    ) : (
+                        <div className='hidden lg:flex flex-row gap-4 h-auto'>
+                            {matchingInterests?.map((interest) => (
+                                <div
+                                    className='bg-gray-50 flex justify-center items-center h-10 w-40 rounded-full shadow-lg '
+                                    key={interest.title}
+                                >
+                                    <div
+                                        className={`flex justify-center items-center  h-6 rounded-full px-1 text-${interest.color}`}
+                                        key={interest.title}
+                                    >
+                                        {interest.title}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    <div className='flex flex-row w-full px-2 gap-2 mb-5 md:hidden'>
+                        <div
+                            className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
+                            onClick={() => {
+                                handleFilterType("interest");
+                                openBottomSheet();
+                            }}
+                        >
+                            Change interest{" "}
+                            <div>
+                                <MdOutlineKeyboardArrowDown />
+                            </div>
+                        </div>
+                        <div
+                            className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
+                            onClick={() => {
+                                handleFilterType("location");
+                                openBottomSheet();
+                            }}
+                        >
+                            change location{" "}
+                            <div>
+                                <MdOutlineKeyboardArrowDown />
+                            </div>
+                        </div>
+                        <div
+                            className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
+                            onClick={() => {
+                                handleFilterType("date");
+                                openBottomSheet();
+                            }}
+                        >
+                            change date{" "}
+                            <div className='font-bold text-lg'>
+                                <MdOutlineKeyboardArrowDown />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='h-auto md:w-[95%] bg-gray-50 rounded-xl shadow-xl w-full flex flex-col justify-start items-center '>
+                        {/* display the events based on filters */}
+                        {currentItems.length !== 0 ? (
+                            currentItems.map((event) => {
+                                return (
+                                    <EventCard
+                                        key={event.id}
+                                        TheEvent={event}
+                                    />
+                                );
+                            })
+                        ) : (
+                            <button
+                                className='w-full h-14 border rounded-lg my-2 text-lg flex flex-row justify-center items-center bg-amber-500 cursor-pointer hover:bg-teal-600 transition-all duration-200'
+                                onClick={handleUser}
+                            >
+                                {t("Create Event")}
+                            </button>
+                        )}
+                    </div>
+
+                    <div className='w-[40%] h-12 mt-3 flex bg-gray-50 rounded-xl shadow-lg flex-col justify-center items-center'>
+                        <Pagination
+                            handlePageClick={handlePageClick}
+                            pageCount={pageCount}
+                        />
+                    </div>
+                </div>
+                {/* <div className='md:hidden container mx-auto py-8'> */}
+                <BottomSheet
+                    setLocationSearch={setLocationSearch}
+                    locationSearch={locationSearch}
+                    handleSearch={handleSearch}
+                    bottomSheetOpen={bottomSheetOpen}
+                    prevLocation={prevLocation}
+                    setPrevLocation={setPrevLocation}
+                    setLocation={setLocation}
+                    location={location}
+                    events={events}
+                    handleLocation={handleLocation}
+                    upDatedDate={upDatedDate}
+                    onClick={onClick}
+                    filterType={filterType}
+                    allCategories={allCategories}
+                    setAllCategoris={setAllCategoris}
+                    setUpdatedInterests={setUpdatedInterests}
+                    updatedInterests={updatedInterests}
+                    handleInterest={handleInterest}
+                    isOpen={bottomSheetOpen}
+                    onClose={closeBottomSheet}
+                />
+                {/* </div> */}
             </div>
         </div>
     );
