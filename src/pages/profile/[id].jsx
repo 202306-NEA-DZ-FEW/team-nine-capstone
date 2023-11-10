@@ -7,9 +7,10 @@ import { useEffect, useState } from "react";
 import { getUserDocument } from "@/lib/firebase/controller";
 import { getAllUserIds } from "@/lib/firebase/users";
 
+import UserProfileEventCard from "@/components/reusableComponents/UserProfileEventCard";
+
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
-import UserProfileEventCard from "@/components/reusableComponents/UserProfileEventCard";
 
 function Profile() {
     const { user } = useUser();
@@ -33,7 +34,7 @@ function Profile() {
                     setUserData(userDoc.data());
                 }
             } catch (error) {
-                console.error("Error fetching user data:", error);
+                error;
             }
         };
 
@@ -144,10 +145,7 @@ function Profile() {
                             <div className='flex flex-wrap my-5 p-1'>
                                 {userData.iEvents.map((event) => (
                                     <div key={event}>
-                                        <UserProfileEventCard
-                                            id={event}
-                                            isOwner={isOwner}
-                                        />
+                                        <UserProfileEventCard id={event} />
                                     </div>
                                 ))}
                             </div>

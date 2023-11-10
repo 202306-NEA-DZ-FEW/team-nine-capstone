@@ -135,8 +135,11 @@ function Navbar() {
                                         <>
                                             <Link
                                                 href={{
-                                                    pathname: "",
-                                                    query: { id: user.uid },
+                                                    pathname: router.pathname,
+                                                    query: {
+                                                        ...router.query,
+                                                        lang: "en",
+                                                    },
                                                 }}
                                                 locale='en'
                                                 className='block text-sm  p-2 w-38 hover:bg-amber-400 rounded-xl'
@@ -145,8 +148,11 @@ function Navbar() {
                                             </Link>
                                             <Link
                                                 href={{
-                                                    pathname: "",
-                                                    query: { id: user.uid },
+                                                    pathname: router.pathname,
+                                                    query: {
+                                                        ...router.query,
+                                                        lang: "ar",
+                                                    },
                                                 }}
                                                 locale='ar'
                                                 className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
@@ -294,9 +300,11 @@ function Navbar() {
                                                     <>
                                                         <Link
                                                             href={{
-                                                                pathname: "",
+                                                                pathname:
+                                                                    router.pathname,
                                                                 query: {
-                                                                    id: user.uid,
+                                                                    ...router.query,
+                                                                    lang: "en",
                                                                 },
                                                             }}
                                                             locale='en'
@@ -307,9 +315,11 @@ function Navbar() {
 
                                                         <Link
                                                             href={{
-                                                                pathname: "",
+                                                                pathname:
+                                                                    router.pathname,
                                                                 query: {
-                                                                    id: user.uid,
+                                                                    ...router.query,
+                                                                    lang: "ar",
                                                                 },
                                                             }}
                                                             locale='ar'
