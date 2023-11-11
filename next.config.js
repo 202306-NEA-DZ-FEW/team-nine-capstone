@@ -16,6 +16,7 @@ module.exports = {
             { hostname: "cdn0.handsonconnect.org" },
             { hostname: "cdn.wallpapersafari.com" },
             { hostname: "cdn.mos.cms.futurecdn.net" },
+            { hostname: "firebasestorage.googleapis.com" },
         ],
     },
 };

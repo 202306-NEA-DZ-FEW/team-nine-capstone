@@ -1,4 +1,5 @@
 import { addDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -6,14 +7,20 @@ import { MultiSelect } from "react-multi-select-component";
 
 import "react-datepicker/dist/react-datepicker.css";
 
+import { eventsCollection, storage } from "@/lib/firebase/controller";
+
+import { useUser } from "@/context/UserContext";
+
 import LocationInput from "../reusableComponents/LocationInput";
-import { eventsCollection } from "../../lib/firebase/controller";
 import { interestList } from "../../lib/interestsList";
 
 function CreateEvent() {
     const [startDate, setStartDate] = useState(new Date());
     const [selectedInterets, setSelectedInterets] = useState([]);
     const [loca, setLoca] = useState(null);
+    const { user, setUser } = useUser();
+    const [imageInput, setImageInput] = useState(null);
+    const [urlsBunch, setUrlsBunch] = useState(null);
 
     const options = interestList.map((obj) => {
         return {
@@ -33,14 +40,49 @@ function CreateEvent() {
 
     function handleCreateForm(e) {
         e.preventDefault();
+        const imgFile = e.target.image.files[0];
+
+        setImageInput(() => imgFile);
+
+        const fileName = imgFile.name;
+
+        const eventImageRef = ref(storage, `images/${user.uid}/${fileName}`);
+
+        // const eventAllImgsRef = ref(storage, `images/${user.uid}`);
+        // const listAllEventImgs = listAll(eventAllImgsRef).then((res) => {
+        //     res.items.map((item) => {
+        //         getDownloadURL(item).then((url) => {
+        //             listAllEventImgsUrl.push(url);
+        //         });
+        //     });
+        // });
+
+        // console.log("show all events ref eventAllImgsRef", eventAllImgsRef);
+        // console.log(" list All Event Imgs", listAllEventImgs);
+
+        // console.log("list All Event Imgs Url", listAllEventImgsUrl);
+
+        // console.log("the eventsImgs:", eventImageRef);
+        // console.log("the user uid:", user.uid);
+        // console.log("the image value:", e.target.image.value);
+
+        uploadBytes(eventImageRef, imageInput).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                console.log("theUrlitself", url);
+                setUrlsBunch(() => url);
+            });
+        });
+
+        console.log("list All Event Imgs Url", urlsBunch);
 
         addDoc(eventsCollection, {
             title: e.target.title.value,
             about: e.target.about.value,
             date: startDate.toLocaleDateString("en-GB"),
-            image: e.target.image.value,
+            image: urlsBunch,
             location: loca,
             interests: selectedInterets.map((interest) => interest.value),
+            CreatedBy: user.uid,
         }).then(() => {
             e.target.reset();
         });
@@ -57,7 +99,6 @@ function CreateEvent() {
                     src='/images/publicSpeak.jpg'
                     alt='plant'
                     className='w-full h-auto'
-                    layout='responsive'
                     width={1920}
                     height={1080}
                     objectFit='cover'
@@ -145,11 +186,11 @@ function CreateEvent() {
                                     Images
                                 </label>
                                 <input
-                                    type='text'
+                                    type='file'
                                     name='image'
                                     id='image'
                                     className='shadow-sm bg-white border border-bgc-Charcoal text-txtc-DarkCharcoal sm:text-sm rounded-lg focus:ring-txtc-DarkCharcoal focus:border-txtc-DarkCharcoal block w-full p-2.5'
-                                    placeholder='provide an Url e.g http:// ...'
+                                    placeholder='provide an Image if possible ..'
                                 />
                             </div>
                             <div className='col-span-6 sm:col-span-3'>
