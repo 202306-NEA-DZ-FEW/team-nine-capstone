@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 import { getEventDocument } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
@@ -87,12 +88,23 @@ function EventCard({ TheEvent }) {
     }
 
     return (
-        <div className='flex flex-col w-[95%] shadow-lg my-4 hover:bg-gray-200 h-56 transition duration-300 md:hover:scale-105 hover:scale-95 border-black rounded-md py-2 px-2'>
+        <div className='flex flex-col w-[95%] shadow-lg my-4 hover:bg-white h-56 transition duration-300 md:hover:scale-105 hover:scale-95 border-black rounded-md py-2 px-2'>
             <div className='h-[20%] flex flex-row justify-between items-center pb-2'>
                 <div className='flex justify-center shadow-md items-center bg-amber-100 md:w-[30%] w-[50%] rounded-md text-xl font-semibold'>
                     {formattedDate}
                 </div>
-                <div>{eventData.attendees?.length}</div>
+                <div className='flex justify-center gap-4 px-2 items-center md:w-auto md:rounded-full md:bg-gray-200 w-[50%] rounded-lg text-lg font-medium'>
+                    {eventData.attendees ? (
+                        <>
+                            {eventData.attendees.length} attendees
+                            <div>
+                                <FaPeopleGroup />
+                            </div>
+                        </>
+                    ) : (
+                        <h1 className='text-sm h-6'>Be The First attendee</h1>
+                    )}
+                </div>
             </div>
             <div className='h-[80%]  flex flex-row gap-3'>
                 <div className=' w-[50%] h-[95%] md:w-[30%] overflow-hidden  rounded-lg shadow-md'>
@@ -110,13 +122,13 @@ function EventCard({ TheEvent }) {
                         <div className=' text-green-900 text-2xl font-bold '>
                             {eventData.title}
                         </div>
-                        <div className='min-h-[50%] text-green-900 text-sm'>
+                        <div className='max-h-[50%] overflow-hidden text-green-900 text-sm'>
                             {eventData.about}
                         </div>
-                        <div className='hidden lg:flex flex-row gap-4 h-[15%]'>
-                            {matchingInterests?.map((interest) => (
+                        <div className='hidden lg:flex flex-row gap-4 h-[20%]'>
+                            {matchingInterests?.slice(0, 4).map((interest) => (
                                 <div
-                                    className={`flex justify-center items-center bg-${interest.color} h-6 rounded-full px-1 border-2 border-solid border-${interest.color} text-${interest.color}`}
+                                    className={`flex justify-center items-center  h-7 rounded-full px-1 bg-orange-100 text-${interest.color}-100 font-medium`}
                                     key={interest.title}
                                 >
                                     {interest.title}
@@ -124,7 +136,7 @@ function EventCard({ TheEvent }) {
                             ))}
                         </div>
                     </div>
-                    <div className='flex md:flex-row flex-col gap-2  min-h-[20%] justify-between mt-2 items-end'>
+                    <div className='flex md:flex-row flex-col gap-2 min-h-[20%] justify-between mt-2 items-end'>
                         <Link
                             className='flex justify-center bg-amber-400 cursor-pointer font-medium text-sm hover:bg-amber-400 items-center w-28 h-7 self-center  rounded-md shadow-md'
                             href={`/events/${eventData.id}`}
@@ -134,7 +146,7 @@ function EventCard({ TheEvent }) {
                                 SEE MORE ...{" "}
                             </button>
                         </Link>
-                        <div className='flex justify-center cursor-pointer font-medium text-lg hover:bg-amber-400 items-center w-28 h-10 self-center bg-emerald-500 rounded-md shadow-md'>
+                        <div className='flex justify-center cursor-pointer font-medium text-lg hover:bg-amber-400 items-center w-28 h-7 self-center bg-emerald-500 rounded-md shadow-md'>
                             <JoinButton
                                 eventId={eventData.id}
                                 eAttendees={eventData.attendees}

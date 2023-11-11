@@ -20,7 +20,7 @@ function InterestsFilter({
                 className={`${
                     isOpen
                         ? ""
-                        : " gap-x-3 cursor-pointer text-sm bg-gray-200 rounded-xl w-[65%] h-10 shadow-lg "
+                        : " gap-x-3 cursor-pointer bg-gray-200 rounded-xl w-[70%] h-10 shadow-lg "
                 } flex flex-row justify-center mb-2 text-lg font-medium items-center w-48  `}
             >
                 {" "}

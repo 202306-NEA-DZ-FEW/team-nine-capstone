@@ -97,7 +97,7 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                                 return (
                                     <div
                                         key={index}
-                                        className='p-2 text-center h-8 grid place-content-center text-sm border-t'
+                                        className='p-2 text-center h-6 grid place-content-center text-sm '
                                     >
                                         <h1
                                             className={cn(
@@ -116,7 +116,7 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                                                             .toDateString()
                                                     ? "bg-amber-400 text-white"
                                                     : "",
-                                                "h-7 w-7 rounded-full grid place-content-center hover:bg-amber-400 hover:text-white transition-all cursor-pointer select-none"
+                                                "lg:h-7 lg:w-7 w-6 h-6 rounded-full grid place-content-center hover:bg-amber-400 hover:text-white transition-all cursor-pointer select-none"
                                             )}
                                             onClick={() => {
                                                 setSelectDate(date);

@@ -165,5 +165,31 @@
         "join": "Join",
         "joined": "Joined",
         "signUp": "Sign Up"
+    },
+    "no Poverty": "no Poverty",
+    "zero Hunger": "zero Hunger",
+    "good Health": "good Health",
+    "quality Education": "quality Education",
+    "gender Equality": "gender Equality",
+    "clean Water": "clean Water",
+    "clean Energy": "clean Energy",
+    "decent Work": "decent Work",
+    "inovation": "inovation",
+    "reduced In Equalities": "reduced In Equalities",
+    "sustainable Cities": "sustainable Cities",
+    "responsible Consumption": "responsible Consumption",
+    "climate Action": "climate Action",
+    "life Below Water": "life Below Water",
+    "life On Land": "life On Land",
+    "peace": "peace",
+    "partnership": "partnership",
+    "global": "global",
+    "eventList": {
+        "Clear Filters": "Clear Filters",
+        "Welcome": "Welcome,",
+        "Change interest": "Change interest",
+        "change location": "change location",
+        "change date": "change date",
+        "sorry no event matches your filters": "sorry, no event matches your filters"
     }
 }

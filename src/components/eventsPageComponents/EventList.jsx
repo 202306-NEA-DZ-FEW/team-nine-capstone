@@ -2,8 +2,9 @@ import { onSnapshot } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
+import { BiSad } from "react-icons/bi";
 import { LuFilterX } from "react-icons/lu";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { MdClose, MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 import { eventsCollection } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
@@ -170,10 +171,13 @@ function EventList() {
                 <div className='hidden bg-gray-50 mt-4 sticky top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>
                     {/* reset filter button */}
                     <div
-                        className='flex flex-row mt-3 justify-center transition-all h-11 duration-150 text-lg bg-gray-200 font-medium cursor-pointer items-center w-[80%] self-center border-spacing-1 border-solid hover:bg-red-500 rounded-lg hover:text-white active:text-white border-black shadow-lg'
+                        className='flex flex-row mt-3 h-auto py-1 justify-between px-1 transition-all duration-150 text-lg bg-gray-200 font-medium cursor-pointer hover:text-white items-center w-auto gap-2 self-center hover:bg-red-500 rounded-full shadow-lg'
                         onClick={() => resetFilter()}
                     >
-                        Clear Filters <LuFilterX />
+                        <div className='w-7 h-7 bg-gray-50 rounded-full text-red-500 flex justify-center items-center'>
+                            <LuFilterX />
+                        </div>
+                        <h1 className=''>{t("eventList.Clear Filters")}</h1>{" "}
                     </div>
                     {/* calendar filter component */}
                     <div>
@@ -214,28 +218,41 @@ function EventList() {
                     <div className='bg-amber-100 self-center w-[95%] rounded-xl mx-auto my-4 flex justify-center items-center'>
                         {user ? (
                             <h1 className='z-60 mx-auto  font-bold text-3xl flex items-center py-12 justify-center'>
-                                Welcome, {user.name}
+                                {t("eventList.Welcome")} {user.name}
                             </h1>
                         ) : (
                             <p className='z-60 mx-auto font-bold text-3xl flex items-center py-12 justify-center'>
-                                Welcome,
+                                {t("eventList.Welcome")}
                             </p>
                         )}
                     </div>
                     {allCategories ? (
                         ""
                     ) : (
-                        <div className='hidden lg:flex flex-row gap-4 h-auto'>
+                        <div className='hidden lg:grid px-5 lg:grid-cols-5 place-content-start justify-items-start gap-4 h-auto'>
                             {matchingInterests?.map((interest) => (
                                 <div
-                                    className='bg-gray-50 flex justify-center items-center h-10 w-40 rounded-full shadow-lg '
+                                    className='bg-gray-50 flex justify-between px-1 items-center gap-1 h-10 w-40 rounded-full shadow-lg '
                                     key={interest.title}
                                 >
                                     <div
-                                        className={`flex justify-center items-center  h-6 rounded-full px-1 text-${interest.color}`}
+                                        className={` rounded-full h-7 w-7  flex justify-center items-center bg-gray-200 text-${interest.color}-100 `}
+                                    >
+                                        {interest.icon}
+                                    </div>
+                                    <div
+                                        className='flex justify-center font-medium text-sm items-center  h-6 rounded-full'
                                         key={interest.title}
                                     >
-                                        {interest.title}
+                                        {t(interest.title.toString())}
+                                    </div>
+                                    <div
+                                        onClick={() =>
+                                            handleInterest(interest.title)
+                                        }
+                                        className='text-lg cursor-pointer'
+                                    >
+                                        <MdClose />
                                     </div>
                                 </div>
                             ))}
@@ -249,7 +266,7 @@ function EventList() {
                                 openBottomSheet();
                             }}
                         >
-                            Change interest{" "}
+                            {t("eventList.Change interest")}{" "}
                             <div>
                                 <MdOutlineKeyboardArrowDown />
                             </div>
@@ -261,7 +278,7 @@ function EventList() {
                                 openBottomSheet();
                             }}
                         >
-                            change location{" "}
+                            {t("eventList.change location")}{" "}
                             <div>
                                 <MdOutlineKeyboardArrowDown />
                             </div>
@@ -273,7 +290,7 @@ function EventList() {
                                 openBottomSheet();
                             }}
                         >
-                            change date{" "}
+                            {t("eventList.change date")}{" "}
                             <div className='font-bold text-lg'>
                                 <MdOutlineKeyboardArrowDown />
                             </div>
@@ -291,23 +308,33 @@ function EventList() {
                                 );
                             })
                         ) : (
-                            <button
-                                className='w-full h-14 border rounded-lg my-2 text-lg flex flex-row justify-center items-center bg-amber-500 cursor-pointer hover:bg-teal-600 transition-all duration-200'
-                                onClick={handleUser}
-                            >
-                                {t("Create Event")}
-                            </button>
+                            <div className=' w-full flex h-auto justify-start py-2 flex-row px-2 gap-4 place-content-center'>
+                                <h1 className='rounded-full px-2 gap-2 justify-center items-center h-8 w-auto flex flex-row bg-gray-200 font-medium text-lg'>
+                                    {t(
+                                        "eventList.sorry no event matches your filters"
+                                    )}{" "}
+                                    <BiSad className='text-yellow-400 text-xl' />
+                                </h1>
+                                <button
+                                    className='w-auto h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
+                                    onClick={handleUser}
+                                >
+                                    {t("Create Event")}
+                                </button>
+                            </div>
                         )}
                     </div>
-
-                    <div className='w-[40%] h-12 mt-3 flex bg-gray-50 rounded-xl shadow-lg flex-col justify-center items-center'>
-                        <Pagination
-                            handlePageClick={handlePageClick}
-                            pageCount={pageCount}
-                        />
-                    </div>
+                    {currentItems.length !== 0 ? (
+                        <div className='w-[40%] h-12 mt-3 flex bg-gray-50 rounded-xl shadow-lg flex-col justify-center items-center'>
+                            <Pagination
+                                handlePageClick={handlePageClick}
+                                pageCount={pageCount}
+                            />
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
-                {/* <div className='md:hidden container mx-auto py-8'> */}
                 <BottomSheet
                     setLocationSearch={setLocationSearch}
                     locationSearch={locationSearch}
@@ -330,7 +357,6 @@ function EventList() {
                     isOpen={bottomSheetOpen}
                     onClose={closeBottomSheet}
                 />
-                {/* </div> */}
             </div>
         </div>
     );

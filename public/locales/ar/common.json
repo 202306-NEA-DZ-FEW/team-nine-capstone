@@ -27,7 +27,7 @@
     "who are we": "مَن نَحن؟ ",
     "Our Events": " انشطتنا",
     "No Events": "لا يوجد انشطة",
-    "Create Event": "اصنع نشاط",
+    "Create Event": "إصنع نشاطاً",
 
     "HeroSection": {
         "title": "انضموا إلينا لإحداث تغيير مؤثر",
@@ -135,8 +135,34 @@
         "button": "موافق ومتابعة"
     },
     "joinbtn": {
-        "join": "الانضمام",
+        "join": "انضمام",
         "joined": "تم الانضمام",
         "signUp": "التسجيل"
+    },
+    "no Poverty": "لا للفقر",
+    "zero Hunger": "لا للجوع",
+    "good Health": "صحة جيدة",
+    "quality Education": "جودة التعليم",
+    "gender Equality": "مساواة الجنسين",
+    "clean Water": "مياه نقية",
+    "clean Energy": "طاقة نقية",
+    "decent Work": "عمل كريم",
+    "inovation": "ابتكار",
+    "reduced In Equalities": "الحد من عدم المساواة",
+    "sustainable Cities": "المدن المستدامة",
+    "responsible Consumption": "إستهلاك بمسؤولية",
+    "climate Action": "العمل المناخي",
+    "life Below Water": "حياة تحت الماء",
+    "life On Land": "الحياة البرية",
+    "peace": "سلام",
+    "partnership": "شراكة",
+    "global": "عالمي",
+    "eventList": {
+        "Clear Filters": "مسح المرشحات",
+        "Welcome": "،أهلا بك",
+        "Change interest": "غير الإهتمام",
+        "change location": "غير الموقع",
+        "change date": "غير التاريخ",
+        "sorry no event matches your filters": "عذرًا، لا يوجد احداث مطابقة لهذه التصفيات"
     }
 }
