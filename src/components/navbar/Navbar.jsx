@@ -138,7 +138,6 @@ function Navbar() {
                                                     pathname: router.pathname,
                                                     query: {
                                                         ...router.query,
-                                                        lang: "en",
                                                     },
                                                 }}
                                                 locale='en'
@@ -151,7 +150,6 @@ function Navbar() {
                                                     pathname: router.pathname,
                                                     query: {
                                                         ...router.query,
-                                                        lang: "ar",
                                                     },
                                                 }}
                                                 locale='ar'
@@ -304,7 +302,6 @@ function Navbar() {
                                                                     router.pathname,
                                                                 query: {
                                                                     ...router.query,
-                                                                    lang: "en",
                                                                 },
                                                             }}
                                                             locale='en'
@@ -319,7 +316,6 @@ function Navbar() {
                                                                     router.pathname,
                                                                 query: {
                                                                     ...router.query,
-                                                                    lang: "ar",
                                                                 },
                                                             }}
                                                             locale='ar'
