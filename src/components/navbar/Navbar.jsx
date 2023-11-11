@@ -136,21 +136,17 @@ function Navbar() {
                                             <Link
                                                 href={{
                                                     pathname: router.pathname,
-                                                    query: {
-                                                        ...router.query,
-                                                    },
+                                                    query: { ...router.query },
                                                 }}
                                                 locale='en'
-                                                className='block text-sm  p-2 w-38 hover:bg-amber-400 rounded-xl'
+                                                className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
                                             >
                                                 English
                                             </Link>
                                             <Link
                                                 href={{
                                                     pathname: router.pathname,
-                                                    query: {
-                                                        ...router.query,
-                                                    },
+                                                    query: { ...router.query },
                                                 }}
                                                 locale='ar'
                                                 className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
@@ -293,8 +289,8 @@ function Navbar() {
                                             )}
                                         </button>
                                         {isLangDropdownOpen && (
-                                            <div className='w-full '>
-                                                {router.query.id ? (
+                                            <div className='w-full'>
+                                                {router.query.id && (
                                                     <>
                                                         <Link
                                                             href={{
@@ -321,25 +317,25 @@ function Navbar() {
                                                             locale='ar'
                                                             className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
                                                         >
-                                                            العربية{" "}
+                                                            العربية
                                                         </Link>
                                                     </>
-                                                ) : (
+                                                )}
+                                                {!router.query.id && (
                                                     <>
                                                         <Link
                                                             href=''
                                                             locale='en'
-                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white 
-                                                    '
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white'
                                                         >
                                                             English
                                                         </Link>
                                                         <Link
                                                             href=''
                                                             locale='ar'
-                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white '
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white'
                                                         >
-                                                            العربية{" "}
+                                                            العربية
                                                         </Link>
                                                     </>
                                                 )}

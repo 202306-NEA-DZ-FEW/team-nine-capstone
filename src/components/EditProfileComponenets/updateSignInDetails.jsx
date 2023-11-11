@@ -6,8 +6,8 @@ import {
 } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
+import { useEffect, useState } from "react";
 
 import { updateUserDocument, userCollection } from "@/lib/firebase/controller";
 
