@@ -129,22 +129,25 @@ function UpdateSignInDetailes() {
     }, [successMessage, error]);
 
     return (
-        <div className='flex flex-col rounded-md border-red-600 boreder-4 w-[90%] bg-gradient-to-b from-red-500 justify-center p-4 mx-10 my-20'>
-            <p className='flex justify-center font-extrabold p-2'>
+        <div className='flex flex-col rounded-md border-red-600 boreder-4 w-[95%] bg-gradient-to-b from-gray-700 justify-center p-4 m-2'>
+            <p className='flex justify-center font-extrabold text-2xl underline p-2'>
                 {" "}
                 ⚠️ {t("editProfile.CRUDtitle")} ⚠️
             </p>
-            <span className='flex justify-center font-bold p-2'>
+            <span className='flex justify-center font-bold text-lg p-2'>
                 {t("editProfile.CRUDreq")}
             </span>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='text-lg'>
                 <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
-                    <label htmlFor='currentEmail' className='w-48'>
+                    <label
+                        htmlFor='currentEmail'
+                        className='md:w-1/6 font-semibold text-white'
+                    >
                         {t("editProfile.CRUDmail")}
                         <span className='text-red-600 font-mono '>*</span>
                     </label>
                     <input
-                        className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
+                        className='border-4 focus:border-amber-400 focus:border-4 rounded-md p-2 w-52 bg-white focus:bg-green-300 bg-opacity-50'
                         type='email'
                         value={currentEmail}
                         onChange={handleCurrentEmailChange}
@@ -152,12 +155,15 @@ function UpdateSignInDetailes() {
                     />
                 </div>
                 <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
-                    <label htmlFor='currentPassword' className='w-48'>
+                    <label
+                        htmlFor='currentPassword'
+                        className='md:w-1/6 font-semibold text-white'
+                    >
                         {t("editProfile.CRUDpassword")}
                         <span className='text-red-600 font-mono '>*</span>
                     </label>
                     <input
-                        className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
+                        className='border-4 focus:border-amber-400 focus:border-4 rounded-md p-2 w-52 bg-white focus:bg-green-300 bg-opacity-50'
                         type='password'
                         value={currentPassword}
                         onChange={handleCurrentPasswordChange}
@@ -165,11 +171,14 @@ function UpdateSignInDetailes() {
                     />
                 </div>
                 <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
-                    <label htmlFor='newPassword' className='w-48'>
+                    <label
+                        htmlFor='newPassword'
+                        className='md:w-1/6 font-semibold text-white'
+                    >
                         {t("editProfile.CRUDnew1")}
                     </label>
                     <input
-                        className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
+                        className='border-4 focus:border-amber-400 focus:border-4 rounded-md p-2 w-52 bg-white focus:bg-green-300 bg-opacity-50'
                         type='password'
                         value={newPassword}
                         onChange={handleNewPasswordChange}
@@ -177,11 +186,14 @@ function UpdateSignInDetailes() {
                     />
                 </div>
                 <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
-                    <label htmlFor='confirmPassword' className='w-48'>
+                    <label
+                        htmlFor='confirmPassword'
+                        className='md:w-1/6 font-semibold text-white'
+                    >
                         {t("editProfile.CRUDnew2")}
                     </label>
                     <input
-                        className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
+                        className='border-4 focus:border-amber-400 focus:border-4 rounded-md p-2 w-52 bg-white focus:bg-green-300 bg-opacity-50'
                         type='password'
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
@@ -204,7 +216,7 @@ function UpdateSignInDetailes() {
                 )}
                 <div className='flex justify-end'>
                     <button
-                        className='flex justify-center item-end bg-orange-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black"'
+                        className='flex justify-center bg-amber-400 w-auto text-white text-center p-2 my-2 rounded cursor-pointer hover:font-semibold hover:bg-amber-300 hover:text-black'
                         type='submit'
                     >
                         {t("editProfile.CRUDsav")}
@@ -215,7 +227,7 @@ function UpdateSignInDetailes() {
                 </div>
                 <div className='flex justify-end'>
                     <button
-                        className='flex justify-center item-end bg-red-700 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black"'
+                        className='flex justify-center item-end bg-red-700 w-auto text-white text-center p-2 my-2 rounded cursor-pointer hover:font-semibold hover:text-black'
                         onClick={handleDelete}
                     >
                         {t("editProfile.CRUDdel")}
