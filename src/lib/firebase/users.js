@@ -1,5 +1,6 @@
-import { userCollection } from "./controller";
 import { getDocs } from "firebase/firestore";
+
+import { userCollection } from "./controller";
 
 export const getAllUserIds = async () => {
     try {

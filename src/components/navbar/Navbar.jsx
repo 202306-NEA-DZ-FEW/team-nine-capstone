@@ -289,8 +289,8 @@ function Navbar() {
                                             )}
                                         </button>
                                         {isLangDropdownOpen && (
-                                            <div className='w-full'>
-                                                {router.query.id && (
+                                            <div className='w-full '>
+                                                {router.query.id ? (
                                                     <>
                                                         <Link
                                                             href={{
@@ -298,6 +298,7 @@ function Navbar() {
                                                                     router.pathname,
                                                                 query: {
                                                                     ...router.query,
+                                                                    lang: "en",
                                                                 },
                                                             }}
                                                             locale='en'
@@ -312,30 +313,31 @@ function Navbar() {
                                                                     router.pathname,
                                                                 query: {
                                                                     ...router.query,
+                                                                    lang: "ar",
                                                                 },
                                                             }}
                                                             locale='ar'
                                                             className='w-full p-2 flex items-center justify-center hover:bg-amber-300 hover:text-white rounded-lg'
                                                         >
-                                                            العربية
+                                                            العربية{" "}
                                                         </Link>
                                                     </>
-                                                )}
-                                                {!router.query.id && (
+                                                ) : (
                                                     <>
                                                         <Link
                                                             href=''
                                                             locale='en'
-                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white'
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white 
+                                                    '
                                                         >
                                                             English
                                                         </Link>
                                                         <Link
                                                             href=''
                                                             locale='ar'
-                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white'
+                                                            className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white '
                                                         >
-                                                            العربية
+                                                            العربية{" "}
                                                         </Link>
                                                     </>
                                                 )}
