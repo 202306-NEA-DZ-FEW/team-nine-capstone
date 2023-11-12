@@ -136,7 +136,7 @@ function Navbar() {
                                             <Link
                                                 href={{
                                                     pathname: router.pathname,
-                                                    query: { id: user.uid },
+                                                    query: { ...router.query },
                                                 }}
                                                 locale='en'
                                                 className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
@@ -146,7 +146,7 @@ function Navbar() {
                                             <Link
                                                 href={{
                                                     pathname: router.pathname,
-                                                    query: { id: user.uid },
+                                                    query: { ...router.query },
                                                 }}
                                                 locale='ar'
                                                 className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
@@ -297,7 +297,7 @@ function Navbar() {
                                                                 pathname:
                                                                     router.pathname,
                                                                 query: {
-                                                                    id: user.uid,
+                                                                    ...router.query,
                                                                 },
                                                             }}
                                                             locale='en'
@@ -311,7 +311,7 @@ function Navbar() {
                                                                 pathname:
                                                                     router.pathname,
                                                                 query: {
-                                                                    id: user.uid,
+                                                                    ...router.query,
                                                                 },
                                                             }}
                                                             locale='ar'
