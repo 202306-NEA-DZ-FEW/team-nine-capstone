@@ -215,7 +215,7 @@ function EventList() {
                 </div>
 
                 <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
-                    <div className='bg-amber-100 self-center w-[95%] rounded-xl mx-auto my-4 flex justify-center items-center'>
+                    <div className='bg-emerald-800 border border-solid border-emerald-950 self-center w-[95%] rounded-xl mx-auto my-4 flex justify-center items-center'>
                         {user ? (
                             <h1 className='z-60 mx-auto  font-bold text-3xl flex items-center py-12 justify-center'>
                                 {t("eventList.Welcome")} {user.name}

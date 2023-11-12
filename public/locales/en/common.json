@@ -189,7 +189,44 @@
         "Welcome": "Welcome,",
         "Change interest": "Change interest",
         "change location": "change location",
-        "change date": "change date",
+        "change date": "change the date",
         "sorry no event matches your filters": "sorry, no event matches your filters"
+    },
+    "Sun": "Sun",
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Jan": "Jan",
+    "Feb": "Feb",
+    "Mar": "Mar",
+    "Apr": "Apr",
+    "May": "May",
+    "Jun": "Jun",
+    "Jul": "Jul",
+    "Aug": "Aug",
+    "Sep": "Sep",
+    "Oct": "Oct",
+    "Nov": "Nov",
+    "Dec": "Dec",
+    "eventCard": {
+        "attendees": "attendees",
+        "Be The First attendee": "Be The First attendee",
+        "SEE MORE ...": "SEE MORE ..."
+    },
+    "dateFilter": {
+        "Today": "Today"
+    },
+    "Su": "Sa",
+    "M": "Mo",
+    "Th": "Tu",
+    "W": "We",
+    "Tu": "Th",
+    "F": "Fr",
+    "Sa": "Sa",
+    "interestFilter": {
+        "All": "All"
     }
 }

@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { FcCheckmark } from "react-icons/fc";
@@ -12,6 +13,7 @@ function InterestsFilter({
     updatedInterests,
     setAllCategoris,
 }) {
+    const { t } = useTranslation("common");
     const [dropIsOpen, setDropisOpen] = useState(null);
     return (
         <div className='flex flex-col justify-center items-center w-full gap-2 px-1 my-3'>
@@ -24,7 +26,8 @@ function InterestsFilter({
                 } flex flex-row justify-center mb-2 text-lg font-medium items-center w-48  `}
             >
                 {" "}
-                Pick Your Interest <MdOutlineInterests className='md:hidden' />{" "}
+                {t("eventList.Change interest")}{" "}
+                <MdOutlineInterests className='md:hidden' />{" "}
                 {dropIsOpen ? (
                     <BiSolidUpArrow className='hidden md:block' />
                 ) : (
@@ -53,7 +56,8 @@ function InterestsFilter({
                                     : " bg-gray-50 rounded"
                             }  `}
                         >
-                            All {allCategories && isOpen ? <FcCheckmark /> : ""}
+                            {t("interestFilter.All")}{" "}
+                            {allCategories && isOpen ? <FcCheckmark /> : ""}
                         </div>
                         {interestList.map((interest) => (
                             <div
@@ -74,7 +78,7 @@ function InterestsFilter({
                                     handleInterest(interest.title);
                                 }}
                             >
-                                {interest.title}{" "}
+                                {t(interest.title)}{" "}
                                 {!allCategories &&
                                 isOpen &&
                                 updatedInterests.includes(interest.title) ? (

@@ -12,6 +12,7 @@ import JoinButton from "../reusableComponents/JoinButton";
 
 function EventCard({ TheEvent }) {
     const { t } = useTranslation("common");
+    console.log(t);
     const [eventData, setEventData] = useState(null);
     const [joinUpdate, setJoinUpdate] = useState(0);
 
@@ -74,9 +75,11 @@ function EventCard({ TheEvent }) {
             const yearValue = year;
 
             if (new Date().getFullYear() === yearValue) {
-                return `${dayOfWeek}, ${formattedDay} ${monthName}`;
+                return `${t(dayOfWeek)}, ${formattedDay} ${t(monthName)}`;
             } else {
-                return `${dayOfWeek}, ${formattedDay} ${monthName} ${yearValue}`;
+                return `${t(dayOfWeek)}, ${formattedDay} ${t(
+                    monthName
+                )} ${yearValue}`;
             }
         }
     }
@@ -90,19 +93,22 @@ function EventCard({ TheEvent }) {
     return (
         <div className='flex flex-col w-[95%] shadow-lg my-4 hover:bg-white h-56 transition duration-300 md:hover:scale-105 hover:scale-95 border-black rounded-md py-2 px-2'>
             <div className='h-[20%] flex flex-row justify-between items-center pb-2'>
-                <div className='flex justify-center shadow-md items-center bg-amber-100 md:w-[30%] w-[50%] rounded-md text-xl font-semibold'>
+                <div className='flex justify-center text-[16px] shadow-md items-center bg-emerald-100 md:w-[30%] w-[50%] rounded-md lg:text-lg font-semibold'>
                     {formattedDate}
                 </div>
                 <div className='flex justify-center gap-4 px-2 items-center md:w-auto md:rounded-full md:bg-gray-200 w-[50%] rounded-lg text-lg font-medium'>
                     {eventData.attendees ? (
                         <>
-                            {eventData.attendees.length} attendees
+                            {eventData.attendees.length}{" "}
+                            {t("eventCard.attendees")}
                             <div>
                                 <FaPeopleGroup />
                             </div>
                         </>
                     ) : (
-                        <h1 className='text-sm h-6'>Be The First attendee</h1>
+                        <h1 className='text-sm h-6'>
+                            {t("eventCard.Be The First attendee")}
+                        </h1>
                     )}
                 </div>
             </div>
@@ -128,10 +134,10 @@ function EventCard({ TheEvent }) {
                         <div className='hidden lg:flex flex-row gap-4 h-[20%]'>
                             {matchingInterests?.slice(0, 4).map((interest) => (
                                 <div
-                                    className={`flex justify-center items-center  h-7 rounded-full px-1 bg-orange-100 text-${interest.color}-100 font-medium`}
+                                    className={`flex justify-center items-center px-2  h-7 rounded-full bg-amber-100 border border-solid border-amber-400 text-${interest.color}-100 font-medium`}
                                     key={interest.title}
                                 >
-                                    {interest.title}
+                                    {t(interest.title)}
                                 </div>
                             ))}
                         </div>
@@ -143,7 +149,7 @@ function EventCard({ TheEvent }) {
                         >
                             {" "}
                             <button className=' text-white'>
-                                SEE MORE ...{" "}
+                                {t("eventCard.SEE MORE ...")}{" "}
                             </button>
                         </Link>
                         <div className='flex justify-center cursor-pointer font-medium text-lg hover:bg-amber-400 items-center w-28 h-7 self-center bg-emerald-500 rounded-md shadow-md'>

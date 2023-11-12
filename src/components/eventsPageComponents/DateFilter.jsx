@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
@@ -6,7 +7,9 @@ import { generateDate, months } from "../util/calendar";
 import cn from "../util/cn";
 
 const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
-    const days = ["S", "M", "T", "W", "T", "F", "S"];
+    const { t } = useTranslation("common");
+
+    const days = ["Su", "M", "Th", "W", "Tu", "F", "Sa"];
     const currentDate = dayjs();
     const [today, setToday] = useState(currentDate);
     const [selectDate, setSelectDate] = useState(currentDate);
@@ -15,7 +18,7 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
         <div className='flex flex-col w-full justify-center items-center'>
             {isOpen ? (
                 <div className='flex flex-row justify-center text-lg font-medium self-center'>
-                    Change The Date
+                    {t("eventList.change date")}
                 </div>
             ) : (
                 ""
@@ -41,23 +44,23 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                     >
                         <div className=' md:grid md:grid-flow-col xl:w-[80%] text-sm w-full justify-items-stretch '>
                             <GrFormPrevious
-                                className={`min-w-[40%] ${
+                                className={`w-auto ${
                                     isOpen ? "hidden" : ""
-                                } h-5 flex items-center cursor-pointer hover:scale-105 transition-all`}
+                                } h-5 flex items-center font-medium cursor-pointer hover:scale-105 transition-all`}
                                 onClick={() => {
                                     setToday(today.month(today.month() - 1));
                                 }}
                             />
                             <div className='flex justify-center'>
-                                <h1 className='h-3 lg:w-[20%] md:w-[20%] flex justify-center items-center pt-2 whitespace-nowrap select-none font-semibold '>
-                                    {months[today.month()]} {today.year()}
+                                <h1 className='h-3 lg:w-[20%] md:w-[20%] flex justify-center items-center pt-2 whitespace-nowrap text-lg select-none font-semibold '>
+                                    {t(months[today.month()])} {today.year()}
                                 </h1>
                             </div>
 
                             <GrFormNext
-                                className={`min-w-[40%] ${
+                                className={`w-auto ${
                                     isOpen ? "hidden" : ""
-                                } h-5 flex items-center cursor-pointer hover:scale-105 transition-all`}
+                                } h-5 flex items-center font-medium cursor-pointer hover:scale-105 transition-all`}
                                 onClick={() => {
                                     setToday(today.month(today.month() + 1));
                                 }}
@@ -74,7 +77,7 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                                     setToday(currentDate);
                                 }}
                             >
-                                Today
+                                {t("dateFilter.Today")}
                             </h1>
                         </div>
                     </div>
@@ -85,7 +88,7 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                                     key={index}
                                     className=' text-sm text-center underline h-8 font-bold grid place-content-center text-gray-500 select-none'
                                 >
-                                    {day}
+                                    {t(day)}
                                 </h1>
                             );
                         })}

@@ -1,7 +1,6 @@
 import { useTranslation } from "next-i18next";
 import React from "react";
 import { Fragment } from "react";
-import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdLocationOn, MdNotListedLocation } from "react-icons/md";
 
@@ -17,23 +16,10 @@ function LocatioFilter({
     prevLocation,
     setPrevLocation,
 }) {
-    const uniqueLocations = new Set();
     const { t } = useTranslation();
-    const [showModal, setShowModal] = useState(false);
     return (
         <Fragment>
-            {/* button to show the locations provided in the events */}
             <div className='flex flex-col gap-3 justify-center items-center'>
-                {/* <div
-                    onClick={() => (isOpen ? null : setShowModal(true))}
-                    className={`flex flex-row justify-center text-lg font-medium  ${
-                        isOpen
-                            ? " mb-2"
-                            : "hover:text-orange-500 hover:border-orange-500 cursor-pointer"
-                    } items-center w-48 border-b-2 gap-x-3 border-solid  border-black `}
-                >
-                    {t("Choose Location")}
-                </div> */}
                 <div className='relative w-[70%] flex flex-row bg-gray-200  rounded-full my-3'>
                     <div className='  text-gray-400 flex justify-center items-center px-2'>
                         <BsSearch />
@@ -86,42 +72,6 @@ function LocatioFilter({
                     )}
                 </div>
             </div>
-            {/* {isOpen ? (
-                events.map((event, index) => {
-                    if (!uniqueLocations.has(event.location)) {
-                        uniqueLocations.add(event.location);
-                        return (
-                            <div
-                                className='text-lg font-medium cursor-pointer h-10 px-5 flex flex-row justify-start items-center gap-4'
-                                onClick={() => {
-                                    setPrevLocation(event.location);
-                                    setLocation(event.location);
-                                }}
-                                key={index}
-                            >
-                                {event.location}{" "}
-                                {location || prevLocation ? (
-                                    <div className='text-green-700'>
-                                        <MdLocationOn />
-                                    </div>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        );
-                    } else {
-                        return null;
-                    }
-                })
-            ) : (
-                <LocationModal
-                    setPrevLocation={setPrevLocation}
-                    setLocation={setLocation}
-                    events={events}
-                    isVisible={showModal}
-                    onClose={() => setShowModal(false)}
-                />
-            )} */}
         </Fragment>
     );
 }
