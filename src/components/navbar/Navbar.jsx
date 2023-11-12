@@ -136,23 +136,17 @@ function Navbar() {
                                             <Link
                                                 href={{
                                                     pathname: router.pathname,
-                                                    query: {
-                                                        ...router.query,
-                                                        lang: "en",
-                                                    },
+                                                    query: { ...router.query },
                                                 }}
                                                 locale='en'
-                                                className='block text-sm  p-2 w-38 hover:bg-amber-400 rounded-xl'
+                                                className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
                                             >
                                                 English
                                             </Link>
                                             <Link
                                                 href={{
                                                     pathname: router.pathname,
-                                                    query: {
-                                                        ...router.query,
-                                                        lang: "ar",
-                                                    },
+                                                    query: { ...router.query },
                                                 }}
                                                 locale='ar'
                                                 className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'

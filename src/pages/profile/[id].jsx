@@ -11,6 +11,7 @@ import UserProfileEventCard from "@/components/reusableComponents/UserProfileEve
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
+import { LiaUserEditSolid } from "react-icons/lia";
 
 function Profile() {
     const { user } = useUser();
@@ -44,7 +45,7 @@ function Profile() {
     return (
         <Layout>
             {userData && (
-                <div className='flex flex-col'>
+                <div className='flex flex-col '>
                     {/* first profile section*/}
                     <div className='relative py-5 bg-green-700 bg-opacity-50 w-full '>
                         <div className='flex flex-col sm:flex-row group justify-center items-center align-middle space-x-10 z-10 '>
@@ -62,23 +63,21 @@ function Profile() {
                                 />
                             )}
                             <div className='w-3/4 sm:w-1/2 justify-center text-center '>
-                                <h1 className='justify-center items-center text-3xl font-bold mt-3 p-2 rounded-t-lg bg-amber-400'>
+                                <h1 className=' flex justify-around items-center text-3xl font-bold mt-3 p-2 rounded-t-lg bg-amber-400'>
                                     {userData.displayName}
-                                </h1>
 
-                                {isOwner && (
-                                    <div className='w-full bg-amber-400 opacity-50 rounded-b-lg p-2'>
+                                    {isOwner && (
                                         <Link
                                             href={`/profile/${id}/editProfile`}
-                                            className='text-2xl'
                                         >
-                                            {t("profile.ep")}
+                                            <LiaUserEditSolid className='justify-end hover:rounded-full hover:bg-black hover:text-white' />
                                         </Link>
-                                    </div>
-                                )}
+                                    )}
+                                </h1>
                             </div>
                         </div>
                     </div>
+
                     {/* second profile section */}
                     <div>
                         <div className='flex p-2 ml-10 sm:text-lg sm:flex-row flex-col justify-start items-start my-3'>

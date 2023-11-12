@@ -59,18 +59,18 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
     };
 
     return (
-        <div className='flex flex-col md:flex-row md:space-x-10 align-middle justify-center items-center p-2'>
+        <div className='flex flex-col md:space-y-10 space-x-0 align-middle justify-center items-center p-2'>
             {avatar ? (
                 <img
                     src={avatar}
                     alt='Avatar'
-                    className='rounded-full border-orange-400 border-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                    className='rounded-full border-orange-400 border-2 w-30 h-30 md:w-3/4 md:h-3/4 mt-5'
                 />
             ) : (
                 <img
                     src='/images/defaultUser.png'
                     alt='Default Avatar'
-                    className='rounded-full border-orange-400 border-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                    className='rounded-full border-orange-400 border-2 w-30 h-30 md:w-3/4 md:h-3/4 mt-5'
                 />
             )}
             <input
@@ -81,7 +81,7 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
             />
             <label
                 htmlFor='avatar'
-                className='bg-orange-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black'
+                className='bg-amber-400 w-32 text-white text-center p-2 mb-2 mt-10 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black'
             >
                 {t("editProfile.ChangeAvatar")}
             </label>

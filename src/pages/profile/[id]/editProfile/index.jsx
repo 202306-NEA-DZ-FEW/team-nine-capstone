@@ -15,8 +15,10 @@ function EditProfile() {
 
     return (
         <Layout>
-            <UserDetails />
-            <EditSignInDetailes />
+            <div className='bg-gray-300'>
+                <UserDetails />
+                <EditSignInDetailes />
+            </div>
         </Layout>
     );
 }
