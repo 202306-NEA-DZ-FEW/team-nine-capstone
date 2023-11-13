@@ -236,50 +236,7 @@ const SectionTwo = () => {
                     ))}
                 </div>
             </div>
-            {/* events images section
-            <div className='flex md:flex-row flex-col  px-4 gap-3 md:px-8 py-10 bg-white'>
-                <div className='flex flex-col  gap-y-3 '>
-                    <div className='h-[40%] rounded-md overflow-hidden shadow-md'>
-                        <Image
-                            className='w-full h-full transition duration-300 hover:scale-110'
-                            src='/globalGoalsLogos/refugies.png'
-                            alt=''
-                            width={800}
-                            height={800}
-                        />
-                    </div>
-                    <div className='h-[60%] rounded-md overflow-hidden shadow-md'>
-                        <Image
-                            className='w-full h-full transition duration-300 hover:scale-110'
-                            src='/globalGoalsLogos/helpOlds.png'
-                            alt=''
-                            width={800}
-                            height={800}
-                        />
-                    </div>
-                </div>
-                <div className='flex flex-col gap-y-3'>
-                    <div className='h-[55%] rounded-md overflow-hidden shadow-md'>
-                        <Image
-                            className='w-full h-full transition duration-300 hover:scale-110'
-                            src='/globalGoalsLogos/construct.png'
-                            alt=''
-                            width={800}
-                            height={800}
-                        />
-                    </div>
-                    <div className='h-[45%] rounded-md overflow-hidden shadow-md'>
-                        <Image
-                            className='w-full h-full transition duration-300 hover:scale-110'
-                            src='/globalGoalsLogos/donate.png'
-                            alt=''
-                            width={800}
-                            height={800}
-                        />
-                    </div>
-                </div>
-            </div> */}
-            {/* slogan and started button */}
+
             <div className='relative w-screen sm:h-1/2'>
                 <div className=' top-0 left-0 w-full bg-black/30 z-[2]'>
                     <div
@@ -288,24 +245,24 @@ const SectionTwo = () => {
                             backgroundImage: `url('/images/image.jpg')`,
                         }}
                     >
-                        <div className='flex flex-col text-white font-semibold p-20 pr-[40%]'>
+                        <div className='flex flex-col text-white font-semibold p-20 pr-[50%]'>
                             <h1 className='text-left text-4xl sm:text-6xl md:w-[35%] lg:w-[60%] mb-3 sm:mb-5'>
                                 {t("slogan.title")}
                             </h1>
-                            <p className='text-base sm:text-xl lg:w-[100%] text-gray-600 font-normal mb-3 sm:mb-5 '>
+                            <p className='text-base sm:text-lg lg:w-[100%] text-gray-600 font-normal mb-3 sm:mb-5 '>
                                 {t("slogan.discription")}
                             </p>
                             <div className='flex flex-row gap-8 '>
                                 <button
                                     onClick={handleUser}
-                                    className=' bg-white text-black font-semibold text-sm rounded-md py-2 px-3'
+                                    className=' bg-white text-black font-semibold text-xs rounded-md py-2 px-3 whitespace-nowrap overflow-hidden text-overflow-ellipsis'
                                 >
                                     {t("Get Started")}
                                 </button>
                                 <Link
                                     href='/about'
                                     passHref
-                                    className='text-black font-semibold bg-green-700 text-sm rounded-md py-2 px-3 '
+                                    className='text-black font-semibold bg-green-700 text-xs rounded-md py-2 px-3 whitespace-nowrap overflow-hidden text-overflow-ellipsis'
                                 >
                                     <h2>{t("who are we")}</h2>
                                     {/* <LiaAngleRightSolid className=' mt-1' /> */}

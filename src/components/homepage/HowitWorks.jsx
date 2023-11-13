@@ -49,7 +49,7 @@ const HowitWorks = () => {
                 style={{ backgroundColor: "rgb(229, 231, 235)" }}
             >
                 <div className='md:w-2/5 text-center md:text-left pl-10'>
-                    <h2 className='text-xl md:text-2xl lg:text-3xl text-zinc-900 font-semibold mb-4'>
+                    <h2 className='text-xl md:text-2xl lg:text-3xl text-zinc-900 font-semibold '>
                         {t("HeroSection.title")}
                     </h2>
                     <p className='text-sm md:text-base lg:text-lg text-zinc-500 mb-4'>
@@ -63,8 +63,8 @@ const HowitWorks = () => {
                     </Link>
                 </div>
             </div>
-            <div className='lg:px-32 max-w-screen-2xl mx-auto  text-center px-8 bg-gray-100'>
-                <h2 className='text-zinc-900 text-3xl font-semibold mb-10'>
+            <div className='lg:px-32 max-w-screen-2xl mx-auto text-center p-14 bg-gray-100'>
+                <h2 className='text-zinc-900 text-3xl font-semibold m-10'>
                     {t("HowitWorks.title")}
                 </h2>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
