@@ -14,6 +14,7 @@ import { useUser } from "@/context/UserContext";
 import BottomSheet from "./BottomSheets";
 import DateFilter from "./DateFilter";
 import EventCard from "./EventCard";
+import EventTimer from "./EventTimer";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
 import Pagination from "./Pagination";
@@ -29,9 +30,33 @@ function EventList() {
     const [filterType, setFilterType] = useState(null);
     const [itemOffset, setItemOffset] = useState(0);
     const [locationSearch, setLocationSearch] = useState([]);
+    const [loading, setLoading] = useState(true);
     const itemsPerPage = 5;
     const { user } = useUser();
     const router = useRouter();
+    const closestEvent = events.reduce((closest, event) => {
+        const targetDate = new Date(event.date);
+
+        // Get the current date
+        const currentDate = new Date();
+
+        // Calculate the time difference in milliseconds
+        const timeDifference = targetDate - currentDate;
+        console.log("time diff", timeDifference);
+
+        // Check if this event is closer than the current closest event
+        if (
+            timeDifference > 0 &&
+            (closest === null || timeDifference < closest.timeDifference)
+        ) {
+            return {
+                event,
+                targetDate,
+            };
+        }
+        return closest;
+    }, null);
+
     const openBottomSheet = () => {
         setBottomSheetOpen(true);
     };
@@ -129,16 +154,24 @@ function EventList() {
             interestList.find((interest) => interest.title === element)
         )
         .filter((matchingInterest) => matchingInterest);
-    console.log(matchingInterests);
     // fetch the events data
     useEffect(() => {
-        onSnapshot(eventsCollection, (snapshot) => {
+        const unsubscribe = onSnapshot(eventsCollection, (snapshot) => {
             let eventsArr = snapshot.docs.map((doc) => {
                 return { ...doc.data(), id: doc.id };
             });
             setEvents(eventsArr);
+            setLoading(false); // Set loading to false when data is fetched
         });
-    }, []);
+
+        // Cleanup the subscription when the component unmounts
+        return () => unsubscribe();
+    }, []); // The empty dependency array ensures that this effect runs once
+
+    // Render loading state while data is being fetched
+    if (loading) {
+        return <p>Loading...</p>;
+    }
     const handleSearch = (e) => {
         const searchValue = e.target.value.toLowerCase();
         if (searchValue === "") {
@@ -215,16 +248,8 @@ function EventList() {
                 </div>
 
                 <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
-                    <div className='bg-emerald-800 border border-solid border-emerald-950 self-center w-[95%] rounded-xl mx-auto my-4 flex justify-center items-center'>
-                        {user ? (
-                            <h1 className='z-60 mx-auto  font-bold text-3xl flex items-center py-12 justify-center'>
-                                {t("eventList.Welcome")} {user.name}
-                            </h1>
-                        ) : (
-                            <p className='z-60 mx-auto font-bold text-3xl flex items-center py-12 justify-center'>
-                                {t("eventList.Welcome")}
-                            </p>
-                        )}
+                    <div className=' border border-solid border-emerald-950 self-center w-[95%] h-44 rounded-xl mx-auto my-4 flex justify-center items-center'>
+                        <EventTimer closestEvent={closestEvent} />
                     </div>
                     {allCategories ? (
                         ""

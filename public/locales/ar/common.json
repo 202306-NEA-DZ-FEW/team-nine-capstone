@@ -201,5 +201,15 @@
     "Sa": "سب",
     "interestFilter": {
         "All": "الكل"
+    },
+    "eventTimer": {
+        "Dont Miss The Chance On": "لا تفوت الفرصة",
+        "Lanching in...": "...ينطلق في",
+        "S": "ثانية",
+        "Mi": "دقيقة",
+        "H": "ساعة",
+        "D": "يوم",
+        "Mo": "شهر",
+        "Y": "سنة"
     }
 }

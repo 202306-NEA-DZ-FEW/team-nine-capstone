@@ -228,5 +228,15 @@
     "Sa": "Sa",
     "interestFilter": {
         "All": "All"
+    },
+    "eventTimer": {
+        "Dont Miss The Chance On": "Dont Miss The Chance",
+        "Lanching in...": "Lanching in...",
+        "S": "SEC",
+        "Mi": "MIN",
+        "H": "HOUR",
+        "D": "DAY",
+        "Mo": "MON",
+        "Y": "YEAR"
     }
 }
