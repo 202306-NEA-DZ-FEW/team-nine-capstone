@@ -47,7 +47,7 @@ function JoinButton({ eventId, eAttendees, setJoinUpdate }) {
     return (
         <div onClick={handleJoin}>
             {user
-                ? eAttendees.includes(user.uid)
+                ? eAttendees?.includes(user.uid)
                     ? t("joinbtn.joined")
                     : t("joinbtn.join")
                 : t("joinbtn.Sign Up")}
