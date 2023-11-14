@@ -74,7 +74,7 @@ function EditEvent() {
         originalEventShow();
     }, []);
 
-    console.log(oldInfo, "oldinfo");
+    // console.log(oldInfo, "oldinfo");
 
     // collecting new data and chcking
 
@@ -115,11 +115,11 @@ function EditEvent() {
             createdBy: user.uid,
         };
 
-        console.log("this is new info", updatedInfo);
+        // console.log("this is new info", updatedInfo);
 
         try {
             await updateDoc(eventRef, updatedInfo);
-            console.log("updated................... ");
+            // console.log("updated................... ");
             router.push("/events");
         } catch (error) {
             console.error("Error ..............:", error);
