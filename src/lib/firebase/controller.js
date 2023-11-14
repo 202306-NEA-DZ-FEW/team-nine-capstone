@@ -42,9 +42,9 @@ export const updateUserDocument = async (userId, userData) => {
 
     try {
         await updateDoc(userRef, userData);
-        // console.log("User document updated successfully!");
+        console.log("User document updated successfully!");
     } catch (error) {
-        // console.error("Error updating user document:", error);
+        console.error("Error updating user document:", error);
     }
 };
 
@@ -53,6 +53,25 @@ export const getUserDocument = async (uid) => {
     const userRef = doc(userCollection, uid);
     const userDoc = await getDoc(userRef);
     return userDoc;
+};
+
+//function responsible for fetching event Data
+export const getEventDocument = async (id) => {
+    const eventRef = doc(eventsCollection, id);
+    const eventDoc = await getDoc(eventRef);
+    return eventDoc;
+};
+
+// Function to update event data
+export const updateEventDocument = async (eventId, eventData) => {
+    const eventRef = doc(eventsCollection, eventId);
+
+    try {
+        await updateDoc(eventRef, eventData);
+        console.log("Event document updated successfully!");
+    } catch (error) {
+        console.error("Error updating event document:", error);
+    }
 };
 
 // Google Auth

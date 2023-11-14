@@ -71,15 +71,20 @@
     "Get started": "Get started",
     "Choose Location": "Choose Location",
     "profile": {
-        "joinON": "Joined on:",
-        "notJoined": "Join date not available",
         "ep": "Edit Profile",
         "Full Name": "Full Name:",
         "Location": "Location: ",
         "noIntrests": "You have not set any interest. Head to the",
         "toaddsome": "to add some",
         "No interests found.": "No interests found.",
-        "Interests": "Interests & Volunteering Goals:"
+        "Interests": "Interests & Volunteering Goals:",
+        "more": "& more",
+        "Join": "Join",
+        "Joined": "Joined",
+        "LearnMore": "Learn More",
+        "attendees": "attendees",
+        "recentEvents": "recent events:",
+        "seeMore": "See more Events with"
     },
     "editProfile": {
         "DisplayName": "Display Name:",
@@ -96,6 +101,13 @@
         "CRUDdel": "Delete Account",
         "CRUDsav": "Save Changes",
         "ChangeAvatar": "Change Avatar"
+    },
+    "profileEvent": {
+        "goback": "Go Back to",
+        "profile": "profile",
+        "eventAmount": "has actively joined",
+        "event": "event",
+        "noEvents": "this member hasn't joined any events so far"
     },
     "signIn": {
         "succLog": "Sign In succefully",
@@ -149,5 +161,83 @@
         "t10": "10. Skill-Based Volunteering",
         "b10": "Encourage volunteers to use their unique skills and expertise for more targeted and impactful contributions.",
         "button": "Agree and Continue"
+    },
+    "joinbtn": {
+        "join": "Join",
+        "joined": "Joined",
+        "signUp": "Sign Up"
+    },
+    "no Poverty": "no Poverty",
+    "zero Hunger": "zero Hunger",
+    "good Health": "good Health",
+    "quality Education": "quality Education",
+    "gender Equality": "gender Equality",
+    "clean Water": "clean Water",
+    "clean Energy": "clean Energy",
+    "decent Work": "decent Work",
+    "inovation": "inovation",
+    "reduced In Equalities": "reduced In Equalities",
+    "sustainable Cities": "sustainable Cities",
+    "responsible Consumption": "responsible Consumption",
+    "climate Action": "climate Action",
+    "life Below Water": "life Below Water",
+    "life On Land": "life On Land",
+    "peace": "peace",
+    "partnership": "partnership",
+    "global": "global",
+    "eventList": {
+        "Clear Filters": "Clear Filters",
+        "Welcome": "Welcome,",
+        "Change interest": "Change interest",
+        "change location": "change location",
+        "change date": "change the date",
+        "sorry no event matches your filters": "sorry, no event matches your filters"
+    },
+    "Sun": "Sun",
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Jan": "Jan",
+    "Feb": "Feb",
+    "Mar": "Mar",
+    "Apr": "Apr",
+    "May": "May",
+    "Jun": "Jun",
+    "Jul": "Jul",
+    "Aug": "Aug",
+    "Sep": "Sep",
+    "Oct": "Oct",
+    "Nov": "Nov",
+    "Dec": "Dec",
+    "eventCard": {
+        "attendees": "attendees",
+        "Be The First attendee": "Be The First attendee",
+        "SEE MORE ...": "SEE MORE ..."
+    },
+    "dateFilter": {
+        "Today": "Today"
+    },
+    "Su": "Sa",
+    "M": "Mo",
+    "Th": "Tu",
+    "W": "We",
+    "Tu": "Th",
+    "F": "Fr",
+    "Sa": "Sa",
+    "interestFilter": {
+        "All": "All"
+    },
+    "eventTimer": {
+        "Dont Miss The Chance On": "Dont Miss The Chance",
+        "Lanching in...": "Lanching in...",
+        "S": "SEC",
+        "Mi": "MIN",
+        "H": "HOUR",
+        "D": "DAY",
+        "Mo": "MON",
+        "Y": "YEAR"
     }
 }
