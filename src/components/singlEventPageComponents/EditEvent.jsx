@@ -66,7 +66,7 @@ function EditEvent() {
 
                     interests: EventData.interests,
 
-                    CreatedBy: EventData.CreatedBy,
+                    createdBy: EventData.CreatedBy,
                 };
             });
         };
@@ -112,7 +112,7 @@ function EditEvent() {
                 selectedInterets.length !== 0
                     ? selectedInterets.map((interest) => interest.value)
                     : oldInfo.interests,
-            CreatedBy: user.uid,
+            createdBy: user.uid,
         };
 
         console.log("this is new info", updatedInfo);
@@ -137,7 +137,7 @@ function EditEvent() {
                     height={1080}
                     objectFit='cover'
                 />
-                <div className='absolute inset-0 flex flex-col items-center justify-center text-white'>
+                <div className='absolute inset-0 flex flex-col items-center justify-center '>
                     <div className='bg-black bg-opacity-50 p-8'>
                         <Image
                             className=' mx-auto my-auto'
@@ -146,10 +146,10 @@ function EditEvent() {
                             width={40}
                             height={60}
                         ></Image>
-                        <h1 className='text-4xl font-bold text-center mb-2 font-Montserrat text-white'>
+                        <h1 className='text-4xl font-bold text-center mb-2 font-Montserrat text-txtc-Ivory'>
                             Host an Event!
                         </h1>
-                        <p className='text-lg font-Lora text-center text-white'>
+                        <p className='text-lg font-Lora text-center text-txtc-Ivory'>
                             Empower change by hosting your own event with us!
                             Our easy setup and do-it-yourself model let you
                             become a community leader effortlessly. Start making

@@ -11,7 +11,7 @@ import { eventsCollection, storage } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 
-import LocationInput from "../reusableComponents/LocationInput";
+import LocaInput from "../reusableComponents/LocaInput";
 import { interestList } from "../../lib/interestsList";
 
 function CreateEvent() {
@@ -82,7 +82,7 @@ function CreateEvent() {
             image: urlsBunch,
             location: loca,
             interests: selectedInterets.map((interest) => interest.value),
-            CreatedBy: user.uid,
+            createdBy: user.uid,
         }).then(() => {
             e.target.reset();
         });
@@ -172,7 +172,7 @@ function CreateEvent() {
                                 >
                                     Location
                                 </label>
-                                <LocationInput
+                                <LocaInput
                                     name='location'
                                     id='location'
                                     className='shadow-sm bg-white border border-bgc-Charcoal text-txtc-DarkCharcoal sm:text-sm rounded-lg focus:ring-txtc-DarkCharcoal focus:border-txtc-DarkCharcoal block w-full p-2.5'

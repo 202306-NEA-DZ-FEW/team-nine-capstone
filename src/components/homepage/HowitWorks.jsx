@@ -39,63 +39,37 @@ const HowitWorks = () => {
             logo: t("Get started"),
             link: "/createTheEvent",
         },
+        {
+            image: "/images/Girl.png",
+            id: 4,
+            title: t("Contribute"),
+            description: t(
+                "Can't attend? Support us with a donation and still make a difference!"
+            ),
+            logo: t("Donate"),
+            link: "https://donate.stripe.com/test_eVa5m5dw83qhe7C289",
+        },
     ];
 
     return (
         <>
-            <div
-                className='hero-inAll'
-                style={{ backgroundColor: "rgb(229, 231, 235)" }}
-            >
-                <div className='md:w-2/5 text-center md:text-left pl-10'>
-                    <img
-                        src='/images/navLogo.png'
-                        alt='Logo'
-                        height={60}
-                        width={60}
-                        className='mx-auto my-5'
-                    />
+            <div className='how-inAll bg-bgc-silver '>
+                <div className='md:w-2/5 text-center bg-bgc-silver md:text-left pl-10'>
+                    <div className='home-text sm:w-[70%] h-[60%] sm:h-[50%] flex flex-col justify-center mx-auto items-center'>
+                        <Image
+                            src='/images/HeroLogo.png'
+                            alt='Logo'
+                            width={50}
+                            height={50}
+                        ></Image>
+                    </div>
 
-                    <h2 className='text-xl md:text-2xl text-center lg:text-3xl text-zinc-900 font-semibold mb-4'>
+                    <h2 className='text-xl md:text-2xl font-Montserrat text-center lg:text-3xl text-txtc-DarkCharcoal font-semibold mb-4'>
                         {t("HeroSection.title")}
                     </h2>
-                    <p className='text-sm md:text-base lg:text-lg text-center text-zinc-500 mb-4'>
+                    <p className='text-sm md:text-base font-Lora lg:text-lg text-center text-txtc-DarkCharcoal mb-4'>
                         {t("HeroSection.introduction")}
                     </p>
-                </div>
-            </div>
-            <div className='lg:px-32 max-w-screen-2xl mx-auto  text-center px-8 bg-gray-100'>
-                <h2 className='text-zinc-900 text-3xl font-semibold mb-10'>
-                    {t("HowitWorks.title")}
-                </h2>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                    {howitworks.map((service) => (
-                        <div
-                            key={service.id}
-                            className='flex flex-col items-center gap-y-4 bg-white rounded-lg shadow-sm hover:shadow-xl transition duration-200 hover:scale-100'
-                        >
-                            <Image
-                                src={service.image}
-                                alt={service.title}
-                                width={220}
-                                height={220}
-                                className='w-[140px] h-[130px] '
-                            />
-                            <h4 className='text-zinc-900 text-2xl font-medium leading-8'>
-                                {service.title}
-                            </h4>
-                            <p className='text-zinc-500 text-lg font-normal leading-6'>
-                                {service.description}
-                            </p>
-                            <a
-                                href={service.link}
-                                className='flex items-center text-zinc-900 font-semibold hover:text-amber-400 text-lg mb-4'
-                            >
-                                {service.logo}{" "}
-                                <AiOutlineRight className=' mt-1 transition duration-300 hover:scale-200' />
-                            </a>
-                        </div>
-                    ))}
                 </div>
             </div>
             <SocialShare
@@ -103,6 +77,40 @@ const HowitWorks = () => {
                 title='Pebbler'
                 quote='Join Us in Creating Impactful Change'
             />
+            <div className='w-full h-full flex flex-col gap-y-4 py-10 lg:px-14'>
+                <h2 className='text-txtc-DarkCharcoal font-Montserrat text-3xl text-center font-semibold mb-10'>
+                    {t("HowitWorks.title")}
+                </h2>
+                <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8'>
+                    {howitworks.map((service) => (
+                        <div
+                            key={service.id}
+                            className='flex flex-col items-center gap-y-3 bg-white rounded-md shadow-md hover:shadow-lg transition duration-200 hover:scale-100 p-4'
+                        >
+                            <Image
+                                src={service.image}
+                                alt={service.title}
+                                width={220}
+                                height={220}
+                                className='object-cover w-full h-full rounded-full shadow-md'
+                            />
+                            <h4 className='text-txtc-DarkCharcoal font-Montserrat text-xl font-medium leading-8'>
+                                {service.title}
+                            </h4>
+                            <p className='text-txtc-DarkCharcoal text-base font-Lora font-normal leading-6'>
+                                {service.description}
+                            </p>
+                            <a
+                                href={service.link}
+                                className='flex items-center text-txtc-DarkCharcoal font-Roboto font-semibold hover:text-amber-400 text-base mb-4 hover:underline'
+                            >
+                                {service.logo}{" "}
+                                <AiOutlineRight className='mt-1 transition duration-300 hover:scale-200' />
+                            </a>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </>
     );
 };

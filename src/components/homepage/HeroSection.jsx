@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import React from "react";
 
+import ExternalLink from "@/components/reusableComponents/ExternalLink";
 import ScrollToBottom from "@/components/reusableComponents/ScrollToBottom";
 
 const Hero = () => {
@@ -12,9 +13,9 @@ const Hero = () => {
         <div className='hero-All '>
             <div className='hero-inAll'>
                 <video
-                    className='bg-video '
+                    className='bg-video sm:bg-video-poster w-full h-full object-cover'
                     src='/images/heroVideo.mp4'
-                    typeof='video/mp4'
+                    type='video/mp4'
                     poster='/images/background.png'
                     autoPlay
                     loop
@@ -48,15 +49,10 @@ const Hero = () => {
                         >
                             {t("Get Started")}
                         </Link>
-                        <Link
-                            href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'
-                            className='home-btn w-full sm:w-40 md:w-48 h-12 sm:h-16 '
-                            style={{
-                                backgroundColor: "rgb(21, 128, 61, 0.5)",
-                            }}
-                        >
+
+                        <ExternalLink href='https://donate.stripe.com/test_eVa5m5dw83qhe7C289'>
                             {t("Donate")}
-                        </Link>
+                        </ExternalLink>
                     </div>
                     <ScrollToBottom />
                 </div>

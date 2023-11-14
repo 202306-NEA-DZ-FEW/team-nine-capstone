@@ -56,6 +56,7 @@ function EventDetails() {
         return <Loader />;
     }
 
+    console.log(user.uid, eventDisplay.CreatedBy);
     return (
         <div className='relative overflow-hidden bg-gray-900 pt-16 pb-32 space-y-24'>
             <div className='relative'>
@@ -156,7 +157,7 @@ function EventDetails() {
                         </div>
                         <div className='mt-6'>
                             <Link
-                                className='inline-flex rounded-lg bg-pink-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-pink-600 hover:bg-pink-700 hover:ring-pink-700'
+                                className='inline-flex rounded-lg bg-bgc-sunflower px-4 py-1.5 text-base font-semibold leading-7 text-txtc-Ivory shadow-sm ring-1 ring-pink-600 hover:bg-bgc-sunflower hover:ring-bgc-Charcoal'
                                 href='/events/yourEvents'
                                 onClick={JoinEvent}
                             >
@@ -164,15 +165,16 @@ function EventDetails() {
                             </Link>
                         </div>
                         {/* this one should be only linked to the user who created the event */}
-                        <div className='mt-6'>
-                            <Link
-                                className='inline-flex rounded-lg bg-pink-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-pink-600 hover:bg-pink-700 hover:ring-pink-700'
-                                href={`/events/editEvent/${eventDisplay.id}`}
-                            >
-                                {" "}
-                                Edit Event
-                            </Link>
-                        </div>
+                        {user.uid == eventDisplay.createdBy ? (
+                            <div className='mt-6'>
+                                <Link
+                                    className='inline-flex rounded-lg bg-bgc-ForestGreen px-4 py-1.5 text-base font-semibold leading-7 text-txtc-Ivory shadow-sm ring-1 ring-bgc-silver hover:bg-bgc-sunflower hover:ring-bgc-Charcoal'
+                                    href={`/events/editEvent/${eventDisplay.id}`}
+                                >
+                                    Edit Event
+                                </Link>
+                            </div>
+                        ) : null}
                     </div>
                 </div>
             </div>

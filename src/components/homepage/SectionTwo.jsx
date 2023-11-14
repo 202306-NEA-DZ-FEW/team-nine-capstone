@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
 import { React } from "react";
-import { LiaAngleRightSolid } from "react-icons/lia";
 import { Carousel } from "react-responsive-carousel";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -113,18 +112,18 @@ const SectionTwo = () => {
         },
     ];
     return (
-        <div className=' flex flex-col justify-center items-center bg-gray-100 mx-auto'>
+        <div className='flex flex-col justify-center py-10 items-center bg-bgc-silver mx-auto'>
             {/* global-goals-section */}
-            <div className='flex flex-col gap-y-6 p-6 lg:px-14 max-w-screen-2xl mx-auto'>
-                <div className='flex flex-col justify-center items-center gap-y-3 '>
-                    <h1 className='text-center text-2xl text-gray-950 font-semibold'>
+            <div className='w-full flex flex-col py-10  lg:px-14'>
+                <div className='flex flex-col justify-center items-center py-10 '>
+                    <h1 className='text-xl md:text-2xl font-Montserrat text-center lg:text-3xl py-10 text-txtc-DarkCharcoal font-semibold mb-4'>
                         {t("globalGolas.title")}
                     </h1>
-                    <p className='md:w-[50%] w-[80%] text-center text-base text-gray-700 font-normal'>
+                    <p className='text-txtc-DarkCharcoal text-lg text-center font-Lora font-normal leading-6'>
                         {t("globalGolas.discription")}
                     </p>
                 </div>
-                <div className='grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 justify-items-center justify-self-center gap-y-3 w-full'>
+                <div className='grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 justify-items-center gap-y-8 justify-self-center py-6 w-full'>
                     {globalGoalsImages.map((goal, index) => (
                         <Link
                             className=' flex w-[60%] h-auto justify-center '
@@ -132,7 +131,7 @@ const SectionTwo = () => {
                             key={index}
                         >
                             <Image
-                                className=' object-cover  transition duration-300 hover:scale-110'
+                                className=' object-cover py-4 transition duration-300 hover:scale-110'
                                 src={goal.src}
                                 alt={goal.title}
                                 width={300}
@@ -195,28 +194,28 @@ const SectionTwo = () => {
                     showIndicators={false}
                 >
                     <div>
-                        <img src='/globalGoalsLogos/refugies.png' alt='' />
+                        <image src='/globalGoalsLogos/refugies.png' alt='' />
                     </div>
                     <div>
-                        <img src='/globalGoalsLogos/helpOlds.png' alt='' />
+                        <image src='/globalGoalsLogos/helpOlds.png' alt='' />
                     </div>
                     <div>
-                        <img src='/globalGoalsLogos/construct.png' alt='' />
+                        <image src='/globalGoalsLogos/construct.png' alt='' />
                     </div>
                     <div>
-                        <img src='/globalGoalsLogos/donate.png' alt='' />
+                        <image src='/globalGoalsLogos/donate.png' alt='' />
                     </div>
                 </Carousel>
             </div>
             {/* volunteers feedback section */}
-            <div className=' w-full flex flex-col gap-y-4 py-10  lg:px-14'>
-                <h1 className='text-center text-3xl text-gray-950 font-semibold mb-7'>
+            <div className='w-full flex flex-col gap-y-6 py-10 lg:px-14'>
+                <h1 className='text-xl md:text-2xl font-Montserrat text-center lg:text-3xl text-txtc-DarkCharcoal font-semibold mb-4'>
                     {t("feedback")}
                 </h1>
-                <div className='flex md:flex-row flex-col items-center px-10 gap-6 justify-center w-[100%] h-auto mx-auto'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-center'>
                     {userFeeddBack.map((user, index) => (
                         <div
-                            className='flex flex-col overflow-hidden pt-8 px-3 border-y-2 h-full justify-center items-center border gap-2 pb-3 bg-white border-white rounded-md shadow-sm hover:shadow-xl transition duration-200 hover:scale-100'
+                            className='flex flex-col overflow-hidden pt-8 px-3 border-2 h-full justify-center items-center gap-2 pb-3 bg-white border-white rounded-md shadow-sm hover:shadow-xl transition duration-200 hover:scale-100'
                             key={index}
                         >
                             <Image
@@ -226,60 +225,17 @@ const SectionTwo = () => {
                                 width={300}
                                 height={300}
                             />
-                            <h1 className='text-center md:text-xl text-sm text-gray-950 font-semibold'>
+                            <h1 className='text-center font-Lora md:text-xl text-sm text-txtc-DarkCharcoal font-semibold'>
                                 {user.Name}, {user.Occupation}
                             </h1>
-                            <p className='text-center text-sm text-gray-400 font-normal'>
+                            <p className='text-center font-OpenSans text-sm text-txtc-DarkCharcoal font-normal'>
                                 {user.FeedBack}
                             </p>
                         </div>
                     ))}
                 </div>
             </div>
-            {/* events images section
-            <div className='flex md:flex-row flex-col  px-4 gap-3 md:px-8 py-10 bg-white'>
-                <div className='flex flex-col  gap-y-3 '>
-                    <div className='h-[40%] rounded-md overflow-hidden shadow-md'>
-                        <Image
-                            className='w-full h-full transition duration-300 hover:scale-110'
-                            src='/globalGoalsLogos/refugies.png'
-                            alt=''
-                            width={800}
-                            height={800}
-                        />
-                    </div>
-                    <div className='h-[60%] rounded-md overflow-hidden shadow-md'>
-                        <Image
-                            className='w-full h-full transition duration-300 hover:scale-110'
-                            src='/globalGoalsLogos/helpOlds.png'
-                            alt=''
-                            width={800}
-                            height={800}
-                        />
-                    </div>
-                </div>
-                <div className='flex flex-col gap-y-3'>
-                    <div className='h-[55%] rounded-md overflow-hidden shadow-md'>
-                        <Image
-                            className='w-full h-full transition duration-300 hover:scale-110'
-                            src='/globalGoalsLogos/construct.png'
-                            alt=''
-                            width={800}
-                            height={800}
-                        />
-                    </div>
-                    <div className='h-[45%] rounded-md overflow-hidden shadow-md'>
-                        <Image
-                            className='w-full h-full transition duration-300 hover:scale-110'
-                            src='/globalGoalsLogos/donate.png'
-                            alt=''
-                            width={800}
-                            height={800}
-                        />
-                    </div>
-                </div>
-            </div> */}
-            {/* slogan and started button */}
+
             <div className='relative w-screen sm:h-1/2'>
                 <div className=' top-0 left-0 w-full bg-black/30 z-[2]'>
                     <div
@@ -298,14 +254,14 @@ const SectionTwo = () => {
                             <div className='flex flex-row gap-8 '>
                                 <button
                                     onClick={handleUser}
-                                    className=' bg-white text-black font-semibold text-sm rounded-md py-2 px-3'
+                                    className=' bg-bgc-silver font-Roboto text-txtc-DarkCharcoal font-semibold text-sm rounded-md py-2 px-3'
                                 >
                                     {t("Get Started")}
                                 </button>
                                 <Link
                                     href='/about'
                                     passHref
-                                    className='text-black font-semibold bg-green-700 text-sm rounded-md py-2 px-3 '
+                                    className='text-txtc-Ivory font-Roboto font-semibold bg-bgc-ForestGreen text-sm rounded-md py-2 px-3 '
                                 >
                                     <h2>{t("who are we")}</h2>
                                     {/* <LiaAngleRightSolid className=' mt-1' /> */}
