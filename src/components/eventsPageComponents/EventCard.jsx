@@ -133,7 +133,7 @@ function EventCard({ TheEvent }) {
                         <div className='hidden lg:flex flex-row gap-4 h-[20%]'>
                             {matchingInterests?.slice(0, 4).map((interest) => (
                                 <div
-                                    className={`flex justify-center items-center xl:text-lg text-sm px-2  h-7 rounded-full bg-amber-100 border border-solid border-amber-400 text-${interest.color}-700 font-medium`}
+                                    className='flex justify-center items-center xl:text-lg text-sm px-2  h-7 rounded-full bg-gray-200  text-black font-medium'
                                     key={interest.title}
                                 >
                                     {t(interest.title)}
