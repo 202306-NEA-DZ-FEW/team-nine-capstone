@@ -143,18 +143,18 @@ function Navbar() {
                                         <>
                                             <Link
                                                 href={{
-                                                    pathname: "",
-                                                    query: { id: user.uid },
+                                                    pathname: router.pathname,
+                                                    query: { ...router.query },
                                                 }}
                                                 locale='en'
-                                                className='block text-sm  p-2 w-38 hover:bg-amber-400 rounded-xl'
+                                                className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
                                             >
                                                 English
                                             </Link>
                                             <Link
                                                 href={{
-                                                    pathname: "",
-                                                    query: { id: user.uid },
+                                                    pathname: router.pathname,
+                                                    query: { ...router.query },
                                                 }}
                                                 locale='ar'
                                                 className='block text-sm p-2 w-38 hover:bg-amber-400 rounded-xl'
@@ -214,7 +214,7 @@ function Navbar() {
                                                 {t("Your Profile")}
                                             </Link>
                                             <Link
-                                                href='/events/yourEvents'
+                                                href={`/profile/${user.uid}/events`}
                                                 className='block text-sm  p-2  hover:bg-amber-400 rounded-xl'
                                                 onClick={closeMenu}
                                             >
@@ -302,9 +302,11 @@ function Navbar() {
                                                     <>
                                                         <Link
                                                             href={{
-                                                                pathname: "",
+                                                                pathname:
+                                                                    router.pathname,
                                                                 query: {
-                                                                    id: user.uid,
+                                                                    ...router.query,
+                                                                    lang: "en",
                                                                 },
                                                             }}
                                                             locale='en'
@@ -315,9 +317,11 @@ function Navbar() {
 
                                                         <Link
                                                             href={{
-                                                                pathname: "",
+                                                                pathname:
+                                                                    router.pathname,
                                                                 query: {
-                                                                    id: user.uid,
+                                                                    ...router.query,
+                                                                    lang: "ar",
                                                                 },
                                                             }}
                                                             locale='ar'
@@ -376,7 +380,9 @@ function Navbar() {
                                                                 )}
                                                             </button>
                                                         </Link>
-                                                        <Link href='/events'>
+                                                        <Link
+                                                            href={`/profile/${user.uid}/events`}
+                                                        >
                                                             <button className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white '>
                                                                 {t(
                                                                     "Your Events"

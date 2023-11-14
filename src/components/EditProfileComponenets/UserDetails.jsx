@@ -111,92 +111,114 @@ function UserDetails() {
     }, [successMessage, error]);
 
     return (
-        <div className='flex flex-col w-screen'>
-            <form onSubmit={handleSubmit}>
-                <AvatarInput
-                    avatar={userData.avatar}
-                    onUpdateAvatar={updateAvatarUrl}
-                />
-                <div className='flex flex-col md:flex-row md:space-x-10 justify-center'>
-                    <div className='flex flex-col md:flex-row md:space-x-5 justify-start items-center p-2'>
-                        <label htmlFor='displayName'>
-                            {t("editProfile.DisplayName")}{" "}
-                        </label>
-                        <input
-                            className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
-                            type='text'
-                            id='displayName'
-                            name='displayName'
-                            placeholder='Enter a User Name'
-                            value={userData.displayName || ""}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className='flex flex-col md:flex-row md:space-x-5 align-middle justify-start items-center p-2'>
-                        <label htmlFor='fullName'>
-                            {t("editProfile.FullName")}{" "}
-                        </label>
-                        <input
-                            className='border-4 focus:border-orange-400 focus:border-4 rounded-md p-2 w-52 bg-orange-200'
-                            type='text'
-                            id='fullName'
-                            name='fullName'
-                            placeholder='Enter Full Name'
-                            value={userData.fullName || ""}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                </div>
-                <div>
-                    <LocationInput
-                        initialLocation={userData.location}
-                        onSelectLocation={handleLocationSelect}
+        <div className='flex'>
+            <form
+                onSubmit={handleSubmit}
+                className='flex flex-col md:flex-row w-full sm:w-[95%] bg-white bg-opacity-50 rounded-lg m-2'
+            >
+                {/* left side */}
+                <div className='bg-gray-800 w-full md:w-1/2 h-auto md:h-full rounded-lg '>
+                    <AvatarInput
+                        avatar={userData.avatar}
+                        onUpdateAvatar={updateAvatarUrl}
                     />
                 </div>
-                <div className='flex flex-col align-middle justify-start items-center p-2'>
-                    <label htmlFor='interests'>{t("profile.interests")}</label>
-                    <div className='flex flex-wrap justify-center items-start'>
-                        {interestList.map((interest) => (
-                            <div
-                                key={interest.title}
-                                className={`flex flex-col items-center basis-1/2 sm:basis-1/4 md:basis-1/6 mr-4 mb-4 text-center justify-center border-4 rounded-lg  w-40 h-14 p-2 m-2' ${
-                                    userData.userInterests.includes(
-                                        interest.title
-                                    )
-                                        ? "bg-orange-400"
-                                        : "border-orange-400"
-                                }`}
-                                onClick={() =>
-                                    handleInterestClick(interest.title)
-                                }
-                            >
-                                {interest.title}
+                {/*righ side */}
+                <div>
+                    <div className='flex-col'>
+                        <div className=''>
+                            <div className='flex flex-col md:flex-row justify-start items-center p-2'>
+                                <label
+                                    htmlFor='displayName'
+                                    className='md:w-40 text-lg'
+                                >
+                                    {t("editProfile.DisplayName")}{" "}
+                                </label>
+                                <input
+                                    className='g-white bg-opacity-50 border-2 border-black focus:bg-green-400 focus:bg-opacity-80  text-black text-lg rounded-lg p-2'
+                                    type='text'
+                                    id='displayName'
+                                    name='displayName'
+                                    placeholder='Enter a User Name'
+                                    value={userData.displayName || ""}
+                                    onChange={handleInputChange}
+                                />
                             </div>
-                        ))}
+                            <div className='flex flex-col md:flex-row justify-start items-center p-2'>
+                                <label
+                                    htmlFor='fullName'
+                                    className='md:w-40 text-lg'
+                                >
+                                    {t("editProfile.FullName")}{" "}
+                                </label>
+                                <input
+                                    className='bg-white bg-opacity-50 border-2 border-black focus:bg-green-400 focus:bg-opacity-80  text-black text-lg rounded-lg p-2'
+                                    type='text'
+                                    id='fullName'
+                                    name='fullName'
+                                    placeholder='Enter Full Name'
+                                    value={userData.fullName || ""}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <LocationInput
+                                    initialLocation={userData.location}
+                                    onSelectLocation={handleLocationSelect}
+                                />
+                            </div>
+                        </div>
                     </div>
+                    <div className='flex flex-col align-middle justify-start items-center p-2'>
+                        <label
+                            htmlFor='interests'
+                            className='text-lg p-2 underline'
+                        >
+                            {t("profile.Interests")}
+                        </label>
+                        <div className='flex flex-wrap justify-center items-start'>
+                            {interestList.map((interest) => (
+                                <div
+                                    key={interest.title}
+                                    className={`flex flex-col items-center basis-1/2 sm:basis-1/4 md:basis-1/6 mr-4 mb-4 text-center justify-center border-4 rounded-lg  w-40 h-14 p-2 m-2' ${
+                                        userData.userInterests.includes(
+                                            interest.title
+                                        )
+                                            ? "bg-green-500 text-white text-lg font-bold border-amber-400 hover:text-base"
+                                            : "bg-green-300 bg-opacity-80 hover:text-lg hover:border-amber-400"
+                                    }`}
+                                    onClick={() =>
+                                        handleInterestClick(interest.title)
+                                    }
+                                >
+                                    {interest.title}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className='flex justify-end relative right-5'>
+                        <button
+                            type='submit'
+                            className='flex justify-center bg-amber-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-amber-300 hover:font-semibold hover:text-black'
+                        >
+                            {t("editProfile.UpdateProfile")}
+                        </button>
+                    </div>
+                    {error && (
+                        <div className='flex justify-center items-center'>
+                            <p className='text-red-500 border-white w-fit bg-red-300 justify-center items-center rounded-lg slide-in'>
+                                {error}
+                            </p>
+                        </div>
+                    )}
+                    {successMessage && (
+                        <div className='flex relative justify-center items-center'>
+                            <p className='text-green-500 border-white bg-green-200 justify-center items-center w-fit rounded-lg slide-in'>
+                                {successMessage}
+                            </p>
+                        </div>
+                    )}
                 </div>
-                <div className='flex justify-end absolute right-20'>
-                    <button
-                        type='submit'
-                        className='flex justify-center bg-orange-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black'
-                    >
-                        {t("editProfile.UpdateProfile")}
-                    </button>
-                </div>
-                {error && (
-                    <div className='flex justify-center items-center'>
-                        <p className='text-red-500 border-white w-fit bg-red-300 justify-center items-center rounded-lg slide-in'>
-                            {error}
-                        </p>
-                    </div>
-                )}
-                {successMessage && (
-                    <div className='flex justify-center items-center'>
-                        <p className='text-green-500 border-white bg-green-200 justify-center items-center w-fit rounded-lg slide-in'>
-                            {successMessage}
-                        </p>
-                    </div>
-                )}
             </form>
         </div>
     );

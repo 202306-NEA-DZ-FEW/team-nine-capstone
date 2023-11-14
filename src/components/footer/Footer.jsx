@@ -14,12 +14,6 @@ function Footer() {
                 <h2 className='font-semibold text-3xl xl:text-3xl leading-snug'>
                     {t("footer.hook")}
                 </h2>
-                <Link
-                    className='mt-8 xl:mt-12 px-4 py-3 text-xl font-medium leading-tight inline-block bg-amber-400 rounded-lg shadow-xl border border-transparent  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-999 '
-                    href='#'
-                >
-                    {t("Get Started")}
-                </Link>
                 <div className='mt-10 xl:mt-10'>
                     <nav className='flex flex-wrap justify-center text-lg font-medium'>
                         <div className='px-5 py-2'>

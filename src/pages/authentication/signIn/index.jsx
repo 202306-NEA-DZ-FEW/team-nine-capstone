@@ -1,8 +1,7 @@
 import {
-    signInWithEmailAndPassword,
-    getAuth,
-    signInWithPopup,
     GoogleAuthProvider,
+    signInWithEmailAndPassword,
+    signInWithPopup,
     TwitterAuthProvider,
 } from "firebase/auth";
 import Image from "next/legacy/image";

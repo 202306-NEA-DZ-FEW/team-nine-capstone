@@ -23,12 +23,13 @@
         "title": " انشر الأمل و التغيير",
         "discription": ".احتضن رؤيتك لعالم أفضل، كن القدوة"
     },
+ 
     "Get Started": "ابدأ الآن",
     "who are we": "مَن نَحن؟ ",
     "Our Events": " انشطتنا",
     "No Events": "لا يوجد انشطة",
-    "Create Event": "اصنع نشاط",
     "Donate": "تبرع",
+    "Create Event": "إصنع نشاطاً",
 
     "HeroSection": {
         "title": "انضموا إلينا لإحداث تغيير مؤثر",
@@ -50,15 +51,20 @@
     "Get started": "ابدأ",
     "Choose Location": "اختر موقعا",
     "profile": {
-        "joinON": "تم الانضمام في:",
-        "notJoined": "تاريخ الانضمام غير متاح",
         "ep": "تعديل الملف الشخصي",
         "Full Name": "الاسم الكامل:",
         "Location": "الموقع: ",
         "noIntrests": "لم تقم بإضافة أي اهتمامات. انتقل إلى",
         "toaddsome": "لإضافة بعض",
         "No interests found.": "لا توجد اهتمامات.",
-        "Interests": "الاهتمامات و الاهداف التطوعية"
+        "Interests": "الاهتمامات و الاهداف التطوعية",
+        "more": "والمزيد",
+        "Join": "شارك",
+        "Joined": "تمت المشاركة",
+        "LearnMore": "المزيد حول الحدث",
+        "attendees": "مشاركة",
+        "recentEvents": "اخر فاعليات:",
+        "seeMore": "شاهد المزيد من فعاليات "
     },
     "editProfile": {
         "DisplayName": "اسم المستخدم:",
@@ -76,6 +82,7 @@
         "CRUDsav": "حفظ التغييرات",
         "ChangeAvatar": "تغيير الصورة الشخصية"
     },
+    "profileEvent": {},
     "signIn": {
         "succLog": "تم تسجيل الدخول بنجاح",
         "failLog": "خطأ أثناء تسجيل الدخول",
@@ -128,5 +135,83 @@
         "t10": "10. التطوع استنادًا إلى المهارات",
         "b10": "شجع المتطوعين على استخدام مهاراتهم وخبراتهم الفريدة لتقديم مساهمات مستهدفة وفعالة.",
         "button": "موافق ومتابعة"
+    },
+    "joinbtn": {
+        "join": "انضمام",
+        "joined": "تم الانضمام",
+        "signUp": "التسجيل"
+    },
+    "no Poverty": "لا للفقر",
+    "zero Hunger": "لا للجوع",
+    "good Health": "صحة جيدة",
+    "quality Education": "جودة التعليم",
+    "gender Equality": "مساواة الجنسين",
+    "clean Water": "مياه نقية",
+    "clean Energy": "طاقة نقية",
+    "decent Work": "عمل كريم",
+    "inovation": "ابتكار",
+    "reduced In Equalities": "الحد من عدم المساواة",
+    "sustainable Cities": "المدن المستدامة",
+    "responsible Consumption": "إستهلاك بمسؤولية",
+    "climate Action": "العمل المناخي",
+    "life Below Water": "حياة تحت الماء",
+    "life On Land": "الحياة البرية",
+    "peace": "سلام",
+    "partnership": "شراكة",
+    "global": "عالمي",
+    "eventList": {
+        "Clear Filters": "مسح المرشحات",
+        "Welcome": "،أهلا بك",
+        "Change interest": "غير الإهتمام",
+        "change location": "غير الموقع",
+        "change date": "غير التاريخ",
+        "sorry no event matches your filters": "عذرًا، لا يوجد احداث مطابقة لهذه التصفيات"
+    },
+    "Sun": "الاحد",
+    "Mon": "الاثنين",
+    "Tue": "الثلاثاء",
+    "Wed": "الأربعاء",
+    "Thu": "الخميس",
+    "Fri": "الجمعة",
+    "Sat": "السبت",
+    "Jan": "جانفي",
+    "Feb": "فيفري",
+    "Mar": "مارس",
+    "Apr": "أفريل",
+    "May": "ماي",
+    "Jun": "جوان",
+    "Jul": "جويلية",
+    "Aug": "أوت",
+    "Sep": "سبتمبر",
+    "Oct": "أكتوبر",
+    "Nov": "نوفمبر",
+    "Dec": "ديسمبر",
+    "eventCard": {
+        "attendees": "إنضمام",
+        "Be The First attendee": "كن أول منضم",
+        "SEE MORE ...": "...مشاهدة المزيد"
+    },
+    "dateFilter": {
+        "Today": "اليوم"
+    },
+    "Su": "أح",
+    "M": "إث",
+    "Th": "ثل",
+    "W": "أر",
+    "Tu": "خم",
+    "F": "جم",
+    "Sa": "سب",
+    "interestFilter": {
+        "All": "الكل"
+    },
+    "eventTimer": {
+        "Dont Miss The Chance On": "لا تفوت الفرصة",
+        "Lanching in...": "...ينطلق في",
+        "S": "ثانية",
+        "Mi": "دقيقة",
+        "H": "ساعة",
+        "D": "يوم",
+        "Mo": "شهر",
+        "Y": "سنة"
     }
 }
