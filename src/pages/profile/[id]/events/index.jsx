@@ -113,7 +113,7 @@ function Events() {
                         <div>
                             {userData.iEvents.map((eventId) => (
                                 <div key={eventId}>
-                                    <EventCard TheEvent={eventData} />
+                                    <EventCard TheEvent={eventId} />
                                 </div>
                             ))}
                         </div>

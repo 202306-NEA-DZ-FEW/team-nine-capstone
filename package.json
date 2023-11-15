@@ -38,6 +38,8 @@
         "react-dom": "^18.2.0",
         "react-icons": "^4.11.0",
         "react-multi-select-component": "^4.3.4",
+        "react-paginate": "^8.2.0",
+        "react-spring-bottom-sheet": "^3.4.1",
         "react-responsive-carousel": "^3.2.23",
         "react-router-dom": "^6.3.0",
         "react-slideshow-image": "^4.3.0",
