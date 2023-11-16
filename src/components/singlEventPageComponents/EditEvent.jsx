@@ -1,5 +1,11 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+    deleteObject,
+    getDownloadURL,
+    getMetadata,
+    ref,
+    uploadBytes,
+} from "firebase/storage";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -37,53 +43,57 @@ function EditEvent() {
         setLoca(selectedLocation);
     };
 
-    const [oldInfo, setOldInfo] = useState(null);
-    const [newInfo, setNewInfo] = useState(null);
+    const [oldInfo, setOldInfo] = useState({});
+    const [newInfo, setNewInfo] = useState({});
+    const [oldImgUrl, setOldImgUrl] = useState(null);
+    console.log(id, "id from router");
 
-    // getting the original data
+    const eventRef = id ? doc(firestore, "events", id) : null;
 
-    const eventRef = doc(firestore, "events", id);
+    console.log("the eventref", eventRef);
 
     useEffect(() => {
-        const originalEventShow = async () => {
-            const docGet = await getDoc(eventRef);
-            // console.log(docGet.data(), "this docGet", docGet.id, "this docID");
-            const EventData = docGet.data();
+        const fetchData = async () => {
+            if (eventRef) {
+                const docGet = await getDoc(eventRef);
+                const eventData = docGet.data();
+                setOldImgUrl(() => eventData.image);
 
-            // console.log(oldInfo, "before");
-
-            setOldInfo(() => {
-                return {
-                    title: EventData.title,
-
-                    about: EventData.about,
-
-                    date: EventData.date,
-
-                    image: EventData.image,
-
-                    location: EventData.location,
-
-                    interests: EventData.interests,
-
-                    createdBy: EventData.CreatedBy,
-                };
-            });
+                setOldInfo(() => ({
+                    title: eventData.title,
+                    about: eventData.about,
+                    date: eventData.date,
+                    image: eventData.image,
+                    location: eventData.location,
+                    interests: eventData.interests,
+                    createdBy: eventData.CreatedBy,
+                }));
+            }
         };
 
-        originalEventShow();
-    }, []);
+        fetchData();
+    }, [urlsBunch]);
 
-    // console.log(oldInfo, "oldinfo");
+    useEffect(() => {
+        if (urlsBunch !== null) {
+            // console.log(urlsBunch, "urlsBunch")
+            updateDocument();
+        }
+    }, [urlsBunch]);
 
-    // collecting new data and chcking
-
-    async function handleEditForm(e) {
+    const handleEditForm = async (e) => {
         e.preventDefault();
 
         const imgFile = e.target.image.files[0];
 
-        if (imgFile != undefined) {
+        if (imgFile !== undefined) {
+            const storageRef = ref(storage, oldImgUrl);
+            const metadata = await getMetadata(storageRef);
+            const oldFileName = metadata.name;
+
+            const deleteRef = ref(storage, `images/${user.uid}/${oldFileName}`);
+            await deleteObject(deleteRef);
+
             setImageInput(() => imgFile);
             const fileName = imgFile.name;
             const eventImageRef = ref(
@@ -92,17 +102,21 @@ function EditEvent() {
             );
 
             try {
-                const snapshot = await uploadBytes(eventImageRef, imageInput);
+                const snapshot = await uploadBytes(eventImageRef, imgFile);
                 const url = await getDownloadURL(snapshot.ref);
-                setUrlsBunch(url);
+                setUrlsBunch(url); // Set the URL
             } catch (error) {
-                console.error("Error image..................:", error);
+                console.error("Error during upload:", error);
             }
+        } else {
+            setImageInput(() => null);
         }
+    };
 
-        const updatedInfo = {
-            title: e.target.title.value ? e.target.title.value : oldInfo.title,
-            about: e.target.about.value ? e.target.about.value : oldInfo.about,
+    const updateDocument = async () => {
+        const newInfo = {
+            title: oldInfo.title,
+            about: oldInfo.about,
             date: startDate
                 ? startDate.toLocaleDateString("en-GB")
                 : oldInfo.date,
@@ -115,16 +129,17 @@ function EditEvent() {
             createdBy: user.uid,
         };
 
-        // console.log("this is new info", updatedInfo);
+        console.log("this is new info", newInfo);
 
         try {
-            await updateDoc(eventRef, updatedInfo);
-            // console.log("updated................... ");
+            await updateDoc(eventRef, newInfo);
+            console.log("updated................... ");
             router.push("/events");
         } catch (error) {
-            console.error("Error ..............:", error);
+            console.error("Error updating document:", error);
         }
-    }
+    };
+    console.log("urlsBunch", urlsBunch);
 
     return (
         <div className='m-0 box-border bg-bgc-silver'>
@@ -135,7 +150,6 @@ function EditEvent() {
                     className='w-full h-auto'
                     width={1920}
                     height={1080}
-                    objectFit='cover'
                 />
                 <div className='absolute inset-0 flex flex-col items-center justify-center '>
                     <div className='bg-black bg-opacity-50 p-8'>
@@ -224,6 +238,9 @@ function EditEvent() {
                                     id='image'
                                     className='shadow-sm bg-white border border-bgc-Charcoal text-txtc-DarkCharcoal sm:text-sm rounded-lg focus:ring-txtc-DarkCharcoal focus:border-txtc-DarkCharcoal block w-full p-2.5'
                                     placeholder='provide an Image if possible ..'
+                                    onChange={(e) => {
+                                        setImageInput(() => e.target.files[0]);
+                                    }}
                                 />
                             </div>
                             <div className='col-span-6 sm:col-span-3'>

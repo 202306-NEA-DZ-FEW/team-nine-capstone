@@ -18,7 +18,7 @@ function EventDetails() {
     const router = useRouter();
     const { id } = router.query;
 
-    console.log("this is router.asPath", router.asPath);
+    console.log("this is router id", id);
     const { user, setUser } = useUser();
 
     function JoinEvent() {
@@ -56,7 +56,7 @@ function EventDetails() {
         return <Loader />;
     }
 
-    console.log(user.uid, eventDisplay.CreatedBy);
+    console.log(user.uid, "user.uid", eventDisplay.image, "eventDisplay.image");
     return (
         <div className='relative overflow-hidden bg-gray-900 pt-16 pb-32 space-y-24'>
             <div className='relative'>

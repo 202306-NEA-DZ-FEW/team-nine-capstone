@@ -5,8 +5,8 @@ module.exports = {
         defaultLocale: "en",
         locales: ["en", "ar"],
         localeDetection: false,
-        localePath: path.resolve("./public/locales"),
-        defaultNS: "common",
-        serializeConfig: false,
     },
+    localePath: path.resolve("./public/locales"),
+    defaultNS: "common",
+    serializeConfig: false,
 };

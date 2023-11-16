@@ -192,6 +192,7 @@ const SectionTwo = () => {
                     interval={4000}
                     showStatus={false}
                     showIndicators={false}
+                    showThumbs={false}
                 >
                     <div>
                         <image src='/globalGoalsLogos/refugies.png' alt='' />

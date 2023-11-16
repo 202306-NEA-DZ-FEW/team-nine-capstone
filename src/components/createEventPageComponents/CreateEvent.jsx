@@ -1,7 +1,7 @@
 import { addDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { MultiSelect } from "react-multi-select-component";
 
@@ -19,7 +19,7 @@ function CreateEvent() {
     const [selectedInterets, setSelectedInterets] = useState([]);
     const [loca, setLoca] = useState(null);
     const { user, setUser } = useUser();
-    const [imageInput, setImageInput] = useState(null);
+
     const [urlsBunch, setUrlsBunch] = useState(null);
 
     const options = interestList.map((obj) => {
@@ -29,67 +29,48 @@ function CreateEvent() {
         };
     });
 
-    // console.log(
-    //     startDate.toLocaleDateString("en-GB"),
-    //     "this is startdate",
-    //     selectedInterets.map((interest) => interest.value),
-    //     "and thsi selected",
-    //     options,
-    //     "this is options"
-    // );
+    useEffect(() => {
+        if (urlsBunch) {
+            console.log("urlsBunch.....:", urlsBunch);
+        }
+    }, [urlsBunch]);
 
-    function handleCreateForm(e) {
+    async function handleCreateForm(e) {
         e.preventDefault();
-        const imgFile = e.target.image.files[0];
 
-        setImageInput(() => imgFile);
+        try {
+            const imgFile = e.target.image.files[0];
 
-        const fileName = imgFile.name;
+            const fileName = imgFile.name;
+            const eventImageRef = ref(
+                storage,
+                `images/${user.uid}/${fileName}`
+            );
 
-        const eventImageRef = ref(storage, `images/${user.uid}/${fileName}`);
+            await uploadBytes(eventImageRef, imgFile);
+            const url = await getDownloadURL(eventImageRef);
 
-        // const eventAllImgsRef = ref(storage, `images/${user.uid}`);
-        // const listAllEventImgs = listAll(eventAllImgsRef).then((res) => {
-        //     res.items.map((item) => {
-        //         getDownloadURL(item).then((url) => {
-        //             listAllEventImgsUrl.push(url);
-        //         });
-        //     });
-        // });
+            setUrlsBunch(() => url);
 
-        // console.log("show all events ref eventAllImgsRef", eventAllImgsRef);
-        // console.log(" list All Event Imgs", listAllEventImgs);
-
-        // console.log("list All Event Imgs Url", listAllEventImgsUrl);
-
-        // console.log("the eventsImgs:", eventImageRef);
-        // console.log("the user uid:", user.uid);
-        // console.log("the image value:", e.target.image.value);
-
-        uploadBytes(eventImageRef, imageInput).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                console.log("theUrlitself", url);
-                setUrlsBunch(() => url);
+            await addDoc(eventsCollection, {
+                title: e.target.title.value,
+                about: e.target.about.value,
+                date: startDate.toLocaleDateString("en-GB"),
+                image: url,
+                location: loca,
+                interests: selectedInterets.map((interest) => interest.value),
+                createdBy: user.uid,
+                attendees: [user.uid],
             });
-        });
 
-        console.log("list All Event Imgs Url", urlsBunch);
-
-        addDoc(eventsCollection, {
-            title: e.target.title.value,
-            about: e.target.about.value,
-            date: startDate.toLocaleDateString("en-GB"),
-            image: urlsBunch,
-            location: loca,
-            interests: selectedInterets.map((interest) => interest.value),
-            createdBy: user.uid,
-        }).then(() => {
             e.target.reset();
-        });
+        } catch (error) {
+            console.error("Error:", error);
+        }
     }
 
     const handleLocationSelect = (selectedLocation) => {
-        setLoca(selectedLocation);
+        setLoca(() => selectedLocation);
     };
 
     return (
@@ -101,7 +82,6 @@ function CreateEvent() {
                     className='w-full h-auto'
                     width={1920}
                     height={1080}
-                    objectFit='cover'
                 />
                 <div className='absolute inset-0 flex flex-col items-center justify-center text-white'>
                     <div className='bg-black bg-opacity-50 p-8'>

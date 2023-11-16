@@ -14,7 +14,6 @@ import { useUser } from "@/context/UserContext";
 import BottomSheet from "./BottomSheets";
 import DateFilter from "./DateFilter";
 import EventCard from "./EventCard";
-import EventTimer from "./EventTimer";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
 import Pagination from "./Pagination";
@@ -197,7 +196,7 @@ function EventList() {
             (event.selected * itemsPerPage) % filteredEvents.length;
         setItemOffset(newOffset);
     };
-
+    console.log(currentItems, "currentItems....................");
     return (
         <div className='relative h-full flex flex-col bg-gray-200'>
             <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
@@ -249,7 +248,7 @@ function EventList() {
 
                 <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
                     <div className=' border border-solid border-emerald-950 self-center w-[95%] h-44 rounded-xl mx-auto my-4 flex justify-center items-center'>
-                        <EventTimer closestEvent={closestEvent} />
+                        {/* <EventTimer closestEvent={closestEvent} /> */}
                     </div>
                     {allCategories ? (
                         ""
@@ -325,10 +324,11 @@ function EventList() {
                         {/* display the events based on filters */}
                         {currentItems.length !== 0 ? (
                             currentItems.map((event) => {
+                                console.log(event, "event............");
                                 return (
                                     <EventCard
                                         key={event.id}
-                                        TheEvent={event.id}
+                                        TheEvent={event}
                                     />
                                 );
                             })
