@@ -113,10 +113,10 @@ function EditEvent() {
         }
     };
 
-    const updateDocument = async () => {
+    const updateDocument = async (e) => {
         const newInfo = {
-            title: oldInfo.title,
-            about: oldInfo.about,
+            title: e.target.title.value ? e.target.title.value : oldInfo.title,
+            about: e.target.about.value ? e.target.about.value : oldInfo.about,
             date: startDate
                 ? startDate.toLocaleDateString("en-GB")
                 : oldInfo.date,
@@ -181,7 +181,7 @@ function EditEvent() {
                 </div>
                 <div className='p-6 space-y-6'>
                     <form
-                        onSubmit={handleEditForm}
+                        onSubmit={(handleEditForm, updateDocument)}
                         className='space-y-4 space-x-4 m-2 p-2'
                     >
                         <div className='grid grid-cols-6 gap-6'>

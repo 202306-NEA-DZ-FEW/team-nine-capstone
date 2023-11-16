@@ -85,16 +85,6 @@
         width: 100%;
         z-index: 10;
     }
-    .bg-video {
-        display: none;
-    }
-
-    .bg-video-poster {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
 }
 
 .social-share-panel {
@@ -150,7 +140,7 @@ hero-All {
 
 .hero-inAll {
     height: 91vh;
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -226,7 +216,7 @@ hero-All {
     width: 100%;
     max-width: 16em;
     height: 4em;
-    border-radius: 0.5em;
+    border-radius: 2.5em;
     z-index: 1;
     animation: fade 4s;
     font-size: 1em;
@@ -444,5 +434,13 @@ hero-All {
         width: 90%;
         border-radius: 1.8em;
         font-size: small;
+    }
+    .hero-inAll {
+        background: url("/images/background.png") no-repeat;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .bg-video {
+        display: none;
     }
 }

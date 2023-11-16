@@ -86,7 +86,7 @@ function Navbar() {
                         onClick={closeMenu}
                         className='flex items-center '
                     >
-                        <img
+                        <image
                             src='/images/navLogo.png'
                             alt='Logo'
                             height={40}
