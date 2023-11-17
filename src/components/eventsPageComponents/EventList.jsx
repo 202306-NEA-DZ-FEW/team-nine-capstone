@@ -324,11 +324,10 @@ function EventList() {
                         {/* display the events based on filters */}
                         {currentItems.length !== 0 ? (
                             currentItems.map((event) => {
-                                console.log(event, "event............");
                                 return (
                                     <EventCard
                                         key={event.id}
-                                        TheEvent={event}
+                                        TheEvent={event.id}
                                     />
                                 );
                             })

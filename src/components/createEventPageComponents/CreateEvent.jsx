@@ -1,4 +1,4 @@
-import { addDoc } from "firebase/firestore";
+import { addDoc, arrayUnion } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,7 +8,11 @@ import { MultiSelect } from "react-multi-select-component";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { eventsCollection, storage } from "@/lib/firebase/controller";
+import {
+    eventsCollection,
+    storage,
+    updateUserDocument,
+} from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 
@@ -66,6 +70,10 @@ function CreateEvent() {
                 interests: selectedInterets.map((interest) => interest.value),
                 createdBy: user.uid,
                 attendees: [user.uid],
+            });
+
+            await updateUserDocument(user.uid, {
+                iEvents: arrayUnion(newDocRef.id),
             });
 
             e.target.reset();
