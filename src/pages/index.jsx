@@ -9,16 +9,18 @@ import SectionTwo from "@/components/homepage/SectionTwo";
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
 
-export default function HomePage() {
+export default function HomePage({ props }) {
     const { user } = useUser();
     const { t } = useTranslation("common");
 
     return (
-        <Layout>
+        <>
             <HeroSection />
-            <HowitWorks />
-            <SectionTwo />
-        </Layout>
+            <Layout>
+                <HowitWorks />
+                <SectionTwo />
+            </Layout>
+        </>
     );
 }
 

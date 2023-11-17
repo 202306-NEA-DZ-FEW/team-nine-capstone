@@ -7,16 +7,16 @@ module.exports = {
         dirs: ["src"],
     },
     reactStrictMode: true,
-    // mak sure there is  no rights infringments on the images used
     images: {
-        domains: [
-            "www.signupgenius.com",
-            "www.greenbiz.com",
-            "www.cleantech.com",
-            "upload.wikimedia.org",
-            "cdn0.handsonconnect.org",
-            "cdn.wallpapersafari.com",
-            "cdn.mos.cms.futurecdn.net",
+        remotePatterns: [
+            { hostname: "www.signupgenius.com" },
+            { hostname: "www.greenbiz.com" },
+            { hostname: "www.cleantech.com" },
+            { hostname: "upload.wikimedia.org" },
+            { hostname: "cdn0.handsonconnect.org" },
+            { hostname: "cdn.wallpapersafari.com" },
+            { hostname: "cdn.mos.cms.futurecdn.net" },
+            { hostname: "firebasestorage.googleapis.com" },
         ],
     },
 };
