@@ -1,6 +1,7 @@
 import { addDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { MultiSelect } from "react-multi-select-component";
@@ -19,7 +20,7 @@ function CreateEvent() {
     const [selectedInterets, setSelectedInterets] = useState([]);
     const [loca, setLoca] = useState(null);
     const { user, setUser } = useUser();
-
+    const router = useRouter();
     const [urlsBunch, setUrlsBunch] = useState(null);
 
     const options = interestList.map((obj) => {
@@ -28,6 +29,10 @@ function CreateEvent() {
             value: `${obj.title}`,
         };
     });
+
+    const handleLocationSelect = (selectedLocation) => {
+        setLoca(() => selectedLocation);
+    };
 
     useEffect(() => {
         if (urlsBunch) {
@@ -52,7 +57,7 @@ function CreateEvent() {
 
             setUrlsBunch(() => url);
 
-            await addDoc(eventsCollection, {
+            const newDocRef = await addDoc(eventsCollection, {
                 title: e.target.title.value,
                 about: e.target.about.value,
                 date: startDate.toLocaleDateString("en-GB"),
@@ -64,14 +69,11 @@ function CreateEvent() {
             });
 
             e.target.reset();
+            router.push("/events");
         } catch (error) {
             console.error("Error:", error);
         }
     }
-
-    const handleLocationSelect = (selectedLocation) => {
-        setLoca(() => selectedLocation);
-    };
 
     return (
         <div className='m-0 box-border bg-bgc-silver'>

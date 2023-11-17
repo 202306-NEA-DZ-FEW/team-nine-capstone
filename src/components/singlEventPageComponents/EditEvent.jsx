@@ -72,14 +72,19 @@ function EditEvent() {
         };
 
         fetchData();
+        updateDocument();
+        // if (urlsBunch !== null) {
+        //     // console.log(urlsBunch, "urlsBunch")
+        //     updateDocument();
+        // }
     }, [urlsBunch]);
 
-    useEffect(() => {
-        if (urlsBunch !== null) {
-            // console.log(urlsBunch, "urlsBunch")
-            updateDocument();
-        }
-    }, [urlsBunch]);
+    // useEffect(() => {
+    //     if (urlsBunch !== null) {
+    //         // console.log(urlsBunch, "urlsBunch")
+    //         updateDocument();
+    //     }
+    // }, [urlsBunch]);
 
     const handleEditForm = async (e) => {
         e.preventDefault();
@@ -95,6 +100,12 @@ function EditEvent() {
             await deleteObject(deleteRef);
 
             setImageInput(() => imgFile);
+
+            setNewInfo(() => ({
+                title: e.target.title.value,
+                about: e.target.about.value,
+            }));
+
             const fileName = imgFile.name;
             const eventImageRef = ref(
                 storage,
@@ -104,19 +115,20 @@ function EditEvent() {
             try {
                 const snapshot = await uploadBytes(eventImageRef, imgFile);
                 const url = await getDownloadURL(snapshot.ref);
-                setUrlsBunch(url); // Set the URL
+                setUrlsBunch(() => url);
             } catch (error) {
                 console.error("Error during upload:", error);
             }
         } else {
-            setImageInput(() => null);
+            setImageInput(() => "no image");
+            setUrlsBunch(() => oldImgUrl);
         }
     };
 
-    const updateDocument = async (e) => {
-        const newInfo = {
-            title: e.target.title.value ? e.target.title.value : oldInfo.title,
-            about: e.target.about.value ? e.target.about.value : oldInfo.about,
+    const updateDocument = async () => {
+        const updatedInfo = {
+            title: newInfo.title ? newInfo.title : oldInfo.title,
+            about: newInfo.about ? newInfo.about : oldInfo.about,
             date: startDate
                 ? startDate.toLocaleDateString("en-GB")
                 : oldInfo.date,
@@ -129,10 +141,10 @@ function EditEvent() {
             createdBy: user.uid,
         };
 
-        console.log("this is new info", newInfo);
+        console.log("this is new info", updatedInfo);
 
         try {
-            await updateDoc(eventRef, newInfo);
+            await updateDoc(eventRef, updatedInfo);
             console.log("updated................... ");
             router.push("/events");
         } catch (error) {
@@ -181,7 +193,7 @@ function EditEvent() {
                 </div>
                 <div className='p-6 space-y-6'>
                     <form
-                        onSubmit={(handleEditForm, updateDocument)}
+                        onSubmit={handleEditForm}
                         className='space-y-4 space-x-4 m-2 p-2'
                     >
                         <div className='grid grid-cols-6 gap-6'>
