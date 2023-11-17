@@ -18,7 +18,7 @@ function EventCard({ TheEvent }) {
     // fetch event data
     useEffect(() => {
         const fetchEventData = async () => {
-            const eventDoc = await getEventDocument(TheEvent.id);
+            const eventDoc = await getEventDocument(TheEvent);
             if (eventDoc.exists()) {
                 setEventData(eventDoc.data());
             }
