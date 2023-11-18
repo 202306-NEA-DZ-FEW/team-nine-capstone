@@ -3,6 +3,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 
 import AboutUs from "@/components/aboutus/AboutUs";
+import IndexPage from "@/components/reusableComponents/indexPage";
 
 import Layout from "@/layout/Layout";
 
@@ -10,9 +11,12 @@ export default function About() {
     const { t } = useTranslation("common");
 
     return (
-        <Layout>
-            <AboutUs />
-        </Layout>
+        <>
+            <IndexPage title='About Pebble' />
+            <Layout>
+                <AboutUs />
+            </Layout>
+        </>
     );
 }
 

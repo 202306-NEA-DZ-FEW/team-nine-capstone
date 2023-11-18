@@ -15,6 +15,8 @@ import { FcGoogle } from "react-icons/fc";
 
 import { auth } from "@/lib/firebase/controller";
 
+import IndexPage from "@/components/reusableComponents/indexPage";
+
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
 
@@ -100,6 +102,7 @@ export default function SignUp() {
 
     return (
         <Layout>
+            <IndexPage title='Get Involved, Sign In' />
             <div className='relative flex justify-center items-center h-screen'>
                 <Image src={background} alt='background' layout='fill' />
                 <div className='flex flex-col justify-center items-center content-center bg-white bg-opacity-50 rounded-lg z-30 w-2/3 py-5 space-y-4'>

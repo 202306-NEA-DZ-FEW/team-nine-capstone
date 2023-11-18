@@ -5,6 +5,7 @@ import * as React from "react";
 import HeroSection from "@/components/homepage/HeroSection";
 import HowitWorks from "@/components/homepage/HowitWorks";
 import SectionTwo from "@/components/homepage/SectionTwo";
+import IndexPage from "@/components/reusableComponents/indexPage";
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
@@ -15,6 +16,7 @@ export default function HomePage({ props }) {
 
     return (
         <>
+            <IndexPage title='Pebble' />
             <HeroSection />
             <Layout>
                 <HowitWorks />
