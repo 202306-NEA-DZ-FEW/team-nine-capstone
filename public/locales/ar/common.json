@@ -137,9 +137,10 @@
         "button": "موافق ومتابعة"
     },
     "joinbtn": {
+        "editEvent" : "تحديث",
         "join": "انضمام",
         "joined": "تم الانضمام",
-        "signUp": "التسجيل"
+        "sign Up": "التسجيل"
     },
     "no Poverty": "لا للفقر",
     "zero Hunger": "لا للجوع",

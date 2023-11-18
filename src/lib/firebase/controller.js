@@ -42,9 +42,8 @@ export const updateUserDocument = async (userId, userData) => {
 
     try {
         await updateDoc(userRef, userData);
-        console.log("User document updated successfully!");
     } catch (error) {
-        console.error("Error updating user document:", error);
+        error.message;
     }
 };
 
@@ -68,9 +67,8 @@ export const updateEventDocument = async (eventId, eventData) => {
 
     try {
         await updateDoc(eventRef, eventData);
-        console.log("Event document updated successfully!");
     } catch (error) {
-        console.error("Error updating event document:", error);
+        error.message;
     }
 };
 

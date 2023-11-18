@@ -163,9 +163,10 @@
         "button": "Agree and Continue"
     },
     "joinbtn": {
+        "editEvent" : "Edit Event",
         "join": "Join",
         "joined": "Joined",
-        "signUp": "Sign Up"
+        "sign Up": "Sign Up"
     },
     "no Poverty": "no Poverty",
     "zero Hunger": "zero Hunger",
