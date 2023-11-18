@@ -163,7 +163,7 @@
         "button": "Agree and Continue"
     },
     "joinbtn": {
-        "editEvent" : "Edit Event",
+        "editEvent": "Edit Event",
         "join": "Join",
         "joined": "Joined",
         "sign Up": "Sign Up"
