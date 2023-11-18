@@ -116,7 +116,7 @@ function CreateEvent() {
             <div className='w-full border border-x-bgc-Charcoal bg-bgc-silver mx-auto'>
                 <div className='flex items-start justify-between p-5 border-b rounded-t'>
                     <h3 className='font-Montserrat text-txtc-DarkCharcoal text-2xl text-center font-semibold'>
-                        Create Your Own Event
+                        {t("createEvent.subTitle")}
                     </h3>
                 </div>
                 <div className='p-6 space-y-6'>
