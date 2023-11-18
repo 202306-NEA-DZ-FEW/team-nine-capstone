@@ -169,7 +169,7 @@ function EventDetails() {
                             <div className='mt-6'>
                                 <Link
                                     className='inline-flex rounded-lg bg-bgc-ForestGreen px-4 py-1.5 text-base font-semibold leading-7 text-txtc-Ivory shadow-sm ring-1 ring-bgc-silver hover:bg-bgc-sunflower hover:ring-bgc-Charcoal'
-                                    href={`/events/editEvent/${eventDisplay.id}`}
+                                    href={`/events/editTheEvent/${eventDisplay.id}`}
                                 >
                                     Edit Event
                                 </Link>

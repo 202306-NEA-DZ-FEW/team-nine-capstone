@@ -39,6 +39,7 @@ function UserProfileEventCard({ id }) {
                     >
                         <div className='w-full max-w-md bg-white shadow-lg rounded-lg overflow-hidden'>
                             <div className='relative'>
+                                {/* eslint-disable-next-line */}
                                 <img
                                     src={eventData.image}
                                     alt={eventData.title}
@@ -96,6 +97,7 @@ function UserProfileEventCard({ id }) {
 
                                 <button className='w-40 h-14 rounded-lg bg-amber-400 hover:bg-green-400 text-white text-xl'>
                                     <JoinButton
+                                        eOwner={eventData.createdBy}
                                         eventId={id}
                                         eAttendees={eventData.attendees}
                                         setJoinUpdate={setJoinUpdate}

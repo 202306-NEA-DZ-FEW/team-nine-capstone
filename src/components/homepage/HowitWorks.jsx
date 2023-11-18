@@ -3,11 +3,13 @@ import { useTranslation } from "next-i18next";
 import React from "react";
 import { AiOutlineRight } from "react-icons/ai";
 
+import { useUser } from "@/context/UserContext";
+
 import SocialShare from "../reusableComponents/SocialShare";
 
 const HowitWorks = () => {
     const { t } = useTranslation();
-
+    const { user } = useUser();
     const howitworks = [
         {
             image: "/images/ManTop.png",
@@ -37,7 +39,7 @@ const HowitWorks = () => {
                 "Host your own charity event and bring positive change to the world."
             ),
             logo: t("Get started"),
-            link: "/createTheEvent",
+            link: user ? "/createTheEvent" : "/authentication/signUp",
         },
         {
             image: "/images/Girl.png",

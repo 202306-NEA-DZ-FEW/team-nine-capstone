@@ -2,6 +2,7 @@ import { addDoc, arrayUnion } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { MultiSelect } from "react-multi-select-component";
@@ -25,6 +26,7 @@ function CreateEvent() {
     const [loca, setLoca] = useState(null);
     const { user, setUser } = useUser();
     const router = useRouter();
+    const { t } = useTranslation("common");
     const [urlsBunch, setUrlsBunch] = useState(null);
 
     const options = interestList.map((obj) => {
@@ -103,14 +105,10 @@ function CreateEvent() {
                             height={60}
                         ></Image>
                         <h1 className='text-4xl font-bold text-center mb-2 font-Montserrat text-white'>
-                            Host an Event!
+                            {t("createEvent.title")}
                         </h1>
                         <p className='text-lg font-Lora text-center text-white'>
-                            Empower change by hosting your own event with us!
-                            Our easy setup and do-it-yourself model let you
-                            become a community leader effortlessly. Start making
-                            a positive impact today—create an event that
-                            matters. Join us in spreading joy and kindness!
+                            {t("createEvent.intro")}
                         </p>
                     </div>
                 </div>
@@ -118,7 +116,7 @@ function CreateEvent() {
             <div className='w-full border border-x-bgc-Charcoal bg-bgc-silver mx-auto'>
                 <div className='flex items-start justify-between p-5 border-b rounded-t'>
                     <h3 className='font-Montserrat text-txtc-DarkCharcoal text-2xl text-center font-semibold'>
-                        Create Your Own Event
+                        {t("createEvent.subTitle")}
                     </h3>
                 </div>
                 <div className='p-6 space-y-6'>
@@ -129,7 +127,7 @@ function CreateEvent() {
                         <div className='grid grid-cols-6 gap-6'>
                             <div className='col-span-6 sm:col-span-3'>
                                 <label htmlFor='title' className='form-input'>
-                                    Title
+                                    {t("createEvent.titleInput")}
                                 </label>
                                 <input
                                     type='text'
@@ -145,7 +143,7 @@ function CreateEvent() {
                                     htmlFor='Interests'
                                     className='form-input'
                                 >
-                                    Interests
+                                    {t("createEvent.interests")}
                                 </label>
                                 <MultiSelect
                                     options={options}
@@ -160,7 +158,7 @@ function CreateEvent() {
                                     htmlFor='location'
                                     className='form-input'
                                 >
-                                    Location
+                                    {t("createEvent.location")}
                                 </label>
                                 <LocaInput
                                     name='location'
@@ -173,7 +171,7 @@ function CreateEvent() {
                             </div>
                             <div className='col-span-6 sm:col-span-3'>
                                 <label htmlFor='image' className='form-input'>
-                                    Images
+                                    {t("createEvent.images")}
                                 </label>
                                 <input
                                     type='file'
@@ -185,7 +183,7 @@ function CreateEvent() {
                             </div>
                             <div className='col-span-6 sm:col-span-3'>
                                 <label htmlFor='date' className='form-input'>
-                                    date
+                                    {t("createEvent.date")}
                                 </label>
                                 <DatePicker
                                     type='text'
@@ -203,7 +201,7 @@ function CreateEvent() {
                             </div>
                             <div className='col-span-full'>
                                 <label htmlFor='about' className='form-input'>
-                                    About
+                                    {t("createEvent.about")}
                                 </label>
                                 <textarea
                                     id='about'
@@ -217,7 +215,7 @@ function CreateEvent() {
                             className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-sunflower hover:bg-bgc-sunflower focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
                             type='submit'
                         >
-                            Save all
+                            {t("createEvent.save")}
                         </button>
                     </form>
                 </div>

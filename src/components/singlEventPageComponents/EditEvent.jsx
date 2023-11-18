@@ -8,6 +8,7 @@ import {
 } from "firebase/storage";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { MultiSelect } from "react-multi-select-component";
@@ -25,6 +26,7 @@ function EditEvent() {
     const { user, setUser } = useUser();
     const [imageInput, setImageInput] = useState(null);
     const [urlsBunch, setUrlsBunch] = useState(null);
+    const { t } = useTranslation("common");
 
     const [startDate, setStartDate] = useState(new Date());
     const [selectedInterets, setSelectedInterets] = useState([]);
@@ -173,14 +175,10 @@ function EditEvent() {
                             height={60}
                         ></Image>
                         <h1 className='text-4xl font-bold text-center mb-2 font-Montserrat text-txtc-Ivory'>
-                            Host an Event!
+                            {t("editEvent.title")}
                         </h1>
                         <p className='text-lg font-Lora text-center text-txtc-Ivory'>
-                            Empower change by hosting your own event with us!
-                            Our easy setup and do-it-yourself model let you
-                            become a community leader effortlessly. Start making
-                            a positive impact today—create an event that
-                            matters. Join us in spreading joy and kindness!
+                            {t("editEvent.intro")}
                         </p>
                     </div>
                 </div>
@@ -188,7 +186,7 @@ function EditEvent() {
             <div className='w-full border border-x-bgc-Charcoal bg-bgc-silver mx-auto'>
                 <div className='flex items-start justify-between p-5 border-b rounded-t'>
                     <h3 className='font-Montserrat text-txtc-DarkCharcoal text-2xl text-center font-semibold'>
-                        Edit Your Event
+                        {t("editEvent.subTitle")}
                     </h3>
                 </div>
                 <div className='p-6 space-y-6'>
@@ -199,7 +197,7 @@ function EditEvent() {
                         <div className='grid grid-cols-6 gap-6'>
                             <div className='col-span-6 sm:col-span-3'>
                                 <label htmlFor='title' className='form-input'>
-                                    Title
+                                    {t("editEvent.titleInput")}
                                 </label>
                                 <input
                                     type='text'
@@ -214,7 +212,7 @@ function EditEvent() {
                                     htmlFor='Interests'
                                     className='form-input'
                                 >
-                                    Interests
+                                    {t("editEvent.interests")}
                                 </label>
                                 <MultiSelect
                                     options={options}
@@ -229,7 +227,7 @@ function EditEvent() {
                                     htmlFor='location'
                                     className='form-input'
                                 >
-                                    Location
+                                    {t("editEvent.location")}
                                 </label>
                                 <LocaInput
                                     name='location'
@@ -242,7 +240,7 @@ function EditEvent() {
                             </div>
                             <div className='col-span-6 sm:col-span-3'>
                                 <label htmlFor='image' className='form-input'>
-                                    Images
+                                    {t("editEvent.images")}
                                 </label>
                                 <input
                                     type='file'
@@ -257,7 +255,7 @@ function EditEvent() {
                             </div>
                             <div className='col-span-6 sm:col-span-3'>
                                 <label htmlFor='date' className='form-input'>
-                                    date
+                                    {t("editEvent.date")}
                                 </label>
                                 <DatePicker
                                     type='text'
@@ -275,7 +273,7 @@ function EditEvent() {
                             </div>
                             <div className='col-span-full'>
                                 <label htmlFor='about' className='form-input'>
-                                    About
+                                    {t("editEvent.about")}
                                 </label>
                                 <textarea
                                     id='about'
@@ -289,7 +287,7 @@ function EditEvent() {
                             className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-sunflower hover:bg-bgc-sunflower focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
                             type='submit'
                         >
-                            Save all
+                            {t("editEvent.save")}
                         </button>
                     </form>
                 </div>

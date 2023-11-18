@@ -22,12 +22,10 @@
         "title": "Spread Hope and Change",
         "discription": "Embrace your vision for a better world. Lead by example."
     },
-    "Get Started": "Get Started",
     "who are we": "who are we",
     "Our Events": "Our Events",
     "No Events": "No Events",
     "Create Event": "Create Event",
-    "Donate": "Donate",
 
     "HeroSection": {
         "title": "Join Us in Creating Impactful Change",
@@ -163,9 +161,10 @@
         "button": "Agree and Continue"
     },
     "joinbtn": {
+        "editEvent": "Edit Event",
         "join": "Join",
         "joined": "Joined",
-        "signUp": "Sign Up"
+        "sign Up": "Sign Up"
     },
     "no Poverty": "no Poverty",
     "zero Hunger": "zero Hunger",
@@ -239,5 +238,35 @@
         "D": "DAY",
         "Mo": "MON",
         "Y": "YEAR"
+    },
+    "editEvent": {
+        "title": "Edit Event",
+        "intro": "Welcome back to your Edit Event page! Refine, enhance, and amplify the impact of your gathering effortlessly. Empower your community and continue spreading joy and kindness. Let's make your event even more extraordinary together!",
+        "subTitle": "Edit Your own Event",
+        "titleInput": "Title",
+        "interests": "Interests",
+        "location": "Location",
+        "images": "Images",
+        "date": "date",
+        "about": "About",
+        "save": "Save all"
+    },
+    "createEvent": {
+        "title": "Create Event",
+        "intro": "Empower change by hosting your own event with us! Our easy setup and do-it-yourself model let you become a community leader effortlessly. Start making a positive impact today—create an event that matters. Join us in spreading joy and kindness!",
+        "subTitle": "Create Your own Event",
+        "titleInput": "Title",
+        "interests": "Interests",
+        "location": "Location",
+        "images": "Images",
+        "date": "date",
+        "about": "About",
+        "save": "Save all"
+    },
+    "VideoSection": {
+        "title": "Empower, Engage, Volunteer",
+        "intro": "Inspire positive change and create meaningful impact through acts of kindness and giving. Join us in making a difference.",
+        "start": "Get Started",
+        "donate": "Donate"
     }
 }
