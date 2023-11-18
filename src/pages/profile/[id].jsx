@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect, useState } from "react";
+import { LiaUserEditSolid } from "react-icons/lia";
 
 import { getUserDocument } from "@/lib/firebase/controller";
 import { getAllUserIds } from "@/lib/firebase/users";
@@ -11,7 +12,6 @@ import UserProfileEventCard from "@/components/reusableComponents/UserProfileEve
 
 import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
-import { LiaUserEditSolid } from "react-icons/lia";
 
 function Profile() {
     const { user } = useUser();

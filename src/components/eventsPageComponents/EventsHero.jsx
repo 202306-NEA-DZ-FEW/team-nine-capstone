@@ -91,7 +91,9 @@ const EventsHero = ({ closestEvent }) => {
                         <h1 className='lg:text-xl text-lg  font-bold flex justify-center'>
                             {t("eventTimer.Lanching in...")}
                         </h1>
-                        <EventTimer closestEvent={closestEvent} />
+                        <div className=''>
+                            <EventTimer closestEvent={closestEvent} />
+                        </div>
                     </div>
                 </div>
 

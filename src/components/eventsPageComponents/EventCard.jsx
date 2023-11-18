@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPeopleGroup } from "react-icons/fa6";
 
+import { getEventDocument } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
-
-import { useUser } from "@/context/UserContext";
 
 import JoinButton from "../reusableComponents/JoinButton";
 
@@ -13,41 +12,28 @@ function EventCard({ TheEvent }) {
     const { t } = useTranslation("common");
     const [eventData, setEventData] = useState(null);
     const [joinUpdate, setJoinUpdate] = useState(0);
-    console.log("theevent.id", TheEvent);
-    console.log("eventdata", eventData);
+
     // fetch event data
-    // useEffect(() => {
-    //     const fetchEventData = async () => {
-    //         const eventDoc = await getEventDocument(TheEvent);
-    //         if (eventDoc.exists()) {
-    //             // Get the data from the document
-    //             const eventDataFromDoc = eventDoc.data();
+    useEffect(() => {
+        const fetchEventData = async () => {
+            const eventDoc = await getEventDocument(TheEvent);
+            if (eventDoc.exists()) {
+                setEventData(eventDoc.data());
+            }
+        };
 
-    //             // Add the document ID to the data
-    //             const eventDataWithId = {
-    //                 ...eventDataFromDoc,
-    //                 id: eventDoc.id,
-    //             };
+        fetchEventData();
+    }, [TheEvent, joinUpdate]);
 
-    //             // Set the updated data to state
-    //             setEventData(eventDataWithId);
-    //         }
-    //     };
-
-    //     fetchEventData();
-    // }, [TheEvent, joinUpdate]);
-    // console.log(TheEvent);
-
-    const { user } = useUser();
-    const matchingInterests = TheEvent?.interests
+    const matchingInterests = eventData?.interests
         ?.map((element) =>
             interestList.find((interest) => interest.title === element)
         )
         .filter((matchingInterest) => matchingInterest);
     function formatDate() {
-        if (TheEvent?.date) {
+        if (eventData?.date) {
             // Split the date string into day, month, and year
-            const dateParts = TheEvent.date.split("/");
+            const dateParts = eventData.date.split("/");
             const day = parseInt(dateParts[0], 10); // Parse day as an integer
             const month = parseInt(dateParts[1], 10) - 1; // Parse month as an integer (0-based)
             const year = parseInt(dateParts[2], 10);
@@ -95,9 +81,9 @@ function EventCard({ TheEvent }) {
 
     const currentDate = new Date(); // You can pass your date here
     const formattedDate = formatDate(currentDate);
-    // if (!eventData || !eventData.image) {
-    //     return null; // Return null or a placeholder component if TheEvent or image is null
-    // }
+    if (!eventData || !eventData.image) {
+        return null; // Return null or a placeholder component if TheEvent or image is null
+    }
 
     return (
         <div className='flex flex-col w-[95%] shadow-lg my-4 hover:bg-white h-56 transition duration-300 md:hover:scale-105 hover:scale-95 border-black rounded-md py-2 px-2'>
@@ -106,9 +92,9 @@ function EventCard({ TheEvent }) {
                     {formattedDate}
                 </div>
                 <div className='flex justify-center gap-4 px-2 items-center md:w-auto md:rounded-full md:bg-gray-200 w-[50%] rounded-lg text-lg font-medium'>
-                    {TheEvent.attendees ? (
+                    {eventData.attendees ? (
                         <>
-                            {TheEvent.attendees.length}{" "}
+                            {eventData.attendees.length}{" "}
                             {t("eventCard.attendees")}
                             <div>
                                 <FaPeopleGroup />
@@ -126,7 +112,7 @@ function EventCard({ TheEvent }) {
                     <div
                         className='w-full h-full bg-top bg-cover'
                         style={{
-                            backgroundImage: `url(${TheEvent.image})`,
+                            backgroundImage: `url(${eventData.image})`,
                         }}
                     >
                         {/* <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60  group-hover:to-black/70'></div> */}
@@ -135,15 +121,15 @@ function EventCard({ TheEvent }) {
                 <div className='w-[65%]  h-[100%] flex flex-col  '>
                     <div className='h-[80%] overflow-hidden'>
                         <div className=' text-green-900 text-2xl font-bold '>
-                            {TheEvent.title}
+                            {eventData.title}
                         </div>
                         <div className='max-h-[50%] overflow-hidden text-green-900 text-sm'>
-                            {TheEvent.about}
+                            {eventData.about}
                         </div>
                         <div className='hidden lg:flex flex-row gap-4 h-[20%]'>
                             {matchingInterests?.slice(0, 4).map((interest) => (
                                 <div
-                                    className='flex justify-center items-center xl:text-lg text-sm px-2  h-7 rounded-full bg-gray-200 text-black font-medium'
+                                    className='flex justify-center items-center truncate text-sm px-2  h-7 rounded-full bg-gray-200  text-black font-medium'
                                     key={interest.title}
                                 >
                                     {t(interest.title)}
@@ -163,8 +149,9 @@ function EventCard({ TheEvent }) {
                         </Link>
                         <div className='flex justify-center cursor-pointer font-medium text-lg hover:bg-amber-400 items-center w-28 h-7 self-center bg-emerald-500 rounded-md shadow-md'>
                             <JoinButton
-                                eventId={TheEvent.id}
-                                eAttendees={TheEvent.attendees}
+                                eOwner={eventData.createdBy}
+                                eventId={TheEvent}
+                                eAttendees={eventData.attendees}
                                 setJoinUpdate={setJoinUpdate}
                             />
                         </div>
