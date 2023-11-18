@@ -243,24 +243,26 @@
     "editEvent": {
         "title": "Edit Event",
         "intro": "Welcome back to your Edit Event page! Refine, enhance, and amplify the impact of your gathering effortlessly. Empower your community and continue spreading joy and kindness. Let's make your event even more extraordinary together!",
+        "subTitle": "Edit Your own Event",
         "titleInput": "Title",
-        "Interests": "Interests",
-        "Location": "Location",
-        "Images": "Images",
+        "interests": "Interests",
+        "location": "Location",
+        "images": "Images",
         "date": "date",
-        "About": "About",
-        "Save all": "Save all"
+        "about": "About",
+        "save all": "Save all"
     },
     "createEvent": {
         "title": "Edit Event",
         "intro": "Empower change by hosting your own event with us! Our easy setup and do-it-yourself model let you become a community leader effortlessly. Start making a positive impact today—create an event that matters. Join us in spreading joy and kindness!",
+        "subTitle": "Create Your own Event",
         "titleInput": "Title",
         "Interests": "Interests",
-        "Location": "Location",
-        "Images": "Images",
+        "location": "Location",
+        "images": "Images",
         "date": "date",
-        "About": "About",
-        "Save all": "Save all"
+        "about": "About",
+        "save all": "Save all"
     },
     "HereSection": {
         "title": "",
