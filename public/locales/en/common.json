@@ -22,12 +22,10 @@
         "title": "Spread Hope and Change",
         "discription": "Embrace your vision for a better world. Lead by example."
     },
-    "Get Started": "Get Started",
     "who are we": "who are we",
     "Our Events": "Our Events",
     "No Events": "No Events",
     "Create Event": "Create Event",
-    "Donate": "Donate",
 
     "HeroSection": {
         "title": "Join Us in Creating Impactful Change",
@@ -163,9 +161,10 @@
         "button": "Agree and Continue"
     },
     "joinbtn": {
+        "editEvent": "Edit Event",
         "join": "Join",
         "joined": "Joined",
-        "signUp": "Sign Up"
+        "sign Up": "Sign Up"
     },
     "no Poverty": "no Poverty",
     "zero Hunger": "zero Hunger",
@@ -264,10 +263,10 @@
         "about": "About",
         "save": "Save all"
     },
-    "HereSection": {
-        "title": "",
-        "intro": "",
-        "donate": "",
-        "start": ""
+    "VideoSection": {
+        "title": "Empower, Engage, Volunteer",
+        "intro": "Inspire positive change and create meaningful impact through acts of kindness and giving. Join us in making a difference.",
+        "start": "Get Started",
+        "donate": "Donate"
     }
 }
