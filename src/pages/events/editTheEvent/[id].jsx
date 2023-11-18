@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
@@ -7,7 +8,8 @@ import EventEdit from "@/components/singlEventPageComponents/EditEvent";
 
 import Layout from "../../../layout/Layout";
 
-function editEvent() {
+function EditTheEvent() {
+    const { t } = useTranslation("common");
     return (
         <Layout>
             <EventEdit />
@@ -15,7 +17,8 @@ function editEvent() {
     );
 }
 
-export default editEvent;
+export default EditTheEvent;
+
 export async function getStaticPaths() {
     const paths = await getAllEventIds();
 

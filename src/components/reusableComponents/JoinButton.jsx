@@ -1,7 +1,7 @@
 import { arrayRemove, arrayUnion } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     updateEventDocument,
@@ -10,17 +10,33 @@ import {
 
 import { useUser } from "@/context/UserContext";
 
-function JoinButton({ eventId, eAttendees, setJoinUpdate }) {
+function JoinButton({ eOwner, eventId, eAttendees, setJoinUpdate }) {
     const { t } = useTranslation("common");
     const { user } = useUser();
     const router = useRouter();
+    const [isEventOwner, setIsEventOwner] = useState(false);
+
+    useEffect(() => {
+        const findIfOwner = () => {
+            if (user && user.uid === eOwner) {
+                setIsEventOwner(true);
+            } else {
+                setIsEventOwner(false);
+            }
+        };
+
+        findIfOwner();
+    }, [user, eOwner]);
 
     const handleJoin = async () => {
         if (!user) {
             router.push("/authentication/signUp");
+        } else if (isEventOwner === true) {
+            router.push(`/events/editEvent/${eventId}`);
         } else {
+            const attendeesArray = eAttendees || [];
             // Update event document
-            if (eAttendees.includes(user.uid)) {
+            if (attendeesArray.includes(user.uid)) {
                 // User is in attendees list - remove them
                 await updateEventDocument(eventId, {
                     attendees: arrayRemove(user.uid),
@@ -47,10 +63,16 @@ function JoinButton({ eventId, eAttendees, setJoinUpdate }) {
     return (
         <div onClick={handleJoin}>
             {user
-                ? eAttendees?.includes(user.uid)
-                    ? t("joinbtn.joined")
-                    : t("joinbtn.join")
-                : t("joinbtn.Sign Up")}
+                ? isEventOwner
+                    ? // If user is the owner, display "Edit Event"
+                      t("joinbtn.editEvent")
+                    : eAttendees?.includes(user.uid)
+                    ? // If user is in attendees list, display "Joined"
+                      t("joinbtn.joined")
+                    : // Otherwise, display "Join"
+                      t("joinbtn.join")
+                : // If user is not logged in, display "Sign Up"
+                  t("joinbtn.Sign Up")}
         </div>
     );
 }

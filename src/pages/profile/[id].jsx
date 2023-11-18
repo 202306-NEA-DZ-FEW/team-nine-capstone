@@ -42,6 +42,25 @@ function Profile() {
         fetchUserData();
     }, [id]);
 
+    const shuffleArray = (array) => {
+        // Copy the original array to avoid modifying it directly
+        const shuffledArray = [...array];
+
+        // Loop through the array in reverse order
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            // Generate a random index from 0 to i
+            const j = Math.floor(Math.random() * (i + 1));
+
+            // Swap elements at i and j indices
+            [shuffledArray[i], shuffledArray[j]] = [
+                shuffledArray[j],
+                shuffledArray[i],
+            ];
+        }
+
+        return shuffledArray;
+    };
+
     return (
         <Layout>
             {userData && (
@@ -50,15 +69,17 @@ function Profile() {
                     <div className='relative py-5 bg-green-700 bg-opacity-50 w-full '>
                         <div className='flex flex-col sm:flex-row group justify-center items-center align-middle space-x-10 z-10 '>
                             {userData.avatar ? (
+                                /* eslint-disable-next-line @next/next/no-img-element */
                                 <img
                                     src={userData.avatar}
                                     alt='Avatar'
-                                    className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40 hover:p-4'
+                                    className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
                                 />
                             ) : (
+                                /* eslint-disable-next-line @next/next/no-img-element */
                                 <img
                                     src='/images/defaultUser.png'
-                                    alt='Default Avatar'
+                                    alt='Default'
                                     className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
                                 />
                             )}
@@ -142,11 +163,13 @@ function Profile() {
                                 {t("profile.recentEvents")}{" "}
                             </div>
                             <div className='flex flex-wrap my-5 p-1'>
-                                {userData.iEvents.map((event) => (
-                                    <div key={event}>
-                                        <UserProfileEventCard id={event} />
-                                    </div>
-                                ))}
+                                {shuffleArray(userData.iEvents)
+                                    .slice(0, 4)
+                                    .map((event) => (
+                                        <div key={event}>
+                                            <UserProfileEventCard id={event} />
+                                        </div>
+                                    ))}
                             </div>
                         </div>
                     ) : (

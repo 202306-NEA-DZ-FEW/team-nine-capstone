@@ -74,7 +74,7 @@ function EventList() {
     // sets the routing according to the user's state
     const handleUser = () => {
         user
-            ? router.push("/createEvent")
+            ? router.push("/createTheEvent")
             : router.push("/authentication/signUp");
     };
 
@@ -200,7 +200,6 @@ function EventList() {
             (event.selected * itemsPerPage) % filteredEvents.length;
         setItemOffset(newOffset);
     };
-
     return (
         <div className='relative h-full flex flex-col bg-gray-200'>
             <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
@@ -254,6 +253,12 @@ function EventList() {
                     <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
                         <EventsHero closestEvent={closestEvent} />
                     </div>
+                    <button
+                        className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
+                        onClick={handleUser}
+                    >
+                        {t("Create Event")}
+                    </button>
                     {allCategories ? (
                         ""
                     ) : (
@@ -343,12 +348,6 @@ function EventList() {
                                     )}{" "}
                                     <BiSad className='text-yellow-400 text-xl' />
                                 </h1>
-                                <button
-                                    className='w-auto h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
-                                    onClick={handleUser}
-                                >
-                                    {t("Create Event")}
-                                </button>
                             </div>
                         )}
                     </div>

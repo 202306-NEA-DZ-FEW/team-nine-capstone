@@ -73,9 +73,9 @@ function Navbar() {
     }, []);
     return (
         <div
-            className={` relative top-0 left-0 w-full h-auto z-50  ${
+            className={`sticky left-0 top-0 w-full h-auto z-50  ${
                 hasScrolled
-                    ? "bg-black/80 text-white "
+                    ? "bg-black/80 text-white"
                     : "bg-black/20 backdrop-blur-lg text-black shadow-lg"
             }`}
         >
@@ -83,11 +83,19 @@ function Navbar() {
                 <div className='flex items-center justify-between p-3'>
                     <Link
                         href='/'
-                        className='text-2xl font-bold cursor-pointer'
                         onClick={closeMenu}
+                        className='flex items-center '
                     >
-                        Logo
+                        <image
+                            src='/images/navLogo.png'
+                            alt='Logo'
+                            height={40}
+                            width={40}
+                            className='mr-2'
+                        />
+                        <span className='nav-logo'>Pebble</span>
                     </Link>
+
                     {/*SM view*/}
                     <div className='absolute right-0 p-5 sm:hidden'>
                         <VscMenu
