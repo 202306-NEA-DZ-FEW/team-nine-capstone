@@ -336,7 +336,7 @@ function EventList() {
                                 return (
                                     <EventCard
                                         key={event.id}
-                                        TheEvent={event}
+                                        TheEvent={event.id}
                                     />
                                 );
                             })
