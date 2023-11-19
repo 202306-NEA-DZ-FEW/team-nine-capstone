@@ -14,6 +14,7 @@ import { useUser } from "@/context/UserContext";
 import BottomSheet from "./BottomSheets";
 import DateFilter from "./DateFilter";
 import EventCard from "./EventCard";
+import EventsUp from "./EventsUp";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
 import Pagination from "./Pagination";
@@ -33,16 +34,20 @@ function EventList() {
     const itemsPerPage = 5;
     const { user } = useUser();
     const router = useRouter();
+
     const closestEvent = events.reduce((closest, event) => {
-        const targetDate = new Date(event.date);
+        const dateParts = event.date.split("/");
+        const day = parseInt(dateParts[0], 10);
+        const month = parseInt(dateParts[1], 10) - 1; // Month is 0-based
+        const year = parseInt(dateParts[2], 10);
+
+        const date = new Date(year, month, day);
 
         // Get the current date
         const currentDate = new Date();
-
         // Calculate the time difference in milliseconds
-        const timeDifference = targetDate - currentDate;
-        // console.log("time diff", timeDifference);
-
+        const timeDifference = date - currentDate;
+        console.log("timediff", event.title, timeDifference);
         // Check if this event is closer than the current closest event
         if (
             timeDifference > 0 &&
@@ -50,12 +55,11 @@ function EventList() {
         ) {
             return {
                 event,
-                targetDate,
+                date,
             };
         }
         return closest;
     }, null);
-
     const openBottomSheet = () => {
         setBottomSheetOpen(true);
     };
@@ -189,7 +193,7 @@ function EventList() {
     const endOffset = itemOffset + itemsPerPage;
     const currentItems = filteredEvents.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(filteredEvents.length / itemsPerPage);
-
+    console.log("currentItems", currentItems);
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
         const newOffset =
@@ -246,8 +250,8 @@ function EventList() {
                 </div>
 
                 <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
-                    <div className=' border border-solid border-emerald-950 self-center w-[95%] h-44 rounded-xl mx-auto my-4 flex justify-center items-center'>
-                        {/* <EventTimer closestEvent={closestEvent} /> */}
+                    <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
+                        <EventsUp closestEvent={closestEvent} />
                     </div>
                     <button
                         className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
