@@ -6,8 +6,6 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { getEventDocument } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
 
-import { useUser } from "@/context/UserContext";
-
 import JoinButton from "../reusableComponents/JoinButton";
 
 function EventCard({ TheEvent }) {
@@ -26,9 +24,7 @@ function EventCard({ TheEvent }) {
 
         fetchEventData();
     }, [TheEvent, joinUpdate]);
-    // console.log(TheEvent);
 
-    const { user } = useUser();
     const matchingInterests = eventData?.interests
         ?.map((element) =>
             interestList.find((interest) => interest.title === element)
@@ -144,7 +140,7 @@ function EventCard({ TheEvent }) {
                     <div className='flex md:flex-row flex-col gap-2 min-h-[20%] justify-between mt-2 items-end'>
                         <Link
                             className='flex justify-center bg-amber-400 cursor-pointer font-medium text-sm hover:bg-amber-400 items-center w-28 h-7 self-center  rounded-md shadow-md'
-                            href={`/events/${eventData.id}`}
+                            href={`/events/${TheEvent}`}
                         >
                             {" "}
                             <button className=' text-white'>
@@ -153,7 +149,8 @@ function EventCard({ TheEvent }) {
                         </Link>
                         <div className='flex justify-center cursor-pointer font-medium text-lg hover:bg-amber-400 items-center w-28 h-7 self-center bg-emerald-500 rounded-md shadow-md'>
                             <JoinButton
-                                eventId={eventData.id}
+                                eOwner={eventData.createdBy}
+                                eventId={TheEvent}
                                 eAttendees={eventData.attendees}
                                 setJoinUpdate={setJoinUpdate}
                             />

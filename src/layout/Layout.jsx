@@ -7,7 +7,7 @@ export default function Layout({ children }) {
     // Put Header or Footer around the children element
     // Example
     return (
-        <div className='w-screen'>
+        <div className='w-screen bg-bgc-silver'>
             <Navbar />
             {children}
             <Footer />
