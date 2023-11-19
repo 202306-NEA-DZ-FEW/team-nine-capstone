@@ -14,7 +14,7 @@ import { useUser } from "@/context/UserContext";
 import BottomSheet from "./BottomSheets";
 import DateFilter from "./DateFilter";
 import EventCard from "./EventCard";
-import EventsHero from "./eventsHero";
+import EventsUp from "./EventsUp";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
 import Pagination from "./Pagination";
@@ -251,7 +251,7 @@ function EventList() {
 
                 <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
                     <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
-                        <EventsHero closestEvent={closestEvent} />
+                        <EventsUp closestEvent={closestEvent} />
                     </div>
                     <button
                         className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'

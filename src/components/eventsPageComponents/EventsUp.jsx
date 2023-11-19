@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import EventTimer from "./EventTimer";
 
-const EventsHero = ({ closestEvent }) => {
+const EventsUp = ({ closestEvent }) => {
     const [joinUpdate, setJoinUpdate] = useState(0);
     const { t } = useTranslation("common");
     console.log("clossetevent", closestEvent);
@@ -91,7 +91,7 @@ const EventsHero = ({ closestEvent }) => {
                         <h1 className='lg:text-xl text-lg  font-bold flex justify-center'>
                             {t("eventTimer.Lanching in...")}
                         </h1>
-                        <div className=''>
+                        <div className='text-emerald-100'>
                             <EventTimer closestEvent={closestEvent} />
                         </div>
                     </div>
@@ -104,4 +104,4 @@ const EventsHero = ({ closestEvent }) => {
     );
 };
 
-export default EventsHero;
+export default EventsUp;

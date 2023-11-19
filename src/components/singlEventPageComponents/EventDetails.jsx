@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt } from "react-icons/fa";
 import { FaPeopleGroup, FaPhoneFlip } from "react-icons/fa6";
-import { MdDateRange, MdEdit, MdMail } from "react-icons/md";
+import { MdDateRange, MdMail } from "react-icons/md";
 
 import {
     eventsCollection,
@@ -49,6 +49,7 @@ function EventDetails() {
     const { t } = useTranslation("common");
     const router = useRouter();
     const { id } = router.query;
+    console.log("id", id);
     console.log("eventData", eventDisplay);
     console.log("userData", userDetails);
     console.log("interests", userDetails?.userInterests);
@@ -100,7 +101,8 @@ function EventDetails() {
         fetchData();
     }, [id]);
     // filter the event category
-    const matchingInterests = eventDisplay.interests
+
+    const matchingInterests = eventDisplay?.interests
         ?.map((element) =>
             interestList.find((interest) => interest.title === element)
         )
@@ -208,9 +210,9 @@ function EventDetails() {
                                 <Link
                                     href={`/events/editEvent/${eventDisplay.id}`}
                                 >
-                                    <div className='absolute z-10 top-2 right-2 text-2xl flex flex-row items-center justify-center w-auto px-2 truncate rounded-full h-6 bg-gray-200 text-gray-950'>
-                                        <MdEdit />
-                                        <div className='text-lg font-medium'>
+                                    <div className='absolute z-10 top-0 right-0 p-2 px-2 opacity-100 group-hover:opacity-0 bg-gray-200'>
+                                        {/* <MdEdit className='absolute z-20 top-1 bg-gray-200 rounded-full hover:hidden right-2' /> */}
+                                        <div className='flex items-center justify-center w-28 h-6  rounded-full'>
                                             EDIT EVENT
                                         </div>
                                     </div>
@@ -272,7 +274,7 @@ function EventDetails() {
                             <div
                                 className={`${
                                     isDiscription
-                                        ? "lg:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
+                                        ? "md:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
                                         : ""
                                 }`}
                             ></div>
@@ -292,7 +294,7 @@ function EventDetails() {
                             <div
                                 className={`${
                                     isOrgenizer
-                                        ? "lg:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
+                                        ? "md:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
                                         : ""
                                 }`}
                             ></div>
@@ -312,7 +314,7 @@ function EventDetails() {
                             <div
                                 className={`${
                                     isDetails
-                                        ? "lg:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
+                                        ? "md:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
                                         : ""
                                 }`}
                             ></div>

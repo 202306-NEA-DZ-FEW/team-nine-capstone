@@ -34,7 +34,7 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                 ) : (
                     ""
                 )}
-                <div className='md:w-full  lg:h-auto rounded-lg pb-2 border-none shadow-xl bg-gray-200'>
+                <div className='md:w-full lg:h-auto rounded-lg pb-2 border-none shadow-xl bg-gray-200'>
                     <div
                         className={`flex md:justify-between ${
                             isOpen
@@ -81,12 +81,12 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                             </h1>
                         </div>
                     </div>
-                    <div className='grid grid-cols-7 px-2 '>
+                    <div className='flex flex-row px-2 '>
                         {days.map((day, index) => {
                             return (
                                 <h1
                                     key={index}
-                                    className=' text-sm text-center underline h-8 font-bold grid place-content-center text-gray-500 select-none'
+                                    className='w-1/6 text-sm text-center underline h-8 font-bold grid place-content-center text-gray-500 select-none'
                                 >
                                     {t(day)}
                                 </h1>
@@ -94,13 +94,13 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                         })}
                     </div>
 
-                    <div className=' grid grid-cols-7 px-2'>
+                    <div className=' flex flex-row flex-wrap px-2'>
                         {generateDate(today.month(), today.year()).map(
                             ({ date, currentMonth, today }, index) => {
                                 return (
                                     <div
                                         key={index}
-                                        className='p-2 text-center h-6 grid place-content-center text-sm '
+                                        className='w-1/6 p-2 text-center h-6 grid place-content-center text-sm '
                                     >
                                         <h1
                                             className={cn(

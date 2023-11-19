@@ -12,6 +12,7 @@ function EventCard({ TheEvent }) {
     const { t } = useTranslation("common");
     const [eventData, setEventData] = useState(null);
     const [joinUpdate, setJoinUpdate] = useState(0);
+    console.log("theevent", TheEvent);
 
     // fetch event data
     useEffect(() => {
@@ -127,7 +128,7 @@ function EventCard({ TheEvent }) {
                             {eventData.about}
                         </div>
                         <div className='hidden lg:flex flex-row gap-4 h-[20%]'>
-                            {matchingInterests?.slice(0, 4).map((interest) => (
+                            {matchingInterests?.slice(0, 3).map((interest) => (
                                 <div
                                     className='flex justify-center items-center truncate text-sm px-2  h-7 rounded-full bg-gray-200  text-black font-medium'
                                     key={interest.title}
@@ -140,7 +141,7 @@ function EventCard({ TheEvent }) {
                     <div className='flex md:flex-row flex-col gap-2 min-h-[20%] justify-between mt-2 items-end'>
                         <Link
                             className='flex justify-center bg-amber-400 cursor-pointer font-medium text-sm hover:bg-amber-400 items-center w-28 h-7 self-center  rounded-md shadow-md'
-                            href={`/events/${TheEvent.id}`}
+                            href={`/events/${TheEvent}`}
                         >
                             {" "}
                             <button className=' text-white'>
