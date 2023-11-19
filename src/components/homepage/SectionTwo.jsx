@@ -262,7 +262,7 @@ const SectionTwo = () => {
                                 <Link
                                     href='/about'
                                     passHref
-                                    className='text-txtc-Ivory font-Roboto font-semibold bg-bgc-ForestGreen text-sm rounded-md py-2 px-3 '
+                                    className='text-txtc-Ivory font-Roboto font-semibold bg-bgc-ForestGreen text-sm rounded-md py-2 px-3 whitespace-nowrap overflow-hidden text-overflow-ellipsis'
                                 >
                                     <h2>{t("who are we")}</h2>
                                     {/* <LiaAngleRightSolid className=' mt-1' /> */}
