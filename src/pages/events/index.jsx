@@ -3,6 +3,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
 import EventList from "@/components/eventsPageComponents/EventList";
+import IndexPage from "@/components/reusableComponents/indexPage";
 
 import Layout from "@/layout/Layout";
 
@@ -10,6 +11,7 @@ function Event() {
     const { t } = useTranslation("common");
     return (
         <Layout>
+            <IndexPage title='Our Events' />
             <div>
                 <EventList />
             </div>

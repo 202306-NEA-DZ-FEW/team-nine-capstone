@@ -8,7 +8,7 @@ import Layout from "@/layout/Layout";
 export default function forgotPassword() {
     return (
         <Layout>
-            <IndexPage title='Forget Password' />
+            <IndexPage title='Reset Password' />
             <ForgotPassword />
         </Layout>
     );
