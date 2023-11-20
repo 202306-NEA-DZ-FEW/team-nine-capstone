@@ -65,8 +65,8 @@
         "attendees": "مشاركة",
         "recentEvents": "اخر فاعليات:",
         "seeMore": "شاهد المزيد من فعاليات ",
-        "orCheck" : "او تفقد ",
-        "noEvent" : "لم ينضم إلى أي  فعاليات"
+        "orCheck": "او تفقد ",
+        "noEvent": "لم ينضم إلى أي  فعاليات"
     },
     "editProfile": {
         "DisplayName": "اسم المستخدم:",

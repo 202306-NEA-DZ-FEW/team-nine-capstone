@@ -83,8 +83,8 @@
         "attendees": "attendees",
         "recentEvents": "recent events:",
         "seeMore": "See more Events with",
-        "orCheck" : "or check availble",
-        "noEvent" : "has not joined any events"
+        "orCheck": "or check availble",
+        "noEvent": "has not joined any events"
     },
     "editProfile": {
         "DisplayName": "Display Name:",
