@@ -37,7 +37,7 @@ function EventDetails() {
 
     // const [containerWidth, setContainerWidth] = useState(1800);
     const { user } = useUser();
-    // console.log("userrrr", user);
+    console.log("userrrr", user.uid);
     const containerRef = useRef();
     // function to handle scrolling
     const handleScrolling = (scrollAmount) => {
@@ -55,11 +55,12 @@ function EventDetails() {
 
     // console.log("queyId", id);
     const [currentEventId, setCurrentEventId] = useState(id);
-    console.log("currentid", currentEventId);
-    // console.log("id", id);
-    console.log("eventData", eventDisplay);
-    console.log("userData", userDetails);
-    console.log("interests", userDetails?.userInterests);
+    // console.log("currentid", currentEventId);
+    // // console.log("id", id);
+    // console.log("eventData", eventDisplay);
+
+    // console.log("userData", userDetails);
+    // console.log("interests", userDetails?.userInterests);
     const formattedDate = formatDate(eventDisplay?.date, t);
     console.log("allevents", allEvents);
     // const { user, setUser } = useUser();
@@ -244,7 +245,7 @@ function EventDetails() {
                             className='w-full h-[90%] absolute top-0 bg-top bg-cover'
                             style={{
                                 backgroundImage: `url(${eventDisplay.image})`,
-                                backgroundSize: "cover", // or "cover", "50%", etc. based on your preference
+                                backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
                             }}
@@ -266,7 +267,7 @@ function EventDetails() {
                                 <HiChevronLeft />
                             </div>
 
-                            {user && user.iud === eventDisplay.createdBy && (
+                            {user && user.uid === eventDisplay.createdBy && (
                                 <Link
                                     href={`/events/editTheEvent/${currentEventId}`}
                                 >
@@ -308,7 +309,6 @@ function EventDetails() {
                             </div>
                             <div className='bg-gray-900 bg-opacity-80 w-[100%] h-full absolute'></div>
                         </div>
-
                         <div className=' rounded-md mx-8 mb-7 px-2 shadow-lg bg-gray-50 absolute lg:-bottom-4 -bottom-2 z-10 top-auto lg:h-[15%] h-[10%] justify-center items-center w-[80%] flex flex-row'>
                             <div className='flex flex-row justify-center items-center lg:text-xl text-lg font-bold'>
                                 {eventDisplay.location?.split(" ")[0]}{" "}
@@ -456,7 +456,7 @@ function EventDetails() {
                                     <div>Interests :</div>
                                 </div>
                                 <div className='flex lg:flex-row flex-col gap-2'>
-                                    {userDetails?.userInterests.map(
+                                    {userDetails?.userInterests?.map(
                                         (interest) => (
                                             <div
                                                 key={interest.id}
@@ -519,7 +519,7 @@ function EventDetails() {
                                     <div className='text-lg w-full font-bold'>
                                         CATEGORY :
                                     </div>
-                                    <div className='grid md:grid-cols-3 w-full grid-flow-row place-content-center justify-items-center gap-3'>
+                                    <div className='grid md:grid-cols-3 w-full grid-flow-row place-content-start justify-items-center gap-3'>
                                         {matchingInterests?.map((interest) => (
                                             <div
                                                 className='bg-gray-200 flex space-x-1 px-1 items-center gap-1 h-10 w-40 rounded-full'
