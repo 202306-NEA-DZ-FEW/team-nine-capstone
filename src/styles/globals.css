@@ -209,9 +209,9 @@ hero-All {
     z-index: 2;
 }
 
-.grid {
+/* .grid {
     grid-template-columns: 1fr;
-}
+} */
 
 .hero-h1 {
     font-family: theme("fontFamily.Montserrat");

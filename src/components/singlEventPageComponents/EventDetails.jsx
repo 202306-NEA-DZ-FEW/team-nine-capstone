@@ -5,7 +5,8 @@ import { useTranslation } from "next-i18next";
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { MdDateRange, MdMail } from "react-icons/md";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { MdDateRange, MdEdit, MdMail } from "react-icons/md";
 
 import {
     eventsCollection,
@@ -33,9 +34,10 @@ function EventDetails() {
     const [attendees, setAttendees] = useState([]);
     const [joinUpdate, setJoinUpdate] = useState(0);
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [containerWidth, setContainerWidth] = useState(1800);
+
+    // const [containerWidth, setContainerWidth] = useState(1800);
     const { user } = useUser();
-    // console.log("userrrr", user);
+    // console.log("userrrr", user.uid);
     const containerRef = useRef();
     // function to handle scrolling
     const handleScrolling = (scrollAmount) => {
@@ -50,18 +52,49 @@ function EventDetails() {
     const { t } = useTranslation("common");
     const router = useRouter();
     const { id } = router.query;
-    console.log("id", id);
-    console.log("eventData", eventDisplay);
-    console.log("userData", userDetails);
-    console.log("interests", userDetails?.userInterests);
+
+    // console.log("queyId", id);
+    const [currentEventId, setCurrentEventId] = useState(id);
+    // console.log("currentid", currentEventId);
+    // // console.log("id", id);
+    // console.log("eventData", eventDisplay);
+
+    // console.log("userData", userDetails);
+    // console.log("interests", userDetails?.userInterests);
     const formattedDate = formatDate(eventDisplay?.date, t);
     console.log("allevents", allEvents);
     // const { user, setUser } = useUser();
     // attendees data
+    function navigateToEvent(direction = null) {
+        if (direction) {
+            const currentItems = allEvents;
+            const currentIndex = currentItems.findIndex(
+                (event) => event.id === currentEventId
+            );
+
+            if (currentIndex !== -1) {
+                let newIndex;
+
+                if (direction === "next") {
+                    newIndex = (currentIndex + 1) % currentItems.length;
+                } else if (direction === "previous") {
+                    newIndex =
+                        currentIndex === 0
+                            ? currentItems.length - 1
+                            : currentIndex - 1;
+                }
+
+                const newEventId = currentItems[newIndex].id;
+                setCurrentEventId(newEventId); // Set the new event ID in the state
+                // You can also fetch and render the single event page using newEventId
+                console.log("Navigate to event:", newEventId);
+            }
+        }
+    }
     const fetchData = async () => {
         try {
             // Fetch event data
-            const eventDoc = await getEventDocument(id);
+            const eventDoc = await getEventDocument(currentEventId);
             if (eventDoc.exists) {
                 console.log("im eventdoc");
                 setEventDisplay(eventDoc.data());
@@ -99,10 +132,13 @@ function EventDetails() {
             console.error("Error fetching data:", error);
         }
     };
+    useEffect(() => {
+        setCurrentEventId(id);
+    }, [id]);
 
     useEffect(() => {
         fetchData();
-    }, [id]);
+    }, [currentEventId]);
     // filter the event category
 
     const matchingInterests = eventDisplay?.interests
@@ -140,7 +176,8 @@ function EventDetails() {
                 eventInterests.some(
                     (eventInterest) =>
                         interest.toLowerCase() ===
-                            eventInterest.toLowerCase() && event.id !== id
+                            eventInterest.toLowerCase() &&
+                        event.id !== currentEventId
                 )
             );
         });
@@ -152,20 +189,20 @@ function EventDetails() {
     const filteredEvents = filterEventsByCategory(eventDisplay, allEvents);
     console.log("Filtered Events:", filteredEvents);
     // var to use in the scroller container
-    useEffect(() => {
-        // Update containerWidth based on the number of filtered events
-        if (filteredEvents.length > 3) {
-            // You can adjust the increment value as needed
-            setContainerWidth(1800 + (filteredEvents.length - 3) * 580);
-        } else {
-            setContainerWidth(1800);
-        }
-    }, [filteredEvents]);
+    // useEffect(() => {
+    //     // Update containerWidth based on the number of filtered events
+    //     if (filteredEvents.length > 3) {
+    //         // You can adjust the increment value as needed
+    //         setContainerWidth(1800 + (filteredEvents.length - 3) * 580);
+    //     } else {
+    //         setContainerWidth(1800);
+    //     }
+    // }, [filteredEvents]);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 // Fetch event data
-                const eventDoc = await getEventDocument(id);
+                const eventDoc = await getEventDocument(currentEventId);
                 if (eventDoc.exists) {
                     console.log("im eventdoc");
                     setEventDisplay(eventDoc.data());
@@ -189,7 +226,7 @@ function EventDetails() {
         };
 
         fetchData();
-    }, [id]);
+    }, [currentEventId, id]);
 
     return (
         <div className='flex flex-col  bg-gray-200 h-auto w-full'>
@@ -200,20 +237,43 @@ function EventDetails() {
                         title={eventDisplay.title}
                         quote={eventDisplay.about}
                     />
+                    
                 </div> */}
-                <div className='w-[100%]  rounded-lg shadow-lg bg-gray-50  h-[150vh]'>
-                    <div className='relative w-full h-[50%] overflow-hidden rounded-lg flex flex-col justify-center  items-center'>
+                <div className='w-[100%]  rounded-lg shadow-lg bg-gray-50  h-[160vh]'>
+                    <div className='relative w-full h-[50%] group transition overflow-hidden hover: rounded-lg flex flex-col justify-center  items-center'>
                         <div
                             className='w-full h-[90%] absolute top-0 bg-top bg-cover'
                             style={{
                                 backgroundImage: `url(${eventDisplay.image})`,
+                                backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                backgroundPosition: "center",
+                                backgroundRepeat: "no-repeat",
                             }}
                         >
-                            {user && user.uid === eventDisplay.createdBy && (
-                                <Link href={`/events/editTheEvent/${id}`}>
-                                    <div className='absolute z-10 top-1 right-1 rounded-sm p-2 px-2 opacity-100 group-hover:opacity-0 bg-gray-200'>
-                                        {/* <MdEdit className='absolute z-20 top-1 bg-gray-200 rounded-full hover:hidden right-2' /> */}
-                                        <div className='flex items-center justify-center w-28 h-6  rounded-full'>
+                            <div
+                                onClick={() => {
+                                    navigateToEvent("next");
+                                }}
+                                className='absolute -right-20 top-1/3 h-28 w-7 cursor-pointer group-hover:right-2 transition-all duration-300 flex justify-center items-center text-2xl bg-white hover:bg-gray-200 rounded-md opacity-75 text-black hover:text-green-500  z-10'
+                            >
+                                <HiChevronRight />
+                            </div>
+                            <div
+                                onClick={() => {
+                                    navigateToEvent("previous");
+                                }}
+                                className='absolute -left-20 top-1/3 h-28 w-7 cursor-pointer group-hover:left-2 transition-all duration-300 flex justify-center items-center text-2xl bg-white hover:bg-gray-200 rounded-md opacity-75 text-black hover:text-green-500  z-10'
+                            >
+                                <HiChevronLeft />
+                            </div>
+
+                            {user && user?.uid === eventDisplay.createdBy && (
+                                <Link
+                                    href={`/events/editTheEvent/${currentEventId}`}
+                                >
+                                    <div className='absolute z-10 top-2 -right-36 group-hover:right-2 transition-all duration-300 rounded-full h-6 p-2 px-2 bg-gray-200 hover:bg-amber-400 opacity-0 group-hover:opacity-100  flex flex-row justify-center items-center'>
+                                        <MdEdit className=' rounded-full text-black' />
+                                        <div className='flex items-center justify-center  w-28 h-6 font-bold  rounded-full'>
                                             EDIT EVENT
                                         </div>
                                     </div>
@@ -230,7 +290,7 @@ function EventDetails() {
                                 <div className='text-emerald-100 font-medium text-lg  rounded-md'>
                                     <EventTimer closestEvent={eventDisplay} />
                                 </div>
-                                <div className='flex md:flex-row flex-col justify-center lg:w-[40%] items-center h-auto'>
+                                <div className='flex md:flex-row flex-col justify-center  w-[80%] items-center h-auto'>
                                     <div className='text-white font-semibold justify-center text-lg items-center gap-2 flex flex-row w-full  lg:w-1/3'>
                                         <MdDateRange /> {formattedDate}
                                     </div>
@@ -249,7 +309,6 @@ function EventDetails() {
                             </div>
                             <div className='bg-gray-900 bg-opacity-80 w-[100%] h-full absolute'></div>
                         </div>
-
                         <div className=' rounded-md mx-8 mb-7 px-2 shadow-lg bg-gray-50 absolute lg:-bottom-4 -bottom-2 z-10 top-auto lg:h-[15%] h-[10%] justify-center items-center w-[80%] flex flex-row'>
                             <div className='flex flex-row justify-center items-center lg:text-xl text-lg font-bold'>
                                 {eventDisplay.location?.split(" ")[0]}{" "}
@@ -273,7 +332,7 @@ function EventDetails() {
                             <div
                                 className={`${
                                     isDiscription
-                                        ? "md:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
+                                        ? "md:w-[40%] w-full border-b-4  border-solid transition-all scale-x-110 border-amber-400"
                                         : ""
                                 }`}
                             ></div>
@@ -325,21 +384,21 @@ function EventDetails() {
                                 isDiscription ? "" : "hidden"
                             }`}
                         >
-                            <div className='lg:w-1/2 flex flex-col items-start w-full'>
-                                <div className='flex justify-center h-auto md:text-lg font-serif '>
+                            <div className='lg:w-1/2 flex flex-col items-start  w-full'>
+                                <div className='flex justify-center h-[40vh] md:text-lg font-serif '>
                                     {eventDisplay.about}
                                 </div>
 
                                 <div className='text-center  self-center mt-3 hover:border-none border-amber-400 border-2 h-8 hover:bg-green-500 transition duration-300 font-medium hover:text-white lg:text-xl text-lg  border-solid w-[40%] rounded-full cursor-pointer '>
                                     <JoinButton
                                         eOwner={eventDisplay.createdBy}
-                                        eventId={id}
+                                        eventId={currentEventId}
                                         eAttendees={eventDisplay.attendees}
                                         setJoinUpdate={setJoinUpdate}
                                     />
                                 </div>
                             </div>
-                            <div className='hidden  relative lg:w-1/2 px-3 h-auto overflow-hidden lg:flex flex-col justify-start  items-start'>
+                            <div className='hidden relative lg:w-1/2 px-3 h-[50vh] overflow-hidden lg:flex flex-col justify-start  items-start'>
                                 <div
                                     className=' absolute z-10 w-[70%] h-[90%] top-0 bg-top bg-cover'
                                     style={{
@@ -350,6 +409,9 @@ function EventDetails() {
                                     className=' absolute left-10 top-16 w-[70%] h-full bg-top bg-cover'
                                     style={{
                                         backgroundImage: `url('/images/the one.jpg')`,
+                                        backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                        backgroundPosition: "center",
+                                        backgroundRepeat: "no-repeat",
                                     }}
                                 ></div>
                             </div>
@@ -366,6 +428,9 @@ function EventDetails() {
                                     className=' w-20 h-20 rounded-md bg-top bg-cover shadow-2xl '
                                     style={{
                                         backgroundImage: `url(${userDetails?.avatar})`,
+                                        backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                        backgroundPosition: "center",
+                                        backgroundRepeat: "no-repeat",
                                     }}
                                 ></div>
                                 <div className='font-medium'>
@@ -391,7 +456,7 @@ function EventDetails() {
                                     <div>Interests :</div>
                                 </div>
                                 <div className='flex lg:flex-row flex-col gap-2'>
-                                    {userDetails?.userInterests.map(
+                                    {userDetails?.userInterests?.map(
                                         (interest) => (
                                             <div
                                                 key={interest.id}
@@ -454,7 +519,7 @@ function EventDetails() {
                                     <div className='text-lg w-full font-bold'>
                                         CATEGORY :
                                     </div>
-                                    <div className='grid md:grid-cols-3 w-full grid-flow-row place-content-center justify-items-center gap-3'>
+                                    <div className='grid md:grid-cols-3 w-full grid-flow-row place-content-start justify-items-center gap-3'>
                                         {matchingInterests?.map((interest) => (
                                             <div
                                                 className='bg-gray-200 flex space-x-1 px-1 items-center gap-1 h-10 w-40 rounded-full'

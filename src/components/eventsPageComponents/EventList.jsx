@@ -1,4 +1,5 @@
 import { onSnapshot } from "firebase/firestore";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
@@ -18,7 +19,6 @@ import EventsUp from "./EventsUp";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
 import Pagination from "./Pagination";
-import Link from "next/link";
 
 function EventList() {
     const [events, setEvents] = useState([]);
