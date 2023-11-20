@@ -267,22 +267,18 @@ function EventDetails() {
                                 <HiChevronLeft />
                             </div>
 
-                            {user &&
-                                user.uid &&
-                                eventDisplay &&
-                                eventDisplay.createdBy &&
-                                user.uid === eventDisplay.createdBy && (
-                                    <Link
-                                        href={`/events/editTheEvent/${currentEventId}`}
-                                    >
-                                        <div className='absolute z-10 top-2 -right-36 group-hover:right-2 transition-all duration-300 rounded-full h-6 p-2 px-2 bg-gray-200 hover:bg-amber-400 opacity-0 group-hover:opacity-100  flex flex-row justify-center items-center'>
-                                            <MdEdit className=' rounded-full text-black' />
-                                            <div className='flex items-center justify-center  w-28 h-6 font-bold  rounded-full'>
-                                                EDIT EVENT
-                                            </div>
+                            {user && user.uid === eventDisplay.createdBy && (
+                                <Link
+                                    href={`/events/editTheEvent/${currentEventId}`}
+                                >
+                                    <div className='absolute z-10 top-2 -right-36 group-hover:right-2 transition-all duration-300 rounded-full h-6 p-2 px-2 bg-gray-200 hover:bg-amber-400 opacity-0 group-hover:opacity-100  flex flex-row justify-center items-center'>
+                                        <MdEdit className=' rounded-full text-black' />
+                                        <div className='flex items-center justify-center  w-28 h-6 font-bold  rounded-full'>
+                                            EDIT EVENT
                                         </div>
-                                    </Link>
-                                )}
+                                    </div>
+                                </Link>
+                            )}
                             <div className='bg-black bg-opacity-60 w-full h-full absolute'></div>
                         </div>
                         <div className='relative absolut z-10 w-[80%] md:h-[50%] h-[70%] '>
