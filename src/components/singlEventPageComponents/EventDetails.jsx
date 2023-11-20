@@ -52,6 +52,8 @@ function EventDetails() {
     const { t } = useTranslation("common");
     const router = useRouter();
     const { id } = router.query;
+
+    // console.log("queyId", id);
     const [currentEventId, setCurrentEventId] = useState(id);
     console.log("currentid", currentEventId);
     // console.log("id", id);
@@ -62,7 +64,7 @@ function EventDetails() {
     console.log("allevents", allEvents);
     // const { user, setUser } = useUser();
     // attendees data
-    function navigateToEvent(direction) {
+    function navigateToEvent(direction = null) {
         if (direction) {
             const currentItems = allEvents;
             const currentIndex = currentItems.findIndex(
@@ -129,6 +131,9 @@ function EventDetails() {
             console.error("Error fetching data:", error);
         }
     };
+    useEffect(() => {
+        setCurrentEventId(id);
+    }, [id]);
 
     useEffect(() => {
         fetchData();
@@ -220,7 +225,7 @@ function EventDetails() {
         };
 
         fetchData();
-    }, [currentEventId]);
+    }, [currentEventId, id]);
 
     return (
         <div className='flex flex-col  bg-gray-200 h-auto w-full'>
@@ -239,6 +244,9 @@ function EventDetails() {
                             className='w-full h-[90%] absolute top-0 bg-top bg-cover'
                             style={{
                                 backgroundImage: `url(${eventDisplay.image})`,
+                                backgroundSize: "cover", // or "cover", "50%", etc. based on your preference
+                                backgroundPosition: "center",
+                                backgroundRepeat: "no-repeat",
                             }}
                         >
                             <div
@@ -281,7 +289,7 @@ function EventDetails() {
                                 <div className='text-emerald-100 font-medium text-lg  rounded-md'>
                                     <EventTimer closestEvent={eventDisplay} />
                                 </div>
-                                <div className='flex md:flex-row flex-col justify-center lg:w-[40%] items-center h-auto'>
+                                <div className='flex md:flex-row flex-col justify-center  w-[80%] items-center h-auto'>
                                     <div className='text-white font-semibold justify-center text-lg items-center gap-2 flex flex-row w-full  lg:w-1/3'>
                                         <MdDateRange /> {formattedDate}
                                     </div>
@@ -390,7 +398,7 @@ function EventDetails() {
                                     />
                                 </div>
                             </div>
-                            <div className='hidden  relative lg:w-1/2 px-3 h-[50vh] overflow-hidden lg:flex flex-col justify-start  items-start'>
+                            <div className='hidden relative lg:w-1/2 px-3 h-[50vh] overflow-hidden lg:flex flex-col justify-start  items-start'>
                                 <div
                                     className=' absolute z-10 w-[70%] h-[90%] top-0 bg-top bg-cover'
                                     style={{
@@ -401,6 +409,9 @@ function EventDetails() {
                                     className=' absolute left-10 top-16 w-[70%] h-full bg-top bg-cover'
                                     style={{
                                         backgroundImage: `url('/images/the one.jpg')`,
+                                        backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                        backgroundPosition: "center",
+                                        backgroundRepeat: "no-repeat",
                                     }}
                                 ></div>
                             </div>
@@ -417,6 +428,9 @@ function EventDetails() {
                                     className=' w-20 h-20 rounded-md bg-top bg-cover shadow-2xl '
                                     style={{
                                         backgroundImage: `url(${userDetails?.avatar})`,
+                                        backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                        backgroundPosition: "center",
+                                        backgroundRepeat: "no-repeat",
                                     }}
                                 ></div>
                                 <div className='font-medium'>
