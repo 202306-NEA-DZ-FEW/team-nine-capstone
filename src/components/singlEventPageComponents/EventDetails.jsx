@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt } from "react-icons/fa";
-import { FaPeopleGroup, FaPhoneFlip } from "react-icons/fa6";
+import { FaPeopleGroup } from "react-icons/fa6";
 import { MdDateRange, MdMail } from "react-icons/md";
 
 import {
@@ -31,10 +31,11 @@ function EventDetails() {
     const [isDetails, setIsDetails] = useState(false);
     const [allEvents, setAllEvents] = useState([]);
     const [attendees, setAttendees] = useState([]);
+    const [joinUpdate, setJoinUpdate] = useState(0);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [containerWidth, setContainerWidth] = useState(1800);
     const { user } = useUser();
-    console.log("userrrr", user);
+    // console.log("userrrr", user);
     const containerRef = useRef();
     // function to handle scrolling
     const handleScrolling = (scrollAmount) => {
@@ -83,7 +84,9 @@ function EventDetails() {
                 const attendeesData = await Promise.all(
                     attendeeIds.map(async (attendeeId) => {
                         const attendeeDoc = await getUserDocument(attendeeId);
-                        return attendeeDoc.exists ? attendeeDoc.data() : null;
+                        return attendeeDoc.exists
+                            ? { ...attendeeDoc.data(), id: attendeeId }
+                            : null;
                     })
                 );
 
@@ -206,19 +209,15 @@ function EventDetails() {
                                 backgroundImage: `url(${eventDisplay.image})`,
                             }}
                         >
-                            {eventDisplay.createdBy ? (
-                                <Link
-                                    href={`/events/editEvent/${eventDisplay.id}`}
-                                >
-                                    <div className='absolute z-10 top-0 right-0 p-2 px-2 opacity-100 group-hover:opacity-0 bg-gray-200'>
+                            {user && user.uid === eventDisplay.createdBy && (
+                                <Link href={`/events/editTheEvent/${id}`}>
+                                    <div className='absolute z-10 top-1 right-1 rounded-sm p-2 px-2 opacity-100 group-hover:opacity-0 bg-gray-200'>
                                         {/* <MdEdit className='absolute z-20 top-1 bg-gray-200 rounded-full hover:hidden right-2' /> */}
                                         <div className='flex items-center justify-center w-28 h-6  rounded-full'>
                                             EDIT EVENT
                                         </div>
                                     </div>
                                 </Link>
-                            ) : (
-                                ""
                             )}
                             <div className='bg-black bg-opacity-60 w-full h-full absolute'></div>
                         </div>
@@ -332,7 +331,12 @@ function EventDetails() {
                                 </div>
 
                                 <div className='text-center  self-center mt-3 hover:border-none border-amber-400 border-2 h-8 hover:bg-green-500 transition duration-300 font-medium hover:text-white lg:text-xl text-lg  border-solid w-[40%] rounded-full cursor-pointer '>
-                                    <JoinButton />
+                                    <JoinButton
+                                        eOwner={eventDisplay.createdBy}
+                                        eventId={id}
+                                        eAttendees={eventDisplay.attendees}
+                                        setJoinUpdate={setJoinUpdate}
+                                    />
                                 </div>
                             </div>
                             <div className='hidden  relative lg:w-1/2 px-3 h-auto overflow-hidden lg:flex flex-col justify-start  items-start'>
@@ -377,8 +381,8 @@ function EventDetails() {
                                     {userDetails?.email}
                                 </div>
                                 <div className=' flex flex-row px-2 lg:justify-start justify-center items-center gap-2  font-medium text-lg'>
-                                    <FaPhoneFlip className='text-gray-900' />{" "}
-                                    {userDetails?.phone}
+                                    <FaMapMarkerAlt className='text-gray-900' />
+                                    {userDetails?.location}
                                 </div>
                             </div>
 
@@ -386,13 +390,14 @@ function EventDetails() {
                                 <div className='text-lg font-bold felx flex-row gap-2'>
                                     <div>Interests :</div>
                                 </div>
-                                <div className='flex lg:flex-row flex-col'>
+                                <div className='flex lg:flex-row flex-col gap-2'>
                                     {userDetails?.userInterests.map(
                                         (interest) => (
-                                            <div key={interest.id}>
+                                            <div
+                                                key={interest.id}
+                                                className='rounded-full turnicate bg-gray-200 px-2'
+                                            >
                                                 {interest}
-                                                {" ,"}
-                                                {/* Display some information about the interest */}
                                             </div>
                                         )
                                     )}
@@ -434,13 +439,14 @@ function EventDetails() {
                                     </div>
                                     <div className='flex flex-row w-full px-2 justify-start items-center gap-2 font-medium text-lg'>
                                         {attendees?.map((attendee) => (
-                                            <div
+                                            <Link
                                                 key={attendee.id} // Add a unique key for each element in the array
                                                 className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl'
                                                 style={{
                                                     backgroundImage: `url(${attendee.avatar})`,
                                                 }}
-                                            ></div>
+                                                href={`/profile/${attendee.id}`}
+                                            ></Link>
                                         ))}
                                     </div>
                                 </div>
@@ -451,7 +457,7 @@ function EventDetails() {
                                     <div className='grid md:grid-cols-3 w-full grid-flow-row place-content-center justify-items-center gap-3'>
                                         {matchingInterests?.map((interest) => (
                                             <div
-                                                className='bg-gray-200 flex justify-between px-1 items-center gap-1 h-10 w-40 rounded-full'
+                                                className='bg-gray-200 flex space-x-1 px-1 items-center gap-1 h-10 w-40 rounded-full'
                                                 key={interest.title}
                                             >
                                                 <div
@@ -460,7 +466,7 @@ function EventDetails() {
                                                     {interest.icon}
                                                 </div>
                                                 <div
-                                                    className='flex justify-center font-medium text-lg items-center  h-6 rounded-full'
+                                                    className='flex justify-start font-medium text-lg items-center truncate h-6'
                                                     key={interest.title}
                                                 >
                                                     {t(

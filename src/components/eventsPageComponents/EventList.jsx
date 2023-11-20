@@ -18,6 +18,7 @@ import EventsUp from "./EventsUp";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
 import Pagination from "./Pagination";
+import Link from "next/link";
 
 function EventList() {
     const [events, setEvents] = useState([]);
@@ -253,12 +254,14 @@ function EventList() {
                     <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
                         <EventsUp closestEvent={closestEvent} />
                     </div>
-                    <button
+                    <Link
                         className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
-                        onClick={handleUser}
+                        href={
+                            user ? "/createTheEvent" : "/authentication/signUp"
+                        }
                     >
                         {t("Create Event")}
-                    </button>
+                    </Link>
                     {allCategories ? (
                         ""
                     ) : (

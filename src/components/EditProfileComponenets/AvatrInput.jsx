@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { storage } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
+import Image from "next/image";
 
 function AvatarInput({ avatar, onUpdateAvatar }) {
     const { t } = useTranslation("common");
@@ -61,16 +62,20 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
     return (
         <div className='flex flex-col md:space-y-10 space-x-0 align-middle justify-center items-center p-2'>
             {avatar ? (
-                <img
+                <Image
                     src={avatar}
                     alt='Avatar'
                     className='rounded-full border-orange-400 border-2 w-30 h-30 md:w-3/4 md:h-3/4 mt-5'
+                    width={120}
+                    height={120}
                 />
             ) : (
-                <img
+                <Image
                     src='/images/defaultUser.png'
                     alt='Default Avatar'
                     className='rounded-full border-orange-400 border-2 w-30 h-30 md:w-3/4 md:h-3/4 mt-5'
+                    width={120}
+                    height={120}
                 />
             )}
             <input

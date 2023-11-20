@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -69,18 +70,20 @@ function Profile() {
                     <div className='relative py-5 bg-green-700 bg-opacity-50 w-full '>
                         <div className='flex flex-col sm:flex-row group justify-center items-center align-middle space-x-10 z-10 '>
                             {userData.avatar ? (
-                                /* eslint-disable-next-line @next/next/no-img-element */
-                                <img
+                                <Image
                                     src={userData.avatar}
                                     alt='Avatar'
                                     className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                                    width={120}
+                                    height={120}
                                 />
                             ) : (
-                                /* eslint-disable-next-line @next/next/no-img-element */
-                                <img
+                                <Image
                                     src='/images/defaultUser.png'
                                     alt='Default'
                                     className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                                    width={120}
+                                    height={120}
                                 />
                             )}
                             <div className='w-3/4 sm:w-1/2 justify-center text-center '>
@@ -173,9 +176,26 @@ function Profile() {
                             </div>
                         </div>
                     ) : (
-                        <div className='text-lg font-semibold'>
+                        <div className='text-lg font-semibold flex flex-col items-center justify-center my-5'>
                             {" "}
-                            {userData.displayName} has not joined any events{" "}
+                            {userData.displayName} {t("profile.noEvent")}{" "}
+                            {isOwner && (
+                                <div>
+                                    <Link
+                                        href='/createTheEvent'
+                                        className='text-indigo-800 underline hover:font-semibold hover:rounded-lg hover:bg-orange-300'
+                                    >
+                                        {t("createEvent.title")}{" "}
+                                    </Link>
+                                    {t("profile.orCheck")}{" "}
+                                    <Link
+                                        href='/events'
+                                        className='text-indigo-800 underline hover:font-semibold hover:rounded-lg hover:bg-orange-300'
+                                    >
+                                        {t("Events")}
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     )}
                     {userData.iEvents && userData.iEvents.length > 0 && (
