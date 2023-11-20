@@ -82,7 +82,9 @@
         "LearnMore": "Learn More",
         "attendees": "attendees",
         "recentEvents": "recent events:",
-        "seeMore": "See more Events with"
+        "seeMore": "See more Events with",
+        "orCheck" : "or check availble",
+        "noEvent" : "has not joined any events"
     },
     "editProfile": {
         "DisplayName": "Display Name:",
@@ -164,7 +166,7 @@
         "editEvent": "Edit Event",
         "join": "Join",
         "joined": "Joined",
-        "sign Up": "Sign Up"
+        "signUp": "Sign Up"
     },
     "no Poverty": "no Poverty",
     "zero Hunger": "zero Hunger",
