@@ -267,7 +267,7 @@ function EventDetails() {
                                 <HiChevronLeft />
                             </div>
 
-                            {user && user.uid === eventDisplay.createdBy && (
+                            {user && user?.uid === eventDisplay?.createdBy && (
                                 <Link
                                     href={`/events/editTheEvent/${currentEventId}`}
                                 >
