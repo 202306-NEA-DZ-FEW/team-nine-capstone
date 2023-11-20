@@ -37,7 +37,7 @@ function EventDetails() {
 
     // const [containerWidth, setContainerWidth] = useState(1800);
     const { user } = useUser();
-    console.log("userrrr", user.uid);
+    // console.log("userrrr", user.uid);
     const containerRef = useRef();
     // function to handle scrolling
     const handleScrolling = (scrollAmount) => {
@@ -267,7 +267,7 @@ function EventDetails() {
                                 <HiChevronLeft />
                             </div>
 
-                            {user && user.uid === eventDisplay.createdBy && (
+                            {user && user?.uid === eventDisplay.createdBy && (
                                 <Link
                                     href={`/events/editTheEvent/${currentEventId}`}
                                 >
