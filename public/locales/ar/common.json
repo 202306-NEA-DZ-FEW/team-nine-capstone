@@ -90,7 +90,9 @@
         "LearnMore": "المزيد حول الحدث",
         "attendees": "مشاركة",
         "recentEvents": "اخر فاعليات:",
-        "seeMore": "شاهد المزيد من فعاليات "
+        "seeMore": "شاهد المزيد من فعاليات ",
+        "orCheck": "او تفقد ",
+        "noEvent": "لم ينضم إلى أي  فعاليات"
     },
     "editProfile": {
         "DisplayName": "اسم المستخدم:",
@@ -166,7 +168,7 @@
         "editEvent": "تحديث",
         "join": "انضمام",
         "joined": "تم الانضمام",
-        "sign Up": "التسجيل"
+        "signUp": "التسجيل"
     },
     "no Poverty": "لا للفقر",
     "zero Hunger": "لا للجوع",
