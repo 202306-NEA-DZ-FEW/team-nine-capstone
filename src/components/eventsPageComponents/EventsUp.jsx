@@ -59,7 +59,7 @@ const EventsUp = ({ closestEvent }) => {
     const currentDate = new Date(); // You can pass your date here
     const formattedDate = formatDate(currentDate);
     return (
-        <div className='relative w-full h-full overflow-hidden rounded-lg'>
+        <div className='relative w-full h-full flex items-center  overflow-hidden rounded-lg'>
             <div
                 className='w-full h-full bg-top bg-cover'
                 style={{
@@ -87,8 +87,8 @@ const EventsUp = ({ closestEvent }) => {
                             {t("eventCard.SEE MORE ...")}
                         </Link>
                     </div>
-                    <div className='flex flex-col lg:gap-2 gap-1 w-2/3 text-white items-center justify-center'>
-                        <h1 className='lg:text-xl text-lg  font-bold flex justify-center'>
+                    <div className='flex flex-col lg:gap-2 gap-1 w-[60%] py-3 text-white items-center justify-center '>
+                        <h1 className='lg:text-3xl text-lg  font-bold flex justify-center'>
                             {t("eventTimer.Lanching in...")}
                         </h1>
                         <div className='text-emerald-100'>
@@ -98,7 +98,7 @@ const EventsUp = ({ closestEvent }) => {
                 </div>
 
                 <div></div>
-                <div className='bg-black bg-opacity-70 w-full h-full absolute'></div>
+                <div className='bg-black bg-opacity-80 w-full h-full absolute'></div>
             </div>
         </div>
     );

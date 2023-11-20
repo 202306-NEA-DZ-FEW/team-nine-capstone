@@ -44,8 +44,8 @@ const EventTimer = ({ closestEvent }) => {
         setRemainingTime(getRemainingTimeUntilMsTimestamp(countdown));
     }
     return (
-        <div className='w-[300px] grid md:grid-cols-6 grid-cols-3 gap-2'>
-            <div className='flex flex-col justify-center items-center'>
+        <div className='w-[300px] grid md:grid-cols-6 grid-cols-3 justify-items-center place-items-center px-5 md:px-2 gap-2'>
+            <div className='flex flex-col justify-center  items-center'>
                 <span className='md:w-10 md:h-14 h-11 w-8   rounded-sm text-xl md:text-3xl flex justify-center items-center'>
                     {remainingTime.years}
                 </span>
