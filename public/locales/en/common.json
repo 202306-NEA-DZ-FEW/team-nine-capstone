@@ -270,5 +270,17 @@
         "intro": "Inspire positive change and create meaningful impact through acts of kindness and giving. Join us in making a difference.",
         "start": "Get Started",
         "donate": "Donate"
+    },
+    "singleEventPage": {
+        "EDIT EVENT": "EDIT EVENT",
+        "DISCRIPTION": "DISCRIPTION",
+        "ORGANIZOR": "ORGANIZOR",
+        "DETAILS": "DETAILS",
+        "CONTACTS:": "CONTACTS:",
+        "Interests :": "Interests :",
+        "TITLE :": "TITLE :",
+        "PLACE :": "PLACE :",
+        "CATEGORY :": "CATEGORY :",
+        "RELATED EVENTS": "RELATED EVENTS"
     }
 }

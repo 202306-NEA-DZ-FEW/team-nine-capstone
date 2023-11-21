@@ -65,6 +65,7 @@ function EventDetails() {
     console.log("allevents", allEvents);
     // const { user, setUser } = useUser();
     // attendees data
+    let indexOfEvent;
     function navigateToEvent(direction = null) {
         if (direction) {
             const currentItems = allEvents;
@@ -83,7 +84,7 @@ function EventDetails() {
                             ? currentItems.length - 1
                             : currentIndex - 1;
                 }
-
+                indexOfEvent = newIndex;
                 const newEventId = currentItems[newIndex].id;
                 setCurrentEventId(newEventId); // Set the new event ID in the state
                 // You can also fetch and render the single event page using newEventId
@@ -250,6 +251,9 @@ function EventDetails() {
                                 backgroundRepeat: "no-repeat",
                             }}
                         >
+                            <div className='absolute z-10 left-4 text-white'>
+                                {indexOfEvent}
+                            </div>
                             <div
                                 onClick={() => {
                                     navigateToEvent("next");
@@ -274,7 +278,7 @@ function EventDetails() {
                                     <div className='absolute z-10 top-2 -right-36 group-hover:right-2 transition-all duration-300 rounded-full h-6 p-2 px-2 bg-gray-200 hover:bg-amber-400 opacity-0 group-hover:opacity-100  flex flex-row justify-center items-center'>
                                         <MdEdit className=' rounded-full text-black' />
                                         <div className='flex items-center justify-center  w-28 h-6 font-bold  rounded-full'>
-                                            EDIT EVENT
+                                            {t("singleEventPage.EDIT EVENT")}
                                         </div>
                                     </div>
                                 </Link>
@@ -312,7 +316,7 @@ function EventDetails() {
                         <div className=' rounded-md mx-8 mb-7 px-2 shadow-lg bg-gray-50 absolute lg:-bottom-4 -bottom-2 z-10 top-auto lg:h-[15%] h-[10%] justify-center items-center w-[80%] flex flex-row'>
                             <div className='flex flex-row justify-center items-center lg:text-xl text-lg font-bold'>
                                 {eventDisplay.location?.split(" ")[0]}{" "}
-                                {eventDisplay.title} event
+                                {eventDisplay.title}
                             </div>
                         </div>
                     </div>
@@ -326,7 +330,7 @@ function EventDetails() {
                             className='ml-2 flex justify-start flex-col w-1/3 cursor-pointer'
                         >
                             <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
-                                DISCRIPTION
+                                {t("singleEventPage.DISCRIPTION")}
                             </div>
 
                             <div
@@ -346,7 +350,7 @@ function EventDetails() {
                             className='ml-2 flex flex-col w-1/3 cursor-pointer'
                         >
                             <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
-                                ORGANIZOR
+                                {t("singleEventPage.ORGANIZOR")}
                             </div>
 
                             <div
@@ -366,7 +370,7 @@ function EventDetails() {
                             className='ml-2 flex flex-col w-1/3 cursor-pointer'
                         >
                             <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
-                                DETAILS
+                                {t("singleEventPage.DETAILS")}
                             </div>
 
                             <div
@@ -439,7 +443,7 @@ function EventDetails() {
                             </div>
                             <div className='flex flex-col px-2 lg:px-28  justify-start items-center gap-2 font-medium text-lg'>
                                 <div className='text-lg font-bold felx flex-row gap-2'>
-                                    CONTACTS:
+                                    {t("singleEventPage.CONTACTS:")}
                                 </div>
                                 <div className=' flex flex-row px-2 lg:justify-start justify-center items-center gap-2 font-medium text-lg'>
                                     <MdMail className='text-gray-900' />{" "}
@@ -453,7 +457,9 @@ function EventDetails() {
 
                             <div className='flex flex-col px-2 justify-start items-center gap-2 font-medium text-lg'>
                                 <div className='text-lg font-bold felx flex-row gap-2'>
-                                    <div>Interests :</div>
+                                    <div>
+                                        {t("singleEventPage.Interests :")}
+                                    </div>
                                 </div>
                                 <div className='flex lg:flex-row flex-col gap-2'>
                                     {userDetails?.userInterests?.map(
@@ -462,7 +468,7 @@ function EventDetails() {
                                                 key={interest.id}
                                                 className='rounded-full turnicate bg-gray-200 px-2'
                                             >
-                                                {interest}
+                                                {t(interest.toString())}
                                             </div>
                                         )
                                     )}
@@ -480,7 +486,7 @@ function EventDetails() {
                                 <div className='flex flex-col px-2  justify-start items-center gap-2 font-medium text-lg'>
                                     {" "}
                                     <div className='text-lg  w-full font-bold'>
-                                        TITLE :
+                                        {t("singleEventPage.TITLE :")}
                                     </div>
                                     <div className='text-lg w-full font-medium'>
                                         {eventDisplay.title?.toUpperCase()}
@@ -488,7 +494,7 @@ function EventDetails() {
                                 </div>
                                 <div className='flex flex-col px-2 justify-start items-center gap-2 font-medium text-lg'>
                                     <div className='text-lg w-full font-bold'>
-                                        PLACE :
+                                        {t("singleEventPage.PLACE :")}
                                     </div>
                                     <div className=' flex flex-row w-full justify-start items-center gap-2 font-medium text-lg'>
                                         <div className=' flex flex-row justify-start'>
@@ -517,7 +523,7 @@ function EventDetails() {
                                 </div>
                                 <div className='flex flex-col px-2 justify-start items-center gap-2 font-medium text-lg'>
                                     <div className='text-lg w-full font-bold'>
-                                        CATEGORY :
+                                        {t("singleEventPage.CATEGORY :")}
                                     </div>
                                     <div className='grid md:grid-cols-3 w-full grid-flow-row place-content-start justify-items-center gap-3'>
                                         {matchingInterests?.map((interest) => (
@@ -550,7 +556,7 @@ function EventDetails() {
             <div className=''>
                 <div className='relative w-full mt-3 '>
                     <div className='bg-amber-400 absolute z-20 -top-8 px-2 left-7 h-8 flex items-center justify-center font-medium w-auto rounded-t-md'>
-                        RELATED EVENTS
+                        {t("singleEventPage.RELATED EVENTS")}
                     </div>
                     <div
                         onClick={() => {
