@@ -253,32 +253,26 @@ function EventList() {
                         </div>
                         {/* <div>join</div> */}
                     </div>
-                <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
-                    <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
-                        <EventsUp closestEvent={closestEvent} />
-                    </div>
-                    <Link
-                        className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
-                        href={
-                            user ? "/createTheEvent" : "/authentication/signUp"
-                        }
-                    >
-                        {t("Create Event")}
-                    </Link>
-                    {allCategories ? (
-                        ""
-                    ) : (
-                        <div className='hidden lg:grid px-5 lg:grid-cols-5 place-content-start justify-items-start gap-4 h-auto'>
-                            {matchingInterests?.map((interest) => (
-                                <div
-                                    className='bg-gray-50 flex justify-between px-1 items-center gap-1 h-10 w-40 rounded-full shadow-lg '
-                                    key={interest.title}
-                                >
-                                    <div
-                                        className={` rounded-full h-7 w-7  flex justify-center items-center bg-gray-200 text-${interest.color}-100 `}
-                                    >
-                                        {interest.icon}
-                                    </div>
+
+                    <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
+                        <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
+                            <EventsUp closestEvent={closestEvent} />
+                        </div>
+                        <Link
+                            className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
+                            href={
+                                user
+                                    ? "/createTheEvent"
+                                    : "/authentication/signUp"
+                            }
+                        >
+                            {t("Create Event")}
+                        </Link>
+                        {allCategories ? (
+                            ""
+                        ) : (
+                            <div className='hidden lg:grid px-5 lg:grid-cols-5 place-content-start justify-items-start gap-4 h-auto'>
+                                {matchingInterests?.map((interest) => (
                                     <div
                                         className='bg-gray-50 flex justify-between px-1 items-center gap-1 h-10 w-40 rounded-full shadow-lg '
                                         key={interest.title}
