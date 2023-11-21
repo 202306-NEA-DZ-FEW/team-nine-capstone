@@ -89,7 +89,7 @@ function CreateEvent() {
 
     return (
         <>
-            <IndexPage title='Create Your Event' />
+            <IndexPage title='Create an Event' />
             <div className='m-0 box-border bg-bgc-silver'>
                 <div className='relative overflow-hidden w-full h-96'>
                     <Image

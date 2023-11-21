@@ -141,6 +141,7 @@ const SectionTwo = () => {
                     ))}
                 </div>
             </div>
+
             {/* events images section */}
             <div className='flex md:flex-row flex-col px-4 gap-3 md:px-8 py-4'>
                 <div className='hidden md:flex flex-col gap-y-3'>

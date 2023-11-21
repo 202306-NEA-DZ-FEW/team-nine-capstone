@@ -3,6 +3,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 
 import AboutUs from "@/components/aboutus/AboutUs";
+import IndexPage from "@/components/reusableComponents/indexPage";
 
 import Layout from "@/layout/Layout";
 
@@ -11,6 +12,7 @@ export default function About() {
 
     return (
         <Layout>
+            <IndexPage title='About Pebble' />
             <AboutUs />
         </Layout>
     );

@@ -35,7 +35,7 @@ function EditEvent() {
     const [loca, setLoca] = useState(null);
     const router = useRouter();
     const { id } = router.query;
-
+    console.log(id);
     const options = interestList.map((obj) => {
         return {
             label: `${obj.title}`,
@@ -159,7 +159,7 @@ function EditEvent() {
 
     return (
         <>
-            <IndexPage title={`${oldInfo.title}`} />
+            <IndexPage title={`Edit Event ${oldInfo.title}`} />
             <div className='m-5 box-border bg-bgc-silver'>
                 <div className='relative overflow-hidden w-full h-96'>
                     <Image

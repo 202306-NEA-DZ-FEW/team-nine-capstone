@@ -1,4 +1,5 @@
 import { signOut } from "firebase/auth";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -84,13 +85,13 @@ function Navbar() {
                     <Link
                         href='/'
                         onClick={closeMenu}
-                        className='flex items-center '
+                        className='flex items-center'
                     >
-                        <image
+                        <Image
                             src='/images/navLogo.png'
                             alt='Logo'
-                            height={40}
-                            width={40}
+                            height={35}
+                            width={35}
                             className='mr-2'
                         />
                         <span className='nav-logo'>Pebble</span>

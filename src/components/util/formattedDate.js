@@ -1,9 +1,11 @@
-export default function formatDate(eventData) {
-    if (eventData?.date) {
-        const dateParts = eventData.date.split("/");
-        const [day, month, year] = dateParts.map((part) => parseInt(part, 10));
+export function formatDate(dateString, t) {
+    if (dateString) {
+        const dateParts = dateString.split("/");
+        const day = parseInt(dateParts[0], 10);
+        const month = parseInt(dateParts[1], 10) - 1;
+        const year = parseInt(dateParts[2], 10);
 
-        const date = new Date(year, month - 1, day);
+        const date = new Date(year, month, day);
 
         const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         const months = [
@@ -23,18 +25,17 @@ export default function formatDate(eventData) {
 
         const dayOfWeek = daysOfWeek[date.getDay()];
         const formattedDay = ("0" + day).slice(-2);
-        const monthName = months[month - 1];
+        const monthName = months[month];
         const yearValue = year;
 
-        return {
-            day,
-            month,
-            year: yearValue,
-            formattedDay,
-            formattedDate:
-                new Date().getFullYear() === yearValue
-                    ? `${dayOfWeek}, ${formattedDay} ${monthName}`
-                    : `${dayOfWeek}, ${formattedDay} ${monthName} ${yearValue}`,
-        };
+        if (new Date().getFullYear() === yearValue) {
+            return `${t(dayOfWeek)}, ${formattedDay} ${t(monthName)}`;
+        } else {
+            return `${t(dayOfWeek)}, ${formattedDay} ${t(
+                monthName
+            )} ${yearValue}`;
+        }
     }
+
+    return ""; // Handle the case where dateString is not provided
 }
