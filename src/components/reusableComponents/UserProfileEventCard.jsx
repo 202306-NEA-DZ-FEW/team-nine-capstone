@@ -50,7 +50,14 @@ function UserProfileEventCard({ id }) {
                                 </h1>
                             </div>
                             <div className='px-6 py-4'>
-                                <div className='font-bold text-xl mb-2'>
+                                <div
+                                    className='font-bold text-xl mb-2'
+                                    style={{
+                                        whiteSpace: "nowrap",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                    }}
+                                >
                                     {eventData.location}
                                 </div>
                                 <div className='font-bold text-xl mb-2'>
@@ -58,9 +65,9 @@ function UserProfileEventCard({ id }) {
                                 </div>
                             </div>
                             {eventData.interests && (
-                                <div className='flex flex-wrap px-6 py-4'>
+                                <div className='flex flex-row px-6 py-4'>
                                     {eventData.interests
-                                        .slice(0, 3)
+                                        .slice(0, 1)
                                         .map((interest) => (
                                             <span
                                                 key={interest}

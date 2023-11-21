@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -55,7 +56,31 @@ function Events() {
 
     return (
         <>
-            <IndexPage title={`${userData.displayName} events`} />
+        <IndexPage title={`${userData.displayName} events`} />
+
+        <Layout>
+            {userData && (
+                <div className='flex flex-col'>
+                    {/* first section*/}
+                    <div className='relative py-5 bg-green-700 bg-opacity-50 w-full '>
+                        <div className='flex flex-col sm:flex-row group justify-center items-center align-middle space-x-10 z-10 '>
+                            {userData.avatar ? (
+                                <Image
+                                    src={userData.avatar}
+                                    alt='Avatar'
+                                    className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                                    width={120}
+                                    height={120}
+                                />
+                            ) : (
+                                <Image
+                                    src='/images/defaultUser.png'
+                                    alt='Default'
+                                    className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                                    width={120}
+                                    height={120}
+                                />
+                            )}
 
             <Layout>
                 {userData && (

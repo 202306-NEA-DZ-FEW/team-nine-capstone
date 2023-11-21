@@ -4,8 +4,9 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt } from "react-icons/fa";
-import { FaPeopleGroup, FaPhoneFlip } from "react-icons/fa6";
-import { MdDateRange, MdMail } from "react-icons/md";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { MdDateRange, MdEdit, MdMail } from "react-icons/md";
 
 import {
     eventsCollection,
@@ -34,10 +35,12 @@ function EventDetails() {
     const [isDetails, setIsDetails] = useState(false);
     const [allEvents, setAllEvents] = useState([]);
     const [attendees, setAttendees] = useState([]);
+    const [joinUpdate, setJoinUpdate] = useState(0);
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [containerWidth, setContainerWidth] = useState(1800);
+
+    // const [containerWidth, setContainerWidth] = useState(1800);
     const { user } = useUser();
-    console.log("userrrr", user);
+    // console.log("userrrr", user.uid);
     const containerRef = useRef();
     // function to handle scrolling
     const handleScrolling = (scrollAmount) => {
@@ -62,18 +65,49 @@ function EventDetails() {
     const { t } = useTranslation("common");
     const router = useRouter();
     const { id } = router.query;
-    console.log("id", id);
-    console.log("eventData", eventDisplay);
-    console.log("userData", userDetails);
-    console.log("interests", userDetails?.userInterests);
+
+    // console.log("queyId", id);
+    const [currentEventId, setCurrentEventId] = useState(id);
+    // console.log("currentid", currentEventId);
+    // // console.log("id", id);
+    // console.log("eventData", eventDisplay);
+
+    // console.log("userData", userDetails);
+    // console.log("interests", userDetails?.userInterests);
     const formattedDate = formatDate(eventDisplay?.date, t);
     console.log("allevents", allEvents);
     // const { user, setUser } = useUser();
     // attendees data
+    function navigateToEvent(direction = null) {
+        if (direction) {
+            const currentItems = allEvents;
+            const currentIndex = currentItems.findIndex(
+                (event) => event.id === currentEventId
+            );
+
+            if (currentIndex !== -1) {
+                let newIndex;
+
+                if (direction === "next") {
+                    newIndex = (currentIndex + 1) % currentItems.length;
+                } else if (direction === "previous") {
+                    newIndex =
+                        currentIndex === 0
+                            ? currentItems.length - 1
+                            : currentIndex - 1;
+                }
+
+                const newEventId = currentItems[newIndex].id;
+                setCurrentEventId(newEventId); // Set the new event ID in the state
+                // You can also fetch and render the single event page using newEventId
+                console.log("Navigate to event:", newEventId);
+            }
+        }
+    }
     const fetchData = async () => {
         try {
             // Fetch event data
-            const eventDoc = await getEventDocument(id);
+            const eventDoc = await getEventDocument(currentEventId);
             if (eventDoc.exists) {
                 console.log("im eventdoc");
                 setEventDisplay(eventDoc.data());
@@ -96,7 +130,9 @@ function EventDetails() {
                 const attendeesData = await Promise.all(
                     attendeeIds.map(async (attendeeId) => {
                         const attendeeDoc = await getUserDocument(attendeeId);
-                        return attendeeDoc.exists ? attendeeDoc.data() : null;
+                        return attendeeDoc.exists
+                            ? { ...attendeeDoc.data(), id: attendeeId }
+                            : null;
                     })
                 );
 
@@ -109,10 +145,13 @@ function EventDetails() {
             console.error("Error fetching data:", error);
         }
     };
+    useEffect(() => {
+        setCurrentEventId(id);
+    }, [id]);
 
     useEffect(() => {
         fetchData();
-    }, [id]);
+    }, [currentEventId]);
     // filter the event category
 
     const matchingInterests = eventDisplay?.interests
@@ -150,7 +189,8 @@ function EventDetails() {
                 eventInterests.some(
                     (eventInterest) =>
                         interest.toLowerCase() ===
-                            eventInterest.toLowerCase() && event.id !== id
+                            eventInterest.toLowerCase() &&
+                        event.id !== currentEventId
                 )
             );
         });
@@ -162,20 +202,20 @@ function EventDetails() {
     const filteredEvents = filterEventsByCategory(eventDisplay, allEvents);
     console.log("Filtered Events:", filteredEvents);
     // var to use in the scroller container
-    useEffect(() => {
-        // Update containerWidth based on the number of filtered events
-        if (filteredEvents.length > 3) {
-            // You can adjust the increment value as needed
-            setContainerWidth(1800 + (filteredEvents.length - 3) * 580);
-        } else {
-            setContainerWidth(1800);
-        }
-    }, [filteredEvents]);
+    // useEffect(() => {
+    //     // Update containerWidth based on the number of filtered events
+    //     if (filteredEvents.length > 3) {
+    //         // You can adjust the increment value as needed
+    //         setContainerWidth(1800 + (filteredEvents.length - 3) * 580);
+    //     } else {
+    //         setContainerWidth(1800);
+    //     }
+    // }, [filteredEvents]);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 // Fetch event data
-                const eventDoc = await getEventDocument(id);
+                const eventDoc = await getEventDocument(currentEventId);
                 if (eventDoc.exists) {
                     console.log("im eventdoc");
                     setEventDisplay(eventDoc.data());
@@ -199,31 +239,58 @@ function EventDetails() {
         };
 
         fetchData();
-    }, [id]);
+    }, [currentEventId, id]);
 
     return (
         <>
             <IndexPage title={`${eventDisplay.title} Details`} />
-
-            <div className='flex flex-col  bg-gray-200 h-auto w-full'>
-                <div className='relative flex pt-3 h-[70%] gap-4 px-5 bg-gray-200'>
-                    <div className='w-[100%]  rounded-lg shadow-lg bg-gray-50  h-[150vh]'>
-                        <div className='relative w-full h-[50%] overflow-hidden rounded-lg flex flex-col justify-center  items-center'>
+        <div className='flex flex-col  bg-gray-200 h-auto w-full'>
+            <div className='relative flex pt-3 h-[70%] gap-4 px-5 bg-gray-200'>
+                {/* <div className='z-20 left-16 top-[50%] sticky'>
+                    <SocialShare
+                        path={router.asPath}
+                        title={eventDisplay.title}
+                        quote={eventDisplay.about}
+                    />
+                    
+                </div> */}
+                <div className='w-[100%]  rounded-lg shadow-lg bg-gray-50  h-[160vh]'>
+                    <div className='relative w-full h-[50%] group transition overflow-hidden hover: rounded-lg flex flex-col justify-center  items-center'>
+                        <div
+                            className='w-full h-[90%] absolute top-0 bg-top bg-cover'
+                            style={{
+                                backgroundImage: `url(${eventDisplay.image})`,
+                                backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                backgroundPosition: "center",
+                                backgroundRepeat: "no-repeat",
+                            }}
+                        >
                             <div
-                                className='w-full h-[90%] absolute top-0 bg-top bg-cover'
-                                style={{
-                                    backgroundImage: `url(${eventDisplay.image})`,
+                                onClick={() => {
+                                    navigateToEvent("next");
                                 }}
+                                className='absolute -right-20 top-1/3 h-28 w-7 cursor-pointer group-hover:right-2 transition-all duration-300 flex justify-center items-center text-2xl bg-white hover:bg-gray-200 rounded-md opacity-75 text-black hover:text-green-500  z-10'
                             >
-                                {eventDisplay.createdBy ? (
-                                    <Link
-                                        href={`/events/editTheEvent/${eventDisplay.id}`}
-                                    >
-                                        <div className='absolute z-10 top-0 right-0 p-2 px-2 opacity-100 group-hover:opacity-0 bg-gray-200'>
-                                            {/* <MdEdit className='absolute z-20 top-1 bg-gray-200 rounded-full hover:hidden right-2' /> */}
-                                            <div className='flex items-center justify-center w-28 h-6  rounded-full'>
-                                                EDIT EVENT
-                                            </div>
+                                <HiChevronRight />
+                            </div>
+                            <div
+                                onClick={() => {
+                                    navigateToEvent("previous");
+                                }}
+                                className='absolute -left-20 top-1/3 h-28 w-7 cursor-pointer group-hover:left-2 transition-all duration-300 flex justify-center items-center text-2xl bg-white hover:bg-gray-200 rounded-md opacity-75 text-black hover:text-green-500  z-10'
+                            >
+                                <HiChevronLeft />
+                            </div>
+
+                            {user && user?.uid === eventDisplay.createdBy && (
+                                <Link
+                                    href={`/events/editTheEvent/${currentEventId}`}
+                                >
+                                    <div className='absolute z-10 top-2 -right-36 group-hover:right-2 transition-all duration-300 rounded-full h-6 p-2 px-2 bg-gray-200 hover:bg-amber-400 opacity-0 group-hover:opacity-100  flex flex-row justify-center items-center'>
+                                        <MdEdit className=' rounded-full text-black' />
+                                        <div className='flex items-center justify-center  w-28 h-6 font-bold  rounded-full'>
+                                            EDIT EVENT
+
                                         </div>
                                     </Link>
                                 ) : (
@@ -237,10 +304,26 @@ function EventDetails() {
                                         Ready to lend a hand & help people, dont
                                         miss the opertunity
                                     </div>
-                                    <div className='text-emerald-100 font-medium text-lg  rounded-md'>
-                                        <EventTimer
-                                            closestEvent={eventDisplay}
-                                        />
+                                </Link>
+                            )}
+                            <div className='bg-black bg-opacity-60 w-full h-full absolute'></div>
+                        </div>
+                        <div className='relative absolut z-10 w-[80%] md:h-[50%] h-[70%] '>
+                            <div className='absolute z-10 w-full flex justify-center gap-3 my-3 items-center flex-col'>
+                                <div className=' lg:text-3xl md:text-2xl text-xl text-white text-center  font-bold'>
+                                    Ready to lend a hand & help people, dont
+                                    miss the opertunity
+                                </div>
+                                <div className='text-emerald-100 font-medium text-lg  rounded-md'>
+                                    <EventTimer closestEvent={eventDisplay} />
+                                </div>
+                                <div className='flex md:flex-row flex-col justify-center  w-[80%] items-center h-auto'>
+                                    <div className='text-white font-semibold justify-center text-lg items-center gap-2 flex flex-row w-full  lg:w-1/3'>
+                                        <MdDateRange /> {formattedDate}
+                                    </div>
+                                    <div className='text-white font-semibold  justify-center items-center text-lg gap-2 flex flex-row w-full  lg:w-1/3'>
+                                        <FaMapMarkerAlt />{" "}
+                                        {eventDisplay.location?.split(" ")[0]}
                                     </div>
                                     <div className='flex md:flex-row flex-col justify-center lg:w-[40%] items-center h-auto'>
                                         <div className='text-white font-semibold justify-center text-lg items-center gap-2 flex flex-row w-full  lg:w-1/3'>
@@ -265,26 +348,36 @@ function EventDetails() {
                                 </div>
                                 <div className='bg-gray-900 bg-opacity-80 w-[100%] h-full absolute'></div>
                             </div>
+                            <div className='bg-gray-900 bg-opacity-80 w-[100%] h-full absolute'></div>
+                        </div>
+                        <div className=' rounded-md mx-8 mb-7 px-2 shadow-lg bg-gray-50 absolute lg:-bottom-4 -bottom-2 z-10 top-auto lg:h-[15%] h-[10%] justify-center items-center w-[80%] flex flex-row'>
+                            <div className='flex flex-row justify-center items-center lg:text-xl text-lg font-bold'>
+                                {eventDisplay.location?.split(" ")[0]}{" "}
+                                {eventDisplay.title} event
 
-                            <div className=' rounded-md mx-8 mb-7 px-2 shadow-lg bg-gray-50 absolute lg:-bottom-4 -bottom-2 z-10 top-auto lg:h-[15%] h-[10%] justify-center items-center w-[80%] flex flex-row'>
-                                <div className='flex flex-row justify-center items-center lg:text-xl text-lg font-bold'>
-                                    {eventDisplay.location?.split(" ")[0]}{" "}
-                                    {eventDisplay.title} event
-                                </div>
                             </div>
                         </div>
                         <div className='flex flex-row my-3'>
                             <div
-                                onClick={() => {
-                                    setIsDescription(true);
-                                    setIsOrgebizer(false);
-                                    setIsDetails(false);
-                                }}
-                                className='ml-2 flex justify-start flex-col w-1/3 cursor-pointer'
-                            >
-                                <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
-                                    DISCRIPTION
-                                </div>
+                                className={`${
+                                    isDiscription
+                                        ? "md:w-[40%] w-full border-b-4  border-solid transition-all scale-x-110 border-amber-400"
+                                        : ""
+                                }`}
+                            ></div>
+                        </div>
+                        <div
+                            onClick={() => {
+                                setIsOrgebizer((prev) => !prev);
+                                setIsDescription(false);
+                                setIsDetails(false);
+                            }}
+                            className='ml-2 flex flex-col w-1/3 cursor-pointer'
+                        >
+                            <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
+                                ORGANIZOR
+                            </div>
+
 
                                 <div
                                     className={`${
@@ -295,23 +388,49 @@ function EventDetails() {
                                 ></div>
                             </div>
                             <div
-                                onClick={() => {
-                                    setIsOrgebizer((prev) => !prev);
-                                    setIsDescription(false);
-                                    setIsDetails(false);
-                                }}
-                                className='ml-2 flex flex-col w-1/3 cursor-pointer'
-                            >
-                                <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
-                                    ORGANIZOR
+                                className={`${
+                                    isDetails
+                                        ? "md:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
+                                        : ""
+                                }`}
+                            ></div>
+                        </div>
+                    </div>
+                    <div className='h-auto flex justify-center py-3'>
+                        <div
+                            className={`flex lg:flex-row flex-col justify-center h-[40%] w-[90%] gap-4 px-4 mt-8 ${
+                                isDiscription ? "" : "hidden"
+                            }`}
+                        >
+                            <div className='lg:w-1/2 flex flex-col items-start  w-full'>
+                                <div className='flex justify-center h-[40vh] md:text-lg font-serif '>
+                                    {eventDisplay.about}
                                 </div>
 
+                                <div className='text-center  self-center mt-3 hover:border-none border-amber-400 border-2 h-8 hover:bg-green-500 transition duration-300 font-medium hover:text-white lg:text-xl text-lg  border-solid w-[40%] rounded-full cursor-pointer '>
+                                    <JoinButton
+                                        eOwner={eventDisplay.createdBy}
+                                        eventId={currentEventId}
+                                        eAttendees={eventDisplay.attendees}
+                                        setJoinUpdate={setJoinUpdate}
+                                    />
+                                </div>
+                            </div>
+                            <div className='hidden relative lg:w-1/2 px-3 h-[50vh] overflow-hidden lg:flex flex-col justify-start  items-start'>
                                 <div
-                                    className={`${
-                                        isOrgenizer
-                                            ? "md:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
-                                            : ""
-                                    }`}
+                                    className=' absolute z-10 w-[70%] h-[90%] top-0 bg-top bg-cover'
+                                    style={{
+                                        backgroundImage: `url(${eventDisplay.image})`,
+                                    }}
+                                ></div>
+                                <div
+                                    className=' absolute left-10 top-16 w-[70%] h-full bg-top bg-cover'
+                                    style={{
+                                        backgroundImage: `url('/images/the one.jpg')`,
+                                        backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                        backgroundPosition: "center",
+                                        backgroundRepeat: "no-repeat",
+                                    }}
                                 ></div>
                             </div>
                             <div
@@ -327,12 +446,30 @@ function EventDetails() {
                                 </div>
 
                                 <div
-                                    className={`${
-                                        isDetails
-                                            ? "md:w-[40%] w-full border-b-4 border-solid transition-all scale-x-110 border-amber-400"
-                                            : ""
-                                    }`}
+                                    className=' w-20 h-20 rounded-md bg-top bg-cover shadow-2xl '
+                                    style={{
+                                        backgroundImage: `url(${userDetails?.avatar})`,
+                                        backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                        backgroundPosition: "center",
+                                        backgroundRepeat: "no-repeat",
+                                    }}
                                 ></div>
+                                <div className='font-medium'>
+                                    {userDetails?.displayName}
+                                </div>
+                            </div>
+                            <div className='flex flex-col px-2 lg:px-28  justify-start items-center gap-2 font-medium text-lg'>
+                                <div className='text-lg font-bold felx flex-row gap-2'>
+                                    CONTACTS:
+                                </div>
+                                <div className=' flex flex-row px-2 lg:justify-start justify-center items-center gap-2 font-medium text-lg'>
+                                    <MdMail className='text-gray-900' />{" "}
+                                    {userDetails?.email}
+                                </div>
+                                <div className=' flex flex-row px-2 lg:justify-start justify-center items-center gap-2  font-medium text-lg'>
+                                    <FaMapMarkerAlt className='text-gray-900' />
+                                    {userDetails?.location}
+                                </div>
                             </div>
                         </div>
                         <div className='h-auto flex justify-center py-3'>
@@ -345,7 +482,6 @@ function EventDetails() {
                                     <div className='flex justify-center h-auto md:text-lg font-serif '>
                                         {eventDisplay.about}
                                     </div>
-
                                     <div className='text-center self-center mt-3 hover:border-none border-bgc-sunflower border-2 h-8 hover:bg-bgc-ForestGreen transition duration-300 font-medium hover:text-txtc-Ivory lg:text-xl text-lg  border-solid w-[40%] rounded-full cursor-pointer '>
                                         <JoinButton />
                                     </div>
@@ -365,6 +501,20 @@ function EventDetails() {
                                                         closeDropdown
                                                     }
                                                 />
+
+                            <div className='flex flex-col px-2 justify-start items-center gap-2 font-medium text-lg'>
+                                <div className='text-lg font-bold felx flex-row gap-2'>
+                                    <div>Interests :</div>
+                                </div>
+                                <div className='flex lg:flex-row flex-col gap-2'>
+                                    {userDetails?.userInterests?.map(
+                                        (interest) => (
+                                            <div
+                                                key={interest.id}
+                                                className='rounded-full turnicate bg-gray-200 px-2'
+                                            >
+                                                {interest}
+
                                             </div>
                                         )}
                                     </div>
@@ -430,6 +580,18 @@ function EventDetails() {
                                                 </div>
                                             )
                                         )}
+
+                                    <div className='flex flex-row w-full px-2 justify-start items-center gap-2 font-medium text-lg'>
+                                        {attendees?.map((attendee) => (
+                                            <Link
+                                                key={attendee.id} // Add a unique key for each element in the array
+                                                className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl'
+                                                style={{
+                                                    backgroundImage: `url(${attendee.avatar})`,
+                                                }}
+                                                href={`/profile/${attendee.id}`}
+                                            ></Link>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -458,6 +620,26 @@ function EventDetails() {
                                             <div className=' flex flex-row justify-start'>
                                                 {eventDisplay.location}
                                                 <FaMapMarkerAlt />{" "}
+
+                                    <div className='grid md:grid-cols-3 w-full grid-flow-row place-content-start justify-items-center gap-3'>
+                                        {matchingInterests?.map((interest) => (
+                                            <div
+                                                className='bg-gray-200 flex space-x-1 px-1 items-center gap-1 h-10 w-40 rounded-full'
+                                                key={interest.title}
+                                            >
+                                                <div
+                                                    className={` rounded-full h-7 w-7  flex justify-center items-center bg-gray-50 text-${interest.color}-100 `}
+                                                >
+                                                    {interest.icon}
+                                                </div>
+                                                <div
+                                                    className='flex justify-start font-medium text-lg items-center truncate h-6'
+                                                    key={interest.title}
+                                                >
+                                                    {t(
+                                                        interest.title.toString()
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
