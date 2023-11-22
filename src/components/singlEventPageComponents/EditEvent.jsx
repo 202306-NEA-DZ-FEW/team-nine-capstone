@@ -6,6 +6,7 @@ import {
     ref,
     uploadBytes,
 } from "firebase/storage";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -16,8 +17,6 @@ import { MultiSelect } from "react-multi-select-component";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { firestore, storage } from "@/lib/firebase/controller";
-
-import IndexPage from "@/components/reusableComponents/indexPage";
 
 import { useUser } from "@/context/UserContext";
 
@@ -159,7 +158,12 @@ function EditEvent() {
 
     return (
         <>
-            <IndexPage title={`Edit Event ${oldInfo.title}`} />
+            <Head>
+                <title>
+                    {t("editEvent.title")} {oldInfo.title}
+                </title>
+            </Head>
+
             <div className='m-5 box-border bg-bgc-silver'>
                 <div className='relative overflow-hidden w-full h-96'>
                     <Image
@@ -211,7 +215,7 @@ function EditEvent() {
                                         name='title'
                                         id='title'
                                         className='shadow-sm bg-white border border-bgc-Charcoal text-txtc-DarkCharcoal sm:text-sm rounded-lg focus:ring-txtc-DarkCharcoal focus:border-txtc-DarkCharcoal block w-full p-2.5'
-                                        placeholder='Green tech”'
+                                        placeholder={oldInfo.title}
                                     />
                                 </div>
                                 <div className='col-span-6 sm:col-span-3'>
@@ -297,7 +301,7 @@ function EditEvent() {
                                         id='about'
                                         rows='6'
                                         className='shadow-sm bg-white border border-bgc-Charcoal text-txtc-DarkCharcoal sm:text-sm rounded-lg focus:ring-txtc-DarkCharcoal focus:border-txtc-DarkCharcoal block w-full p-2.5'
-                                        placeholder='e.g helping kids, coach..etc'
+                                        placeholder={oldInfo.about}
                                     ></textarea>
                                 </div>
                             </div>

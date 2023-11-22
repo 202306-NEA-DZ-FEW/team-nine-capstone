@@ -1,12 +1,9 @@
 import React from "react";
 
-import IndexPage from "@/components/reusableComponents/indexPage";
-
 export default function TermsAndConditions() {
     return (
         <>
             <div>
-                <IndexPage title='Terms and Conditions' />
                 <h1>Welcome to the Pebbler Community</h1>
 
                 <h2>1. Compassion and Empathy</h2>

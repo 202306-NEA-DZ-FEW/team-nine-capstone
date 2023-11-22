@@ -1,14 +1,16 @@
+import Head from "next/head";
 import React from "react";
 
 import ForgotPassword from "@/components/reusableComponents/ForgotPassword";
-import IndexPage from "@/components/reusableComponents/indexPage";
 
 import Layout from "@/layout/Layout";
 
 export default function forgotPassword() {
     return (
         <Layout>
-            <IndexPage title='Reset Password' />
+            <Head>
+                <title>Forgot Password</title>
+            </Head>
             <ForgotPassword />
         </Layout>
     );

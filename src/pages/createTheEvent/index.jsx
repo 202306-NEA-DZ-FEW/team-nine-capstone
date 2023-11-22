@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
@@ -8,6 +9,9 @@ import Layout from "@/layout/Layout";
 function createTheEvent() {
     return (
         <Layout>
+            <Head>
+                <title>Host an Event</title>
+            </Head>
             <CreateEvent />
         </Layout>
     );

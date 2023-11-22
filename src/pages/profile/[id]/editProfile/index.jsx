@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getAllUserIds } from "@/lib/firebase/users";
@@ -10,6 +11,9 @@ import Layout from "@/layout/Layout";
 function EditProfile() {
     return (
         <Layout>
+            <Head>
+                <title>Edit Profile</title>
+            </Head>
             <div className='bg-gray-300'>
                 <UserDetails />
                 <EditSignInDetailes />

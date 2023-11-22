@@ -5,13 +5,12 @@ import {
     updatePassword,
 } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 
 import { updateUserDocument, userCollection } from "@/lib/firebase/controller";
-
-import IndexPage from "@/components/reusableComponents/indexPage";
 
 import { useUser } from "@/context/UserContext";
 
@@ -132,7 +131,9 @@ function UpdateSignInDetailes() {
 
     return (
         <>
-            <IndexPage title='Edit Profile' />
+            <Head>
+                <title>Edit Profile</title>
+            </Head>
 
             <div className='flex flex-col rounded-md border-red-600 boreder-4 w-[95%] bg-gradient-to-b from-gray-700 justify-center p-4 m-2'>
                 <p className='flex justify-center font-extrabold text-2xl underline p-2'>

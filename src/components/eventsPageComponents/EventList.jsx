@@ -10,8 +10,6 @@ import { MdClose, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { eventsCollection } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
 
-import IndexPage from "@/components/reusableComponents/indexPage";
-
 import { useUser } from "@/context/UserContext";
 
 import BottomSheet from "./BottomSheets";
@@ -205,7 +203,6 @@ function EventList() {
     };
     return (
         <>
-            <IndexPage title='All Events' />
             <div className='relative h-full flex flex-col bg-gray-200'>
                 <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
                     <div className='hidden bg-gray-50 mt-4 sticky top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>

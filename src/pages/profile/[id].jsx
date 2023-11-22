@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -64,6 +65,9 @@ function Profile() {
 
     return (
         <Layout>
+            <Head>
+                <title>Profile</title>
+            </Head>
             {userData && (
                 <div className='flex flex-col '>
                     {/* first profile section*/}
