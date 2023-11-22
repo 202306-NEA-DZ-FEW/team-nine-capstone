@@ -474,3 +474,14 @@ hero-All {
         display: none;
     }
 }
+
+.how-inAll1 {
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    background-color: #eeeeee;
+}

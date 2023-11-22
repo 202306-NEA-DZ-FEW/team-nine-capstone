@@ -16,6 +16,7 @@ import {
 import { auth } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
+import Image from "next/image";
 
 function Navbar() {
     const [hasScrolled, setHasScrolled] = useState(false);
@@ -94,7 +95,7 @@ function Navbar() {
                             width={35}
                             className='mr-2'
                         />
-                        <span className='nav-logo'>Pebble</span>
+                        <span className='nav-logo'>{t("webtitle")}</span>
                     </Link>
 
                     {/*SM view*/}
@@ -353,7 +354,6 @@ function Navbar() {
                                             </div>
                                         )}
                                     </div>
-                                    donate
                                     <div className='relative'>
                                         <div
                                             className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white border-t'
