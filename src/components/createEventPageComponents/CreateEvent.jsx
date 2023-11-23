@@ -72,6 +72,7 @@ function CreateEvent() {
                 interests: selectedInterets.map((interest) => interest.value),
                 createdBy: user.uid,
                 attendees: [user.uid],
+                comments: [],
             });
 
             await updateUserDocument(user.uid, {

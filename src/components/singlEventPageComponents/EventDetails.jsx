@@ -1,23 +1,30 @@
-import { onSnapshot } from "firebase/firestore";
+import { arrayRemove, onSnapshot } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useRef, useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt } from "react-icons/fa";
+import {
+    FaArrowLeft,
+    FaArrowRight,
+    FaMapMarkerAlt,
+    FaRegCommentDots,
+} from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import { MdDateRange, MdEdit, MdMail } from "react-icons/md";
+import { MdClose, MdDateRange, MdEdit, MdMail } from "react-icons/md";
 
 import {
     eventsCollection,
     getEventDocument,
     getUserDocument,
+    updateEventDocument,
 } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
 
 import { useUser } from "@/context/UserContext";
 
 import EventCard from "../eventsPageComponents/EventCard";
+import EventComments from "../eventsPageComponents/eventComments";
 import EventTimer from "../eventsPageComponents/EventTimer";
 import JoinButton from "../reusableComponents/JoinButton";
 import { formatDate } from "../util/formattedDate";
@@ -34,10 +41,16 @@ function EventDetails() {
     const [attendees, setAttendees] = useState([]);
     const [joinUpdate, setJoinUpdate] = useState(0);
     const [scrollPosition, setScrollPosition] = useState(0);
+    const [userDoc, setUserDoc] = useState(null);
+    const [isComments, setIsComments] = useState(false);
+    const [singleEventData, setSingleEventData] = useState(null);
+    const [isDeleted, setIsDeleted] = useState(false);
+    const [commentId, setCommentId] = useState(null);
+    // const [comment, setComment]
 
     // const [containerWidth, setContainerWidth] = useState(1800);
     const { user } = useUser();
-    // console.log("userrrr", user.uid);
+    console.log("userrrrsingleEventData", singleEventData);
     const containerRef = useRef();
     // function to handle scrolling
     const handleScrolling = (scrollAmount) => {
@@ -57,7 +70,7 @@ function EventDetails() {
     const [currentEventId, setCurrentEventId] = useState(id);
     // console.log("currentid", currentEventId);
     // // console.log("id", id);
-    // console.log("eventData", eventDisplay);
+    console.log("eventData", eventDisplay.comments);
 
     // console.log("userData", userDetails);
     // console.log("interests", userDetails?.userInterests);
@@ -139,8 +152,23 @@ function EventDetails() {
     useEffect(() => {
         fetchData();
     }, [currentEventId]);
-    // filter the event category
+    const fetchUserDocument = async () => {
+        const doc = await getUserDocument(user.uid);
+        if (doc.exists()) {
+            setUserDoc({ ...doc.data(), id: doc.id });
+        } else {
+            // Handle the case where the document doesn't exist
+            setUserDoc(null);
+        }
+    };
 
+    useEffect(() => {
+        if (user && user.uid) {
+            fetchUserDocument();
+        }
+    }, [user]);
+    console.log("userDoc", userDoc);
+    // filter the event category
     const matchingInterests = eventDisplay?.interests
         ?.map((element) =>
             interestList.find((interest) => interest.title === element)
@@ -153,11 +181,33 @@ function EventDetails() {
                 return { ...doc.data(), id: doc.id };
             });
             setAllEvents(eventsArr); // Set loading to false when data is fetched
+
+            // Fetch and set single event data using the currentEventId
+            const currentEvent = eventsArr.find(
+                (event) => event.id === currentEventId
+            );
+            if (currentEvent) {
+                setSingleEventData(currentEvent);
+            } else {
+                // Handle the case where the document doesn't exist
+                setSingleEventData(null); // You can adjust this based on your requirements
+            }
         });
 
         // Cleanup the subscription when the component unmounts
         return () => unsubscribe();
-    }, []);
+    }, [currentEventId]);
+    // fetch single event data to use n
+    const handleDeleteComment = async (commentId) => {
+        console.log("iminsidehandlecomment", commentId);
+        await updateEventDocument(currentEventId, {
+            comments: arrayRemove(
+                singleEventData.comments.find(
+                    (comment) => comment.commentId === commentId
+                )
+            ),
+        });
+    };
     // filter event by category to put related events
     function filterEventsByCategory(currentEvent, allEvents) {
         // Check if currentEvent or allEvents is undefined or null
@@ -226,28 +276,27 @@ function EventDetails() {
         };
 
         fetchData();
-    }, [currentEventId, id]);
+    }, [currentEventId, id, user]);
 
     return (
-        <div className='flex flex-col  bg-gray-200 h-auto w-full'>
-            <div className='relative flex pt-3 h-[70%] gap-4 px-5 bg-gray-200'>
-                {/* <div className='z-20 left-16 top-[50%] sticky'>
-                    <SocialShare
-                        path={router.asPath}
-                        title={eventDisplay.title}
-                        quote={eventDisplay.about}
-                    />
-                    
-                </div> */}
-                <div className='w-[100%]  rounded-lg shadow-lg bg-gray-50  h-[160vh]'>
-                    <div className='relative w-full h-[50%] group transition overflow-hidden hover: rounded-lg flex flex-col justify-center  items-center'>
+        <div className='relative flex flex-col  bg-gray-200 h-auto w-full'>
+            {/* <div className='z-40 left-16 top-[50%] sticky'>
+                <SocialShare
+                    path={router.asPath}
+                    title={eventDisplay.title}
+                    quote={eventDisplay.about}
+                />
+            </div> */}
+            <div className='relative flex pt-3 h-auto gap-4 px-5 bg-gray-200'>
+                <div className='w-[100%]  rounded-lg shadow-lg bg-gray-50  h-auto'>
+                    <div className='relative w-full h-[80vh] group transition overflow-hidden rounded-lg flex flex-col justify-center  items-center'>
                         <div
                             className='w-full h-[90%] absolute top-0 bg-top bg-cover'
                             style={{
                                 backgroundImage: `url(${eventDisplay.image})`,
-                                backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
-                                backgroundPosition: "center",
-                                backgroundRepeat: "no-repeat",
+                                // backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                // backgroundPosition: "center",
+                                // backgroundRepeat: "no-repeat",
                             }}
                         >
                             <div
@@ -312,7 +361,7 @@ function EventDetails() {
                         <div className=' rounded-md mx-8 mb-7 px-2 shadow-lg bg-gray-50 absolute lg:-bottom-4 -bottom-2 z-10 top-auto lg:h-[15%] h-[10%] justify-center items-center w-[80%] flex flex-row'>
                             <div className='flex flex-row justify-center items-center lg:text-xl text-lg font-bold'>
                                 {eventDisplay.location?.split(" ")[0]}{" "}
-                                {eventDisplay.title} event
+                                {eventDisplay.title}
                             </div>
                         </div>
                     </div>
@@ -519,19 +568,19 @@ function EventDetails() {
                                     <div className='text-lg w-full font-bold'>
                                         CATEGORY :
                                     </div>
-                                    <div className='grid md:grid-cols-3 w-full grid-flow-row place-content-start justify-items-center gap-3'>
+                                    <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full place-content-start justify-items-center gap-3'>
                                         {matchingInterests?.map((interest) => (
                                             <div
-                                                className='bg-gray-200 flex space-x-1 px-1 items-center gap-1 h-10 w-40 rounded-full'
+                                                className='bg-gray-200 flex space-x-1 px-1 items-center gap-1 h-8 w-28 rounded-full'
                                                 key={interest.title}
                                             >
                                                 <div
-                                                    className={` rounded-full h-7 w-7  flex justify-center items-center bg-gray-50 text-${interest.color}-100 `}
+                                                    className={` rounded-full h-5 w-5  flex justify-center items-center bg-gray-50  `}
                                                 >
                                                     {interest.icon}
                                                 </div>
                                                 <div
-                                                    className='flex justify-start font-medium text-lg items-center truncate h-6'
+                                                    className='flex justify-start font-medium text-sm items-center truncate h-5'
                                                     key={interest.title}
                                                 >
                                                     {t(
@@ -545,9 +594,95 @@ function EventDetails() {
                             </div>
                         </div>
                     </div>
+                    <div className='h-auto'>
+                        <div className='w-[100%] self-center bg-amber-400 h-2  rounded-full my-4'></div>
+                        <div className='flex flex-col gap-4 w-full'>
+                            <div
+                                className={`${
+                                    isComments
+                                        ? "bg-gray-200 max-h-56 w-full flex flex-col overflow-hidden overflow-y-auto gap-1 px-2"
+                                        : "hidden"
+                                }`}
+                            >
+                                {singleEventData?.comments?.map((comment) => (
+                                    <div
+                                        key={comment.userUid}
+                                        className='bg-gray-200 gap-2 w-full h-auto my-2 flex flex-row justify-start items-start'
+                                    >
+                                        <div className='w-auto'>
+                                            <div
+                                                className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl '
+                                                style={{
+                                                    backgroundImage: `url(${comment?.userAvatar})`,
+                                                    backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                                    // backgroundPosition:
+                                                    //     "center",
+                                                    // backgroundRepeat:
+                                                    //     "no-repeat",
+                                                }}
+                                            ></div>
+                                        </div>
+                                        <div className='relative min-h-[50px] w-96 group transition  bg-gray-50 text-sm font-medium shadow-lg flex flex-wrap whitespace-normal border border-gray-900 border-solid rounded-md justify-start items-center p-2'>
+                                            {user?.uid === comment.userUid ? (
+                                                <MdClose
+                                                    onClick={() =>
+                                                        handleDeleteComment(
+                                                            comment.commentId
+                                                        )
+                                                    }
+                                                    className='absolute -top-2 right-0 rounded-bl-md text-lg group-hover:flex hidden transition-all cursor-pointer bg-gray-200 shadow-lg '
+                                                />
+                                            ) : (
+                                                ""
+                                            )}{" "}
+                                            {comment.comment}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            {user ? (
+                                <div className='flex flex-row w-full mt-2 gap-2 px-2 h-16'>
+                                    <div
+                                        className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl '
+                                        style={{
+                                            backgroundImage: `url(${userDoc?.avatar})`,
+                                            backgroundSize: "100%",
+                                        }}
+                                    ></div>
+
+                                    <div className='bg-gray-200 h-12 rounded-full w-full flex justify-start items-center'>
+                                        <EventComments
+                                            commentId={commentId}
+                                            singleEventData={singleEventData}
+                                            isDeleted={isDeleted}
+                                            userDoc={userDoc}
+                                            eventId={currentEventId}
+                                        />
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className='bg-gray-200 h-12 self-center px-3 my-2 mx-2 font-medium rounded-full w-full flex justify-start items-center'>
+                                    YOU CAN COMMENT WHEN YOU ARE LOGGED IN
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div
+                    onClick={() => setIsComments(!isComments)}
+                    className='bg-gray-50 cursor-pointer  absolute z-20 hover:bg-amber-400 transition-all duration-300 -bottom-8 px-2 right-8 h-8 flex flex-row gap-2 items-center justify-center font-medium w-auto rounded-b-md'
+                >
+                    <FaRegCommentDots />{" "}
+                    <div>
+                        {singleEventData.comments.length === 0
+                            ? "NO COMMENTS YET"
+                            : isComments
+                            ? "HIDE COMMENTS"
+                            : "SEE COMMENTS"}
+                    </div>
                 </div>
             </div>
-            <div className=''>
+            <div className=' mt-8'>
                 <div className='relative w-full mt-3 '>
                     <div className='bg-amber-400 absolute z-20 -top-8 px-2 left-7 h-8 flex items-center justify-center font-medium w-auto rounded-t-md'>
                         RELATED EVENTS
