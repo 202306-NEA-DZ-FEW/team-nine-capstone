@@ -25,7 +25,7 @@ import SocialShare from "@/components/reusableComponents/SocialShare";
 import { useUser } from "@/context/UserContext";
 
 import EventCard from "../eventsPageComponents/EventCard";
-import EventComments from "../eventsPageComponents/eventComments";
+import EventsComments from "../eventsPageComponents/EventsComments";
 import EventTimer from "../eventsPageComponents/EventTimer";
 import JoinButton from "../reusableComponents/JoinButton";
 import { formatDate } from "../util/formattedDate";
@@ -469,7 +469,7 @@ function EventDetails() {
                                     <div>Interests :</div>
                                 </div>
                                 <div className='flex lg:flex-row flex-col gap-2'>
-                                    {userDetails?.userInterests.map(
+                                    {userDetails?.userInterests?.map(
                                         (interest) => (
                                             <div
                                                 key={interest.id}
@@ -627,7 +627,7 @@ function EventDetails() {
                                     ></div> */}
 
                                     <div className='bg-gray-200 h-12 rounded-full w-full flex justify-start items-center'>
-                                        <EventComments
+                                        <EventsComments
                                             commentId={commentId}
                                             singleEventData={singleEventData}
                                             isDeleted={isDeleted}

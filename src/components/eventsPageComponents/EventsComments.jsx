@@ -5,10 +5,8 @@ import { updateEventDocument } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
 
-const EventComments = ({ singleEventData, userDoc, eventId }) => {
-    console.log("userDocinside comment", userDoc);
+const EventsComments = ({ singleEventData, userDoc, eventId }) => {
     const { user } = useUser();
-    // console.log("user.uid", user.uid);
     const [comment, setComment] = useState("");
     const handleComment = async (e) => {
         e.preventDefault();
@@ -57,4 +55,4 @@ const EventComments = ({ singleEventData, userDoc, eventId }) => {
     );
 };
 
-export default EventComments;
+export default EventsComments;
