@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useRef, useState } from "react";
+import { BiLogIn } from "react-icons/bi";
 import {
     FaArrowLeft,
     FaArrowRight,
@@ -10,7 +11,8 @@ import {
     FaRegCommentDots,
 } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { MdClose, MdDateRange, MdMail } from "react-icons/md";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { MdClose, MdDateRange, MdEdit, MdMail } from "react-icons/md";
 
 import {
     eventsCollection,
@@ -89,6 +91,33 @@ function EventDetails() {
     console.log("allevents", allEvents);
     // const { user, setUser } = useUser();
     // attendees data
+    let indexOfEvent;
+    function navigateToEvent(direction = null) {
+        if (direction) {
+            const currentItems = allEvents;
+            const currentIndex = currentItems.findIndex(
+                (event) => event.id === currentEventId
+            );
+
+            if (currentIndex !== -1) {
+                let newIndex;
+
+                if (direction === "next") {
+                    newIndex = (currentIndex + 1) % currentItems.length;
+                } else if (direction === "previous") {
+                    newIndex =
+                        currentIndex === 0
+                            ? currentItems.length - 1
+                            : currentIndex - 1;
+                }
+                indexOfEvent = newIndex;
+                const newEventId = currentItems[newIndex].id;
+                setCurrentEventId(newEventId); // Set the new event ID in the state
+                // You can also fetch and render the single event page using newEventId
+                console.log("Navigate to event:", newEventId);
+            }
+        }
+    }
     const fetchData = async () => {
         try {
             // Fetch event data
@@ -130,6 +159,9 @@ function EventDetails() {
             console.error("Error fetching data:", error);
         }
     };
+    useEffect(() => {
+        setCurrentEventId(id);
+    }, [id]);
 
     useEffect(() => {
         fetchData();
@@ -208,7 +240,8 @@ function EventDetails() {
                 eventInterests.some(
                     (eventInterest) =>
                         interest.toLowerCase() ===
-                            eventInterest.toLowerCase() && event.id !== id
+                            eventInterest.toLowerCase() &&
+                        event.id !== currentEventId
                 )
             );
         });
@@ -224,7 +257,7 @@ function EventDetails() {
         const fetchData = async () => {
             try {
                 // Fetch event data
-                const eventDoc = await getEventDocument(id);
+                const eventDoc = await getEventDocument(currentEventId);
                 if (eventDoc.exists) {
                     console.log("im eventdoc");
                     setEventDisplay(eventDoc.data());
@@ -266,17 +299,32 @@ function EventDetails() {
                             className='w-full h-[90%] absolute top-0 bg-top bg-cover'
                             style={{
                                 backgroundImage: `url(${eventDisplay.image})`,
-                                // backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
-                                // backgroundPosition: "center",
-                                // backgroundRepeat: "no-repeat",
                             }}
                         >
-                            {user && user.uid === eventDisplay.createdBy && (
-                                <Link href={`/events/editTheEvent/${id}`}>
-                                    <div className='absolute z-10 top-1 right-1 rounded-sm p-2 px-2 opacity-100 group-hover:opacity-0 bg-gray-200'>
-                                        {/* <MdEdit className='absolute z-20 top-1 bg-gray-200 rounded-full hover:hidden right-2' /> */}
-                                        <div className='flex items-center justify-center w-28 h-6  rounded-full'>
-                                            EDIT EVENT
+                            <div
+                                onClick={() => {
+                                    navigateToEvent("next");
+                                }}
+                                className='absolute -right-20 top-1/3 h-28 w-7 cursor-pointer group-hover:right-2 transition-all duration-300 flex justify-center items-center text-2xl bg-white hover:bg-gray-200 rounded-md opacity-75 text-black hover:text-green-500  z-10'
+                            >
+                                <HiChevronRight />
+                            </div>
+                            <div
+                                onClick={() => {
+                                    navigateToEvent("previous");
+                                }}
+                                className='absolute -left-20 top-1/3 h-28 w-7 cursor-pointer group-hover:left-2 transition-all duration-300 flex justify-center items-center text-2xl bg-white hover:bg-gray-200 rounded-md opacity-75 text-black hover:text-green-500  z-10'
+                            >
+                                <HiChevronLeft />
+                            </div>
+                            {user && user?.uid === eventDisplay.createdBy && (
+                                <Link
+                                    href={`/events/editTheEvent/${currentEventId}`}
+                                >
+                                    <div className='absolute z-10 top-2 -right-36 group-hover:right-2 transition-all duration-300 rounded-full h-6 p-2 px-2 bg-gray-200 hover:bg-amber-400 opacity-0 group-hover:opacity-100  flex flex-row justify-center items-center'>
+                                        <MdEdit className=' rounded-full text-black' />
+                                        <div className='flex items-center justify-center  w-28 h-6 font-bold  rounded-full'>
+                                            {t("EventDetails.EDIT EVENT")}
                                         </div>
                                     </div>
                                 </Link>
@@ -286,13 +334,14 @@ function EventDetails() {
                         <div className='relative absolut z-10 w-[80%] md:h-[50%] h-[70%] '>
                             <div className='absolute z-10 w-full flex justify-center gap-3 my-3 items-center flex-col'>
                                 <div className=' lg:text-3xl md:text-2xl text-xl text-white text-center  font-bold'>
-                                    Ready to lend a hand & help people, dont
-                                    miss the opertunity
+                                    {t(
+                                        "EventDetails.“Whoever is in need of his brother, Allah is in his need”"
+                                    )}
                                 </div>
                                 <div className='text-emerald-100 font-medium text-lg  rounded-md'>
                                     <EventTimer closestEvent={eventDisplay} />
                                 </div>
-                                <div className='flex md:flex-row flex-col justify-center lg:w-[40%] items-center h-auto'>
+                                <div className='flex md:flex-row flex-col justify-center lg:w-[70%] items-center h-auto'>
                                     <div className='text-white font-semibold justify-center text-lg items-center gap-2 flex flex-row w-full  lg:w-1/3'>
                                         <MdDateRange /> {formattedDate}
                                     </div>
@@ -329,7 +378,7 @@ function EventDetails() {
                             className='ml-2 flex justify-start flex-col w-1/3 cursor-pointer'
                         >
                             <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
-                                DISCRIPTION
+                                {t("EventDetails.DISCRIPTION")}
                             </div>
 
                             <div
@@ -349,7 +398,7 @@ function EventDetails() {
                             className='ml-2 flex flex-col w-1/3 cursor-pointer'
                         >
                             <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
-                                ORGANIZOR
+                                {t("EventDetails.ORGANIZOR")}
                             </div>
 
                             <div
@@ -369,7 +418,7 @@ function EventDetails() {
                             className='ml-2 flex flex-col w-1/3 cursor-pointer'
                         >
                             <div className='hover:text-amber-400 scale-110 transition-all lg:text-lg text-sm font-medium px-4'>
-                                DETAILS
+                                {t("EventDetails.DETAILS")}
                             </div>
 
                             <div
@@ -388,36 +437,41 @@ function EventDetails() {
                             }`}
                         >
                             <div className='lg:w-1/2 flex flex-col items-start w-full'>
-                                <div className='flex justify-center h-auto md:text-lg font-serif '>
+                                <div className='flex justify-center h-[80%] md:text-lg font-serif '>
                                     {eventDisplay.about}
                                 </div>
-
-                                <div className='text-center  self-center mt-3 hover:border-none border-amber-400 border-2 h-8 hover:bg-green-500 transition duration-300 font-medium hover:text-white lg:text-xl text-lg  border-solid w-[40%] rounded-full cursor-pointer '>
-                                    <JoinButton
-                                        eOwner={eventDisplay.createdBy}
-                                        eventId={id}
-                                        eAttendees={eventDisplay.attendees}
-                                        setJoinUpdate={setJoinUpdate}
-                                    />
-                                </div>
-                                <div className='relative text-center self-center mt-3 border-bgc-sunflower border-2 h-8 hover:bg-bgc-ForestGreen transition duration-300 font-medium hover:text-txtc-Ivory lg:text-xl text-lg border-solid w-[40%] rounded-full cursor-pointer '>
-                                    <div onClick={toggleDropdown}>
-                                        <button>Share</button>
+                                <div className='h-[19%] flex lg:flex-row flex-col w-full gap-3'>
+                                    <div className='text-center self-center mt-3 hover:border-none border-amber-400 border-2 h-8 hover:bg-green-500 transition duration-300 font-medium hover:text-white lg:text-xl text-lg  border-solid w-[40%] rounded-full cursor-pointer '>
+                                        <JoinButton
+                                            eOwner={eventDisplay.createdBy}
+                                            eventId={id}
+                                            eAttendees={eventDisplay.attendees}
+                                            setJoinUpdate={setJoinUpdate}
+                                        />
                                     </div>
-
-                                    {isDropdownOpen && (
-                                        <div className='absolute z-10 top-10 right-0 bg-bgc-silver p-2 rounded-full shadow-md'>
-                                            <SocialShare
-                                                path={router.asPath}
-                                                title={eventDisplay.title}
-                                                quote={eventDisplay.about}
-                                                closeDropdown={closeDropdown}
-                                            />
+                                    <div className='relative text-center self-center mt-3 border-bgc-sunflower border-2 h-8 hover:bg-bgc-ForestGreen transition duration-300 font-medium hover:text-txtc-Ivory lg:text-xl text-lg border-solid w-[40%] rounded-full cursor-pointer '>
+                                        <div onClick={toggleDropdown}>
+                                            <button>
+                                                {t("EventDetails.SHARE")}
+                                            </button>
                                         </div>
-                                    )}
+
+                                        {isDropdownOpen && (
+                                            <div className='absolute z-10 top-10 right-0 bg-bgc-silver p-2 rounded-full shadow-md'>
+                                                <SocialShare
+                                                    path={router.asPath}
+                                                    title={eventDisplay.title}
+                                                    quote={eventDisplay.about}
+                                                    closeDropdown={
+                                                        closeDropdown
+                                                    }
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                            <div className='hidden  relative lg:w-1/2 px-3 h-auto overflow-hidden lg:flex flex-col justify-start  items-start'>
+                            <div className='hidden  relative lg:w-1/2 px-3 h-[60vh] overflow-hidden lg:flex flex-col justify-start  items-start'>
                                 <div
                                     className=' absolute z-10 w-[70%] h-[90%] top-0 bg-top bg-cover'
                                     style={{
@@ -452,7 +506,7 @@ function EventDetails() {
                             </div>
                             <div className='flex flex-col px-2 lg:px-28  justify-start items-center gap-2 font-medium text-lg'>
                                 <div className='text-lg font-bold felx flex-row gap-2'>
-                                    CONTACTS:
+                                    {t("EventDetails.CONTACTS:")}
                                 </div>
                                 <div className=' flex flex-row px-2 lg:justify-start justify-center items-center gap-2 font-medium text-lg'>
                                     <MdMail className='text-gray-900' />{" "}
@@ -466,7 +520,7 @@ function EventDetails() {
 
                             <div className='flex flex-col px-2 justify-start items-center gap-2 font-medium text-lg'>
                                 <div className='text-lg font-bold felx flex-row gap-2'>
-                                    <div>Interests :</div>
+                                    <div>{t("EventDetails.INTERESTS:")}</div>
                                 </div>
                                 <div className='flex lg:flex-row flex-col gap-2'>
                                     {userDetails?.userInterests?.map(
@@ -493,7 +547,7 @@ function EventDetails() {
                                 <div className='flex flex-col px-2  justify-start items-center gap-2 font-medium text-lg'>
                                     {" "}
                                     <div className='text-lg  w-full font-bold'>
-                                        TITLE :
+                                        {t("EventDetails.TITLE:")}
                                     </div>
                                     <div className='text-lg w-full font-medium'>
                                         {eventDisplay.title?.toUpperCase()}
@@ -501,7 +555,7 @@ function EventDetails() {
                                 </div>
                                 <div className='flex flex-col px-2 justify-start items-center gap-2 font-medium text-lg'>
                                     <div className='text-lg w-full font-bold'>
-                                        PLACE :
+                                        {t("EventDetails.PLACE:")}
                                     </div>
                                     <div className=' flex flex-row w-full justify-start items-center gap-2 font-medium text-lg'>
                                         <div className=' flex flex-row justify-start'>
@@ -530,7 +584,7 @@ function EventDetails() {
                                 </div>
                                 <div className='flex flex-col px-2 justify-start items-center gap-2 font-medium text-lg'>
                                     <div className='text-lg w-full font-bold'>
-                                        CATEGORY :
+                                        {t("EventDetails.CATEGORY:")}
                                     </div>
                                     <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full place-content-start justify-items-center gap-3'>
                                         {matchingInterests?.map((interest) => (
@@ -618,13 +672,6 @@ function EventDetails() {
                                             backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
                                         }}
                                     ></Link>
-                                    {/* <div
-                                        className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl '
-                                        style={{
-                                            backgroundImage: `url(${userDoc?.avatar})`,
-                                            backgroundSize: "100%",
-                                        }}
-                                    ></div> */}
 
                                     <div className='bg-gray-200 h-12 rounded-full w-full flex justify-start items-center'>
                                         <EventsComments
@@ -637,9 +684,14 @@ function EventDetails() {
                                     </div>
                                 </div>
                             ) : (
-                                <div className='bg-gray-200 h-12 self-center px-3 my-2 mx-2 font-medium rounded-full w-full flex justify-start items-center'>
-                                    YOU CAN COMMENT WHEN YOU ARE LOGGED IN
-                                </div>
+                                <Link href='/authentication/signIn'>
+                                    <div className='bg-gray-200 h-12 self-center px-3 my-2 mx-2 font-medium rounded-full w-full flex flex-row justify-start items-center'>
+                                        {t(
+                                            "EventDetails.YOU CAN COMMENT WHEN YOU ARE LOGGED IN"
+                                        )}{" "}
+                                        <BiLogIn className='text-lg font-bold' />
+                                    </div>
+                                </Link>
                             )}
                         </div>
                     </div>
@@ -650,18 +702,18 @@ function EventDetails() {
                 >
                     <FaRegCommentDots />{" "}
                     <div>
-                        {singleEventData?.comments.length === 0
-                            ? "NO COMMENTS YET"
+                        {singleEventData?.comments?.length === 0
+                            ? t("EventDetails.NO COMMENTS YET")
                             : isComments
-                            ? "HIDE COMMENTS"
-                            : "SEE COMMENTS"}
+                            ? t("EventDetails.HIDE COMMENTS")
+                            : t("EventDetails.SEE COMMENTS")}
                     </div>
                 </div>
             </div>
             <div className=' mt-8'>
                 <div className='relative w-full mt-3 '>
                     <div className='bg-amber-400 absolute z-20 -top-8 px-2 left-7 h-8 flex items-center justify-center font-medium w-auto rounded-t-md'>
-                        RELATED EVENTS
+                        {t("EventDetails.RELATED EVENTS")}
                     </div>
                     <div
                         onClick={() => {

@@ -347,5 +347,26 @@
         "reset": "Reset Password",
         "remember": "Remember you Password? Login!",
         "create": "Create an Account!"
+    },
+    "EventsComments": {
+        "add comment": "add comment"
+    },
+    "EventDetails": {
+        "“Whoever is in need of his brother, Allah is in his need”": "“Whoever is in need of his brother, Allah is in his need”",
+        "EDIT EVENT": "EDIT EVENT",
+        "DISCRIPTION": "DISCRIPTION",
+        "ORGANIZOR": "ORGANIZOR",
+        "DETAILS": "DETAILS",
+        "SHARE": "SHARE",
+        "CONTACTS:": "CONTACTS:",
+        "INTERESTS:": "INTERESTS:",
+        "TITLE:": "TITLE:",
+        "PLACE:": "PLACE:",
+        "CATEGORY:": "CATEGORY:",
+        "YOU CAN COMMENT WHEN YOU ARE LOGGED IN": "YOU CAN COMMENT WHEN YOU ARE LOGGED IN:",
+        "NO COMMENTS YET": "NO COMMENTS YET",
+        "HIDE COMMENTS": "HIDE COMMENTS",
+        "SEE COMMENTS": "SEE COMMENTS",
+        "RELATED EVENTS": "RELATED EVENTS"
     }
 }

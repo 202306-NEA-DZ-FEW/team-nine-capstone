@@ -1,4 +1,5 @@
 import { arrayUnion } from "firebase/firestore";
+import { t } from "i18next";
 import React, { useState } from "react";
 
 import { updateEventDocument } from "@/lib/firebase/controller";
@@ -48,7 +49,7 @@ const EventsComments = ({ singleEventData, userDoc, eventId }) => {
                     id='comment'
                     onChange={(e) => setComment(e.target.value)}
                     className='w-full rounded-full h-8 focus:outline-none text-gray-950 px-3 bg-gray-200'
-                    placeholder='add comment'
+                    placeholder={t("EventsComments.add comment")}
                 />
             </form>
         </div>
