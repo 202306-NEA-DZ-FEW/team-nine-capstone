@@ -674,7 +674,7 @@ function EventDetails() {
                 >
                     <FaRegCommentDots />{" "}
                     <div>
-                        {singleEventData.comments.length === 0
+                        {singleEventData?.comments.length === 0
                             ? "NO COMMENTS YET"
                             : isComments
                             ? "HIDE COMMENTS"

@@ -1,4 +1,5 @@
 import { signOut } from "firebase/auth";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -75,7 +76,7 @@ function Navbar() {
         <div
             className={`sticky left-0 top-0 w-full h-auto z-50  ${
                 hasScrolled
-                    ? "bg-black/80 text-white"
+                    ? "bg-black/80 text-white shadow-sm"
                     : "bg-black/20 backdrop-blur-lg text-black shadow-lg"
             }`}
         >
@@ -84,16 +85,16 @@ function Navbar() {
                     <Link
                         href='/'
                         onClick={closeMenu}
-                        className='flex items-center '
+                        className='flex items-center'
                     >
-                        <image
+                        <Image
                             src='/images/navLogo.png'
                             alt='Logo'
-                            height={40}
-                            width={40}
+                            height={35}
+                            width={35}
                             className='mr-2'
                         />
-                        <span className='nav-logo'>Pebble</span>
+                        <span className='nav-logo'>{t("webtitle")}</span>
                     </Link>
 
                     {/*SM view*/}
@@ -352,7 +353,6 @@ function Navbar() {
                                             </div>
                                         )}
                                     </div>
-                                    donate
                                     <div className='relative'>
                                         <div
                                             className='w-full p-2 flex items-center justify-center hover:bg-amber-400 hover:text-white border-t'

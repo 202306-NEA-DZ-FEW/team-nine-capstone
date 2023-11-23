@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Slide } from "react-slideshow-image";
 
 import "react-slideshow-image/dist/styles.css";
+
 const AboutUs = () => {
     const { t } = useTranslation();
 

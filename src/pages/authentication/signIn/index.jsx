@@ -4,6 +4,7 @@ import {
     signInWithPopup,
     TwitterAuthProvider,
 } from "firebase/auth";
+import Head from "next/head";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -100,6 +101,15 @@ export default function SignUp() {
 
     return (
         <Layout>
+            <Head>
+                <title>{t("indxsignIn.title")}</title>
+
+                <meta
+                    name='description'
+                    content={t("indxsignIn.description")}
+                />
+                <meta name='keywords' content={t("indxsignIn.keywords")} />
+            </Head>
             <div className='relative flex justify-center items-center h-screen'>
                 <Image src={background} alt='background' layout='fill' />
                 <div className='flex flex-col justify-center items-center content-center bg-white bg-opacity-50 rounded-lg z-30 w-2/3 py-5 space-y-4'>

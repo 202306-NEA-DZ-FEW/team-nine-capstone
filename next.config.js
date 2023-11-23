@@ -9,13 +9,8 @@ module.exports = {
     reactStrictMode: true,
     images: {
         remotePatterns: [
-            { hostname: "www.signupgenius.com" },
-            { hostname: "www.greenbiz.com" },
-            { hostname: "www.cleantech.com" },
-            { hostname: "upload.wikimedia.org" },
-            { hostname: "cdn0.handsonconnect.org" },
-            { hostname: "cdn.wallpapersafari.com" },
-            { hostname: "cdn.mos.cms.futurecdn.net" },
+            { hostname: "i.pinimg.com" },
+
             { hostname: "firebasestorage.googleapis.com" },
         ],
     },

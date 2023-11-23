@@ -32,6 +32,13 @@
         Ivory: "#FFFFF0", // For Emerald-500 ad the Green-700 (#388E3C, #50C878)
         LightGray: "#AAAAAA", // For Grey-800 (#424242)
     
+
+    our fonts
+                Montserrat: ["Montserrat", "sans-serif"], // for titles
+                Lora: ["Lora", "serif"], // for sub titles
+                Roboto: ["Roboto", "sans-serif"], // for text
+                OpenSans: ["Open Sans", "sans-serif"], // for details
+            },
 */
 
 @keyframes fadeInRotate {
@@ -104,18 +111,19 @@
 }
 .social-share-panel {
     position: sticky;
-    top: 26%;
+    top: 50%;
     transform: translateY(-50%);
-    background-color: #333333;
-    padding: 15px;
+    background-color: theme("colors.bgc.silver");
+    padding: 5px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 100;
-    width: 40px;
+    width: 38px;
     opacity: 0.7;
     transition: opacity 0.3s;
+    overflow-wrap: initial;
 }
 
 .social-share-panel:hover {
@@ -465,4 +473,15 @@ hero-All {
     .bg-video {
         display: none;
     }
+}
+
+.how-inAll1 {
+    width: 100vw;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    background-color: #eeeeee;
 }
