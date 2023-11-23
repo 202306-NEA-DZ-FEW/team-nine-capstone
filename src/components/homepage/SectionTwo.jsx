@@ -112,7 +112,7 @@ const SectionTwo = () => {
         },
     ];
     return (
-        <div className='flex flex-col justify-center py-10 items-center bg-bgc-silver mx-auto'>
+        <div className='w-full h-full flex flex-col justify-center py-10 items-center bg-bgc-silver mx-auto'>
             {/* global-goals-section */}
             <div className='w-full flex flex-col py-10  lg:px-14'>
                 <div className='flex flex-col justify-center items-center py-10 '>

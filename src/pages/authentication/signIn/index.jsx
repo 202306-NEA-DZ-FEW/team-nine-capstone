@@ -102,7 +102,13 @@ export default function SignUp() {
     return (
         <Layout>
             <Head>
-                <title>Sign In</title>
+                <title>{t("indxsignIn.title")}</title>
+
+                <meta
+                    name='description'
+                    content={t("indxsignIn.description")}
+                />
+                <meta name='keywords' content={t("indxsignIn.keywords")} />
             </Head>
             <div className='relative flex justify-center items-center h-screen'>
                 <Image src={background} alt='background' layout='fill' />

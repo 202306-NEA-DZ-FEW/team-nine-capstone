@@ -16,7 +16,6 @@ import {
 import { auth } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
-import Image from "next/image";
 
 function Navbar() {
     const [hasScrolled, setHasScrolled] = useState(false);
@@ -77,7 +76,7 @@ function Navbar() {
         <div
             className={`sticky left-0 top-0 w-full h-auto z-50  ${
                 hasScrolled
-                    ? "bg-black/80 text-white"
+                    ? "bg-black/80 text-white shadow-sm"
                     : "bg-black/20 backdrop-blur-lg text-black shadow-lg"
             }`}
         >

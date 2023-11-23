@@ -1,11 +1,13 @@
 import { sendPasswordResetEmail } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 import { auth } from "@/lib/firebase/controller";
 
 function ForgotPassword() {
+    const { t } = useTranslation();
     const router = useRouter();
     // console.log(router);
 
@@ -25,12 +27,12 @@ function ForgotPassword() {
     }
 
     return (
-        <div className=' bg-gray-400 min-h-screen flex items-center justify-center'>
+        <div className=' bg-bgc-silver min-h-screen flex items-center justify-center'>
             <div className='container mx-auto'>
                 <div className='flex flex-col lg:flex-row justify-center px-6'>
                     <div className='w-full xl:w-3/4 lg:w-11/12 flex'>
                         <div
-                            className='w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg'
+                            className='w-full h-auto bg-bgc-silver hidden lg:block lg:w-1/2 bg-cover rounded-l-lg'
                             style={{
                                 backgroundImage:
                                     "url('https://www.jugendleiter-blog.de/wp-content/uploads/2015/09/pebbles-796943_1280-696x461.jpg')",
@@ -40,12 +42,10 @@ function ForgotPassword() {
                         <div className='w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none'>
                             <div className='px-8 mb-4 text-center'>
                                 <h3 className='pt-4 mb-2 text-2xl'>
-                                    Forgot Your Password?
+                                    {t("passwordRst.title")}
                                 </h3>
-                                <p className='mb-4 text-sm text-gray-700'>
-                                    We get it, stuff happens. Just enter your
-                                    email address below and we&apos;ll send you
-                                    a link to reset your password!
+                                <p className='mb-4 text-sm text-txtc-DarkCharcoal'>
+                                    {t("passwordRst.intro")}
                                 </p>
                             </div>
                             <form
@@ -54,13 +54,13 @@ function ForgotPassword() {
                             >
                                 <div className='mb-4'>
                                     <label
-                                        className='block mb-2 text-sm font-bold text-gray-700'
+                                        className='block mb-2 text-sm font-bold text-txtc-DarkCharcoal'
                                         htmlFor='email'
                                     >
-                                        Email
+                                        {t("passwordRst.email")}
                                     </label>
                                     <input
-                                        className='w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+                                        className='w-full px-3 py-2 text-sm leading-tight text-txtc-DarkCharcoal border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
                                         id='email'
                                         name='email'
                                         type='email'
@@ -69,28 +69,28 @@ function ForgotPassword() {
                                 </div>
                                 <div className='mb-6 text-center'>
                                     <button
-                                        className='w-full px-4 py-2 font-bold text-white layout rounded-full focus:outline-none focus:shadow-outline'
+                                        className='w-full px-4 py-2 font-bold text-txtc-Ivory layout rounded-full focus:outline-none focus:shadow-outline'
                                         type='submit'
                                     >
-                                        Reset Password
+                                        {t("passwordRst.reset")}
                                     </button>
                                 </div>
                                 <hr className='mb-6 border-t' />
                             </form>
                             <div className='text-center'>
                                 <Link
-                                    className='inline-block text-sm text-blue text-slate-600 align-baseline hover:text-blue-800'
+                                    className='inline-block text-sm text-blue text-txtc-LightGray align-baseline hover:text-txtc-DarkCharcoal'
                                     href='/authentication/signUp'
                                 >
-                                    Create an Account!
+                                    {t("passwordRst.create")}
                                 </Link>
                             </div>
                             <div className='text-center'>
                                 <Link
-                                    className='inline-block text-sm text-slate-600 align-baseline hover:text-blue-800'
+                                    className='inline-block text-sm text-txtc-LightGray align-baseline hover:text-txtc-DarkCharcoal'
                                     href='/authentication/signIn'
                                 >
-                                    Remember you Password? Login!
+                                    {t("passwordRst.remember")}
                                 </Link>
                             </div>
                         </div>

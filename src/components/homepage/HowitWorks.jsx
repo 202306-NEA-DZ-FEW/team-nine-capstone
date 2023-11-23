@@ -43,9 +43,7 @@ const HowitWorks = () => {
             image: "/images/Girl.png",
             id: 4,
             title: t("Contribute"),
-            description: t(
-                "Can't attend? Support us with a donation and still make a difference!"
-            ),
+            description: t("HowitWorks.donate"),
             logo: t("Donate"),
             link: "https://donate.stripe.com/test_eVa5m5dw83qhe7C289",
         },
@@ -72,7 +70,7 @@ const HowitWorks = () => {
                     </p>
                 </div>
             </div>
-            <div className='w-full h-full flex flex-col gap-y-4 py-10 lg:px-14'>
+            <div className='h-full w-full flex flex-col gap-y-4 py-10 lg:px-14'>
                 <h2 className='text-txtc-DarkCharcoal font-Montserrat text-3xl text-center font-semibold mb-10'>
                     {t("HowitWorks.title")}
                 </h2>

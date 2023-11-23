@@ -32,7 +32,8 @@
         "introduction": "Welcome to Pebble, where we unite hearts and hands to make a difference. Our charity events are more than gatherings; they're opportunities to transform lives. Join our mission to inspire hope, foster change, and spread kindness. Together, we can create a brighter future, one event at a time"
     },
     "HowitWorks": {
-        "title": "How it Works"
+        "title": "How it Works",
+        "donate": "Can't attend? Support us with a donation and still make a difference!"
     },
     "Register": "Register",
     "Sign up and create your account to join our community.": "Sign up and create your account to join our community.",
@@ -271,5 +272,80 @@
         "start": "Get Started",
         "donate": "Donate"
     },
-    "webtitle": "Aide be Aide"
+    "webtitle": "Aide be Aide",
+    "Contribute": "Contribute",
+
+    "indxHomePage": {
+        "title": "Aide Be Aide",
+        "description": "Welcome to Aide Be Aide, where we unite hearts and hands to make a difference. Our charity events are more than gatherings; they're opportunities to transform lives. Join our mission to inspire hope, foster change, and spread kindness. Together, we can create a brighter future, one event at a time",
+        "keywords": "Aide Be Aide, Welcome, unite, heart, hands, difference, change, charity, events, gatherings, opportunities, Join, mission, inspire, Together, future, event, homepage, home, intro, how it works, get involved, hope, spread, change"
+    },
+    "indxTerms": {
+        "title": "Terms and Conditions",
+        "description": "Read and understand our Terms and Conditions before using our services. This legal agreement outlines the rules, responsibilities, and policies you must adhere to when interacting with our platform.",
+        "keywords": "Terms and Conditions, Terms of Service, User Agreement, Usage Policies, Legal Agreement, User Responsibilities, Acceptable Use, Privacy Policy, Disclaimer, Governing Law, Agreement, Conditions of Use, Compliance"
+    },
+    "indxProfile": {
+        "title": "Profile",
+        "description": "Explore the user profile page on Your Website Name. View details about your account, personalize settings, and manage preferences. Connect with other users and showcase your activity on our platform.",
+        "keywords": "User Profile, Account Details, Personalization, Preferences, User Settings, Profile Information, Profile Page, Account Management, Social Connections, Activity Showcase, Public Profile, Customization, User Bio, Social Networking, User Dashboard"
+    },
+    "indxMyEvents": {
+        "title": " My Events",
+        "description": "Explore and manage your own volunteering events on our platform. Empower positive change by creating, organizing, and participating in events that align with your passion for making a difference. Connect with like-minded individuals and contribute to meaningful causes through our user-friendly volunteering platform.",
+        "keywords": "Personal Volunteering Events, User-Created Events, Volunteer Management, Social Impact, Community Engagement, Event Organization, Meaningful Causes, Civic Engagement, Philanthropy, Volunteer Opportunities, Empowerment, Positive Change, Community Building, Passionate Participation, Volunteer Networking"
+    },
+    "indxEditProfile": {
+        "title": "Edit Profile ",
+        "description": "Customize and update your profile on our volunteering platform. Personalize your experience, showcase your skills and interests, and let the community know about your commitment to making a positive impact. Edit your profile to reflect your passion for volunteering and connect with like-minded individuals who share your dedication to meaningful causes.",
+        "keywords": "Edit Profile, Personalization, Volunteer Profile, Skills Showcase, Interests Highlight, Community Engagement, Positive Impact, Volunteering Passion, Profile Customization, Skillsets Display, Community Connection, Meaningful Causes, Volunteer Commitment, User Empowerment, Community Building"
+    },
+    "indxOurEvents": {
+        "title": "Our Events",
+        "description": "Discover a diverse array of volunteering opportunities on our 'All Events' page. Browse through a curated list of impactful events, ranging from community projects to environmental initiatives. Find meaningful ways to contribute, connect with passionate individuals, and make a positive impact in various causes. Explore the collective power of volunteering and join us in creating a better world together.",
+        "keywords": "Our Events, Volunteering Opportunities, Community Projects, Environmental Initiatives, Social Impact, Collective Volunteering, Meaningful Contributions, Passionate Individuals, Positive Impact, Civic Engagement, Volunteer Network, Join the Cause, Diverse Opportunities, Empowerment, Community Building"
+    },
+    "indxEventDetails": {
+        "title": " Event Details",
+        "description": "Explore the comprehensive details of this volunteering event on our 'Event Details' page. Learn about the mission, agenda, and key highlights. Discover the impact this event aims to make and how you can contribute. Dive into the specifics and join us in creating positive change together.",
+        "keywords": "Event Details, Volunteering Event, Mission, Agenda, Key Highlights, Impact, Contribution, Specifics, Positive Change"
+    },
+    "indxHostEvent": {
+        "title": " ",
+        "description": "Empower change by becoming an event host on our platform. The 'Host an Event' page is your gateway to creating meaningful experiences. Share your vision, mobilize volunteers, and make a positive impact in your community. Take the lead in shaping events that matter and join us in building a better world through purposeful hosting.",
+        "keywords": "Host an Event, Volunteer Hosting, Empower Change, Meaningful Experiences, Vision Sharing, Mobilize Volunteers, Positive Impact, Community Building, Event Leadership, Purposeful Hosting, Empowerment"
+    },
+    "indxSignUp": {
+        "title": "Sign Up",
+        "description": "Join our volunteering community by signing up on our user-friendly platform. The 'Sign-Up' page is your gateway to unlocking a world of opportunities to make a difference. Become a part of our network, connect with passionate individuals, and embark on a journey of meaningful contributions. Start your volunteering adventure today!",
+        "keywords": "User Sign-Up, Volunteer Registration, Community Joining, User-Friendly Platform, Opportunities, Make a Difference, Network Connection, Passionate Individuals, Meaningful Contributions, Volunteering Adventure"
+    },
+    "indxsignIn": {
+        "title": " Sign In",
+        "description": "Access your volunteering account by signing in on our secure platform. The 'Sign-In' page is your portal to a personalized volunteering experience. Stay connected, manage your events, and engage with our community. Sign in today to continue your journey of making a positive impact and connecting with like-minded volunteers.",
+        "keywords": "User Sign-In, Volunteer Login, Secure Platform, Personalized Experience, Stay Connected, Event Management, Community Engagement, Positive Impact, Like-Minded Volunteers"
+    },
+    "indxReset": {
+        "title": "Reset Password",
+        "description": "Securely reset your password and regain access to your volunteering account. The 'Reset Password' page is designed to ensure the security of your account. Follow the steps to reset your password and continue your journey of making a positive impact through volunteering. Your account safety is our priority.",
+        "keywords": "User Reset Password, Password Recovery, Account Security, Secure Reset, Positive Impact, Volunteering Journey, Account Safety"
+    },
+    "indxAbout": {
+        "title": " About Us",
+        "description": "Discover the heart and soul of our volunteering community on the 'About Us' page. Learn about our mission, values, and the collective impact we aim to make. Meet the team driving positive change and explore our commitment to creating a world where volunteerism thrives. Join us in our journey of making a meaningful difference.",
+        "keywords": "About Us, Volunteering Community, Mission, Values, Collective Impact, Team, Positive Change, Commitment, Volunteerism, Meaningful Difference"
+    },
+    "indxEdtEvent": {
+        "title": "Edit Event",
+        "description": "Elevate your volunteering event on the 'Edit Event' page. Tailor the details, refine the agenda, and optimize participant engagement. Take control of your event's narrative, ensuring it aligns seamlessly with your vision. Empower yourself to create an even more impactful and memorable volunteering experience. Edit with precision on our user-friendly platform.",
+        "keywords": "User Edit Event, Event Tailoring, Agenda Refinement, Participant Engagement, Event Control, Vision Alignment, Empowerment, Impactful Experience, User-Friendly Platform, Precision Editing"
+    },
+    "passwordRst": {
+        "title": "Forgot Your Password?",
+        "intro": "We get it, stuff happens. Just enter your email address below and we will send you a link to reset your password!",
+        "email": "Email",
+        "reset": "Reset Password",
+        "remember": "Remember you Password? Login!",
+        "create": "Create an Account!"
+    }
 }

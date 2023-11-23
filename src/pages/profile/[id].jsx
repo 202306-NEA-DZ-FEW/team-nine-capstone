@@ -66,7 +66,12 @@ function Profile() {
     return (
         <Layout>
             <Head>
-                <title>Profile</title>
+                <title>{t("indxProfile.title")}</title>
+                <meta
+                    name='description'
+                    content={t("indxProfile.description")}
+                />
+                <meta name='keywords' content={t("indxProfile.keywords")} />
             </Head>
             {userData && (
                 <div className='flex flex-col '>

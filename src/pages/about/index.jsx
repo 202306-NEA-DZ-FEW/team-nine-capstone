@@ -13,7 +13,10 @@ export default function About() {
     return (
         <Layout>
             <Head>
-                <title>About Us</title>
+                <title>{t("indxAbout.title")}</title>
+
+                <meta name='description' content={t("indxAbout.description")} />
+                <meta name='keywords' content={t("indxAbout.keywords")} />
             </Head>
             <AboutUs />
         </Layout>

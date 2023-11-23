@@ -16,15 +16,15 @@ function MyApp({ Component, pageProps }) {
                 <meta charSet='UTF-8' />
                 <meta
                     name='description'
-                    content='organize volunteer local events and gatherings to create meaningful work and an impact, General public, mostly volunteers who want to create a change in the world.'
+                    content='organize volunteer local events and gatherings to create meaningful work and an impact, for volunteers who want to create a change in the world.'
                 />
                 <meta
                     name='keywords'
-                    content='HTML, CSS, JavaScript, NextJS, Donate, Volunteer, Organize, Event, Host, Attend, '
+                    content='People, Donate, Volunteer, Organize, Event, Host, Attend, Events, Create, Help, Change'
                 />
                 <meta
                     name='author'
-                    content='ReCoded-FEDB-Algeria-2023, Khalil NOUI, Oualid ELHOUARI,  Hachem BOUHADDEDE, Imane OMARI'
+                    content='Re:Coded-FEWDB-DZD-23, Team[9]NiNe '
                 />
                 <meta
                     name='viewport'

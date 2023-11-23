@@ -160,8 +160,14 @@ function EditEvent() {
         <>
             <Head>
                 <title>
-                    {t("editEvent.title")} {oldInfo.title}
+                    {t("indxEdtEvent.title")} {oldInfo.title}
                 </title>
+
+                <meta
+                    name='description'
+                    content={t("indxEdtEvent.description")}
+                />
+                <meta name='keywords' content={t("indxEdtEvent.keywords")} />
             </Head>
 
             <div className='m-5 box-border bg-bgc-silver'>

@@ -57,7 +57,13 @@ function Events() {
     return (
         <Layout>
             <Head>
-                <title>My Events</title>
+                <title>{t("indxMyEvents.title")}</title>
+
+                <meta
+                    name='description'
+                    content={t("indxMyEvents.description")}
+                />
+                <meta name='keywords' content={t("indxMyEvents.keywords")} />
             </Head>
             {userData && (
                 <div className='flex flex-col'>

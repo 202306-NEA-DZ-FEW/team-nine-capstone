@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
@@ -9,10 +10,20 @@ import EventDetails from "@/components/singlEventPageComponents/EventDetails";
 import Layout from "../../layout/Layout";
 
 function SingleEventPage({ eventData, userData }) {
+    const { t } = useTranslation("common");
     return (
         <Layout>
             <Head>
-                <title>Event Details</title>
+                <title>{t("indxEventDetails.title")}</title>
+
+                <meta
+                    name='description'
+                    content={t("indxEventDetails.description")}
+                />
+                <meta
+                    name='keywords'
+                    content={t("indxEventDetails.keywords")}
+                />
             </Head>
             <EventDetails eventData={eventData} userData={userData} />
         </Layout>
