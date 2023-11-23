@@ -219,16 +219,7 @@ function EventDetails() {
     }
     const filteredEvents = filterEventsByCategory(eventDisplay, allEvents);
     console.log("Filtered Events:", filteredEvents);
-    // var to use in the scroller container
-    // useEffect(() => {
-    //     // Update containerWidth based on the number of filtered events
-    //     if (filteredEvents.length > 3) {
-    //         // You can adjust the increment value as needed
-    //         setContainerWidth(1800 + (filteredEvents.length - 3) * 580);
-    //     } else {
-    //         setContainerWidth(1800);
-    //     }
-    // }, [filteredEvents]);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -478,7 +469,7 @@ function EventDetails() {
                                     <div>Interests :</div>
                                 </div>
                                 <div className='flex lg:flex-row flex-col gap-2'>
-                                    {userDetails?.userInterests?.map(
+                                    {userDetails?.userInterests.map(
                                         (interest) => (
                                             <div
                                                 key={interest.id}
