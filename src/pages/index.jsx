@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
@@ -15,6 +16,14 @@ export default function HomePage({ props }) {
 
     return (
         <>
+            <Head>
+                <title>{t("indxHomePage.title")}</title>
+                <meta
+                    name='description'
+                    content={t("indxHomePage.description")}
+                />
+                <meta name='keywords' content={t("indxHomePage.keywords")} />
+            </Head>
             <HeroSection />
             <Layout>
                 <HowitWorks />

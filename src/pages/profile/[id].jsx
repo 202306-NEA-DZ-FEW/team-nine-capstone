@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -64,6 +65,14 @@ function Profile() {
 
     return (
         <Layout>
+            <Head>
+                <title>{t("indxProfile.title")}</title>
+                <meta
+                    name='description'
+                    content={t("indxProfile.description")}
+                />
+                <meta name='keywords' content={t("indxProfile.keywords")} />
+            </Head>
             {userData && (
                 <div className='flex flex-col '>
                     <div className='flex flex-col sm:flex-row justify-center items-center mx-10'>
