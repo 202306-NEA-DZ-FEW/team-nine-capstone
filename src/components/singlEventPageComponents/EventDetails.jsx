@@ -636,10 +636,6 @@ function EventDetails() {
                                                     style={{
                                                         backgroundImage: `url(${comment?.userAvatar})`,
                                                         backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
-                                                        // backgroundPosition:
-                                                        //     "center",
-                                                        // backgroundRepeat:
-                                                        //     "no-repeat",
                                                     }}
                                                 ></div>
                                             </Link>
@@ -655,7 +651,7 @@ function EventDetails() {
                                                     className='absolute -top-2 right-0 rounded-bl-md text-lg group-hover:flex hidden transition-all cursor-pointer bg-gray-200 shadow-lg '
                                                 />
                                             ) : (
-                                                ""
+                                                t("EventDetails.add comment")
                                             )}{" "}
                                             {comment.comment}
                                         </div>
