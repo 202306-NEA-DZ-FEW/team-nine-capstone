@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -55,6 +56,15 @@ function Events() {
 
     return (
         <Layout>
+            <Head>
+                <title>{t("indxMyEvents.title")}</title>
+
+                <meta
+                    name='description'
+                    content={t("indxMyEvents.description")}
+                />
+                <meta name='keywords' content={t("indxMyEvents.keywords")} />
+            </Head>
             {userData && (
                 <div className='flex flex-col'>
                     {/* first section*/}

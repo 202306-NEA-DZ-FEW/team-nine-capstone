@@ -1,4 +1,5 @@
 import { signOut } from "firebase/auth";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -15,7 +16,6 @@ import {
 import { auth } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
-import Image from "next/image";
 
 function Navbar() {
     const [hasScrolled, setHasScrolled] = useState(false);
@@ -76,7 +76,7 @@ function Navbar() {
         <div
             className={`sticky left-0 top-0 w-full h-auto z-50  ${
                 hasScrolled
-                    ? "bg-black/80 text-white"
+                    ? "bg-black/80 text-white shadow-sm"
                     : "bg-black/20 backdrop-blur-lg text-black shadow-lg"
             }`}
         >
@@ -85,13 +85,13 @@ function Navbar() {
                     <Link
                         href='/'
                         onClick={closeMenu}
-                        className='flex items-center '
+                        className='flex items-center'
                     >
                         <Image
                             src='/images/navLogo.png'
                             alt='Logo'
-                            height={40}
-                            width={40}
+                            height={35}
+                            width={35}
                             className='mr-2'
                         />
                         <span className='nav-logo'>{t("webtitle")}</span>

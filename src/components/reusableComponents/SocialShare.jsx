@@ -16,8 +16,8 @@ import React from "react";
 
 function SocialShare({ path, title, quote }) {
     return (
-        <div className='social-share-panel'>
-            <div className='share-buttons'>
+        <div>
+            <div>
                 <EmailShareButton
                     url={`https://togatherwebuild.vercel.app${path}`}
                     subject={`${title}`}
