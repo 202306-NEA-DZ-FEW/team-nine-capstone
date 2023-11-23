@@ -1,7 +1,6 @@
 import { updateProfile } from "firebase/auth";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
-import { MultiSelect } from "react-multi-select-component";
 
 import { getUserDocument, updateUserDocument } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
@@ -24,12 +23,6 @@ function UserDetails() {
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
-    const [selectedInterests, setSelectedInterests] = useState([]);
-
-    const handleInterestChange = (selectedOptions) => {
-        setSelectedInterests(selectedOptions.map((option) => option.value));
-    };
-
     useEffect(() => {
         if (user) {
             getUserDocument(user.uid)
@@ -40,7 +33,6 @@ function UserDetails() {
                             ...doc.data(),
                             userInterests: doc.data().userInterests || [],
                         }));
-                        setSelectedInterests(doc.data().userInterests || []);
                     }
                 })
                 .catch((error) => {
@@ -49,11 +41,12 @@ function UserDetails() {
         }
     }, [user]);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e, selectedInterets) => {
         const { name, value } = e.target;
         setUserData((prevUserData) => ({
             ...prevUserData,
             [name]: value,
+            userInterests: selectedInterets.map((interest) => interest.value),
         }));
     };
 
@@ -83,6 +76,22 @@ function UserDetails() {
             });
     };
 
+    // Function to handle interest selection
+    const handleInterestClick = (interest) => {
+        const updatedInterests = [...userData.userInterests];
+        const index = updatedInterests.indexOf(interest);
+
+        if (index === -1) {
+            updatedInterests.push(interest);
+        } else {
+            updatedInterests.splice(index, 1);
+        }
+
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            userInterests: updatedInterests,
+        }));
+    };
     useEffect(() => {
         if (successMessage || error) {
             const timer = setTimeout(() => {
@@ -124,7 +133,7 @@ function UserDetails() {
                                 id='displayName'
                                 name='displayName'
                                 placeholder='Display Name'
-                                value={userData.DisplayName || ""}
+                                value={userData.displayName || ""}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -154,36 +163,29 @@ function UserDetails() {
                             />
                         </div>
 
-                        <div className='flex flex-col'>
-                            <label htmlFor='interests' className='text-lg'>
+                        <div className='flex flex-col p-2'>
+                            <label
+                                htmlFor='interests'
+                                className='text-lg p-2 underline'
+                            >
                                 {t("profile.Interests")}
                             </label>
-                            <div className='md:w-80'>
-                                <MultiSelect
-                                    options={interestList.map((interest) => ({
-                                        label: interest.title,
-                                        value: interest.title,
-                                    }))}
-                                    value={userData.userInterests.map(
-                                        (interest) => ({
-                                            label: interest,
-                                            value: interest,
-                                        })
-                                    )}
-                                    onChange={handleInterestChange}
-                                    labelledBy='Select'
-                                />
-                            </div>
-                            <p className='text-sm mt-2 mb-2'>
-                                Selected Interests: {selectedInterests.length}
-                            </p>
-                            <div className='hidden lg:flex flex-wrap gap-2'>
-                                {selectedInterests.map((interest) => (
+                            <div className='grid grid-cols-3 gap-2 mr-6'>
+                                {interestList.map((interest) => (
                                     <div
-                                        key={interest}
-                                        className='bg-green-900 text-white rounded-md px-2 py-1'
+                                        key={interest.title}
+                                        className={`flex flex-col col items-center w-full h-12 p-2 m-2 text-center justify-center border-4 rounded-lg ${
+                                            userData.userInterests.includes(
+                                                interest.title
+                                            )
+                                                ? "bg-green-500 text-white text-sm font-semibold"
+                                                : " hover:text-sm"
+                                        }`}
+                                        onClick={() =>
+                                            handleInterestClick(interest.title)
+                                        }
                                     >
-                                        {interest}
+                                        {interest.title}
                                     </div>
                                 ))}
                             </div>

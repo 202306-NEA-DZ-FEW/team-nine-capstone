@@ -175,12 +175,12 @@ function Profile() {
                                 </div>
                                 {userData.userInterests &&
                                 userData.userInterests.length > 0 ? (
-                                    <div className='flex flex-wrap items-center justify-center mt-2'>
+                                    <div className='flex flex-wrap items-start justify-start '>
                                         {userData.userInterests.map(
                                             (interest) => (
                                                 <div
                                                     key={interest}
-                                                    className='flex flex-col sm:flex-row w-full sm:w-40 h-14 p-2 m-2 items-center text-center justify-center border-transparent rounded-lg bg-green-500 hover:bg-green-700 hover:text-white'
+                                                    className='flex flex-col sm:flex-row w-full sm:w-fit h-10 p-2 m-2 items-center text-center justify-center  rounded-md border-neutral-400 border-2'
                                                 >
                                                     {interest}
                                                 </div>
