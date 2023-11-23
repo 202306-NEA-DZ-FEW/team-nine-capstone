@@ -51,6 +51,7 @@
     "Get started": "ابدأ",
     "Choose Location": "اختر موقعا",
     "profile": {
+        "pro":" الملف الشخصي",
         "ep": "تعديل الملف الشخصي",
         "Full Name": "الاسم الكامل:",
         "Location": "الموقع: ",
@@ -69,8 +70,8 @@
         "noEvent": "لم ينضم إلى أي  فعاليات"
     },
     "editProfile": {
-        "DisplayName": "اسم المستخدم:",
-        "FullName": "الاسم الكامل:",
+        "DisplayName": "الاسم :",
+        "FullName": "الاسم الكامل :",
         "UpdateProfile": "تحديث الملف الشخصي",
         "succUpdate": "تم تحديث تفاصيل حسابك بنجاح",
         "failUpdate": "حدث خطأ أثناء تحديث تفاصيل حسابك: ",
