@@ -478,7 +478,7 @@ function EventDetails() {
                                     <div>Interests :</div>
                                 </div>
                                 <div className='flex lg:flex-row flex-col gap-2'>
-                                    {userDetails?.userInterests.map(
+                                    {userDetails?.userInterests?.map(
                                         (interest) => (
                                             <div
                                                 key={interest.id}
@@ -583,17 +583,21 @@ function EventDetails() {
                                         className='bg-gray-200 gap-2 w-full h-auto my-2 flex flex-row justify-start items-start'
                                     >
                                         <div className='w-auto'>
-                                            <div
-                                                className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl '
-                                                style={{
-                                                    backgroundImage: `url(${comment?.userAvatar})`,
-                                                    backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
-                                                    // backgroundPosition:
-                                                    //     "center",
-                                                    // backgroundRepeat:
-                                                    //     "no-repeat",
-                                                }}
-                                            ></div>
+                                            <Link
+                                                href={`/profile/${comment.userUid}`}
+                                            >
+                                                <div
+                                                    className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl '
+                                                    style={{
+                                                        backgroundImage: `url(${comment?.userAvatar})`,
+                                                        backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                                        // backgroundPosition:
+                                                        //     "center",
+                                                        // backgroundRepeat:
+                                                        //     "no-repeat",
+                                                    }}
+                                                ></div>
+                                            </Link>
                                         </div>
                                         <div className='relative min-h-[50px] w-96 group transition  bg-gray-50 text-sm font-medium shadow-lg flex flex-wrap whitespace-normal border border-gray-900 border-solid rounded-md justify-start items-center p-2'>
                                             {user?.uid === comment.userUid ? (
@@ -615,13 +619,21 @@ function EventDetails() {
                             </div>
                             {user ? (
                                 <div className='flex flex-row w-full mt-2 gap-2 px-2 h-16'>
-                                    <div
+                                    <Link
+                                        className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl '
+                                        href={`/profile/${userDoc?.id}`}
+                                        style={{
+                                            backgroundImage: `url(${userDoc?.avatar})`,
+                                            backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                                        }}
+                                    ></Link>
+                                    {/* <div
                                         className='w-12 h-12 rounded-full bg-top bg-cover shadow-2xl '
                                         style={{
                                             backgroundImage: `url(${userDoc?.avatar})`,
                                             backgroundSize: "100%",
                                         }}
-                                    ></div>
+                                    ></div> */}
 
                                     <div className='bg-gray-200 h-12 rounded-full w-full flex justify-start items-center'>
                                         <EventComments
