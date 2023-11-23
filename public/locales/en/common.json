@@ -70,6 +70,7 @@
     "Get started": "Get started",
     "Choose Location": "Choose Location",
     "profile": {
+        "pro": "Profile",
         "ep": "Edit Profile",
         "Full Name": "Full Name:",
         "Location": "Location: ",
@@ -88,20 +89,20 @@
         "noEvent": "has not joined any events"
     },
     "editProfile": {
-        "DisplayName": "Display Name:",
-        "FullName": "Full Name:",
+        "DisplayName": "First Name:",
+        "FullName": "Last Name:",
         "UpdateProfile": "Update Profile",
         "succUpdate": "Your Account Detailes have been update succefully",
         "failUpdate": "There was an error while updating your account details: ",
         "CRUDtitle": "Change Sign-in Credentials",
-        "CRUDreq": "you will need to provide your Crudentials in order to UPDATE them or DELETE the account",
+        "CRUDreq": "Credentials required for updating or deleting the account.",
         "CRUDmail": "Current Email :",
         "CRUDpassword": "Current Password :",
         "CRUDnew1": "New Password :",
         "CRUDnew2": "Confirm New Password :",
         "CRUDdel": "Delete Account",
         "CRUDsav": "Save Changes",
-        "ChangeAvatar": "Change Avatar"
+        "ChangeAvatar": "Change"
     },
     "profileEvent": {
         "goback": "Go Back to",

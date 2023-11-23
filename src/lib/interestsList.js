@@ -30,12 +30,7 @@ export const interestList = [
         color: "green",
         icon: <BsFillHeartPulseFill />,
     },
-    {
-        title: "quality Education",
-        src: "/globalGoalsLogos/4.png",
-        color: "red",
-        icon: <AiOutlineRead />,
-    },
+
     {
         title: "gender Equality",
         src: "/globalGoalsLogos/5.png",
@@ -59,6 +54,12 @@ export const interestList = [
         src: "/globalGoalsLogos/8.png",
         color: "rose",
         icon: <AiOutlineStock />,
+    },
+    {
+        title: "quality Education",
+        src: "/globalGoalsLogos/4.png",
+        color: "red",
+        icon: <AiOutlineRead />,
     },
     {
         title: "inovation",
@@ -103,6 +104,12 @@ export const interestList = [
         icon: <BiSolidTreeAlt />,
     },
     {
+        title: "global",
+        src: "/globalGoalsLogos/Rounded.png",
+        color: "black",
+        icon: <AiOutlineGlobal />,
+    },
+    {
         title: "peace",
         src: "/globalGoalsLogos/16.png",
         color: "blue",
@@ -113,11 +120,5 @@ export const interestList = [
         src: "/globalGoalsLogos/17.png",
         color: "indigo",
         icon: <PiUniteFill />,
-    },
-    {
-        title: "global",
-        src: "/globalGoalsLogos/Rounded.png",
-        color: "black",
-        icon: <AiOutlineGlobal />,
     },
 ];

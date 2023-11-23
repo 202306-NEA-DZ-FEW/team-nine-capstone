@@ -1,11 +1,11 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 
 import { storage } from "@/lib/firebase/controller";
 
 import { useUser } from "@/context/UserContext";
-import Image from "next/image";
 
 function AvatarInput({ avatar, onUpdateAvatar }) {
     const { t } = useTranslation("common");
@@ -60,12 +60,12 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
     };
 
     return (
-        <div className='flex flex-col md:space-y-10 space-x-0 align-middle justify-center items-center p-2'>
+        <div className='flex flex-col md:space-y-10 space-x-0 align-middle justify-center items-center mt-14 '>
             {avatar ? (
                 <Image
                     src={avatar}
                     alt='Avatar'
-                    className='rounded-full border-orange-400 border-2 w-30 h-30 md:w-3/4 md:h-3/4 mt-5'
+                    className='rounded-full w-30 h-30 md:w-2/4 md:h-2/4 '
                     width={120}
                     height={120}
                 />
@@ -73,7 +73,7 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
                 <Image
                     src='/images/defaultUser.png'
                     alt='Default Avatar'
-                    className='rounded-full border-orange-400 border-2 w-30 h-30 md:w-3/4 md:h-3/4 mt-5'
+                    className='rounded-full  w-30 h-30 md:w-2/4 md:h-2/4 '
                     width={120}
                     height={120}
                 />
@@ -86,7 +86,7 @@ function AvatarInput({ avatar, onUpdateAvatar }) {
             />
             <label
                 htmlFor='avatar'
-                className='bg-amber-400 w-32 text-white text-center p-2 mb-2 mt-10 rounded cursor-pointer hover:bg-orange-300 hover:font-semibold hover:text-black'
+                className='bg-amber-400 w-32 text-white text-center p-2 mb-2 mt-10 rounded cursor-pointer hover:font-semibold hover:text-black'
             >
                 {t("editProfile.ChangeAvatar")}
             </label>

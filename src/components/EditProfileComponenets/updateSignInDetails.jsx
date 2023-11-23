@@ -129,114 +129,120 @@ function UpdateSignInDetailes() {
     }, [successMessage, error]);
 
     return (
-        <>
-            <div className='flex flex-col rounded-md border-red-600 boreder-4 w-[95%] bg-gradient-to-b from-gray-700 justify-center p-4 m-2'>
-                <p className='flex justify-center font-extrabold text-2xl underline p-2'>
-                    {" "}
-                    ⚠️ {t("editProfile.CRUDtitle")} ⚠️
-                </p>
-                <span className='flex justify-center font-bold text-lg p-2'>
-                    {t("editProfile.CRUDreq")}
-                </span>
-                <form onSubmit={handleSubmit} className='text-lg'>
-                    <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
-                        <label
-                            htmlFor='currentEmail'
-                            className='md:w-1/6 font-semibold text-white'
-                        >
-                            {t("editProfile.CRUDmail")}
-                            <span className='text-red-600 font-mono '>*</span>
-                        </label>
-                        <input
-                            className='border-4 focus:border-amber-400 focus:border-4 rounded-md p-2 w-52 bg-white focus:bg-green-300 bg-opacity-50'
-                            type='email'
-                            value={currentEmail}
-                            onChange={handleCurrentEmailChange}
-                            required
-                        />
+        <div className='flex flex-col bg-bgc-silver '>
+            <form
+                onSubmit={handleSubmit}
+                className='flex flex-col md:flex-row w-full sm:w-[95%] rounded-lg justify-center'
+            >
+                <div className='md:w-1/5 mx-10 mb-10 bg-white'></div>
+                <div className='grid gap-8 justify-center bg-white p-2 md:w-3/4 mb-10'>
+                    <p className='flex justify-center font-semibold text-3xl '>
+                        {t("editProfile.CRUDtitle")}
+                    </p>
+                    <span className='flex justify-center text-lg'>
+                        {t("editProfile.CRUDreq")}
+                    </span>
+                    {/* First Row */}
+                    <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-8'>
+                        <div className='flex flex-col'>
+                            <label
+                                htmlFor='currentEmail'
+                                className='text-black'
+                            >
+                                {t("editProfile.CRUDmail")}
+                            </label>
+                            <input
+                                className='bg-white rounded-sm border-2 text-black text-lg p-1 md:w-80'
+                                type='email'
+                                value={currentEmail}
+                                onChange={handleCurrentEmailChange}
+                                required
+                            />
+                        </div>
+                        <div className='flex flex-col'>
+                            <label
+                                htmlFor='currentPassword'
+                                className='text-black'
+                            >
+                                {t("editProfile.CRUDpassword")}
+                            </label>
+                            <input
+                                className='bg-white rounded-sm border-2 text-black text-lg p-1 md:w-80'
+                                type='password'
+                                value={currentPassword}
+                                onChange={handleCurrentPasswordChange}
+                                required
+                            />
+                        </div>
                     </div>
-                    <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
-                        <label
-                            htmlFor='currentPassword'
-                            className='md:w-1/6 font-semibold text-white'
-                        >
-                            {t("editProfile.CRUDpassword")}
-                            <span className='text-red-600 font-mono '>*</span>
-                        </label>
-                        <input
-                            className='border-4 focus:border-amber-400 focus:border-4 rounded-md p-2 w-52 bg-white focus:bg-green-300 bg-opacity-50'
-                            type='password'
-                            value={currentPassword}
-                            onChange={handleCurrentPasswordChange}
-                            required
-                        />
+                    {/* End First Row */}
+                    {/* Second Row */}
+                    <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-8'>
+                        <div className='flex flex-col'>
+                            <label htmlFor='newPassword' className='text-black'>
+                                {t("editProfile.CRUDnew1")}
+                            </label>
+                            <input
+                                className='bg-white rounded-sm border-2 text-black text-lg p-1 md:w-80'
+                                type='password'
+                                value={newPassword}
+                                onChange={handleNewPasswordChange}
+                                minLength='8'
+                            />
+                        </div>
+                        <div className='flex flex-col'>
+                            <label
+                                htmlFor='confirmPassword'
+                                className='text-black'
+                            >
+                                {t("editProfile.CRUDnew2")}
+                            </label>
+                            <input
+                                className='bg-white rounded-sm border-2 text-black text-lg p-1 md:w-80'
+                                type='password'
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                                minLength='8'
+                            />
+                        </div>
                     </div>
-                    <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
-                        <label
-                            htmlFor='newPassword'
-                            className='md:w-1/6 font-semibold text-white'
-                        >
-                            {t("editProfile.CRUDnew1")}
-                        </label>
-                        <input
-                            className='border-4 focus:border-amber-400 focus:border-4 rounded-md p-2 w-52 bg-white focus:bg-green-300 bg-opacity-50'
-                            type='password'
-                            value={newPassword}
-                            onChange={handleNewPasswordChange}
-                            minLength='8'
-                        />
-                    </div>
-                    <div className='flex flex-col md:flex-row md:space-x-5  items-center p-2'>
-                        <label
-                            htmlFor='confirmPassword'
-                            className='md:w-1/6 font-semibold text-white'
-                        >
-                            {t("editProfile.CRUDnew2")}
-                        </label>
-                        <input
-                            className='border-4 focus:border-amber-400 focus:border-4 rounded-md p-2 w-52 bg-white focus:bg-green-300 bg-opacity-50'
-                            type='password'
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
-                            minLength='8'
-                        />
-                    </div>
+
                     {error && (
                         <div className='flex justify-center items-center'>
-                            <p className='text-red-500 border-white w-fit bg-red-300 rounded-lg slide-in'>
+                            <p className='text-red-500 bg-red-300 rounded-lg p-2'>
                                 {error}
                             </p>
                         </div>
                     )}
                     {successMessage && (
                         <div className='flex justify-center items-center'>
-                            <p className='text-green-500 border-white bg-green-200 w-fit rounded-lg slide-in'>
+                            <p className='text-green-500 bg-green-200 rounded-lg p-2'>
                                 {successMessage}
                             </p>
                         </div>
                     )}
-                    <div className='flex justify-end'>
-                        <button
-                            className='flex justify-center bg-amber-400 w-auto text-white text-center p-2 my-2 rounded cursor-pointer hover:font-semibold hover:bg-amber-300 hover:text-black'
-                            type='submit'
-                        >
-                            {t("editProfile.CRUDsav")}
-                        </button>
+                    <div className='grid grid-cols-2 md:grid-cols-2 md:gap-x-8'>
+                        <div className='flex justify-center'>
+                            <button
+                                className='bg-green-500 text-white p-2 my-2 rounded cursor-pointer hover:font-semibold hover:text-black'
+                                type='submit'
+                            >
+                                {t("editProfile.CRUDsav")}
+                            </button>
+                        </div>
+
+                        <div className='flex justify-center'>
+                            <button
+                                className='bg-red-700 text-white p-2 my-2 rounded cursor-pointer hover:font-semibold hover:text-black'
+                                onClick={handleDelete}
+                            >
+                                {t("editProfile.CRUDdel")}
+                            </button>
+                        </div>
                     </div>
-                    <div className='flex justify-center items-center p-2'>
-                        <hr className='border-t border-4 border-white w-full' />
-                    </div>
-                    <div className='flex justify-end'>
-                        <button
-                            className='flex justify-center item-end bg-red-700 w-auto text-white text-center p-2 my-2 rounded cursor-pointer hover:font-semibold hover:text-black'
-                            onClick={handleDelete}
-                        >
-                            {t("editProfile.CRUDdel")}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </>
+                </div>
+            </form>
+        </div>
     );
 }
 
