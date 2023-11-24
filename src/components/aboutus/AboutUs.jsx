@@ -203,9 +203,9 @@ const AboutUs = () => {
                             className='text-white md:text-black mt-3 text-lg'
                         >
                             <span className='text-amber-400 text-xl font-bold mr-2'>
-                                Pebble
+                                {t("webtitle")}
                             </span>
-                            {t("about.pebble")}
+                            {t("about.Aide")}
                         </motion.p>
                     </motion.div>
                 </motion.div>
@@ -234,21 +234,20 @@ const AboutUs = () => {
                 <h3 className='text-white text-3xl font-semibold sm:text-4xl'>
                     {t("Technologies Used")}
                 </h3>
-                <div className='mt-6 flex flex-wrap justify-center items-center gap-4'>
+                <div className='mt-6 flex justify-center items-center gap-4'>
                     {technologiesUsed.map((tech) => (
-                        <div
-                            key={tech.id}
-                            className='text-white flex flex-col items-center'
-                        >
+                        <div key={tech.id} className='text-white'>
                             <Link href={tech.link}>
-                                <Image
-                                    src={tech.icon}
-                                    className='w-16 h-16 mb-2'
-                                    alt={`${tech.name} Icon`}
-                                    width={64}
-                                    height={64}
-                                />
-                                <span>{tech.name}</span>
+                                <div className='text-center'>
+                                    <Image
+                                        src={tech.icon}
+                                        className='w-16 h-16 mb-2'
+                                        alt={`${tech.name} Icon`}
+                                        width={64}
+                                        height={64}
+                                    />
+                                    <span>{tech.name}</span>
+                                </div>
                             </Link>
                         </div>
                     ))}
