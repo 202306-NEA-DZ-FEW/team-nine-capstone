@@ -62,7 +62,7 @@ const HowitWorks = () => {
                         ></Image>
                     </div>
 
-                    <h2 className='text-xl md:text-2xl font-Montserrat text-center lg:text-3xl text-txtc-DarkCharcoal font-semibold mb-4'>
+                    <h2 className='text-xl md:text-2xl font-Montserrat text-center lg:text-3xl text-txtc-DarkCharcoal font-semibold '>
                         {t("HeroSection.title")}
                     </h2>
                     <p className='text-sm md:text-base font-Lora lg:text-lg text-center text-txtc-DarkCharcoal mb-4'>

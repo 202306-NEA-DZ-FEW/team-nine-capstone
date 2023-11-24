@@ -250,24 +250,24 @@ const SectionTwo = () => {
                             backgroundImage: `url('/images/image.jpg')`,
                         }}
                     >
-                        <div className='flex flex-col text-white font-semibold p-20 pr-[40%]'>
+                        <div className='flex flex-col text-white font-semibold p-20 pr-[50%]'>
                             <h1 className='text-left text-4xl sm:text-6xl md:w-[35%] lg:w-[60%] mb-3 sm:mb-5'>
                                 {t("slogan.title")}
                             </h1>
-                            <p className='text-base sm:text-xl lg:w-[100%] text-gray-600 font-normal mb-3 sm:mb-5 '>
+                            <p className='text-base sm:text-lg lg:w-[100%] text-gray-600 font-normal mb-3 sm:mb-5 '>
                                 {t("slogan.discription")}
                             </p>
                             <div className='flex flex-row gap-8 '>
                                 <button
                                     onClick={handleUser}
-                                    className=' bg-bgc-silver font-Roboto text-txtc-DarkCharcoal font-semibold text-sm rounded-md py-2 px-3'
+                                    className=' bg-white text-black font-semibold text-xs rounded-md py-2 px-3 whitespace-nowrap overflow-hidden text-overflow-ellipsis'
                                 >
                                     {t("Get Started")}
                                 </button>
                                 <Link
                                     href='/about'
                                     passHref
-                                    className='text-txtc-Ivory font-Roboto font-semibold bg-bgc-ForestGreen text-sm rounded-md py-2 px-3 '
+                                    className='text-txtc-Ivory font-Roboto font-semibold bg-bgc-ForestGreen text-sm rounded-md py-2 px-3 whitespace-nowrap overflow-hidden text-overflow-ellipsis'
                                 >
                                     <h2>{t("who are we")}</h2>
                                     {/* <LiaAngleRightSolid className=' mt-1' /> */}

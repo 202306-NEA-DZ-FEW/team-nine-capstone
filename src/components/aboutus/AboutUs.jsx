@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import Image from "next/legacy/image";
+import Link from "next/link";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Slide } from "react-slideshow-image";
 
@@ -8,6 +10,72 @@ import "react-slideshow-image/dist/styles.css";
 
 const AboutUs = () => {
     const { t } = useTranslation();
+
+    const TeamComponent = ({ team }) => {
+        const cardsRef = useRef([]);
+
+        useEffect(() => {
+            cardsRef.current.forEach((card, idx) => {
+                card.style.animation = `slideInFromRight 1s ease-in-out ${
+                    idx * 0.5
+                }s forwards`;
+            });
+        }, [team]);
+
+        return (
+            <div className='grid gap-10 sm:grid-cols-2 md:grid-cols-4'>
+                {team.map((item, idx) => (
+                    <div
+                        key={idx}
+                        ref={(el) => (cardsRef.current[idx] = el)}
+                        className='rounded-lg transition duration-300 ease-in-out transform hover:scale-105 sm:max-w-bg-white shadow-md p-2 bg-gray-200'
+                        style={{
+                            animationDelay: `${idx * 0.8}s`,
+                        }}
+                    >
+                        <div className='w-24 h-24 mx-auto mb-3 rotate-vertical'>
+                            <Image
+                                src={item.avatar}
+                                className='w-full h-full rounded-full'
+                                alt=''
+                                width={64}
+                                height={64}
+                            />
+                        </div>
+                        <h4 className='text-gray-700 font-semibold text-lg mb-2'>
+                            {item.name}
+                        </h4>
+                        <p className='text-indigo-600 mb-2'>{item.title}</p>
+                        <p className='text-gray-600 mb-4'>{item.desc}</p>
+                        <div className='flex justify-center gap-4 mb-1'>
+                            <div className='flex gap-2'>
+                                <a
+                                    href={item.linkedin}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >
+                                    <FaLinkedin
+                                        size={20}
+                                        className='text-blue-500'
+                                    />
+                                </a>
+                                <a
+                                    href={item.GitHub}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >
+                                    <FaGithub
+                                        size={20}
+                                        className='text-gray-700'
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    };
 
     const slideImages = [
         {
@@ -20,6 +88,7 @@ const AboutUs = () => {
             url: "/images/AboutUs/COVID.png",
         },
     ];
+
     const team = [
         {
             avatar: "/images/AboutUs/khalil.jpg",
@@ -48,28 +117,42 @@ const AboutUs = () => {
         {
             avatar: "/images/AboutUs/iman.jpg",
             name: t("Imane Omari"),
-            title: t("web Developer"),
+            title: t("Web Developer"),
             linkedin: "https://www.linkedin.com/in/iman-omari/",
             GitHub: "https://www.linkedin.com/in/iman-omari/",
             desc: t("desc.imane"),
         },
     ];
-
     const technologiesUsed = [
         {
             id: 1,
             name: "React",
             icon: "/images/tech/react.png",
+            link: "https://react.dev/",
         },
         {
             id: 2,
             name: "Tailwind CSS",
             icon: "/images/tech/tailwindcss.png",
+            link: "https://tailwindcss.com/",
         },
         {
             id: 3,
             name: "Firebase",
             icon: "/images/tech/firebase.png",
+            link: "https://firebase.google.com/",
+        },
+        {
+            id: 4,
+            name: "OpenStreetMap",
+            icon: "/images/tech/Street.png",
+            link: "https://www.openstreetmap.org/#map=5/28.413/1.653",
+        },
+        {
+            id: 5,
+            name: "i18next",
+            icon: "/images/tech/translate.png",
+            link: "https://www.i18next.com/",
         },
     ];
 
@@ -77,15 +160,8 @@ const AboutUs = () => {
         <div className='relative items-center justify-center bg-gray-100'>
             {/* Hero Section */}
             <div className='relative w-screen h-1/2'>
-                <div className='absolute top-0 left-0 w-full h-full bg-black/30 z-[2] '></div>
-                <Slide
-                    showArrows={false}
-                    infiniteLoop={true}
-                    autoPlay={true}
-                    interval={4000}
-                    showStatus={false}
-                    showIndicators={false}
-                >
+                <div className='absolute top-0 left-0 w-full h-full bg-black/20 z-[2] '></div>
+                <Slide>
                     {slideImages.map((slideImage, index) => (
                         <div
                             key={index}
@@ -99,28 +175,47 @@ const AboutUs = () => {
                 </Slide>
             </div>
             {/* About Us Section */}
-            <section className=' md:m-10 overlay-section  '>
-                <div className='max-w-screen-xl mx-auto rounded-lg py-10'>
-                    <div className='max-w-xl mx-auto text-center'>
-                        <h2 className='text-white md:text-black text-3xl font-semibold sm:text-4xl'>
+            <section className='md:m-10 overlay-section'>
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9 }}
+                    className='max-w-screen-xl mx-auto rounded-lg py-10'
+                >
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9, delay: 0.2 }}
+                        className='max-w-xl mx-auto text-center'
+                    >
+                        <motion.h2
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.9, delay: 0.4 }}
+                            className='text-white md:text-black text-3xl font-semibold sm:text-4xl'
+                        >
                             {t("about.title")}
-                        </h2>
-                        <p className='text-white md:text-black mt-3 text-lg'>
-                            <span className='text-amber-400 text-xl font-bold mr-2 '>
-                                Pebble
+                        </motion.h2>
+                        <motion.p
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.6 }}
+                            className='text-white md:text-black mt-3 text-lg'
+                        >
+                            <span className='text-amber-400 text-xl font-bold mr-2'>
+                                {t("webtitle")}
                             </span>
-                            {t("about.pebble")}
-                        </p>
-                    </div>
-                </div>
+                            {t("about.Aide")}
+                        </motion.p>
+                    </motion.div>
+                </motion.div>
             </section>
-
             {/* Team Section */}
             <section>
                 <hr className='md:w-screen' />
 
-                <div className='max-w-screen-xl mx-auto px-4 text-center md:px-20  py-10 mt-5  rounded-lg'>
-                    <div className='max-w-xl mx-auto'>
+                <div className='max-w-screen-xl mx-auto px-4 text-center md:px-20 py-10 mt-5 rounded-lg'>
+                    <div className='max-w-xl mx-auto '>
                         <h3 className='text-black text-3xl font-semibold sm:text-4xl'>
                             {t("team.title")}
                         </h3>
@@ -129,58 +224,7 @@ const AboutUs = () => {
                         </p>
                     </div>
                     <div className='mt-12'>
-                        <div className='grid gap-10 sm:grid-cols-2 md:grid-cols-4 '>
-                            {team.map((item, idx) => (
-                                <div
-                                    key={idx}
-                                    className=' rounded-lg transition duration-300 ease-in-out transform hover:scale-105 sm:max-w-bg-white shadow-md p-2 bg-gray-200'
-                                >
-                                    <div className='w-24 h-24 mx-auto mb-3 rotate-vertical'>
-                                        <Image
-                                            src={item.avatar}
-                                            className='w-full h-full rounded-full'
-                                            alt=''
-                                            width={64}
-                                            height={64}
-                                        />
-                                    </div>
-
-                                    <h4 className='text-gray-700 font-semibold text-lg mb-2'>
-                                        {item.name}
-                                    </h4>
-                                    <p className='text-indigo-600 mb-2'>
-                                        {item.title}
-                                    </p>
-                                    <p className='text-gray-600 mb-4'>
-                                        {item.desc}
-                                    </p>
-                                    <div className='flex justify-center gap-4 mb-1'>
-                                        <div className='flex gap-2'>
-                                            <a
-                                                href={item.linkedin}
-                                                target='_blank'
-                                                rel='noopener noreferrer'
-                                            >
-                                                <FaLinkedin
-                                                    size={20}
-                                                    className='text-blue-500'
-                                                />
-                                            </a>
-                                            <a
-                                                href={item.GitHub}
-                                                target='_blank'
-                                                rel='noopener noreferrer'
-                                            >
-                                                <FaGithub
-                                                    size={20}
-                                                    className='text-gray-700'
-                                                />
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <TeamComponent team={team} />
                     </div>
                 </div>
             </section>
@@ -188,22 +232,23 @@ const AboutUs = () => {
             {/* Technologies Used Section */}
             <section className='w-full mx-auto px-4 text-center md:px-20 py-20 bg-[url("/images/AboutUs/pc.jpg")] bg-cover'>
                 <h3 className='text-white text-3xl font-semibold sm:text-4xl'>
-                    {t("<Technologies Used/>")}
+                    {t("Technologies Used")}
                 </h3>
-                <div className='mt-6 flex flex-wrap justify-center items-center gap-4'>
+                <div className='mt-6 flex justify-center items-center gap-4'>
                     {technologiesUsed.map((tech) => (
-                        <div
-                            key={tech.id}
-                            className='text-white flex flex-col items-center'
-                        >
-                            <Image
-                                src={tech.icon}
-                                className='w-16 h-16 rounded-full mb-2'
-                                alt={`${tech.name} Icon`}
-                                width={64}
-                                height={64}
-                            />
-                            <span>{tech.name}</span>
+                        <div key={tech.id} className='text-white'>
+                            <Link href={tech.link}>
+                                <div className='text-center'>
+                                    <Image
+                                        src={tech.icon}
+                                        className='w-16 h-16 mb-2'
+                                        alt={`${tech.name} Icon`}
+                                        width={64}
+                                        height={64}
+                                    />
+                                    <span>{tech.name}</span>
+                                </div>
+                            </Link>
                         </div>
                     ))}
                 </div>
