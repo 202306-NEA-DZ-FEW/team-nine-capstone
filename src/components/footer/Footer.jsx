@@ -1,11 +1,11 @@
-import { getAuth } from "firebase/auth";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import React from "react";
 
+import { useUser } from "@/context/UserContext";
+
 function Footer() {
-    const auth = getAuth();
-    const user = auth.currentUser;
+    const { user } = useUser();
 
     const { t } = useTranslation("common");
     return (
