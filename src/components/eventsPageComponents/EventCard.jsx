@@ -12,7 +12,6 @@ function EventCard({ TheEvent }) {
     const { t } = useTranslation("common");
     const [eventData, setEventData] = useState(null);
     const [joinUpdate, setJoinUpdate] = useState(0);
-    console.log("theevent", TheEvent);
 
     // fetch event data
     useEffect(() => {
