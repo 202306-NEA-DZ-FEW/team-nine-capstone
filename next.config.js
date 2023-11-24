@@ -8,6 +8,10 @@ module.exports = {
     },
     reactStrictMode: true,
     images: {
-        remotePatterns: [{ hostname: "firebasestorage.googleapis.com" }],
+        remotePatterns: [
+            { hostname: "i.pinimg.com" },
+
+            { hostname: "firebasestorage.googleapis.com" },
+        ],
     },
 };

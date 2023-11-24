@@ -93,25 +93,22 @@ const SectionTwo = () => {
     ];
     const userFeeddBack = [
         {
-            Name: "Emma Thompson",
-            Occupation: " Environmental Scientist",
-            Image: "/globalGoalsLogos/feedback3.jpg",
-            FeedBack:
-                " “ I had a fantastic experience with 'Aide be Aide'. The sense of community and shared purpose was truly inspiring. I look forward to being part of future initiatives! ” ",
+            Name: "flan",
+            Occupation: "apple",
+            Image: "/globalGoalsLogos/user.png",
+            FeedBack: "Lorem ipsum dolor sit amet consectetur adipisicing",
         },
         {
-            Name: "Lina Abbas",
-            Occupation: "Graphic Designer",
-            Image: "/globalGoalsLogos/feedback5.jpg",
-            FeedBack:
-                " “ Volunteering with you was not only rewarding but also incredibly fun. I genuinely appreciate the dedication your team shows to the cause. it's truly commendable! Looking forward to futur opportunities! ” ",
+            Name: "flan",
+            Occupation: "apple",
+            Image: "/globalGoalsLogos/user.png",
+            FeedBack: "Lorem ipsum dolor sit amet consectetur adipisicing",
         },
         {
-            Name: "Alex Rodriguez",
-            Occupation: "Software Engineer",
-            Image: "/globalGoalsLogos/feedback6.jpg",
-            FeedBack:
-                " “ A fulfilling experience. The well-organized tasks and the positive energy among volunteers made a real impact. Thank you for the opportunity! ” ",
+            Name: "flan",
+            Occupation: "apple",
+            Image: "/globalGoalsLogos/user.png",
+            FeedBack: "Lorem ipsum dolor sit amet consectetur adipisicing",
         },
     ];
     return (
@@ -146,9 +143,9 @@ const SectionTwo = () => {
             </div>
 
             {/* events images section */}
-            <div className='flex md:flex-row flex-col bg-bgc-silver px-4 gap-3 md:px-8 py-4'>
+            <div className='flex md:flex-row flex-col px-4 gap-3 md:px-8 py-4'>
                 <div className='hidden md:flex flex-col gap-y-3'>
-                    <div className='object-fill rounded-md overflow-hidden'>
+                    <div className='h-[40%] rounded-md overflow-hidden shadow-md'>
                         <Image
                             className='w-full h-full transition duration-300 hover:scale-110'
                             src='/globalGoalsLogos/refugies.png'
@@ -157,7 +154,7 @@ const SectionTwo = () => {
                             height={800}
                         />
                     </div>
-                    <div className='object-fill rounded-md overflow-hidden'>
+                    <div className='h-[60%] rounded-md overflow-hidden shadow-md'>
                         <Image
                             className='w-full h-full transition duration-300 hover:scale-110'
                             src='/globalGoalsLogos/helpOlds.png'
@@ -168,16 +165,16 @@ const SectionTwo = () => {
                     </div>
                 </div>
                 <div className='hidden md:flex flex-col gap-y-3'>
-                    <div className=' rounded-md overflow-hidden'>
+                    <div className='h-[55%] rounded-md overflow-hidden shadow-md'>
                         <Image
-                            className='object-fill w-full h-full transition duration-300 hover:scale-110'
+                            className='w-full h-full transition duration-300 hover:scale-110'
                             src='/globalGoalsLogos/construct.png'
                             alt=''
                             width={800}
                             height={800}
                         />
                     </div>
-                    <div className='object-fill rounded-md overflow-hidden'>
+                    <div className='h-[45%] rounded-md overflow-hidden shadow-md'>
                         <Image
                             className='w-full h-full transition duration-300 hover:scale-110'
                             src='/globalGoalsLogos/donate.png'
@@ -220,21 +217,20 @@ const SectionTwo = () => {
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-center'>
                     {userFeeddBack.map((user, index) => (
                         <div
-                            className='flex flex-col overflow-hidden pt-8 px-3 h-full justify-center items-center gap-2 pb-3 bg-bgc-silver rounded-md hover:shadow-xl transition duration-200 hover:scale-100'
+                            className='flex flex-col overflow-hidden pt-8 px-3 border-2 h-full justify-center items-center gap-2 pb-3 bg-white border-white rounded-md shadow-sm hover:shadow-xl transition duration-200 hover:scale-100'
                             key={index}
                         >
                             <Image
-                                className='md:my-4 rounded-[50%] m-0 p-0  '
+                                className='w-[50px] h-[50px] md:w-[60px] md:h-[60px] md:my-4 lg:w-[80px] lg:h-[80px] rounded-[50%] m-0 p-0  border  border-white border-20 shadow-xl '
                                 src={user.Image}
                                 alt={user.Name}
-                                height={120}
-                                width={120}
-                                objectFit='cover'
+                                width={300}
+                                height={300}
                             />
-                            <h1 className='text-center font-Montserrat md:text-xl text-sm text-txtc-DarkCharcoal font-semibold'>
+                            <h1 className='text-center font-Lora md:text-xl text-sm text-txtc-DarkCharcoal font-semibold'>
                                 {user.Name}, {user.Occupation}
                             </h1>
-                            <p className='text-center font-Opensans font-normal text-sm text-txtc-DarkCharcoal'>
+                            <p className='text-center font-OpenSans text-sm text-txtc-DarkCharcoal font-normal'>
                                 {user.FeedBack}
                             </p>
                         </div>

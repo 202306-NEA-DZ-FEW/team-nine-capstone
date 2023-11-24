@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlineGlobal, AiOutlineRead, AiOutlineStock } from "react-icons/ai";
 import { BiSolidTreeAlt } from "react-icons/bi";
 import {
@@ -12,7 +11,6 @@ import { FaGlassWaterDroplet } from "react-icons/fa6";
 import { LuEqualNot } from "react-icons/lu";
 import { MdFamilyRestroom, MdOutlineEnergySavingsLeaf } from "react-icons/md";
 import { PiBowlFood, PiInfinity, PiUniteFill } from "react-icons/pi";
-
 export const interestList = [
     {
         title: "no Poverty",
