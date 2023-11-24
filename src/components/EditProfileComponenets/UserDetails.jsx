@@ -7,7 +7,7 @@ import { interestList } from "@/lib/interestsList";
 
 import { useUser } from "@/context/UserContext";
 
-import AvatarInput from "./AvatrInput";
+import AvatarInput from "./AvatarInput";
 import LocationInput from "../reusableComponents/LocationInput";
 
 function UserDetails() {
@@ -46,7 +46,9 @@ function UserDetails() {
         setUserData((prevUserData) => ({
             ...prevUserData,
             [name]: value,
-            userInterests: selectedInterets.map((interest) => interest.value),
+            userInterests: selectedInterets
+                ? selectedInterets.map((interest) => interest.value)
+                : [],
         }));
     };
 
@@ -148,7 +150,7 @@ function UserDetails() {
                                 id='fullName'
                                 name='fullName'
                                 placeholder='Full Name'
-                                value={userData.FullName || ""}
+                                value={userData.fullName || ""}
                                 onChange={handleInputChange}
                             />
                         </div>

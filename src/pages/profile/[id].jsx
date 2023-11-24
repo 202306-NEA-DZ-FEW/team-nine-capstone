@@ -77,8 +77,8 @@ function Profile() {
                 <div className='flex flex-col '>
                     <div className='flex flex-col sm:flex-row justify-center items-center mx-10'>
                         {/* first profile section*/}
-                        <div className=' md:w-1/4  sm:w-1/2 mx-10 mt-10 bg-yellow-500 w-full'>
-                            <div className='flex justify-center mt-10'>
+                        <div className=' md:w-1/4  sm:w-1/2 mx-10 my-10 p-8 pb-0 rounded-md bg-yellow-500 mt-10 w-full'>
+                            <div className='flex justify-center mt-12'>
                                 {userData.avatar ? (
                                     <div className='flex flex-col items-center'>
                                         <Image
@@ -88,14 +88,9 @@ function Profile() {
                                             width={120}
                                             height={120}
                                         />
-                                        <div className='w-3/4 sm:w-1/2 justify-center text-center  '>
+                                        <div className='w-3/4 sm:w-1/2 justify-center text-center bg- '>
                                             <h1 className='flex justify-around items-center text-3xl font-normal text-white p-2'>
                                                 {userData.displayName}
-                                            </h1>
-                                        </div>
-                                        <div className='w-3/4 sm:w-1/2 justify-center text-center  '>
-                                            <h1 className='flex justify-around items-center text-3xl font-normal text-white p-2'>
-                                                {userData.currentEmail}
                                             </h1>
                                         </div>
                                         <div className='flex justify-center text-center bg-white hover:bg-yellow-400 mt-16'>
@@ -126,26 +121,25 @@ function Profile() {
                                             width={120}
                                             height={120}
                                         />
-                                        <div className='w-3/4 sm:w-1/2 justify-center text-center mt-3'>
-                                            <h1 className='flex justify-around items-center text-3xl font-bold p-2 rounded-t-lg bg-amber-400'>
+                                        <div className='w-3/4 sm:w-1/2 justify-center text-center bg- '>
+                                            <h1 className='flex justify-around items-center text-3xl font-normal text-white p-2'>
                                                 {userData.displayName}
-                                                {isOwner && (
-                                                    <Link
-                                                        href={`/profile/${id}/editProfile`}
-                                                    >
-                                                        <LiaUserEditSolid className='justify-end hover:rounded-full hover:bg-black hover:text-white' />
-                                                    </Link>
-                                                )}
                                             </h1>
                                         </div>
-                                        <div className='w-3/4 sm:w-1/2 justify-center text-center mt-3'>
-                                            <h1 className='flex justify-around items-center text-3xl font-bold p-2 rounded-t-lg bg-amber-400'>
-                                                {userData.currentEmail}
+                                        <div className='flex justify-center text-center bg-white hover:bg-yellow-400 mt-10'>
+                                            <h1 className='flex items-center text-xl font-normal text-gray-400 '>
                                                 {isOwner && (
                                                     <Link
                                                         href={`/profile/${id}/editProfile`}
                                                     >
-                                                        <LiaUserEditSolid className='justify-end hover:rounded-full hover:bg-black hover:text-white' />
+                                                        <div className='flex justify-center items-center ml-2 w-72 bg-white'>
+                                                            <span>
+                                                                {t(
+                                                                    "profile.ep"
+                                                                )}
+                                                            </span>
+                                                            <LiaUserEditSolid className='ml-2 hover:rounded-full hover:bg-black hover:text-white' />
+                                                        </div>
                                                     </Link>
                                                 )}
                                             </h1>
@@ -156,12 +150,10 @@ function Profile() {
                         </div>
 
                         {/* second profile section */}
-                        <div className='grid justify-center bg-white mt-10 md:w-3/4'>
-                            <div className='flex h-24 m-2 bg-yellow-400 items-center'>
-                                <h1 className='font-semibold text-2xl ml-10'>
-                                    {t("profile.pro")}
-                                </h1>
-                            </div>
+                        <div className='grid justify-center rounded-md bg-white p-8 md:w-3/4'>
+                            <h1 className='font-semibold text-2xl mb-10'>
+                                {t("profile.pro")}
+                            </h1>
                             <div className='flex flex-col p-2 sm:text-lg sm:flex-row my-3'>
                                 <div className='w-full sm:w-1/3 font-semibold'>
                                     {t("profile.Full Name")}
