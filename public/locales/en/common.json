@@ -88,8 +88,8 @@
         "noEvent": "has not joined any events"
     },
     "editProfile": {
-        "DisplayName": "First Name:",
-        "FullName": "Last Name:",
+        "DisplayName": "Display Name:",
+        "FullName": "Full Name:",
         "UpdateProfile": "Update Profile",
         "succUpdate": "Your Account Detailes have been update succefully",
         "failUpdate": "There was an error while updating your account details: ",
