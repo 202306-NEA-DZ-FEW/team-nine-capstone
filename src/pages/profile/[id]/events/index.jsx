@@ -68,13 +68,13 @@ function Events() {
             {userData && (
                 <div className='flex flex-col'>
                     {/* first section*/}
-                    <div className='relative py-5 bg-green-700 bg-opacity-50 w-full '>
-                        <div className='flex flex-col sm:flex-row group justify-center items-center align-middle space-x-10 z-10 '>
+                    <div className='relative py-5 bg-white m-5 '>
+                        <div className='flex flex-col sm:flex-row group justify-center items-center align-middle  '>
                             {userData.avatar ? (
                                 <Image
                                     src={userData.avatar}
                                     alt='Avatar'
-                                    className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                                    className='rounded-full border-yellow-400 border-8 mr-4 w-30 h-30 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
                                     width={120}
                                     height={120}
                                 />
@@ -82,17 +82,17 @@ function Events() {
                                 <Image
                                     src='/images/defaultUser.png'
                                     alt='Default'
-                                    className='rounded-full border-orange-400 border-2 w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
+                                    className='rounded-full border-yellow-400 mr-4 border-8 w-30 h-30 lg:w-32 lg:h-32 xl:w-40 xl:h-40'
                                     width={120}
                                     height={120}
                                 />
                             )}
 
                             <div className='w-3/4 sm:w-1/2 justify-center text-center '>
-                                <h1 className='justify-center items-center text-3xl font-bold mt-3 p-2 rounded-t-lg bg-amber-400'>
+                                <h1 className='justify-center items-center text-3xl font-bold mt-3 p-2 rounded-t-lg bg-yellow-500'>
                                     {userData.displayName}
                                 </h1>
-                                <h1 className='w-full bg-amber-400 opacity-50 rounded-b-lg p-2'>
+                                <h1 className=' bg-yellow-500 opacity-50 rounded-b-lg p-2'>
                                     {userData.displayName}{" "}
                                     {t("profileEvent.eventAmount")}{" "}
                                     {userData.iEvents &&
@@ -109,7 +109,7 @@ function Events() {
                         className='flex flex-end items-end justify-end mr-10 mb-5 mt-5'
                         href={`/profile/${id}/`}
                     >
-                        <button className='rounded-sm py-2 px-3 text-white text-xl hover:font-semibold hover:text-black focus:font-semibold focus:text-black bg-green-400 hover:bg-opacity-50 focus:border-2 focus:border-black'>
+                        <button className='rounded-sm py-2 px-3 text-white text-xl hover:font-semibold hover:text-black focus:font-semibold focus:text-black bg-green-500 hover:bg-opacity-80 focus:border-2 focus:border-black'>
                             {" "}
                             {t("profileEvent.goback")} {userData.displayName}{" "}
                             {t("profileEvent.profile")}
