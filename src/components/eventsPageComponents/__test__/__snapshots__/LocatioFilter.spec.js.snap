@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocatioFilter Snapshot should matches DOM Snapshot 1`] = `
+<div
+  className="flex flex-col gap-3 justify-center items-center"
+>
+  <div
+    className="relative w-[70%] flex flex-row bg-gray-200  rounded-full my-3"
+  >
+    <div
+      className="  text-gray-400 flex justify-center items-center px-2"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 16 16"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+        />
+      </svg>
+    </div>
+    <input
+      className="form control px-3 text-sm lg:text-lg flex justify-center items-center rounded-full font-medium bg-gray-200 w-full border-none outline-none focus:border-none h-10"
+      placeholder="Choose Location"
+      type="text"
+    />
+    <div
+      className="absolute z-30 w-[100%] mt-2 gap-4 top-9 flex-col shadow-lg  rounded-md bg-gray-200 h-auto self-center px-3 text-xl flex justify-center items-start font-medium overflow-y-auto"
+    />
+  </div>
+  <div
+    className="flex flex-row text-lg cursor-pointer transition-all hover:bg-amber justify-center items-center gap-x-2  font-medium w-[90%]  rounded-xl shadow-xl h-10 bg-amber-400 transition-all scale-95"
+    onClick={[Function]}
+  >
+    <svg
+      className=" text-3xl"
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 0h24v24H0V0z"
+        fill="none"
+      />
+      <path
+        d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm.88 13.75h-1.75V14h1.75v1.75zm0-2.87h-1.75c0-2.84 2.62-2.62 2.62-4.38 0-.96-.79-1.75-1.75-1.75s-1.75.79-1.75 1.75H8.5C8.5 6.57 10.07 5 12 5s3.5 1.57 3.5 3.5c0 2.19-2.62 2.41-2.62 4.38z"
+      />
+    </svg>
+  </div>
+</div>
+`;

@@ -29,9 +29,9 @@ function JoinButton({ eOwner, eventId, eAttendees, setJoinUpdate }) {
 
     const handleJoin = async () => {
         if (!user) {
-            /* */
+            /* Handle case when user is not logged in */
         } else if (isEventOwner === true) {
-            /* */
+            /* Handle case when user is the event owner */
         } else {
             const attendeesArray = eAttendees || [];
             // Update event document

@@ -40,7 +40,7 @@ const HowitWorks = () => {
             link: user ? "/createTheEvent" : "/authentication/signUp",
         },
         {
-            image: "/images/Girl.png",
+            image: "/images/donation.png",
             id: 4,
             title: t("Contribute"),
             description: t("HowitWorks.donate"),
@@ -85,7 +85,7 @@ const HowitWorks = () => {
                                 alt={service.title}
                                 width={220}
                                 height={220}
-                                className='object-cover w-full h-full rounded-full shadow-md'
+                                className='w-full object-contain h-full shadow-md'
                             />
                             <h4 className='text-txtc-DarkCharcoal font-Montserrat text-xl font-medium leading-8'>
                                 {service.title}

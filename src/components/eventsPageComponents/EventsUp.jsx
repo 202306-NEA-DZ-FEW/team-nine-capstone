@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
+import React from "react";
 
 import EventTimer from "./EventTimer";
 
 const EventsUp = ({ closestEvent }) => {
-    const [joinUpdate, setJoinUpdate] = useState(0);
     const { t } = useTranslation("common");
-    console.log("clossetevent", closestEvent);
     function formatDate() {
         if (closestEvent?.event?.date) {
             // Split the date string into day, month, and year
@@ -64,7 +62,7 @@ const EventsUp = ({ closestEvent }) => {
                 className='w-full h-full bg-top bg-cover'
                 style={{
                     backgroundImage: `url(${closestEvent.event.image})`,
-                    backgroundSize: "100%", // or "cover", "50%", etc. based on your preference
+                    backgroundSize: "100%",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                 }}

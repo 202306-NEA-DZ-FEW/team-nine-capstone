@@ -29,9 +29,6 @@ const EventTimer = ({ closestEvent }) => {
         date = closestEvent.date;
     }
 
-    // console.log("clossestdate", closestEvent.date);
-    // console.log("clossestevent", closestEvent);
-
     useEffect(() => {
         const intervalId = setInterval(() => {
             updateRemainingTime(date);
