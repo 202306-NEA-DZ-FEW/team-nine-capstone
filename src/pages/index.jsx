@@ -1,25 +1,35 @@
-import Link from "next/link";
+import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 
+import HeroSection from "@/components/homepage/HeroSection";
+import HowitWorks from "@/components/homepage/HowitWorks";
+import SectionTwo from "@/components/homepage/SectionTwo";
+
+import { useUser } from "@/context/UserContext";
 import Layout from "@/layout/Layout";
 
-export default function HomePage() {
+export default function HomePage({ props }) {
+    const { user } = useUser();
     const { t } = useTranslation("common");
 
     return (
-        <Layout>
-            <p>{t("test")}</p>
-            <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-                <Link href='/' locale='en'>
-                    English
-                </Link>
-                <Link href='/' locale='ar'>
-                    العربية
-                </Link>
-            </div>
-        </Layout>
+        <>
+            <Head>
+                <title>{t("indxHomePage.title")}</title>
+                <meta
+                    name='description'
+                    content={t("indxHomePage.description")}
+                />
+                <meta name='keywords' content={t("indxHomePage.keywords")} />
+            </Head>
+            <HeroSection />
+            <Layout>
+                <HowitWorks />
+                <SectionTwo />
+            </Layout>
+        </>
     );
 }
 
