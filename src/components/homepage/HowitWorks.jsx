@@ -5,8 +5,6 @@ import { AiOutlineRight } from "react-icons/ai";
 
 import { useUser } from "@/context/UserContext";
 
-import SocialShare from "../reusableComponents/SocialShare";
-
 const HowitWorks = () => {
     const { t } = useTranslation();
     const { user } = useUser();
@@ -45,9 +43,7 @@ const HowitWorks = () => {
             image: "/images/Girl.png",
             id: 4,
             title: t("Contribute"),
-            description: t(
-                "Can't attend? Support us with a donation and still make a difference!"
-            ),
+            description: t("HowitWorks.donate"),
             logo: t("Donate"),
             link: "https://donate.stripe.com/test_eVa5m5dw83qhe7C289",
         },
@@ -55,7 +51,7 @@ const HowitWorks = () => {
 
     return (
         <>
-            <div className='how-inAll bg-bgc-silver '>
+            <div className='how-inAll1 bg-bgc-silver '>
                 <div className='md:w-2/5 text-center bg-bgc-silver md:text-left pl-10'>
                     <div className='home-text sm:w-[70%] h-[60%] sm:h-[50%] flex flex-col justify-center mx-auto items-center'>
                         <Image
@@ -74,12 +70,7 @@ const HowitWorks = () => {
                     </p>
                 </div>
             </div>
-            <SocialShare
-                path=''
-                title='Pebbler'
-                quote='Join Us in Creating Impactful Change'
-            />
-            <div className='w-full h-full flex flex-col gap-y-4 py-10 lg:px-14'>
+            <div className='h-full w-full flex flex-col gap-y-4 py-10 lg:px-14'>
                 <h2 className='text-txtc-DarkCharcoal font-Montserrat text-3xl text-center font-semibold mb-10'>
                     {t("HowitWorks.title")}
                 </h2>

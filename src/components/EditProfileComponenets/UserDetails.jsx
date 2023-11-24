@@ -23,7 +23,6 @@ function UserDetails() {
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
-    //get user details if there is any from data base to populate input
     useEffect(() => {
         if (user) {
             getUserDocument(user.uid)
@@ -32,25 +31,25 @@ function UserDetails() {
                         setUserData((prevUserData) => ({
                             ...prevUserData,
                             ...doc.data(),
-                            userInterests: doc.data().userInterests || [], // Initialize as an empty array
+                            userInterests: doc.data().userInterests || [],
                         }));
                     }
                 })
                 .catch((error) => {
-                    error;
+                    setError(error);
                 });
         }
     }, [user]);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e, selectedInterets) => {
         const { name, value } = e.target;
         setUserData((prevUserData) => ({
             ...prevUserData,
             [name]: value,
+            userInterests: selectedInterets.map((interest) => interest.value),
         }));
     };
 
-    // Function to handle location selection
     const handleLocationSelect = (selectedLocation) => {
         setUserData((prevUserData) => ({
             ...prevUserData,
@@ -58,7 +57,6 @@ function UserDetails() {
         }));
     };
 
-    // Function to update avatar URL
     const updateAvatarUrl = (downloadURL) => {
         setUserData((prevUserData) => ({
             ...prevUserData,
@@ -70,7 +68,6 @@ function UserDetails() {
         e.preventDefault();
         updateUserDocument(user.uid, userData)
             .then(() => {
-                // Update display name in authentication
                 updateProfile(user, { displayName: userData.displayName });
                 setSuccessMessage(t("editProfile.succUpdate"));
             })
@@ -95,124 +92,127 @@ function UserDetails() {
             userInterests: updatedInterests,
         }));
     };
-
-    //effect for notification
     useEffect(() => {
         if (successMessage || error) {
-            // After 5 seconds, remove the success message
             const timer = setTimeout(() => {
                 setError(null);
                 setSuccessMessage(null);
             }, 5000);
 
-            // Clear the timer if the component unmounts or if successMessage changes
             return () => clearTimeout(timer);
         }
     }, [successMessage, error]);
 
     return (
-        <div className='flex'>
+        <div className='flex bg-bgc-silver'>
             <form
                 onSubmit={handleSubmit}
-                className='flex flex-col md:flex-row w-full sm:w-[95%] bg-white bg-opacity-50 rounded-lg m-2'
+                className='flex flex-col md:flex-row w-full sm:w-[95%] rounded-lg justify-center'
             >
-                {/* left side */}
-                <div className='bg-gray-800 w-full md:w-1/2 h-auto md:h-full rounded-lg '>
+                <div className='md:w-1/5 mt-10 mx-10 bg-white'>
                     <AvatarInput
                         avatar={userData.avatar}
                         onUpdateAvatar={updateAvatarUrl}
                     />
                 </div>
-                {/*righ side */}
-                <div>
-                    <div className='flex-col'>
-                        <div className=''>
-                            <div className='flex flex-col md:flex-row justify-start items-center p-2'>
-                                <label
-                                    htmlFor='displayName'
-                                    className='md:w-40 text-lg'
-                                >
-                                    {t("editProfile.DisplayName")}{" "}
-                                </label>
-                                <input
-                                    className='g-white bg-opacity-50 border-2 border-black focus:bg-green-400 focus:bg-opacity-80  text-black text-lg rounded-lg p-2'
-                                    type='text'
-                                    id='displayName'
-                                    name='displayName'
-                                    placeholder='Enter a User Name'
-                                    value={userData.displayName || ""}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className='flex flex-col md:flex-row justify-start items-center p-2'>
-                                <label
-                                    htmlFor='fullName'
-                                    className='md:w-40 text-lg'
-                                >
-                                    {t("editProfile.FullName")}{" "}
-                                </label>
-                                <input
-                                    className='bg-white bg-opacity-50 border-2 border-black focus:bg-green-400 focus:bg-opacity-80  text-black text-lg rounded-lg p-2'
-                                    type='text'
-                                    id='fullName'
-                                    name='fullName'
-                                    placeholder='Enter Full Name'
-                                    value={userData.fullName || ""}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div>
-                                <LocationInput
-                                    initialLocation={userData.location}
-                                    onSelectLocation={handleLocationSelect}
-                                />
+
+                <div className='grid gap-8 justify-center bg-white p-10 mt-10 md:w-3/4'>
+                    <h1 className=' flex text-3xl justify-center font-semibold text-black p-2'>
+                        {t("profile.pro")}
+                    </h1>
+
+                    {/* First Row */}
+                    <div className='grid grid-cols-1 md:grid-cols-2 md:gap-8'>
+                        <div className='flex flex-col mb-4 md:mb-0'>
+                            <label htmlFor='displayName' className='text-lg'>
+                                {t("editProfile.DisplayName")}
+                            </label>
+                            <input
+                                className='bg-white rounded-sm border-2 text-black text-lg p-1 md:w-80'
+                                type='text'
+                                id='displayName'
+                                name='displayName'
+                                placeholder='Display Name'
+                                value={userData.displayName || ""}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+
+                        <div className='flex flex-col'>
+                            <label htmlFor='fullName' className='text-lg'>
+                                {t("editProfile.FullName")}
+                            </label>
+                            <input
+                                className='bg-white rounded-sm border-2 text-black text-lg p-1 md:w-80'
+                                type='text'
+                                id='fullName'
+                                name='fullName'
+                                placeholder='Full Name'
+                                value={userData.FullName || ""}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Second Row */}
+                    <div className='grid grid-cols-1 md:grid-cols-2 md:gap-8'>
+                        <div className='flex flex-col mb-4 md:mb-0'>
+                            <LocationInput
+                                initialLocation={userData.location}
+                                onSelectLocation={handleLocationSelect}
+                            />
+                        </div>
+
+                        <div className='flex flex-col p-2'>
+                            <label
+                                htmlFor='interests'
+                                className='text-lg p-2 underline'
+                            >
+                                {t("profile.Interests")}
+                            </label>
+                            <div className='grid grid-cols-3 gap-2 mr-6'>
+                                {interestList.map((interest) => (
+                                    <div
+                                        key={interest.title}
+                                        className={`flex flex-col col items-center w-full h-12 p-2 m-2 text-center justify-center border-4 rounded-lg ${
+                                            userData.userInterests.includes(
+                                                interest.title
+                                            )
+                                                ? "bg-green-500 text-white text-sm font-semibold"
+                                                : " hover:text-sm"
+                                        }`}
+                                        onClick={() =>
+                                            handleInterestClick(interest.title)
+                                        }
+                                    >
+                                        {interest.title}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col align-middle justify-start items-center p-2'>
-                        <label
-                            htmlFor='interests'
-                            className='text-lg p-2 underline'
-                        >
-                            {t("profile.Interests")}
-                        </label>
-                        <div className='flex flex-wrap justify-center items-start'>
-                            {interestList.map((interest) => (
-                                <div
-                                    key={interest.title}
-                                    className={`flex flex-col items-center basis-1/2 sm:basis-1/4 md:basis-1/6 mr-4 mb-4 text-center justify-center border-4 rounded-lg  w-40 h-14 p-2 m-2' ${
-                                        userData.userInterests.includes(
-                                            interest.title
-                                        )
-                                            ? "bg-green-500 text-white text-lg font-bold border-amber-400 hover:text-base"
-                                            : "bg-green-300 bg-opacity-80 hover:text-lg hover:border-amber-400"
-                                    }`}
-                                    onClick={() =>
-                                        handleInterestClick(interest.title)
-                                    }
-                                >
-                                    {interest.title}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className='flex justify-end relative right-5'>
+
+                    <div className='flex justify-center'>
                         <button
                             type='submit'
-                            className='flex justify-center bg-amber-400 w-32 text-white text-center p-2 my-2 rounded cursor-pointer hover:bg-amber-300 hover:font-semibold hover:text-black'
+                            className='bg-amber-400 w-32 text-white text-center p-2  rounded cursor-pointer  hover:font-semibold hover:text-black'
                         >
                             {t("editProfile.UpdateProfile")}
                         </button>
                     </div>
+                    <div className='flex justify-center items-center'>
+                        <hr className='border-t border-4 border-gray w-full' />
+                    </div>
                     {error && (
-                        <div className='flex justify-center items-center'>
+                        <div className='flex justify-center items-center mt-4'>
                             <p className='text-red-500 border-white w-fit bg-red-300 justify-center items-center rounded-lg slide-in'>
                                 {error}
                             </p>
                         </div>
                     )}
+
                     {successMessage && (
-                        <div className='flex relative justify-center items-center'>
+                        <div className='flex justify-center items-center mt-4'>
                             <p className='text-green-500 border-white bg-green-200 justify-center items-center w-fit rounded-lg slide-in'>
                                 {successMessage}
                             </p>

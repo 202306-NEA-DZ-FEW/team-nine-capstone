@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
@@ -11,6 +12,12 @@ export default function About() {
 
     return (
         <Layout>
+            <Head>
+                <title>{t("indxAbout.title")}</title>
+
+                <meta name='description' content={t("indxAbout.description")} />
+                <meta name='keywords' content={t("indxAbout.keywords")} />
+            </Head>
             <AboutUs />
         </Layout>
     );

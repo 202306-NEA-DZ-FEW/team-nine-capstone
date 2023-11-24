@@ -9,6 +9,7 @@ function LocationInput({ initialLocation, onSelectLocation }) {
     const [showSuggestions, setShowSuggestions] = useState(false);
 
     //searches for suggestion
+
     useEffect(() => {
         if (location.trim() !== "") {
             axios
@@ -41,13 +42,13 @@ function LocationInput({ initialLocation, onSelectLocation }) {
     };
 
     return (
-        <div className='relative flex flex-col md:flex-row justify-start items-center p-2'>
-            <label htmlFor='locationInput' className='md:w-40 text-lg'>
+        <div className='relative flex flex-col'>
+            <label htmlFor='locationInput' className='text-lg'>
                 {t("profile.Location")}
             </label>
             <div>
                 <input
-                    className='bg-white bg-opacity-50 border-2 border-black focus:bg-green-400 focus:bg-opacity-80  text-black text-lg rounded-lg p-2'
+                    className='bg-white rounded-sm border-2 text-black text-lg p-1 md:w-80'
                     type='text'
                     id='locationInput'
                     value={location}

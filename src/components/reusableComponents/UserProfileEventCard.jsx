@@ -45,7 +45,7 @@ function UserProfileEventCard({ id }) {
                                     alt={eventData.title}
                                     className='h-56 w-full object-cover'
                                 />
-                                <h1 className='absolute bottom-0 w-full py-2 text-xl text-center bg-amber-400 bg-opacity-50'>
+                                <h1 className='absolute bottom-0 w-full py-2 text-xl font-Montserrat text-center text-white bg-black bg-opacity-50'>
                                     {eventData.title}
                                 </h1>
                             </div>

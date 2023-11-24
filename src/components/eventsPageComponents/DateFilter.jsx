@@ -81,7 +81,7 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                             </h1>
                         </div>
                     </div>
-                    <div className='flex flex-row px-2 '>
+                    <div className='grid grid-cols-7 px-2 place-items-center'>
                         {days.map((day, index) => {
                             return (
                                 <h1
@@ -94,7 +94,7 @@ const DateFilter = ({ onClick, upDatedDate, isOpen }) => {
                         })}
                     </div>
 
-                    <div className=' flex flex-row flex-wrap px-2'>
+                    <div className=' grid grid-cols-7 px-2 place-items-center'>
                         {generateDate(today.month(), today.year()).map(
                             ({ date, currentMonth, today }, index) => {
                                 return (

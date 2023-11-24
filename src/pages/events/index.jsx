@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
@@ -10,6 +11,15 @@ function Event() {
     const { t } = useTranslation("common");
     return (
         <Layout>
+            <Head>
+                <title>{t("indxOurEvents.title")}</title>
+
+                <meta
+                    name='description'
+                    content={t("indxOurEvents.description")}
+                />
+                <meta name='keywords' content={t("indxOurEvents.keywords")} />
+            </Head>
             <div>
                 <EventList />
             </div>

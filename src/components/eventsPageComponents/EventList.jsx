@@ -1,4 +1,5 @@
 import { onSnapshot } from "firebase/firestore";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
@@ -18,7 +19,6 @@ import EventsUp from "./EventsUp";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
 import Pagination from "./Pagination";
-import Link from "next/link";
 
 function EventList() {
     const [events, setEvents] = useState([]);
@@ -202,193 +202,197 @@ function EventList() {
         setItemOffset(newOffset);
     };
     return (
-        <div className='relative h-full flex flex-col bg-gray-200'>
-            <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
-                <div className='hidden bg-gray-50 mt-4 sticky top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>
-                    {/* reset filter button */}
-                    <div
-                        className='flex flex-row mt-3 h-auto py-1 justify-between px-1 transition-all duration-150 text-lg bg-gray-200 font-medium cursor-pointer hover:text-white items-center w-auto gap-2 self-center hover:bg-red-500 rounded-full shadow-lg'
-                        onClick={() => resetFilter()}
-                    >
-                        <div className='w-7 h-7 bg-gray-50 rounded-full text-red-500 flex justify-center items-center'>
-                            <LuFilterX />
-                        </div>
-                        <h1 className=''>{t("eventList.Clear Filters")}</h1>{" "}
-                    </div>
-                    {/* calendar filter component */}
-                    <div>
-                        <DateFilter
-                            upDatedDate={upDatedDate}
-                            onClick={onClick}
-                        />
-                    </div>
-                    <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
-                    <div className=''>
-                        {/* locations components filter */}
-                        <LocatioFilter
-                            setLocationSearch={setLocationSearch}
-                            locationSearch={locationSearch}
-                            handleSearch={handleSearch}
-                            prevLocation={prevLocation}
-                            setPrevLocation={setPrevLocation}
-                            setLocation={setLocation}
-                            location={location}
-                            events={events}
-                            handleLocation={handleLocation}
-                        />
-                    </div>
-                    <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
-                    <div className=''>
-                        <InterestsFilter
-                            allCategories={allCategories}
-                            setAllCategoris={setAllCategoris}
-                            setUpdatedInterests={setUpdatedInterests}
-                            updatedInterests={updatedInterests}
-                            handleInterest={handleInterest}
-                        />
-                    </div>
-                    {/* <div>join</div> */}
-                </div>
-
-                <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
-                    <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
-                        <EventsUp closestEvent={closestEvent} />
-                    </div>
-                    <Link
-                        className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
-                        href={
-                            user ? "/createTheEvent" : "/authentication/signUp"
-                        }
-                    >
-                        {t("Create Event")}
-                    </Link>
-                    {allCategories ? (
-                        ""
-                    ) : (
-                        <div className='hidden lg:grid px-5 lg:grid-cols-5 place-content-start justify-items-start gap-4 h-auto'>
-                            {matchingInterests?.map((interest) => (
-                                <div
-                                    className='bg-gray-50 flex justify-between px-1 items-center gap-1 h-10 w-40 rounded-full shadow-lg '
-                                    key={interest.title}
-                                >
-                                    <div
-                                        className={` rounded-full h-7 w-7  flex justify-center items-center bg-gray-200 text-${interest.color}-100 `}
-                                    >
-                                        {interest.icon}
-                                    </div>
-                                    <div
-                                        className='flex justify-center font-medium text-sm items-center  h-6 rounded-full'
-                                        key={interest.title}
-                                    >
-                                        {t(interest.title.toString())}
-                                    </div>
-                                    <div
-                                        onClick={() =>
-                                            handleInterest(interest.title)
-                                        }
-                                        className='text-lg cursor-pointer'
-                                    >
-                                        <MdClose />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    <div className='flex flex-row w-full px-2 gap-2 mb-5 md:hidden'>
+        <>
+            <div className='relative h-full flex flex-col bg-gray-200'>
+                <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
+                    <div className='hidden bg-gray-50 mt-4 sticky top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>
+                        {/* reset filter button */}
                         <div
-                            className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
-                            onClick={() => {
-                                handleFilterType("interest");
-                                openBottomSheet();
-                            }}
+                            className='flex flex-row mt-3 h-auto py-1 justify-between px-1 transition-all duration-150 text-lg bg-gray-200 font-medium cursor-pointer hover:text-white items-center w-auto gap-2 self-center hover:bg-red-500 rounded-full shadow-lg'
+                            onClick={() => resetFilter()}
                         >
-                            {t("eventList.Change interest")}{" "}
-                            <div>
-                                <MdOutlineKeyboardArrowDown />
+                            <div className='w-7 h-7 bg-gray-50 rounded-full text-red-500 flex justify-center items-center'>
+                                <LuFilterX />
                             </div>
+                            <h1 className=''>{t("eventList.Clear Filters")}</h1>{" "}
                         </div>
-                        <div
-                            className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
-                            onClick={() => {
-                                handleFilterType("location");
-                                openBottomSheet();
-                            }}
-                        >
-                            {t("eventList.change location")}{" "}
-                            <div>
-                                <MdOutlineKeyboardArrowDown />
-                            </div>
-                        </div>
-                        <div
-                            className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
-                            onClick={() => {
-                                handleFilterType("date");
-                                openBottomSheet();
-                            }}
-                        >
-                            {t("eventList.change date")}{" "}
-                            <div className='font-bold text-lg'>
-                                <MdOutlineKeyboardArrowDown />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='h-auto md:w-[95%] bg-gray-50 rounded-xl shadow-xl w-full flex flex-col justify-start items-center '>
-                        {/* display the events based on filters */}
-                        {currentItems.length !== 0 ? (
-                            currentItems.map((event) => {
-                                return (
-                                    <EventCard
-                                        key={event.id}
-                                        TheEvent={event.id}
-                                    />
-                                );
-                            })
-                        ) : (
-                            <div className=' w-full flex h-auto justify-start py-2 flex-row px-2 gap-4 place-content-center'>
-                                <h1 className='rounded-full px-2 gap-2 justify-center items-center h-8 w-auto flex flex-row bg-gray-200 font-medium text-lg'>
-                                    {t(
-                                        "eventList.sorry no event matches your filters"
-                                    )}{" "}
-                                    <BiSad className='text-yellow-400 text-xl' />
-                                </h1>
-                            </div>
-                        )}
-                    </div>
-                    {currentItems.length !== 0 ? (
-                        <div className='w-[40%] h-12 mt-3 flex bg-gray-50 rounded-xl shadow-lg flex-col justify-center items-center'>
-                            <Pagination
-                                handlePageClick={handlePageClick}
-                                pageCount={pageCount}
+                        {/* calendar filter component */}
+                        <div>
+                            <DateFilter
+                                upDatedDate={upDatedDate}
+                                onClick={onClick}
                             />
                         </div>
-                    ) : (
-                        ""
-                    )}
+                        <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
+                        <div className=''>
+                            {/* locations components filter */}
+                            <LocatioFilter
+                                setLocationSearch={setLocationSearch}
+                                locationSearch={locationSearch}
+                                handleSearch={handleSearch}
+                                prevLocation={prevLocation}
+                                setPrevLocation={setPrevLocation}
+                                setLocation={setLocation}
+                                location={location}
+                                events={events}
+                                handleLocation={handleLocation}
+                            />
+                        </div>
+                        <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
+                        <div className=''>
+                            <InterestsFilter
+                                allCategories={allCategories}
+                                setAllCategoris={setAllCategoris}
+                                setUpdatedInterests={setUpdatedInterests}
+                                updatedInterests={updatedInterests}
+                                handleInterest={handleInterest}
+                            />
+                        </div>
+                        {/* <div>join</div> */}
+                    </div>
+
+                    <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
+                        <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
+                            <EventsUp closestEvent={closestEvent} />
+                        </div>
+                        <Link
+                            className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
+                            href={
+                                user
+                                    ? "/createTheEvent"
+                                    : "/authentication/signUp"
+                            }
+                        >
+                            {t("Create Event")}
+                        </Link>
+                        {allCategories ? (
+                            ""
+                        ) : (
+                            <div className='hidden lg:grid px-5 lg:grid-cols-5 place-content-start justify-items-start gap-4 h-auto'>
+                                {matchingInterests?.map((interest) => (
+                                    <div
+                                        className='bg-gray-50 flex justify-between px-1 items-center gap-1 h-10 w-40 rounded-full shadow-lg '
+                                        key={interest.title}
+                                    >
+                                        <div
+                                            className={` rounded-full h-7 w-7  flex justify-center items-center bg-gray-200 text-${interest.color}-100 `}
+                                        >
+                                            {interest.icon}
+                                        </div>
+                                        <div
+                                            className='flex justify-center font-medium text-sm items-center  h-6 rounded-full'
+                                            key={interest.title}
+                                        >
+                                            {t(interest.title.toString())}
+                                        </div>
+                                        <div
+                                            onClick={() =>
+                                                handleInterest(interest.title)
+                                            }
+                                            className='text-lg cursor-pointer'
+                                        >
+                                            <MdClose />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        <div className='flex flex-row w-full px-2 gap-2 mb-5 md:hidden'>
+                            <div
+                                className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
+                                onClick={() => {
+                                    handleFilterType("interest");
+                                    openBottomSheet();
+                                }}
+                            >
+                                {t("eventList.Change interest")}{" "}
+                                <div>
+                                    <MdOutlineKeyboardArrowDown />
+                                </div>
+                            </div>
+                            <div
+                                className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
+                                onClick={() => {
+                                    handleFilterType("location");
+                                    openBottomSheet();
+                                }}
+                            >
+                                {t("eventList.change location")}{" "}
+                                <div>
+                                    <MdOutlineKeyboardArrowDown />
+                                </div>
+                            </div>
+                            <div
+                                className='w-[35%] cursor-pointer bg-slate-50 flex justify-center items-center h-9 transition duration-300 hover:bg-amber-400 hover:text-white rounded-lg shadow-lg text-sm font-medium'
+                                onClick={() => {
+                                    handleFilterType("date");
+                                    openBottomSheet();
+                                }}
+                            >
+                                {t("eventList.change date")}{" "}
+                                <div className='font-bold text-lg'>
+                                    <MdOutlineKeyboardArrowDown />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='h-auto md:w-[95%] bg-gray-50 rounded-xl shadow-xl w-full flex flex-col justify-start items-center '>
+                            {/* display the events based on filters */}
+                            {currentItems.length !== 0 ? (
+                                currentItems.map((event) => {
+                                    return (
+                                        <EventCard
+                                            key={event.id}
+                                            TheEvent={event.id}
+                                        />
+                                    );
+                                })
+                            ) : (
+                                <div className=' w-full flex h-auto justify-start py-2 flex-row px-2 gap-4 place-content-center'>
+                                    <h1 className='rounded-full px-2 gap-2 justify-center items-center h-8 w-auto flex flex-row bg-gray-200 font-medium text-lg'>
+                                        {t(
+                                            "eventList.sorry no event matches your filters"
+                                        )}{" "}
+                                        <BiSad className='text-yellow-400 text-xl' />
+                                    </h1>
+                                </div>
+                            )}
+                        </div>
+                        {currentItems.length !== 0 ? (
+                            <div className='w-[40%] h-12 mt-3 flex bg-gray-50 rounded-xl shadow-lg flex-col justify-center items-center'>
+                                <Pagination
+                                    handlePageClick={handlePageClick}
+                                    pageCount={pageCount}
+                                />
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                    </div>
+                    <BottomSheet
+                        setLocationSearch={setLocationSearch}
+                        locationSearch={locationSearch}
+                        handleSearch={handleSearch}
+                        bottomSheetOpen={bottomSheetOpen}
+                        prevLocation={prevLocation}
+                        setPrevLocation={setPrevLocation}
+                        setLocation={setLocation}
+                        location={location}
+                        events={events}
+                        handleLocation={handleLocation}
+                        upDatedDate={upDatedDate}
+                        onClick={onClick}
+                        filterType={filterType}
+                        allCategories={allCategories}
+                        setAllCategoris={setAllCategoris}
+                        setUpdatedInterests={setUpdatedInterests}
+                        updatedInterests={updatedInterests}
+                        handleInterest={handleInterest}
+                        isOpen={bottomSheetOpen}
+                        onClose={closeBottomSheet}
+                    />
                 </div>
-                <BottomSheet
-                    setLocationSearch={setLocationSearch}
-                    locationSearch={locationSearch}
-                    handleSearch={handleSearch}
-                    bottomSheetOpen={bottomSheetOpen}
-                    prevLocation={prevLocation}
-                    setPrevLocation={setPrevLocation}
-                    setLocation={setLocation}
-                    location={location}
-                    events={events}
-                    handleLocation={handleLocation}
-                    upDatedDate={upDatedDate}
-                    onClick={onClick}
-                    filterType={filterType}
-                    allCategories={allCategories}
-                    setAllCategoris={setAllCategoris}
-                    setUpdatedInterests={setUpdatedInterests}
-                    updatedInterests={updatedInterests}
-                    handleInterest={handleInterest}
-                    isOpen={bottomSheetOpen}
-                    onClose={closeBottomSheet}
-                />
             </div>
-        </div>
+        </>
     );
 }
 
