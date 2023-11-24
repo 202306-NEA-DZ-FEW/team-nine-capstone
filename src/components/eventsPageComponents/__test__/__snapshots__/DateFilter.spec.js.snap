@@ -392,7 +392,7 @@ exports[`DateFilter Snapshot should matches DOM Snapshot 1`] = `
           className="w-1/6 p-2 text-center h-6 grid place-content-center text-sm "
         >
           <h1
-            className="bg-black text-white lg:h-7 lg:w-7 w-6 h-6 rounded-full grid place-content-center hover:bg-amber-400 hover:text-white transition-all cursor-pointer select-none"
+            className="lg:h-7 lg:w-7 w-6 h-6 rounded-full grid place-content-center hover:bg-amber-400 hover:text-white transition-all cursor-pointer select-none"
             onClick={[Function]}
           >
             24
@@ -402,7 +402,7 @@ exports[`DateFilter Snapshot should matches DOM Snapshot 1`] = `
           className="w-1/6 p-2 text-center h-6 grid place-content-center text-sm "
         >
           <h1
-            className="lg:h-7 lg:w-7 w-6 h-6 rounded-full grid place-content-center hover:bg-amber-400 hover:text-white transition-all cursor-pointer select-none"
+            className="bg-black text-white lg:h-7 lg:w-7 w-6 h-6 rounded-full grid place-content-center hover:bg-amber-400 hover:text-white transition-all cursor-pointer select-none"
             onClick={[Function]}
           >
             25
