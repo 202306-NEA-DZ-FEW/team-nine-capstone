@@ -205,19 +205,19 @@ function EventList() {
         <>
             <div className='relative h-full flex flex-col bg-gray-200'>
                 <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
-                    <div className='hidden bg-gray-50 mt-4 sticky top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>
+                    <div className=' hidden bg-gray-50 mt-4 sticky group transition top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>
                         {/* reset filter button */}
                         <div
-                            className='flex flex-row mt-3 h-auto py-1 justify-between px-1 transition-all duration-150 text-lg bg-gray-200 font-medium cursor-pointer hover:text-white items-center w-auto gap-2 self-center hover:bg-red-500 rounded-full shadow-lg'
+                            className='absolute flex flex-row mt-3 -left-28 group-hover:left-2 duration-300 opacity-0 group-hover:opacity-100 h-auto py-1 justify-between px-1 transition-all text-lg bg-gray-200 font-medium cursor-pointer hover:text-white items-center w-auto gap-2 self-center hover:bg-red-500 rounded-full shadow-lg'
                             onClick={() => resetFilter()}
                         >
-                            <div className='w-7 h-7 bg-gray-50 rounded-full text-red-500 flex justify-center items-center'>
+                            <div className='w-7 h-7 bg-gray-50 rounded-full text-black flex justify-center items-center'>
                                 <LuFilterX />
                             </div>
                             <h1 className=''>{t("eventList.Clear Filters")}</h1>{" "}
                         </div>
                         {/* calendar filter component */}
-                        <div>
+                        <div className='mt-10'>
                             <DateFilter
                                 upDatedDate={upDatedDate}
                                 onClick={onClick}

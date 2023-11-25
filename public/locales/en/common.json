@@ -85,7 +85,8 @@
         "recentEvents": "recent events:",
         "seeMore": "See more Events with",
         "orCheck": "or check availble",
-        "noEvent": "has not joined any events"
+        "noEvent": "has not joined any events",
+        "saved events": "saved events"
     },
     "editProfile": {
         "DisplayName": "Display Name:",
@@ -192,7 +193,7 @@
         "Welcome": "Welcome,",
         "Change interest": "Change interest",
         "change location": "change location",
-        "change date": "change the date",
+        "change date": "change date",
         "sorry no event matches your filters": "sorry, no event matches your filters"
     },
     "Sun": "Sun",

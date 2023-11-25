@@ -92,7 +92,8 @@
         "recentEvents": "اخر فاعليات:",
         "seeMore": "شاهد المزيد من فعاليات ",
         "orCheck": "او تفقد ",
-        "noEvent": "لم ينضم إلى أي  فعاليات"
+        "noEvent": "لم ينضم إلى أي  فعاليات",
+        "saved events": "النشاطات المحفوظة"
     },
     "editProfile": {
         "DisplayName": "الاسم :",

@@ -28,6 +28,7 @@ import { useUser } from "@/context/UserContext";
 
 import EventCard from "../eventsPageComponents/EventCard";
 import EventsComments from "../eventsPageComponents/EventsComments";
+import EventsSave from "../eventsPageComponents/EventsSave";
 import EventTimer from "../eventsPageComponents/EventTimer";
 import JoinButton from "../reusableComponents/JoinButton";
 import { formatDate } from "../util/formattedDate";
@@ -301,6 +302,12 @@ function EventDetails() {
                                 backgroundImage: `url(${eventDisplay.image})`,
                             }}
                         >
+                            <div className='absolute text-2xl z-10 -top-24 left-2 group-hover:top-0 rounded-b-sm transition-all duration-300 bg-slate-200 py-2 px-1 opacity-0 group-hover:opacity-100'>
+                                <EventsSave
+                                    userDoc={userDoc}
+                                    eventId={currentEventId}
+                                />
+                            </div>
                             <div
                                 onClick={() => {
                                     navigateToEvent("next");
