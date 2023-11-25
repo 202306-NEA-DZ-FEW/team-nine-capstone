@@ -169,7 +169,8 @@ hero-All {
 }
 
 .hero-inAll {
-    height: 90vh;
+    height: 91vh;
+    min-height: 91vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -233,7 +234,7 @@ hero-All {
 
 .hero-p {
     font-family: theme("fontFamily.Lora");
-    color: white;
+    color: ivory;
     font-size: 1em;
     animation: fade 4s;
     margin-bottom: 10px;
@@ -282,7 +283,7 @@ hero-All {
     }
 
     .nav-logo {
-        font-size: 1.3em;
+        font-size: 1.1em;
         font-weight: 700;
     }
 
@@ -296,7 +297,7 @@ hero-All {
         max-width: none;
         font-size: 1.2em;
         margin: 0.5em;
-        border-radius: 3rem;
+        border-radius: 2.5rem;
     }
 }
 

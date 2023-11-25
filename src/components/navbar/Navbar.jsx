@@ -80,8 +80,8 @@ function Navbar() {
                     : "bg-bgc-silver text-txtc-DarkCharcoal shadow-sm font-Montserrat"
             }`}
         >
-            <div className='mx-auto px-4 sm:px-8 md:px-0'>
-                <div className='flex items-center justify-between p-3'>
+            <div className='mx-auto px-1 sm:px-2 md:px-0'>
+                <div className='flex items-center justify-between p-1'>
                     <Link
                         href='/'
                         onClick={closeMenu}
