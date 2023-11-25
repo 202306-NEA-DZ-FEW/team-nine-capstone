@@ -17,7 +17,7 @@ const Hero = () => {
             <div className='hero-inAll'>
                 <video
                     className='bg-video w-full h-full object-cover'
-                    src='/images/heroVideo.mp4'
+                    src='/images/check.mp4'
                     type='video/mp4'
                     poster='/images/background.png'
                     autoPlay
