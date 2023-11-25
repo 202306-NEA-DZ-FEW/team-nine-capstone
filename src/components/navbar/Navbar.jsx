@@ -76,8 +76,8 @@ function Navbar() {
         <div
             className={`sticky left-0 top-0 w-full h-auto z-50  ${
                 hasScrolled
-                    ? "bg-bgc-Charcoal text-txtc-Ivory shadow-sm font-Montserrat h-9vh"
-                    : "bg-bgc-silver text-txtc-DarkCharcoal shadow-sm h-9vh font-Montserrat"
+                    ? "bg-bgc-Charcoal text-txtc-Ivory shadow-sm font-Montserrat"
+                    : "bg-bgc-silver text-txtc-DarkCharcoal shadow-sm font-Montserrat"
             }`}
         >
             <div className='mx-auto px-4 sm:px-8 md:px-0'>
