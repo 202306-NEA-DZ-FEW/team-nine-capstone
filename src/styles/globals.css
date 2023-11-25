@@ -414,6 +414,7 @@ hero-All {
     .home-btn {
         width: 60%;
         border-radius: 0.5;
+        text-align: center;
     }
     .top-to-btm {
         display: none;
@@ -476,6 +477,7 @@ hero-All {
         width: 90%;
         border-radius: 1.8em;
         font-size: small;
+        text-align: center;
     }
     .hero-inAll {
         background: url("/images/background.png") no-repeat;
