@@ -52,7 +52,7 @@ const HowitWorks = () => {
     return (
         <>
             <div className='how-inAll1 bg-bgc-silver '>
-                <div className='md:w-2/5 text-center bg-bgc-silver md:text-left pl-10'>
+                <div className='md:w-2/5 text-center bg-bgc-silver md:text-center p-3'>
                     <div className='home-text sm:w-[70%] h-[60%] sm:h-[50%] flex flex-col justify-center mx-auto items-center'>
                         <Image
                             src='/images/HeroLogo.png'

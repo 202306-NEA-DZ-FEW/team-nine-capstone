@@ -76,8 +76,8 @@ function Navbar() {
         <div
             className={`sticky left-0 top-0 w-full h-auto z-50  ${
                 hasScrolled
-                    ? "bg-black/80 text-white shadow-sm h-9vh"
-                    : "bg-black/20 backdrop-blur-lg text-black shadow-lg"
+                    ? "bg-bgc-Charcoal text-txtc-Ivory shadow-sm font-Montserrat"
+                    : "bg-bgc-silver text-txtc-DarkCharcoal shadow-sm font-Montserrat"
             }`}
         >
             <div className='mx-auto px-4 sm:px-8 md:px-0'>
@@ -136,8 +136,8 @@ function Navbar() {
                                 <div
                                     className={`absolute top-full left-0 w-full p-2 border-grey-800 border-3 rounded-b-lg shadow-lg backdrop-blur-md mt-3 ${
                                         hasScrolled
-                                            ? "bg-black/80 text-white"
-                                            : "bg-black/20 backdrop-blur-lg text-black"
+                                            ? "bg-bgc-Charcoal text-txtc-Ivory"
+                                            : "bg-bgc-silver text-txtc-DarkCharcoal backdrop-blur-lg"
                                     }`}
                                 >
                                     {router.query.id ? (
@@ -168,14 +168,14 @@ function Navbar() {
                                             <Link
                                                 href=''
                                                 locale='en'
-                                                className='block text-sm text-white p-2 w-38 hover-bg-amber-200 rounded-xl'
+                                                className='block text-sm  p-2 w-38 hover-bg-amber-200 rounded-xl'
                                             >
                                                 English
                                             </Link>
                                             <Link
                                                 href=''
                                                 locale='ar'
-                                                className='block text-sm text-white p-2 w-38 hover-bg-amber-200 rounded-xl'
+                                                className='block text-sm  p-2 w-38 hover-bg-amber-200 rounded-xl'
                                             >
                                                 العربية
                                             </Link>
@@ -201,8 +201,8 @@ function Navbar() {
                                 <div
                                     className={`absolute top-full left-0 w-full p-2 border-grey-800 border-3 rounded-b-lg shadow-lg mt-3 ${
                                         hasScrolled
-                                            ? "bg-black/80 text-white"
-                                            : "bg-black/20 backdrop-blur-lg text-black"
+                                            ? "bg-bgc-Charcoal text-txtc-Ivory"
+                                            : "bg-bgc-silver text-txtc-DarkCharcoal backdrop-blur-lg"
                                     }`}
                                 >
                                     {user ? (
