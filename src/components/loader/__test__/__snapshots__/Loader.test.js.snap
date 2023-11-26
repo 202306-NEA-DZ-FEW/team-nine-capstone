@@ -5,33 +5,13 @@ exports[`renders correctly 1`] = `
   className="flex justify-center items-center h-screen"
 >
   <div
-    className="relative"
+    className="centered"
   >
     <div
-      className="w-20 h-20 border-bgc-ForestGreen border-2 rounded-full"
+      className="blob-1"
     />
     <div
-      className="w-20 h-20 border-bgc-sunflower border-t-2 animate-spin rounded-full absolute left-0 top-0"
-    />
-  </div>
-  <div
-    className="relative"
-  >
-    <div
-      className="w-10 h-10 border-bgc-ForestGreen border-2 rounded-full"
-    />
-    <div
-      className="w-10 h-10 border-bgc-sunflower border-t-2 animate-spin rounded-full absolute left-0 top-0"
-    />
-  </div>
-  <div
-    className="relative"
-  >
-    <div
-      className="w-5 h-5 border-bgc-ForestGreen border-2 rounded-full"
-    />
-    <div
-      className="w-5 h-5 border-bgc-sunflower border-t-2 animate-spin rounded-full absolute left-0 top-0"
+      className="blob-2"
     />
   </div>
 </div>
