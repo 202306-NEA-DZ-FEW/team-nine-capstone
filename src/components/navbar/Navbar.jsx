@@ -80,8 +80,8 @@ function Navbar() {
                     : "bg-bgc-silver text-txtc-DarkCharcoal shadow-sm font-Montserrat"
             }`}
         >
-            <div className='mx-auto px-1 sm:px-2 md:px-0'>
-                <div className='flex items-center justify-between p-1'>
+            <div className='mx-auto px-4 sm:px-8 md:px-0'>
+                <div className='flex items-center justify-between p-3'>
                     <Link
                         href='/'
                         onClick={closeMenu}
@@ -134,7 +134,7 @@ function Navbar() {
                             </span>
                             {isLangDropdownOpen && (
                                 <div
-                                    className={`sticky top-0 left-0 w-full p-2 border-grey-800 border-3 rounded-b-lg shadow-lg backdrop-blur-md mt-3 ${
+                                    className={`absolute top-full left-0 w-full p-2 border-grey-800 border-3 rounded-b-lg shadow-lg backdrop-blur-md mt-3 ${
                                         hasScrolled
                                             ? "bg-bgc-Charcoal text-txtc-Ivory"
                                             : "bg-bgc-silver text-txtc-DarkCharcoal backdrop-blur-lg"

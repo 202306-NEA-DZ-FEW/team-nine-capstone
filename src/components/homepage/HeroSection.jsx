@@ -34,7 +34,6 @@ const Hero = () => {
                         alt='Logo'
                         width={65}
                         height={65}
-                        className='hidden'
                     ></Image>
                     <h2 className='hero-h1'>{t("VideoSection.title")}</h2>
                     <p className='hero-p'>{t("VideoSection.intro")}</p>
