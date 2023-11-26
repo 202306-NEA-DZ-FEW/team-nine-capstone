@@ -346,7 +346,9 @@
         "email": "Email",
         "reset": "Reset Password",
         "remember": "Remember you Password? Login!",
-        "create": "Create an Account!"
+        "create": "Create an Account!",
+        "popupMessage": "Please check your email, for further instructions on how to reset your password. Thank You !",
+        "close": "close"
     },
     "EventsComments": {
         "add comment": "add comment"

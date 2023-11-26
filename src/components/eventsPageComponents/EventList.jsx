@@ -10,6 +10,8 @@ import { MdClose, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { eventsCollection } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
 
+import Loader from "@/components/loader/Loader";
+
 import { useUser } from "@/context/UserContext";
 
 import BottomSheet from "./BottomSheets";
@@ -174,7 +176,7 @@ function EventList() {
 
     // Render loading state while data is being fetched
     if (loading) {
-        return <p>Loading...</p>;
+        return <Loader />;
     }
     const handleSearch = (e) => {
         const searchValue = e.target.value.toLowerCase();
