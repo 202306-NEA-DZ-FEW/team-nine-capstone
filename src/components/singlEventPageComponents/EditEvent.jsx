@@ -1,4 +1,4 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import {
     deleteObject,
     getDownloadURL,
@@ -53,7 +53,7 @@ function EditEvent() {
 
     const eventRef = id ? doc(firestore, "events", id) : null;
 
-    console.log("the eventref", eventRef);
+    // console.log("the eventref", eventRef);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,18 +76,7 @@ function EditEvent() {
 
         fetchData();
         updateDocument();
-        // if (urlsBunch !== null) {
-        //     // console.log(urlsBunch, "urlsBunch")
-        //     updateDocument();
-        // }
     }, [urlsBunch]);
-
-    // useEffect(() => {
-    //     if (urlsBunch !== null) {
-    //         // console.log(urlsBunch, "urlsBunch")
-    //         updateDocument();
-    //     }
-    // }, [urlsBunch]);
 
     const handleEditForm = async (e) => {
         e.preventDefault();
@@ -120,11 +109,21 @@ function EditEvent() {
                 const url = await getDownloadURL(snapshot.ref);
                 setUrlsBunch(() => url);
             } catch (error) {
-                console.error("Error during upload:", error);
+                alert("Error during upload:", error);
             }
         } else {
             setImageInput(() => "no image");
             setUrlsBunch(() => oldImgUrl);
+        }
+    };
+
+    const handleCancel = async () => {
+        console.log(id, "id", eventRef, "eventRef");
+        try {
+            await deleteDoc(eventRef);
+            router.push("/events");
+        } catch (error) {
+            alert("error deleting event:", error);
         }
     };
 
@@ -144,17 +143,13 @@ function EditEvent() {
             createdBy: user.uid,
         };
 
-        console.log("this is new info", updatedInfo);
-
         try {
             await updateDoc(eventRef, updatedInfo);
-            console.log("updated................... ");
             router.push("/events");
         } catch (error) {
-            console.error("Error updating document:", error);
+            alert("Error updating document:", error);
         }
     };
-    console.log("urlsBunch", urlsBunch);
 
     return (
         <>
@@ -316,6 +311,12 @@ function EditEvent() {
                                 type='submit'
                             >
                                 {t("editEvent.save")}
+                            </button>
+                            <button
+                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-sunflower hover:bg-bgc-sunflower focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+                                onClick={() => handleCancel}
+                            >
+                                {t("editEvent.delete")}
                             </button>
                         </form>
                     </div>
