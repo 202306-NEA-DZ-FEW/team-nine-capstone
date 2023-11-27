@@ -3,16 +3,37 @@ import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 import { FaPeopleGroup } from "react-icons/fa6";
 
-import { getEventDocument } from "@/lib/firebase/controller";
+import { getEventDocument, getUserDocument } from "@/lib/firebase/controller";
 import { interestList } from "@/lib/interestsList";
 
+import { useUser } from "@/context/UserContext";
+
+import EventsSave from "./EventsSave";
 import JoinButton from "../reusableComponents/JoinButton";
 
 function EventCard({ TheEvent }) {
     const { t } = useTranslation("common");
     const [eventData, setEventData] = useState(null);
     const [joinUpdate, setJoinUpdate] = useState(0);
+    const [userDoc, setUserDoc] = useState(null);
+    const { user } = useUser();
+    console.log("userdocfromeventcard", userDoc);
+    // fetch user docs
+    useEffect(() => {
+        const fetchUserDocument = async () => {
+            if (user) {
+                const doc = await getUserDocument(user.uid);
+                if (doc.exists()) {
+                    setUserDoc({ ...doc.data(), id: doc.id });
+                } else {
+                    // Handle the case where the document doesn't exist
+                    setUserDoc(null);
+                }
+            }
+        };
 
+        fetchUserDocument();
+    }, [user]);
     // fetch event data
     useEffect(() => {
         const fetchEventData = async () => {
@@ -90,6 +111,9 @@ function EventCard({ TheEvent }) {
             <div className='h-[20%] flex flex-row justify-between items-center pb-2'>
                 <div className='flex justify-center text-[16px] shadow-md items-center bg-emerald-100 md:w-[30%] w-[50%] rounded-md lg:text-lg font-semibold'>
                     {formattedDate}
+                </div>
+                <div className='text-xl'>
+                    <EventsSave userDoc={userDoc} eventId={TheEvent} />
                 </div>
                 <div className='flex justify-center gap-4 px-2 items-center md:w-auto md:rounded-full md:bg-gray-200 w-[50%] rounded-lg text-lg font-medium'>
                     {eventData.attendees ? (

@@ -269,6 +269,26 @@ function Profile() {
                             </button>
                         </Link>
                     )}
+                    <div className='grow shrink m-2 h-0.5 bg-stone-900' />
+                    {/* saved events */}
+                    {userData.eventsSave && userData.eventsSave.length > 0 && (
+                        <div className='flex flex-col items-center justify-center '>
+                            <div className='text-lg font-semibold'>
+                                {" "}
+                                {userData.displayName}{" "}
+                                {t("profile.saved events")}
+                            </div>
+                            <div className='flex flex-wrap my-5 p-1'>
+                                {shuffleArray(userData.eventsSave)
+                                    .slice(0, 4)
+                                    .map((event) => (
+                                        <div key={event}>
+                                            <UserProfileEventCard id={event} />
+                                        </div>
+                                    ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
         </Layout>
