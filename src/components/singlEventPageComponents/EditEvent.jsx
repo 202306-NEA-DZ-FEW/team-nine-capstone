@@ -53,8 +53,6 @@ function EditEvent() {
 
     const eventRef = id ? doc(firestore, "events", id) : null;
 
-    // console.log("the eventref", eventRef);
-
     useEffect(() => {
         const fetchData = async () => {
             if (eventRef) {
@@ -76,7 +74,7 @@ function EditEvent() {
 
         fetchData();
         updateDocument();
-    }, [urlsBunch]);
+    }, [urlsBunch, startDate, selectedInterets, loca, newInfo]);
 
     const handleEditForm = async (e) => {
         e.preventDefault();
@@ -109,7 +107,7 @@ function EditEvent() {
                 const url = await getDownloadURL(snapshot.ref);
                 setUrlsBunch(() => url);
             } catch (error) {
-                alert("Error during upload:", error);
+                console.log("Error during upload:", error);
             }
         } else {
             setImageInput(() => "no image");
@@ -123,7 +121,7 @@ function EditEvent() {
             await deleteDoc(eventRef);
             router.push("/events");
         } catch (error) {
-            alert("error deleting event:", error);
+            console.log("error deleting event:", error);
         }
     };
 
@@ -147,7 +145,7 @@ function EditEvent() {
             await updateDoc(eventRef, updatedInfo);
             router.push("/events");
         } catch (error) {
-            alert("Error updating document:", error);
+            console.log("Error updating document:", error);
         }
     };
 
@@ -314,7 +312,7 @@ function EditEvent() {
                             </button>
                             <button
                                 className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-sunflower hover:bg-bgc-sunflower focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
-                                onClick={() => handleCancel}
+                                onClick={() => handleCancel()}
                             >
                                 {t("editEvent.delete")}
                             </button>

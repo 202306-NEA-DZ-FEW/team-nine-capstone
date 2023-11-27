@@ -253,7 +253,7 @@
         "date": "date",
         "about": "About",
         "save": "Save all",
-        "cancel": "Cancel event"
+        "delete": "Cancel event"
     },
     "createEvent": {
         "title": "Create Event",
