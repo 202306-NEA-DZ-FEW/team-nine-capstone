@@ -42,7 +42,7 @@ function Profile() {
         };
 
         fetchUserData();
-    }, [id]);
+    }, [id, user]);
 
     const shuffleArray = (array) => {
         // Copy the original array to avoid modifying it directly
@@ -77,7 +77,7 @@ function Profile() {
                 <div className='flex flex-col '>
                     <div className='flex flex-col sm:flex-row justify-center items-center mx-10'>
                         {/* first profile section*/}
-                        <div className=' md:w-1/4  sm:w-1/2 mx-10 my-10 p-8 pb-0 rounded-md bg-yellow-500 mt-10 w-full'>
+                        <div className=' md:w-1/4  sm:w-1/2 mx-10 my-10 p-8 pb-0 rounded-md bg-gray-50 shadow-lg mt-10 w-full'>
                             <div className='flex justify-center mt-12'>
                                 {userData.avatar ? (
                                     <div className='flex flex-col items-center'>
@@ -89,7 +89,7 @@ function Profile() {
                                             height={120}
                                         />
                                         <div className='w-3/4 sm:w-1/2 justify-center text-center bg- '>
-                                            <h1 className='flex justify-around items-center text-3xl font-normal text-white p-2'>
+                                            <h1 className='flex justify-around items-center text-3xl font-normal text-black p-2'>
                                                 {userData.displayName}
                                             </h1>
                                         </div>
@@ -132,13 +132,13 @@ function Profile() {
                                                     <Link
                                                         href={`/profile/${id}/editProfile`}
                                                     >
-                                                        <div className='flex justify-center items-center ml-2 w-72 bg-white'>
+                                                        <div className='flex justify-center  items-center ml-2 w-72 bg-white'>
                                                             <span>
                                                                 {t(
                                                                     "profile.ep"
                                                                 )}
                                                             </span>
-                                                            <LiaUserEditSolid className='ml-2 hover:rounded-full hover:bg-black hover:text-white' />
+                                                            <LiaUserEditSolid className='ml-2 hover:rounded-full  hover:bg-black hover:text-white' />
                                                         </div>
                                                     </Link>
                                                 )}
@@ -150,7 +150,7 @@ function Profile() {
                         </div>
 
                         {/* second profile section */}
-                        <div className='grid justify-center rounded-md bg-white p-8 md:w-3/4'>
+                        <div className='grid justify-center rounded-md shadow-lg my-6 bg-gray-50 p-8 md:w-3/4'>
                             <h1 className='font-semibold text-2xl mb-10'>
                                 {t("profile.pro")}
                             </h1>
@@ -219,7 +219,7 @@ function Profile() {
                     {/* third profile section */}
 
                     {userData.iEvents && userData.iEvents.length > 0 ? (
-                        <div className='flex flex-col items-center justify-center '>
+                        <div className='flex flex-col items-center bg-gray-50 rounded-md w-[95%] self-center mt-3 shadow-lg justify-center '>
                             <div className='text-lg font-semibold'>
                                 {" "}
                                 {userData.displayName}{" "}
@@ -271,24 +271,28 @@ function Profile() {
                     )}
                     <div className='grow shrink m-2 h-0.5 bg-stone-900' />
                     {/* saved events */}
-                    {userData.eventsSave && userData.eventsSave.length > 0 && (
-                        <div className='flex flex-col items-center justify-center '>
-                            <div className='text-lg font-semibold'>
-                                {" "}
-                                {userData.displayName}{" "}
-                                {t("profile.saved events")}
+                    {user?.uid === id &&
+                        userData.eventsSave &&
+                        userData.eventsSave.length > 0 && (
+                            <div className='flex flex-col items-center justify-center bg-gray-50 rounded-md w-[95%] self-center my-3 '>
+                                <div className='text-lg font-semibold'>
+                                    {" "}
+                                    {userData.displayName}{" "}
+                                    {t("profile.saved events")}
+                                </div>
+                                <div className='flex flex-wrap my-5 p-1'>
+                                    {shuffleArray(userData.eventsSave)
+                                        .slice(0, 4)
+                                        .map((event) => (
+                                            <div key={event}>
+                                                <UserProfileEventCard
+                                                    id={event}
+                                                />
+                                            </div>
+                                        ))}
+                                </div>
                             </div>
-                            <div className='flex flex-wrap my-5 p-1'>
-                                {shuffleArray(userData.eventsSave)
-                                    .slice(0, 4)
-                                    .map((event) => (
-                                        <div key={event}>
-                                            <UserProfileEventCard id={event} />
-                                        </div>
-                                    ))}
-                            </div>
-                        </div>
-                    )}
+                        )}
                 </div>
             )}
         </Layout>

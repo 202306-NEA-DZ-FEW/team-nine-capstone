@@ -530,16 +530,16 @@ function EventDetails() {
                                     <div>{t("EventDetails.INTERESTS:")}</div>
                                 </div>
                                 <div className='flex lg:flex-row flex-col gap-2'>
-                                    {userDetails?.userInterests?.map(
-                                        (interest) => (
+                                    {userDetails?.userInterests
+                                        ?.slice(0, 4)
+                                        .map((interest) => (
                                             <div
                                                 key={interest.id}
-                                                className='rounded-full turnicate bg-gray-200 px-2'
+                                                className='rounded-full text-sm bg-gray-200 px-2'
                                             >
                                                 {interest}
                                             </div>
-                                        )
-                                    )}
+                                        ))}
                                 </div>
                             </div>
                         </div>
@@ -596,7 +596,7 @@ function EventDetails() {
                                     <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full place-content-start justify-items-center gap-3'>
                                         {matchingInterests?.map((interest) => (
                                             <div
-                                                className='bg-gray-200 flex space-x-1 px-1 items-center gap-1 h-8 w-28 rounded-full'
+                                                className='bg-gray-200 flex space-x-1 px-1 items-center gap-1 h-8 w-auto rounded-full'
                                                 key={interest.title}
                                             >
                                                 <div
@@ -605,7 +605,7 @@ function EventDetails() {
                                                     {interest.icon}
                                                 </div>
                                                 <div
-                                                    className='flex justify-start font-medium text-sm items-center truncate h-5'
+                                                    className='flex justify-start font-medium text-sm items-center h-5'
                                                     key={interest.title}
                                                 >
                                                     {t(
