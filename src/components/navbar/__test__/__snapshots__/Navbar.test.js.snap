@@ -2,7 +2,7 @@
 
 exports[`Navbar renders correctly 1`] = `
 <div
-  className="sticky left-0 top-0 w-full h-auto z-50  bg-black/20 backdrop-blur-lg text-black shadow-lg"
+  className="sticky left-0 top-0 w-full h-auto z-50  bg-bgc-silver text-txtc-DarkCharcoal shadow-sm font-Montserrat"
 >
   <div
     className="mx-auto px-4 sm:px-8 md:px-0"

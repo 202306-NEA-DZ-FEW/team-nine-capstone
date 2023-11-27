@@ -85,7 +85,8 @@
         "recentEvents": "recent events:",
         "seeMore": "See more Events with",
         "orCheck": "or check availble",
-        "noEvent": "has not joined any events"
+        "noEvent": "has not joined any events",
+        "saved events": "saved events"
     },
     "editProfile": {
         "DisplayName": "Display Name:",
@@ -192,7 +193,7 @@
         "Welcome": "Welcome,",
         "Change interest": "Change interest",
         "change location": "change location",
-        "change date": "change the date",
+        "change date": "change date",
         "sorry no event matches your filters": "sorry, no event matches your filters"
     },
     "Sun": "Sun",
@@ -346,7 +347,9 @@
         "email": "Email",
         "reset": "Reset Password",
         "remember": "Remember you Password? Login!",
-        "create": "Create an Account!"
+        "create": "Create an Account!",
+        "popupMessage": "Please check your email, for further instructions on how to reset your password. Thank You !",
+        "close": "close"
     },
     "EventsComments": {
         "add comment": "add comment"
@@ -369,5 +372,24 @@
         "HIDE COMMENTS": "HIDE COMMENTS",
         "SEE COMMENTS": "SEE COMMENTS",
         "RELATED EVENTS": "RELATED EVENTS"
+    },
+    "mockUser": {
+        "one": {
+            "name": "Emma Thompson",
+            "occupation": "Environmental Scientist",
+            "comment": " “ I had a fantastic experience with 'Aide be Aide'. The sense of community and shared purpose was truly inspiring. I look forward to being part of future initiatives! ” "
+        },
+
+        "two": {
+            "name": "Lina Abbas",
+            "occupation": "Graphic Designer",
+            "comment": " “ Volunteering with you was not only rewarding but also incredibly fun. I genuinely appreciate the dedication your team shows to the cause. it's truly commendable! Looking forward to futur opportunities! ” "
+        },
+
+        "three": {
+            "name": "Alex Rodriguez",
+            "occupation": "Software Engineer",
+            "comment": " “ A fulfilling experience. The well-organized tasks and the positive energy among volunteers made a real impact. Thank you for the opportunity! ” "
+        }
     }
 }

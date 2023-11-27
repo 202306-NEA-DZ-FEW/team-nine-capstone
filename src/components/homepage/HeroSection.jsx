@@ -17,7 +17,7 @@ const Hero = () => {
             <div className='hero-inAll'>
                 <video
                     className='bg-video w-full h-full object-cover'
-                    src='/images/heroVideo.mp4'
+                    src='/images/check.mp4'
                     type='video/mp4'
                     poster='/images/background.png'
                     autoPlay
@@ -28,12 +28,12 @@ const Hero = () => {
 
                 <div className='bg-overlay'></div>
 
-                <div className='home-text sm:w-[70%] h-[60%] sm:h-[50%] flex flex-col justify-center items-center'>
+                <div className='home-text flex flex-col justify-center items-center'>
                     <Image
                         src='/images/HeroLogo.png'
                         alt='Logo'
-                        width={70}
-                        height={70}
+                        width={65}
+                        height={65}
                     ></Image>
                     <h2 className='hero-h1'>{t("VideoSection.title")}</h2>
                     <p className='hero-p'>{t("VideoSection.intro")}</p>

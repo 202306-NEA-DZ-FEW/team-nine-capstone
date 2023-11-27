@@ -93,25 +93,22 @@ const SectionTwo = () => {
     ];
     const userFeeddBack = [
         {
-            Name: "Emma Thompson",
-            Occupation: " Environmental Scientist",
+            Name: t("mockUser.one.name"),
+            Occupation: t("mockUser.one.occupation"),
             Image: "/globalGoalsLogos/feedback3.jpg",
-            FeedBack:
-                " “ I had a fantastic experience with 'Aide be Aide'. The sense of community and shared purpose was truly inspiring. I look forward to being part of future initiatives! ” ",
+            FeedBack: t("mockUser.one.comment"),
         },
         {
-            Name: "Lina Abbas",
-            Occupation: "Graphic Designer",
+            Name: t("mockUser.two.name"),
+            Occupation: t("mockUser.two.occupation"),
             Image: "/globalGoalsLogos/feedback5.jpg",
-            FeedBack:
-                " “ Volunteering with you was not only rewarding but also incredibly fun. I genuinely appreciate the dedication your team shows to the cause. it's truly commendable! Looking forward to futur opportunities! ” ",
+            FeedBack: t("mockUser.two.comment"),
         },
         {
-            Name: "Alex Rodriguez",
-            Occupation: "Software Engineer",
+            Name: t("mockUser.three.name"),
+            Occupation: t("mockUser.three.occupation"),
             Image: "/globalGoalsLogos/feedback6.jpg",
-            FeedBack:
-                " “ A fulfilling experience. The well-organized tasks and the positive energy among volunteers made a real impact. Thank you for the opportunity! ” ",
+            FeedBack: t("mockUser.three.comment"),
         },
     ];
     return (
@@ -193,22 +190,42 @@ const SectionTwo = () => {
                     showArrows={false}
                     infiniteLoop={true}
                     autoPlay={true}
-                    interval={4000}
+                    interval={2000}
                     showStatus={false}
                     showIndicators={false}
                     showThumbs={false}
                 >
                     <div>
-                        <image src='/globalGoalsLogos/refugies.png' alt='' />
+                        <Image
+                            src='/globalGoalsLogos/refugies.png'
+                            alt='refugies'
+                            width={800}
+                            height={800}
+                        />
                     </div>
                     <div>
-                        <image src='/globalGoalsLogos/helpOlds.png' alt='' />
+                        <Image
+                            src='/globalGoalsLogos/helpOlds.png'
+                            alt='helpOlds'
+                            width={800}
+                            height={800}
+                        />
                     </div>
                     <div>
-                        <image src='/globalGoalsLogos/construct.png' alt='' />
+                        <Image
+                            src='/globalGoalsLogos/construct.png'
+                            alt='construct'
+                            width={800}
+                            height={800}
+                        />
                     </div>
                     <div>
-                        <image src='/globalGoalsLogos/donate.png' alt='' />
+                        <Image
+                            src='/globalGoalsLogos/donate.png'
+                            alt='donate'
+                            width={800}
+                            height={800}
+                        />
                     </div>
                 </Carousel>
             </div>
