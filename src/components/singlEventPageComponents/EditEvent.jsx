@@ -1,4 +1,4 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import {
     deleteObject,
     getDownloadURL,
@@ -25,8 +25,7 @@ import { interestList } from "../../lib/interestsList";
 
 function EditEvent() {
     const { user, setUser } = useUser();
-    const [imageInput, setImageInput] = useState(null);
-    const [urlsBunch, setUrlsBunch] = useState(null);
+
     const { t } = useTranslation("common");
 
     const [startDate, setStartDate] = useState(new Date());
@@ -34,7 +33,7 @@ function EditEvent() {
     const [loca, setLoca] = useState(null);
     const router = useRouter();
     const { id } = router.query;
-    console.log(id);
+
     const options = interestList.map((obj) => {
         return {
             label: `${obj.title}`,
@@ -48,120 +47,105 @@ function EditEvent() {
 
     const [oldInfo, setOldInfo] = useState({});
     const [newInfo, setNewInfo] = useState({});
-    const [oldImgUrl, setOldImgUrl] = useState(null);
-    console.log(id, "id from router");
 
     const eventRef = id ? doc(firestore, "events", id) : null;
 
-    console.log("the eventref", eventRef);
-
     useEffect(() => {
         const fetchData = async () => {
-            if (eventRef) {
+            try {
                 const docGet = await getDoc(eventRef);
-                const eventData = docGet.data();
-                setOldImgUrl(() => eventData.image);
-
-                setOldInfo(() => ({
-                    title: eventData.title,
-                    about: eventData.about,
-                    date: eventData.date,
-                    image: eventData.image,
-                    location: eventData.location,
-                    interests: eventData.interests,
-                    createdBy: eventData.CreatedBy,
-                }));
+                setNewInfo(() => docGet.data());
+                setOldInfo(() => docGet.data());
+            } catch (error) {
+                console.log("error", error);
             }
         };
 
         fetchData();
-        updateDocument();
-        // if (urlsBunch !== null) {
-        //     // console.log(urlsBunch, "urlsBunch")
-        //     updateDocument();
-        // }
-    }, [urlsBunch]);
-
-    // useEffect(() => {
-    //     if (urlsBunch !== null) {
-    //         // console.log(urlsBunch, "urlsBunch")
-    //         updateDocument();
-    //     }
-    // }, [urlsBunch]);
+    }, []);
 
     const handleEditForm = async (e) => {
         e.preventDefault();
 
         const imgFile = e.target.image.files[0];
 
-        if (imgFile !== undefined) {
-            const storageRef = ref(storage, oldImgUrl);
-            const metadata = await getMetadata(storageRef);
-            const oldFileName = metadata.name;
+        if (imgFile !== undefined && imgFile !== null) {
+            try {
+                const storageRef = ref(storage, oldInfo.image);
+                const metadata = await getMetadata(storageRef);
+                const oldFileName = metadata.name;
+                const deleteRef = ref(
+                    storage,
+                    `images/${user.uid}/${oldFileName}`
+                );
+                await deleteObject(deleteRef);
 
-            const deleteRef = ref(storage, `images/${user.uid}/${oldFileName}`);
-            await deleteObject(deleteRef);
+                const fileName = imgFile.name;
+                const eventImageRef = ref(
+                    storage,
+                    `images/${user.uid}/${fileName}`
+                );
 
-            setImageInput(() => imgFile);
+                const snapshot = await uploadBytes(eventImageRef, imgFile);
 
-            setNewInfo(() => ({
-                title: e.target.title.value,
-                about: e.target.about.value,
+                const url = await getDownloadURL(snapshot.ref);
+
+                setNewInfo((prev) => ({ ...prev, image: url }));
+            } catch (error) {
+                console.log("Error during upload:", error);
+            }
+        }
+
+        if (loca !== null) setNewInfo((prev) => ({ ...prev, location: loca }));
+
+        if (selectedInterets.length !== 0)
+            setNewInfo((prev) => ({
+                ...prev,
+                interests: selectedInterets.map((inter) => inter.value),
             }));
 
-            const fileName = imgFile.name;
-            const eventImageRef = ref(
-                storage,
-                `images/${user.uid}/${fileName}`
-            );
-
-            try {
-                const snapshot = await uploadBytes(eventImageRef, imgFile);
-                const url = await getDownloadURL(snapshot.ref);
-                setUrlsBunch(() => url);
-            } catch (error) {
-                console.error("Error during upload:", error);
-            }
-        } else {
-            setImageInput(() => "no image");
-            setUrlsBunch(() => oldImgUrl);
+        if (e.target.title.value !== "") {
+            const title = e.target.title;
+            setNewInfo((prev) => ({ ...prev, title: title.value }));
         }
+
+        if (e.target.about.value !== "") {
+            const about = e.target.about;
+            setNewInfo((prev) => ({ ...prev, about: about.value }));
+        }
+
+        if (e.target.date.value !== null) {
+            setNewInfo((prev) => ({
+                ...prev,
+                date: startDate.toLocaleDateString("en-GB"),
+            }));
+        }
+
+        handleUpdate();
     };
 
-    const updateDocument = async () => {
-        const updatedInfo = {
-            title: newInfo.title ? newInfo.title : oldInfo.title,
-            about: newInfo.about ? newInfo.about : oldInfo.about,
-            date: startDate
-                ? startDate.toLocaleDateString("en-GB")
-                : oldInfo.date,
-            image: urlsBunch ? urlsBunch : oldInfo.image,
-            location: loca ? loca : oldInfo.location,
-            interests:
-                selectedInterets.length !== 0
-                    ? selectedInterets.map((interest) => interest.value)
-                    : oldInfo.interests,
-            createdBy: user.uid,
-        };
-
-        console.log("this is new info", updatedInfo);
-
+    const handleUpdate = async () => {
         try {
-            await updateDoc(eventRef, updatedInfo);
-            console.log("updated................... ");
+            await updateDoc(eventRef, newInfo);
             router.push("/events");
         } catch (error) {
-            console.error("Error updating document:", error);
+            console.log("Error updating document:", error);
         }
     };
-    console.log("urlsBunch", urlsBunch);
+
+    const handleCancel = async () => {
+        try {
+            await deleteDoc(eventRef);
+            router.push("/events");
+        } catch (error) {
+            console.log("error deleting event:", error);
+        }
+    };
 
     return (
         <>
             <Head>
-                <title>
-                    {t("indxEdtEvent.title")} {oldInfo.title}
-                </title>
+                <title> {t("indxEdtEvent.title")} </title>
 
                 <meta
                     name='description'
@@ -221,7 +205,6 @@ function EditEvent() {
                                         name='title'
                                         id='title'
                                         className='shadow-sm bg-white border border-bgc-Charcoal text-txtc-DarkCharcoal sm:text-sm rounded-lg focus:ring-txtc-DarkCharcoal focus:border-txtc-DarkCharcoal block w-full p-2.5'
-                                        placeholder={oldInfo.title}
                                     />
                                 </div>
                                 <div className='col-span-6 sm:col-span-3'>
@@ -268,11 +251,6 @@ function EditEvent() {
                                         id='image'
                                         className='shadow-sm bg-white border border-bgc-Charcoal text-txtc-DarkCharcoal sm:text-sm rounded-lg focus:ring-txtc-DarkCharcoal focus:border-txtc-DarkCharcoal block w-full p-2.5'
                                         placeholder='provide an Image if possible ..'
-                                        onChange={(e) => {
-                                            setImageInput(
-                                                () => e.target.files[0]
-                                            );
-                                        }}
                                     />
                                 </div>
                                 <div className='col-span-6 sm:col-span-3'>
@@ -312,10 +290,16 @@ function EditEvent() {
                                 </div>
                             </div>
                             <button
-                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-sunflower hover:bg-bgc-sunflower focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-ForestGreen hover:bg-bgc-ForestGreen focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
                                 type='submit'
                             >
                                 {t("editEvent.save")}
+                            </button>
+                            <button
+                                className='text-txtc-Ivory text-l font-Roboto bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center '
+                                onClick={() => handleCancel()}
+                            >
+                                {t("editEvent.delete")}
                             </button>
                         </form>
                     </div>
