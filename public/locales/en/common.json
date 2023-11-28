@@ -253,8 +253,8 @@
         "images": "Images",
         "date": "date",
         "about": "About",
-        "save": "Save all",
-        "delete": "Cancel event"
+        "save": "Save",
+        "delete": "Cancel"
     },
     "createEvent": {
         "title": "Create Event",

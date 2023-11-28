@@ -121,6 +121,10 @@ function EditEvent() {
             }));
         }
 
+        handleUpdate();
+    };
+
+    const handleUpdate = async () => {
         try {
             await updateDoc(eventRef, newInfo);
             router.push("/events");
@@ -286,13 +290,13 @@ function EditEvent() {
                                 </div>
                             </div>
                             <button
-                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-sunflower hover:bg-bgc-sunflower focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-ForestGreen hover:bg-bgc-ForestGreen focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
                                 type='submit'
                             >
                                 {t("editEvent.save")}
                             </button>
                             <button
-                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-ForestGreen hover:bg-bgc-Viridescent focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-sunflower hover:bg-bgc-sunflower focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
                                 onClick={() => handleCancel()}
                             >
                                 {t("editEvent.delete")}
