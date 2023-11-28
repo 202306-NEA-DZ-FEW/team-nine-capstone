@@ -12,7 +12,7 @@ function Event() {
     return (
         <Layout>
             <Head>
-                <title>{t("indxOurEvents.title")}</title>
+                <title> {t("indxOurEvents.title")} </title>
 
                 <meta
                     name='description'
