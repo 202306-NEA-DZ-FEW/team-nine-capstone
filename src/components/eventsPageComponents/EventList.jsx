@@ -207,53 +207,56 @@ function EventList() {
         <>
             <div className='relative h-full flex flex-col bg-gray-200'>
                 <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
-                    <div className=' hidden bg-gray-50 mt-4 sticky group transition top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>
-                        {/* reset filter button */}
-                        <div
-                            className='absolute flex flex-row mt-3 -left-28 group-hover:left-2 duration-300 opacity-0 group-hover:opacity-100 h-auto py-1 justify-between px-1 transition-all text-lg bg-gray-200 font-medium cursor-pointer hover:text-white items-center w-auto gap-2 self-center hover:bg-red-500 rounded-full shadow-lg'
-                            onClick={() => resetFilter()}
-                        >
-                            <div className='w-7 h-7 bg-gray-50 rounded-full text-black flex justify-center items-center'>
-                                <LuFilterX />
+                    <div className='flex flex-col justify-start items-start bg-gray-200 '>
+                        <div className=' hidden bg-gray-50 mt-4 group transition rounded-xl shadow-lg md:flex flex-col w-full gap-4  h-auto'>
+                            {/* reset filter button */}
+                            <div
+                                className='absolute flex flex-row mt-3 -left-28 group-hover:left-10 duration-300 opacity-0 group-hover:opacity-100 h-auto py-1 justify-between px-1 transition-all text-lg bg-gray-200 font-medium cursor-pointer hover:text-white items-center w-auto gap-2 self-center hover:bg-red-500 rounded-full shadow-lg'
+                                onClick={() => resetFilter()}
+                            >
+                                <div className='w-7 h-7 bg-gray-50 rounded-full text-black flex justify-center items-center'>
+                                    <LuFilterX />
+                                </div>
+                                <h1 className=''>
+                                    {t("eventList.Clear Filters")}
+                                </h1>{" "}
                             </div>
-                            <h1 className=''>{t("eventList.Clear Filters")}</h1>{" "}
+                            {/* calendar filter component */}
+                            <div className='mt-10'>
+                                <DateFilter
+                                    upDatedDate={upDatedDate}
+                                    onClick={onClick}
+                                />
+                            </div>
+                            <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
+                            <div className=''>
+                                {/* locations components filter */}
+                                <LocatioFilter
+                                    setLocationSearch={setLocationSearch}
+                                    locationSearch={locationSearch}
+                                    handleSearch={handleSearch}
+                                    prevLocation={prevLocation}
+                                    setPrevLocation={setPrevLocation}
+                                    setLocation={setLocation}
+                                    location={location}
+                                    events={events}
+                                    handleLocation={handleLocation}
+                                />
+                            </div>
+                            <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
+                            <div className=''>
+                                <InterestsFilter
+                                    allCategories={allCategories}
+                                    setAllCategoris={setAllCategoris}
+                                    setUpdatedInterests={setUpdatedInterests}
+                                    updatedInterests={updatedInterests}
+                                    handleInterest={handleInterest}
+                                />
+                            </div>
                         </div>
-                        {/* calendar filter component */}
-                        <div className='mt-10'>
-                            <DateFilter
-                                upDatedDate={upDatedDate}
-                                onClick={onClick}
-                            />
-                        </div>
-                        <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
-                        <div className=''>
-                            {/* locations components filter */}
-                            <LocatioFilter
-                                setLocationSearch={setLocationSearch}
-                                locationSearch={locationSearch}
-                                handleSearch={handleSearch}
-                                prevLocation={prevLocation}
-                                setPrevLocation={setPrevLocation}
-                                setLocation={setLocation}
-                                location={location}
-                                events={events}
-                                handleLocation={handleLocation}
-                            />
-                        </div>
-                        <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
-                        <div className=''>
-                            <InterestsFilter
-                                allCategories={allCategories}
-                                setAllCategoris={setAllCategoris}
-                                setUpdatedInterests={setUpdatedInterests}
-                                updatedInterests={updatedInterests}
-                                handleInterest={handleInterest}
-                            />
-                        </div>
-                        {/* <div>join</div> */}
                     </div>
 
-                    <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
+                    <div className='md:w-3/4 h-auto flex flex-col gap-2 items-center'>
                         <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
                             <EventsUp closestEvent={closestEvent} />
                         </div>

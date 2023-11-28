@@ -171,7 +171,13 @@ function EventCard({ TheEvent }) {
                                 {t("eventCard.SEE MORE ...")}{" "}
                             </button>
                         </Link>
-                        <div className='flex justify-center cursor-pointer font-medium text-lg hover:bg-amber-400 items-center w-28 h-7 self-center bg-emerald-500 rounded-md shadow-md'>
+                        <div
+                            className={`${
+                                eventData.attendees.includes(userDoc.id)
+                                    ? "bg-gray-200 flex justify-center cursor-pointer font-medium text-lg hover:bg-amber-400 items-center w-28 h-7 self-center rounded-md shadow-md"
+                                    : "flex justify-center cursor-pointer font-medium text-lg hover:bg-amber-400 items-center w-28 h-7 self-center bg-emerald-500 rounded-md shadow-md"
+                            }`}
+                        >
                             <JoinButton
                                 eOwner={eventData.createdBy}
                                 eventId={TheEvent}
