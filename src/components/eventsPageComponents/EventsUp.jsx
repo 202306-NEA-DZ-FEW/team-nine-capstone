@@ -76,7 +76,10 @@ const EventsUp = ({ closestEvent }) => {
                             {formattedDate}
                         </h1>
                         <h1 className=' w-[90%] font-bold md:text-2xl text-lg text-gray-50'>
-                            {closestEvent.event.title}
+                            {closestEvent.event.title
+                                .split(" ")
+                                .slice(0, 2)
+                                .join(" ")}
                         </h1>
                         <Link
                             className='flex justify-center bg-amber-400 cursor-pointer font-medium text-sm hover:bg-amber-400 items-center lg:w-28 w-24 h-5 lg:h-7 self-center  rounded-md shadow-md'
@@ -87,7 +90,7 @@ const EventsUp = ({ closestEvent }) => {
                     </div>
                     <div className='flex flex-col lg:gap-2 gap-1 w-[60%] py-3 text-white items-center justify-center '>
                         <h1 className='lg:text-3xl text-lg  font-bold flex justify-center'>
-                            {t("eventTimer.Lanching in...")}
+                            {t("eventTimer.Launching in...")}
                         </h1>
                         <div className='text-emerald-100'>
                             <EventTimer closestEvent={closestEvent} />

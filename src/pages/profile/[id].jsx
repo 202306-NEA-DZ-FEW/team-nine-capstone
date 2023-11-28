@@ -113,7 +113,7 @@ function Profile() {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className='flex flex-col items-center'>
+                                    <div className='relative group transition flex flex-col items-center'>
                                         <Image
                                             src='/images/defaultUser.png'
                                             alt='Default'
@@ -126,7 +126,7 @@ function Profile() {
                                                 {userData.displayName}
                                             </h1>
                                         </div>
-                                        <div className='flex justify-center text-center bg-white hover:bg-yellow-400 mt-10'>
+                                        <div className='absolute -bottom-20 group-hover:bottom-2 px-2 rounded-full flex justify-center text-center bg-red-300 hover:bg-yellow-400 '>
                                             <h1 className='flex items-center text-xl font-normal text-gray-400 '>
                                                 {isOwner && (
                                                     <Link
@@ -263,7 +263,7 @@ function Profile() {
                             className='flex flex-end items-end justify-end mr-10 mb-10'
                             href={`/profile/${id}/events`}
                         >
-                            <button className='rounded-sm py-2 px-3 text-white text-xl hover:font-semibold hover:text-black focus:font-semibold focus:text-black bg-green-400 hover:bg-opacity-50 focus:border-2 focus:border-black'>
+                            <button className='rounded-sm py-2 px-3 text-white text-xl hover:font-semibold shadow-md hover:text-black focus:font-semibold focus:text-black bg-green-400 hover:bg-opacity-50 focus:border-2 focus:border-black'>
                                 {" "}
                                 {t("profile.seeMore")} {userData.displayName}
                             </button>
@@ -274,7 +274,7 @@ function Profile() {
                     {user?.uid === id &&
                         userData.eventsSave &&
                         userData.eventsSave.length > 0 && (
-                            <div className='flex flex-col items-center justify-center bg-gray-50 rounded-md w-[95%] self-center my-3 '>
+                            <div className='flex flex-col items-center justify-center bg-gray-50 rounded-md shadow-md w-[95%] self-center my-3 '>
                                 <div className='text-lg font-semibold'>
                                     {" "}
                                     {userData.displayName}{" "}
