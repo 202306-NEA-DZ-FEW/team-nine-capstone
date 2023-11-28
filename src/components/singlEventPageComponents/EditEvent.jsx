@@ -115,11 +115,15 @@ function EditEvent() {
         }
 
         if (e.target.date.value !== null) {
-            setNewInfo((prev) => ({ ...prev, date: startDate }));
+            setNewInfo((prev) => ({
+                ...prev,
+                date: startDate.toLocaleDateString("en-GB"),
+            }));
         }
 
         try {
             await updateDoc(eventRef, newInfo);
+            router.push("/events");
         } catch (error) {
             console.log("Error updating document:", error);
         }
@@ -288,7 +292,7 @@ function EditEvent() {
                                 {t("editEvent.save")}
                             </button>
                             <button
-                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-red-700 focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+                                className='text-txtc-DarkCharcoal text-l font-Roboto bg-bgc-ForestGreen hover:bg-bgc-Viridescent focus:ring-4 focus:ring-bgc-Charcoal font-medium rounded-lg text-sm px-5 py-2.5 text-center'
                                 onClick={() => handleCancel()}
                             >
                                 {t("editEvent.delete")}
