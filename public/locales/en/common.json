@@ -254,7 +254,7 @@
         "date": "date",
         "about": "About",
         "save": "Save",
-        "delete": "Cancel"
+        "delete": "Cancel Event"
     },
     "createEvent": {
         "title": "Create Event",
