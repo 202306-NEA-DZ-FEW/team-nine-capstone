@@ -34,9 +34,7 @@ function JoinButton({ eOwner, eventId, eAttendees, setJoinUpdate }) {
             /* Handle case when user is the event owner */
         } else {
             const attendeesArray = eAttendees || [];
-            // Update event document
             if (attendeesArray.includes(user.uid)) {
-                // User is in attendees list - remove them
                 await updateEventDocument(eventId, {
                     attendees: arrayRemove(user.uid),
                 });
@@ -55,7 +53,6 @@ function JoinButton({ eOwner, eventId, eAttendees, setJoinUpdate }) {
             }
         }
 
-        // Update local state
         setJoinUpdate((prev) => prev + 1);
     };
 
@@ -63,19 +60,15 @@ function JoinButton({ eOwner, eventId, eAttendees, setJoinUpdate }) {
         <div onClick={handleJoin}>
             {user ? (
                 isEventOwner ? (
-                    // If user is the owner, display "Edit Event"
                     <Link href={`/events/editTheEvent/${eventId}`}>
                         {t("joinbtn.editEvent")}
                     </Link>
                 ) : eAttendees?.includes(user.uid) ? (
-                    // If user is in attendees list, display "Joined"
                     t("joinbtn.joined")
                 ) : (
-                    // Otherwise, display "Join"
                     t("joinbtn.join")
                 )
             ) : (
-                // If user is not logged in, display "Sign Up"
                 <Link href='authetication/signUp'>{t("joinbtn.signUp")}</Link>
             )}
         </div>

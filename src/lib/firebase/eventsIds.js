@@ -8,7 +8,7 @@ export const getAllEventIds = async () => {
         const eventIds = [];
 
         eventsSnapshot.forEach((doc) => {
-            const id = doc.id; // Assuming that your event documents have a unique ID
+            const id = doc.id;
             eventIds.push({
                 params: {
                     id: id,

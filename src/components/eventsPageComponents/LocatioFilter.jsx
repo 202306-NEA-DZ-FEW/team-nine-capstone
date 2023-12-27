@@ -49,7 +49,6 @@ function LocatioFilter({
                         ))}
                     </div>
                 </div>
-                {/* div that holds the location choosen by the user */}
                 <div
                     onClick={() => {
                         handleLocation(location);

@@ -30,16 +30,13 @@ function BottomSheet({
         <div
             className={`fixed h-80 rounded-t-lg bottom-0 left-0 right-0 bg-white shadow-lg transform transition-transform duration-300 ${sheetStyles}`}
         >
-            {/* Close button */}
             <div
                 className='flex justify-center h-5 cursor-pointer'
                 onClick={onClose}
             >
                 <div className=' mt-0 w-[30%] h-2 text-center bg-gray-400 hover:bg-black rounded-xl'></div>
             </div>
-            {/* Your content for the bottom sheet */}
             <div className='p-1 h-full'>
-                {/* <h1 className='text-xl font-semibold'>Bottom Sheet Title</h1> */}
                 <div className='h-72 scroll-m-4 overflow-y-auto mt-2'>
                     {filterType === "interest" ? (
                         <InterestsFilter

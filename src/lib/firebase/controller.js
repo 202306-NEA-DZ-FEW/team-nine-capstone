@@ -23,7 +23,6 @@ export const storage = getStorage(app);
 export const eventsCollection = collection(firestore, "events"); //Events
 export const userCollection = collection(firestore, "users"); //Auth
 
-//the function responsible for creating the enw user document when they sign up
 export const createUserDocument = async (userId, userData) => {
     const usersRef = collection(firestore, "users");
     const userDocRef = doc(usersRef, userId);
@@ -36,7 +35,6 @@ export const createUserDocument = async (userId, userData) => {
     }
 };
 
-//function responsible for updating profile info
 export const updateUserDocument = async (userId, userData) => {
     const userRef = doc(userCollection, userId);
 
@@ -47,21 +45,18 @@ export const updateUserDocument = async (userId, userData) => {
     }
 };
 
-//function responsible for fetching user Data
 export const getUserDocument = async (uid) => {
     const userRef = doc(userCollection, uid);
     const userDoc = await getDoc(userRef);
     return userDoc;
 };
 
-//function responsible for fetching event Data
 export const getEventDocument = async (id) => {
     const eventRef = doc(eventsCollection, id);
     const eventDoc = await getDoc(eventRef);
     return eventDoc;
 };
 
-// Function to update event data
 export const updateEventDocument = async (eventId, eventData) => {
     const eventRef = doc(eventsCollection, eventId);
 
@@ -72,14 +67,8 @@ export const updateEventDocument = async (eventId, eventData) => {
     }
 };
 
-// Google Auth
-
 export const googleProvider = new GoogleAuthProvider();
 
-//Facebook Auth
-
 export const facebookProvider = new FacebookAuthProvider();
-
-//TWitter Auth
 
 export const twitterProvider = new TwitterAuthProvider();

@@ -78,7 +78,6 @@ function UserDetails() {
             });
     };
 
-    // Function to handle interest selection
     const handleInterestClick = (interest) => {
         const updatedInterests = [...userData.userInterests];
         const index = updatedInterests.indexOf(interest);
@@ -123,7 +122,6 @@ function UserDetails() {
                         {t("profile.pro")}
                     </h1>
 
-                    {/* First Row */}
                     <div className='grid grid-cols-1 md:grid-cols-2 md:gap-8'>
                         <div className='flex flex-col mb-4 md:mb-0'>
                             <label htmlFor='displayName' className='text-lg'>
@@ -156,7 +154,6 @@ function UserDetails() {
                         </div>
                     </div>
 
-                    {/* Second Row */}
                     <div className='grid grid-cols-1 md:grid-cols-2 md:gap-8'>
                         <div className='flex flex-col mb-4 md:mb-0'>
                             <LocationInput
