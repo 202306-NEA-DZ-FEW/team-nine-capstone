@@ -8,7 +8,6 @@ function LocaInput({ initialLocation, onSelectLocation }) {
     const [results, setResults] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
-    //searches for suggestion
     useEffect(() => {
         if (location.trim() !== "") {
             axios
@@ -26,14 +25,12 @@ function LocaInput({ initialLocation, onSelectLocation }) {
         }
     }, [location]);
 
-    //keeps up with the input to display the suggestion
     const handleLocationChange = (e) => {
         const value = e.target.value;
         setLocation(value);
         setShowSuggestions(true);
     };
 
-    //allows user to select a location and put in the input field
     const handleSelectedLocation = (result) => {
         setLocation(result.display_name);
         setShowSuggestions(false);

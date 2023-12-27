@@ -2,7 +2,6 @@ import {
     createUserWithEmailAndPassword,
     signInWithPopup,
     updateProfile,
-    //  sendEmailVerification
 } from "firebase/auth";
 import Head from "next/head";
 import Image from "next/legacy/image";
@@ -63,10 +62,6 @@ export default function SignUp() {
             };
 
             await createUserDocument(user.uid, userData);
-
-            //Verification email
-            // await sendEmailVerification(user);
-            // console.log("Verification email sent successfully!");
 
             setUser(user);
             setSuccessMessage(t("SignUp.succLog"));
@@ -137,13 +132,11 @@ export default function SignUp() {
 
     useEffect(() => {
         if (successMessage || error) {
-            // After 5 seconds, remove the success message
             const timer = setTimeout(() => {
                 setError(null);
                 setSuccessMessage(null);
             }, 5000);
 
-            // Clear the timer if the component unmounts or if successMessage changes
             return () => clearTimeout(timer);
         }
     }, [successMessage, error]);
@@ -171,7 +164,7 @@ export default function SignUp() {
                             placeholder={t("SignUp.EnterUserName")}
                             type='text'
                             id='displayName'
-                            name='displayName' // Add a name attribute
+                            name='displayName'
                         />
                         <input
                             className='px-4 py-2 sm:text-2xl border-2 rounded-lg bg-black opacity-50 w-3/4 sm:w-1/2 text-white'

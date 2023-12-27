@@ -12,7 +12,6 @@ import { useUser } from "@/context/UserContext";
 const SectionTwo = () => {
     const router = useRouter();
     const { user } = useUser();
-    // sets the routing according to the user's state
     const handleUser = () => {
         user ? router.push("/events") : router.push("/authentication/signUp");
     };
@@ -113,7 +112,6 @@ const SectionTwo = () => {
     ];
     return (
         <div className='w-full h-full flex flex-col justify-center py-10 items-center bg-bgc-silver mx-auto'>
-            {/* global-goals-section */}
             <div className='w-full flex flex-col py-10  lg:px-14'>
                 <div className='flex flex-col justify-center items-center py-10 '>
                     <h1 className='text-xl md:text-2xl font-Montserrat text-center lg:text-3xl py-10 text-txtc-DarkCharcoal font-semibold mb-4'>
@@ -142,7 +140,6 @@ const SectionTwo = () => {
                 </div>
             </div>
 
-            {/* events images section */}
             <div className='flex md:flex-row flex-col bg-bgc-silver px-4 gap-3 md:px-8 py-4'>
                 <div className='hidden md:flex flex-col gap-y-3'>
                     <div className='object-fill rounded-md overflow-hidden'>
@@ -229,7 +226,6 @@ const SectionTwo = () => {
                     </div>
                 </Carousel>
             </div>
-            {/* volunteers feedback section */}
             <div className='w-full flex flex-col gap-y-6 py-10 lg:px-14'>
                 <h1 className='text-xl md:text-2xl font-Montserrat text-center lg:text-3xl text-txtc-DarkCharcoal font-semibold mb-4'>
                     {t("feedback")}
@@ -287,7 +283,6 @@ const SectionTwo = () => {
                                     className='text-txtc-Ivory font-Roboto font-semibold bg-bgc-ForestGreen text-sm rounded-md py-2 px-3 whitespace-nowrap overflow-hidden text-overflow-ellipsis'
                                 >
                                     <h2>{t("who are we")}</h2>
-                                    {/* <LiaAngleRightSolid className=' mt-1' /> */}
                                 </Link>
                             </div>
                         </div>

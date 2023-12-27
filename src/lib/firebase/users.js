@@ -8,7 +8,7 @@ export const getAllUserIds = async () => {
         const userIds = [];
 
         userSnapshot.forEach((doc) => {
-            const id = doc.id; // Assuming that your user documents have a unique ID
+            const id = doc.id;
             userIds.push({
                 params: {
                     id: id,

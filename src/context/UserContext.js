@@ -10,15 +10,12 @@ export function UserProvider({ children }) {
     useEffect(() => {
         const isLogged = auth.onAuthStateChanged((authUser) => {
             if (authUser) {
-                // User is signed in
                 setUser(authUser);
             } else {
-                // User is signed out
                 setUser(null);
             }
         });
 
-        // Clean up the subscription
         return () => isLogged();
     }, [user]);
 

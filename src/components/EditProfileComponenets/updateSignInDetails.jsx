@@ -42,7 +42,6 @@ function UpdateSignInDetailes() {
 
     const handleDelete = async () => {
         try {
-            // Reauthenticate the user with their current credentials, must be done, firebase rules
             const credential = EmailAuthProvider.credential(
                 currentEmail,
                 currentPassword
@@ -67,14 +66,12 @@ function UpdateSignInDetailes() {
         e.preventDefault();
 
         try {
-            // Reauthenticate the user with their current credentials,  must be done, firebase rules
             const credential = EmailAuthProvider.credential(
                 currentEmail,
                 currentPassword
             );
             await reauthenticateWithCredential(user, credential);
 
-            //checks if the new password inputs are identical
             if (newPassword !== "") {
                 if (newPassword === confirmPassword) {
                     await updatePassword(user, newPassword);
@@ -83,7 +80,6 @@ function UpdateSignInDetailes() {
                 }
             }
 
-            // Update the user context with the signed-up user
             setUser(user);
 
             if (newPassword !== "") {
@@ -114,16 +110,13 @@ function UpdateSignInDetailes() {
         }
     };
 
-    //effect for notification
     useEffect(() => {
         if (successMessage || error) {
-            // After 5 seconds, remove the success message
             const timer = setTimeout(() => {
                 setError(null);
                 setSuccessMessage(null);
             }, 5000);
 
-            // Clear the timer if the component unmounts or if successMessage changes
             return () => clearTimeout(timer);
         }
     }, [successMessage, error]);
@@ -142,7 +135,6 @@ function UpdateSignInDetailes() {
                     <span className='flex justify-center text-lg'>
                         {t("editProfile.CRUDreq")}
                     </span>
-                    {/* First Row */}
                     <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-8'>
                         <div className='flex flex-col'>
                             <label
@@ -175,8 +167,7 @@ function UpdateSignInDetailes() {
                             />
                         </div>
                     </div>
-                    {/* End First Row */}
-                    {/* Second Row */}
+
                     <div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-8'>
                         <div className='flex flex-col'>
                             <label htmlFor='newPassword' className='text-black'>

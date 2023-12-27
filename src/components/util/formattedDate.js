@@ -37,5 +37,5 @@ export function formatDate(dateString, t) {
         }
     }
 
-    return ""; // Handle the case where dateString is not provided
+    return "";
 }

@@ -1,4 +1,5 @@
 import { onSnapshot } from "firebase/firestore";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "next-i18next";
@@ -17,7 +18,6 @@ import { useUser } from "@/context/UserContext";
 import BottomSheet from "./BottomSheets";
 import DateFilter from "./DateFilter";
 import EventCard from "./EventCard";
-import EventsUp from "./EventsUp";
 import InterestsFilter from "./InterestsFilter";
 import LocatioFilter from "./LocatioFilter";
 import Pagination from "./Pagination";
@@ -38,31 +38,6 @@ function EventList() {
     const { user } = useUser();
     const router = useRouter();
 
-    const closestEvent = events.reduce((closest, event) => {
-        const dateParts = event.date.split("/");
-        const day = parseInt(dateParts[0], 10);
-        const month = parseInt(dateParts[1], 10) - 1; // Month is 0-based
-        const year = parseInt(dateParts[2], 10);
-
-        const date = new Date(year, month, day);
-
-        // Get the current date
-        const currentDate = new Date();
-        // Calculate the time difference in milliseconds
-        const timeDifference = date - currentDate;
-        console.log("timediff", event.title, timeDifference);
-        // Check if this event is closer than the current closest event
-        if (
-            timeDifference > 0 &&
-            (closest === null || timeDifference < closest.timeDifference)
-        ) {
-            return {
-                event,
-                date,
-            };
-        }
-        return closest;
-    }, null);
     const openBottomSheet = () => {
         setBottomSheetOpen(true);
     };
@@ -74,25 +49,22 @@ function EventList() {
         setFilterType(filterType);
     };
 
-    // sets the routing according to the user's state
     const handleUser = () => {
         user
             ? router.push("/createTheEvent")
             : router.push("/authentication/signUp");
     };
 
-    let filteredEvents = events; // Initialize with all events
-
-    // var to handle translatons
+    let filteredEvents = events;
     const { t } = useTranslation();
-    // handle reset filter
+
     const resetFilter = () => {
         setUpdatedInterests([]);
         setLocation(null);
         setUpDatedDated(null);
         setAllCategoris(null);
     };
-    // filtered date
+
     const onClick = (selectedDate) => {
         const formattedDate = selectedDate.format("DD/MM/YYYY");
         if (formattedDate === upDatedDate) {
@@ -101,7 +73,7 @@ function EventList() {
             setUpDatedDated(formattedDate);
         }
     };
-    // function that handle filter the events based on the location choosed by the user
+
     const handleLocation = (location) => {
         if (location !== prevLocation) {
             setLocation(prevLocation);
@@ -109,18 +81,15 @@ function EventList() {
             setLocation(null);
         }
     };
-    // function to handle Interests filter
+
     const handleInterest = (interest) => {
-        // Check if the interest is in the updatedInterests array
         const index = updatedInterests.indexOf(interest);
         if (index === -1) {
-            // If the interest is not in the array, add it
             setUpdatedInterests((prevInterests) => [
                 ...prevInterests,
                 interest,
             ]);
         } else {
-            // If the interest is already in the array, remove it
             const updatedInterestsWithoutInterest = updatedInterests.filter(
                 (item) => item !== interest
             );
@@ -129,12 +98,10 @@ function EventList() {
     };
 
     if (!allCategories) {
-        // Apply the category filter
         filteredEvents = filteredEvents.filter((e) => {
             if (updatedInterests.length === 0) {
-                return true; // No filters applied if updatedInterests is empty
+                return true;
             } else {
-                // Check if any selected interest is included in e.interest
                 return updatedInterests.every((selectedInterest) =>
                     e.interests?.includes(selectedInterest)
                 );
@@ -142,7 +109,6 @@ function EventList() {
         });
     }
 
-    // Apply other filters
     filteredEvents = filteredEvents
         .filter((e) =>
             upDatedDate
@@ -160,21 +126,18 @@ function EventList() {
             interestList.find((interest) => interest.title === element)
         )
         .filter((matchingInterest) => matchingInterest);
-    // fetch the events data
+
     useEffect(() => {
         const unsubscribe = onSnapshot(eventsCollection, (snapshot) => {
             let eventsArr = snapshot.docs.map((doc) => {
                 return { ...doc.data(), id: doc.id };
             });
             setEvents(eventsArr);
-            setLoading(false); // Set loading to false when data is fetched
+            setLoading(false);
         });
 
-        // Cleanup the subscription when the component unmounts
         return () => unsubscribe();
-    }, []); // The empty dependency array ensures that this effect runs once
-
-    // Render loading state while data is being fetched
+    }, []);
     if (loading) {
         return <Loader />;
     }
@@ -196,8 +159,7 @@ function EventList() {
     const endOffset = itemOffset + itemsPerPage;
     const currentItems = filteredEvents.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(filteredEvents.length / itemsPerPage);
-    console.log("currentItems", currentItems);
-    // Invoke when user click to request another page.
+
     const handlePageClick = (event) => {
         const newOffset =
             (event.selected * itemsPerPage) % filteredEvents.length;
@@ -208,7 +170,6 @@ function EventList() {
             <div className='relative h-full flex flex-col bg-gray-200'>
                 <div className='relative flex md:flex-row py-2 justify-center flex-col md:px-6'>
                     <div className=' hidden bg-gray-50 mt-4 sticky group transition top-24 rounded-xl shadow-lg md:flex flex-col w-1/4 gap-4  h-[60%]'>
-                        {/* reset filter button */}
                         <div
                             className='absolute flex flex-row mt-3 -left-28 group-hover:left-2 duration-300 opacity-0 group-hover:opacity-100 h-auto py-1 justify-between px-1 transition-all text-lg bg-gray-200 font-medium cursor-pointer hover:text-white items-center w-auto gap-2 self-center hover:bg-red-500 rounded-full shadow-lg'
                             onClick={() => resetFilter()}
@@ -218,7 +179,7 @@ function EventList() {
                             </div>
                             <h1 className=''>{t("eventList.Clear Filters")}</h1>{" "}
                         </div>
-                        {/* calendar filter component */}
+
                         <div className='mt-10'>
                             <DateFilter
                                 upDatedDate={upDatedDate}
@@ -227,7 +188,6 @@ function EventList() {
                         </div>
                         <div className='w-[90%] self-center bg-gray-200 h-2 rounded-full my-4'></div>
                         <div className=''>
-                            {/* locations components filter */}
                             <LocatioFilter
                                 setLocationSearch={setLocationSearch}
                                 locationSearch={locationSearch}
@@ -250,12 +210,22 @@ function EventList() {
                                 handleInterest={handleInterest}
                             />
                         </div>
-                        {/* <div>join</div> */}
                     </div>
 
                     <div className='md:w-3/4  h-auto flex flex-col gap-2 items-center'>
-                        <div className=' border border-solid border-emerald-950 self-center w-[95%] h-52 rounded-xl mx-auto my-4 flex justify-center items-center'>
-                            <EventsUp closestEvent={closestEvent} />
+                        <div className=' border border-solid border-emerald-950 self-center w-[92%] h-60 rounded-xl mx-auto my-4 flex justify-center items-center'>
+                            <Image
+                                src='/images/allEventsBackground.png'
+                                alt='construct'
+                                width={900}
+                                height={900}
+                                style={{
+                                    objectFit: "fill",
+                                    maxWidth: "100%",
+                                    maxHeight: "100%",
+                                    border: "rounded",
+                                }}
+                            />
                         </div>
                         <Link
                             className='w-[90%] h-8 px-1 rounded-full shadow-lg font-medium flex flex-row justify-center items-center hover:bg-amber-400 cursor-pointer bg-teal-600 transition-all duration-200'
@@ -338,7 +308,6 @@ function EventList() {
                             </div>
                         </div>
                         <div className='h-auto md:w-[95%] bg-gray-50 rounded-xl shadow-xl w-full flex flex-col justify-start items-center '>
-                            {/* display the events based on filters */}
                             {currentItems.length !== 0 ? (
                                 currentItems.map((event) => {
                                     return (

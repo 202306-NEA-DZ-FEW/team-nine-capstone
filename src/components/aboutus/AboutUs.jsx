@@ -91,7 +91,7 @@ const AboutUs = () => {
 
     const team = [
         {
-            avatar: "/images/AboutUs/khalil.jpg",
+            avatar: "/images/AboutUs/Khalil.jpg",
             name: t("Khalil Noui"),
             title: t("Web Developer"),
             linkedin: "https://www.linkedin.com/in/khalil-noui-pr/",
@@ -210,7 +210,7 @@ const AboutUs = () => {
                     </motion.div>
                 </motion.div>
             </section>
-            {/* Team Section */}
+
             <section>
                 <hr className='md:w-screen' />
 
@@ -229,7 +229,6 @@ const AboutUs = () => {
                 </div>
             </section>
 
-            {/* Technologies Used Section */}
             <section className='w-full mx-auto px-4 text-center md:px-20 py-20 bg-[url("/images/AboutUs/pc.jpg")] bg-cover'>
                 <h3 className='text-white text-3xl font-semibold sm:text-4xl'>
                     {t("Technologies Used")}
