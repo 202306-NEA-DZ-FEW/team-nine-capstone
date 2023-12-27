@@ -17,8 +17,7 @@ function EventCard({ TheEvent }) {
     const [joinUpdate, setJoinUpdate] = useState(0);
     const [userDoc, setUserDoc] = useState(null);
     const { user } = useUser();
-    console.log("userdocfromeventcard", userDoc);
-    // fetch user docs
+
     useEffect(() => {
         const fetchUserDocument = async () => {
             if (user) {
@@ -26,7 +25,6 @@ function EventCard({ TheEvent }) {
                 if (doc.exists()) {
                     setUserDoc({ ...doc.data(), id: doc.id });
                 } else {
-                    // Handle the case where the document doesn't exist
                     setUserDoc(null);
                 }
             }
@@ -34,7 +32,6 @@ function EventCard({ TheEvent }) {
 
         fetchUserDocument();
     }, [user]);
-    // fetch event data
     useEffect(() => {
         const fetchEventData = async () => {
             const eventDoc = await getEventDocument(TheEvent);
@@ -53,13 +50,12 @@ function EventCard({ TheEvent }) {
         .filter((matchingInterest) => matchingInterest);
     function formatDate() {
         if (eventData?.date) {
-            // Split the date string into day, month, and year
             const dateParts = eventData.date.split("/");
-            const day = parseInt(dateParts[0], 10); // Parse day as an integer
-            const month = parseInt(dateParts[1], 10) - 1; // Parse month as an integer (0-based)
+            const day = parseInt(dateParts[0], 10);
+            const month = parseInt(dateParts[1], 10) - 1;
             const year = parseInt(dateParts[2], 10);
 
-            const date = new Date(year, month, day); // Create a date object
+            const date = new Date(year, month, day);
 
             const daysOfWeek = [
                 "Sun",
@@ -86,7 +82,7 @@ function EventCard({ TheEvent }) {
             ];
 
             const dayOfWeek = daysOfWeek[date.getDay()];
-            const formattedDay = ("0" + day).slice(-2); // Pads with zero if needed
+            const formattedDay = ("0" + day).slice(-2);
             const monthName = months[month];
             const yearValue = year;
 
@@ -100,10 +96,10 @@ function EventCard({ TheEvent }) {
         }
     }
 
-    const currentDate = new Date(); // You can pass your date here
+    const currentDate = new Date();
     const formattedDate = formatDate(currentDate);
     if (!eventData || !eventData.image) {
-        return null; // Return null or a placeholder component if TheEvent or image is null
+        return null;
     }
 
     return (
@@ -138,9 +134,7 @@ function EventCard({ TheEvent }) {
                         style={{
                             backgroundImage: `url(${eventData.image})`,
                         }}
-                    >
-                        {/* <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60  group-hover:to-black/70'></div> */}
-                    </div>
+                    ></div>
                 </div>
                 <div className='w-[65%]  h-[100%] flex flex-col  '>
                     <div className='h-[80%] overflow-hidden'>

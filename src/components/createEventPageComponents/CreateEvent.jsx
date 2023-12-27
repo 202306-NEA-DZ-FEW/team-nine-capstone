@@ -42,7 +42,7 @@ function CreateEvent() {
 
     useEffect(() => {
         if (urlsBunch) {
-            console.log("urlsBunch.....:", urlsBunch);
+            // console.log("urlsBunch.....:", urlsBunch);
         }
     }, [urlsBunch]);
 
@@ -82,7 +82,7 @@ function CreateEvent() {
             e.target.reset();
             router.push("/events");
         } catch (error) {
-            console.error("Error:", error);
+            // console.error("Error:", error);
         }
     }
 

@@ -5,10 +5,8 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { updateUserDocument } from "@/lib/firebase/controller";
 
 const EventsSave = ({ userDoc, eventId }) => {
-    // State to manage eventsSave array
     const [eventsSave, setEventsSave] = useState([]);
 
-    // Update state when userDoc changes
     useEffect(() => {
         if (userDoc && userDoc.eventsSave) {
             setEventsSave(userDoc.eventsSave);

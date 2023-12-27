@@ -45,15 +45,11 @@ function Profile() {
     }, [id, user]);
 
     const shuffleArray = (array) => {
-        // Copy the original array to avoid modifying it directly
         const shuffledArray = [...array];
 
-        // Loop through the array in reverse order
         for (let i = shuffledArray.length - 1; i > 0; i--) {
-            // Generate a random index from 0 to i
             const j = Math.floor(Math.random() * (i + 1));
 
-            // Swap elements at i and j indices
             [shuffledArray[i], shuffledArray[j]] = [
                 shuffledArray[j],
                 shuffledArray[i],
@@ -76,7 +72,6 @@ function Profile() {
             {userData && (
                 <div className='flex flex-col '>
                     <div className='flex flex-col sm:flex-row justify-center items-center mx-10'>
-                        {/* first profile section*/}
                         <div className=' md:w-1/4  sm:w-1/2 mx-10 my-10 p-8 pb-0 rounded-md bg-gray-50 shadow-lg mt-10 w-full'>
                             <div className='flex justify-center mt-12'>
                                 {userData.avatar ? (
@@ -149,7 +144,6 @@ function Profile() {
                             </div>
                         </div>
 
-                        {/* second profile section */}
                         <div className='grid justify-center rounded-md shadow-lg my-6 bg-gray-50 p-8 md:w-3/4'>
                             <h1 className='font-semibold text-2xl mb-10'>
                                 {t("profile.pro")}
@@ -214,9 +208,6 @@ function Profile() {
                         </div>
                     </div>
                     <div className='grow shrink m-2 h-0.5 bg-stone-900' />
-                    {/* divider */}
-
-                    {/* third profile section */}
 
                     {userData.iEvents && userData.iEvents.length > 0 ? (
                         <div className='flex flex-col items-center bg-gray-50 rounded-md w-[95%] self-center mt-3 shadow-lg justify-center '>
@@ -270,7 +261,6 @@ function Profile() {
                         </Link>
                     )}
                     <div className='grow shrink m-2 h-0.5 bg-stone-900' />
-                    {/* saved events */}
                     {user?.uid === id &&
                         userData.eventsSave &&
                         userData.eventsSave.length > 0 && (

@@ -50,13 +50,11 @@ function EventDetails() {
     const [singleEventData, setSingleEventData] = useState(null);
     const [isDeleted, setIsDeleted] = useState(false);
     const [commentId, setCommentId] = useState(null);
-    // const [comment, setComment]
 
-    // const [containerWidth, setContainerWidth] = useState(1800);
     const { user } = useUser();
-    console.log("userrrrsingleEventData", singleEventData);
+
     const containerRef = useRef();
-    // function to handle scrolling
+
     const handleScrolling = (scrollAmount) => {
         const newScrollPosition = Math.max(
             0,
@@ -80,18 +78,10 @@ function EventDetails() {
     const router = useRouter();
     const { id } = router.query;
 
-    // console.log("queyId", id);
     const [currentEventId, setCurrentEventId] = useState(id);
-    // console.log("currentid", currentEventId);
-    // // console.log("id", id);
-    console.log("eventData", eventDisplay.comments);
 
-    // console.log("userData", userDetails);
-    // console.log("interests", userDetails?.userInterests);
     const formattedDate = formatDate(eventDisplay?.date, t);
-    console.log("allevents", allEvents);
-    // const { user, setUser } = useUser();
-    // attendees data
+
     let indexOfEvent;
     function navigateToEvent(direction = null) {
         if (direction) {
@@ -113,34 +103,24 @@ function EventDetails() {
                 }
                 indexOfEvent = newIndex;
                 const newEventId = currentItems[newIndex].id;
-                setCurrentEventId(newEventId); // Set the new event ID in the state
-                // You can also fetch and render the single event page using newEventId
-                console.log("Navigate to event:", newEventId);
+                setCurrentEventId(newEventId);
             }
         }
     }
     const fetchData = async () => {
         try {
-            // Fetch event data
             const eventDoc = await getEventDocument(id);
             if (eventDoc.exists) {
-                console.log("im eventdoc");
                 setEventDisplay(eventDoc.data());
-                // Extract userId from event data
-                const userId = eventDoc.data()?.createdBy;
-                console.log("userid inside", userId);
 
-                // Fetch user data for the event creator
+                const userId = eventDoc.data()?.createdBy;
+
                 const userDoc = await getUserDocument(userId);
-                console.log("userdoooc", userDoc.data());
 
                 if (userDoc.exists) {
-                    console.log("im usrdoc");
                     setUserDetails(userDoc.data());
-                    console.log("inside", userDetails);
                 }
 
-                // Fetch user data for each attendee
                 const attendeeIds = eventDoc.data()?.attendees || [];
                 const attendeesData = await Promise.all(
                     attendeeIds.map(async (attendeeId) => {
@@ -151,9 +131,6 @@ function EventDetails() {
                     })
                 );
 
-                console.log("attendeesData", attendeesData);
-
-                // Set the attendees state
                 setAttendees(attendeesData.filter(Boolean));
             }
         } catch (error) {
@@ -182,14 +159,13 @@ function EventDetails() {
             fetchUserDocument();
         }
     }, [user]);
-    console.log("userDoc", userDoc);
-    // filter the event category
+
     const matchingInterests = eventDisplay?.interests
         ?.map((element) =>
             interestList.find((interest) => interest.title === element)
         )
         .filter((matchingInterest) => matchingInterest);
-    // fetch all the events to filter by cetegory
+
     useEffect(() => {
         const unsubscribe = onSnapshot(eventsCollection, (snapshot) => {
             let eventsArr = snapshot.docs.map((doc) => {
@@ -204,17 +180,13 @@ function EventDetails() {
             if (currentEvent) {
                 setSingleEventData(currentEvent);
             } else {
-                // Handle the case where the document doesn't exist
                 setSingleEventData(null); // You can adjust this based on your requirements
             }
         });
 
-        // Cleanup the subscription when the component unmounts
         return () => unsubscribe();
     }, [currentEventId]);
-    // fetch single event data to use n
     const handleDeleteComment = async (commentId) => {
-        console.log("iminsidehandlecomment", commentId);
         await updateEventDocument(currentEventId, {
             comments: arrayRemove(
                 singleEventData.comments.find(
@@ -223,20 +195,16 @@ function EventDetails() {
             ),
         });
     };
-    // filter event by category to put related events
     function filterEventsByCategory(currentEvent, allEvents) {
-        // Check if currentEvent or allEvents is undefined or null
         if (!currentEvent || !allEvents) {
             return [];
         }
 
         const currentEventInterests = currentEvent.interests || [];
 
-        // Filter events that have at least one common interest with the current event
         const filteredEvents = allEvents.filter((event) => {
             const eventInterests = event.interests || [];
 
-            // Check if there's at least one common interest (case-insensitive)
             return currentEventInterests.some((interest) =>
                 eventInterests.some(
                     (eventInterest) =>
@@ -247,33 +215,22 @@ function EventDetails() {
             );
         });
 
-        // Check if the currentEvent is not already in the filteredEvents array
-
         return filteredEvents;
     }
     const filteredEvents = filterEventsByCategory(eventDisplay, allEvents);
-    console.log("Filtered Events:", filteredEvents);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch event data
                 const eventDoc = await getEventDocument(currentEventId);
                 if (eventDoc.exists) {
-                    console.log("im eventdoc");
                     setEventDisplay(eventDoc.data());
-                    // Extract userId from event data
                     const userId = eventDoc.data()?.createdBy;
-                    console.log("userid inside", userId);
 
-                    // Fetch user data
                     const userDoc = await getUserDocument(userId);
-                    console.log("userdoooc", userDoc.data());
 
                     if (userDoc.exists) {
-                        console.log("im usrdoc");
                         setUserDetails(userDoc.data());
-                        console.log("inside", userDetails);
                     }
                 }
             } catch (error) {
@@ -286,13 +243,6 @@ function EventDetails() {
 
     return (
         <div className='relative flex flex-col  bg-gray-200 h-auto w-full'>
-            {/* <div className='z-40 left-16 top-[50%] sticky'>
-                <SocialShare
-                    path={router.asPath}
-                    title={eventDisplay.title}
-                    quote={eventDisplay.about}
-                />
-            </div> */}
             <div className='relative flex pt-3 h-auto gap-4 px-5 bg-gray-200'>
                 <div className='w-[100%]  rounded-lg shadow-lg bg-gray-50  h-auto'>
                     <div className='relative w-full h-[80vh] group transition overflow-hidden rounded-lg flex flex-col justify-center  items-center'>

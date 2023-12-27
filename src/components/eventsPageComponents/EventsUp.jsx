@@ -8,13 +8,12 @@ const EventsUp = ({ closestEvent }) => {
     const { t } = useTranslation("common");
     function formatDate() {
         if (closestEvent?.event?.date) {
-            // Split the date string into day, month, and year
             const dateParts = closestEvent.event.date.split("/");
-            const day = parseInt(dateParts[0], 10); // Parse day as an integer
-            const month = parseInt(dateParts[1], 10) - 1; // Parse month as an integer (0-based)
+            const day = parseInt(dateParts[0], 10);
+            const month = parseInt(dateParts[1], 10) - 1;
             const year = parseInt(dateParts[2], 10);
 
-            const date = new Date(year, month, day); // Create a date object
+            const date = new Date(year, month, day);
 
             const daysOfWeek = [
                 "Sun",
@@ -54,7 +53,7 @@ const EventsUp = ({ closestEvent }) => {
             }
         }
     }
-    const currentDate = new Date(); // You can pass your date here
+    const currentDate = new Date();
     const formattedDate = formatDate(currentDate);
     return (
         <div className='relative w-full h-full flex items-center  overflow-hidden rounded-lg'>

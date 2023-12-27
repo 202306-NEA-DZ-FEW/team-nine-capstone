@@ -11,7 +11,6 @@ const LocationModal = ({
     const uniqueLocations = new Set();
     if (!isVisible) return null;
     return (
-        // model that show up when the user want to choose location
         <div
             onClick={onClose}
             className='fixed z-10 w-full inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center'
@@ -23,7 +22,6 @@ const LocationModal = ({
                 >
                     X
                 </button>
-                {/* function that display the locations provided in the events  */}
                 <div className=' rounded-sm ring ring-amber-500 active:ring-2 active:ring-green-500'>
                     {events.map((event, index) => {
                         if (!uniqueLocations.has(event.location)) {
